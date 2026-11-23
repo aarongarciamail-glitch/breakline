@@ -39,10 +39,10 @@
  },
  "tape": {
   "ok": true,
-  "asof": "2026-11-23T13:15:35-05:00",
+  "asof": "2026-11-23T13:26:23-05:00",
   "lean": "bullish",
   "label": "Lean up",
-  "strategy": "Calls and puts both stay open. Oil is down 2.9% and the 10-year is up 2.8 bp, which is my lean toward calls. The opening-range close still picks the side.",
+  "strategy": "Calls and puts both stay open. Oil is down 2.9% and the 10-year is up 3.2 bp, which is my lean toward calls. The opening-range close still picks the side.",
   "block_calls": false,
   "block_puts": false,
   "vix_small": false,
@@ -54,11 +54,11 @@
   "note": "Context only. Oil 1% and the 10-year 5 bp describe the lean. VIX 35 is a size note. Neither one blocks a call or a put.",
   "vix": {
    "name": "VIX",
-   "price": 27.41,
+   "price": 26.99,
    "prev": 35.89,
-   "chg_pct": -23.6,
-   "move": "Down 23.6% from yesterday's close of 35.9.",
-   "why": "Down 23.6% from yesterday's close of 35.9. Barrons.com: Wall Street\u2019s Fear Gauge Tumbles But Volatility Remains High",
+   "chg_pct": -24.8,
+   "move": "Down 24.8% from yesterday's close of 35.9.",
+   "why": "Down 24.8% from yesterday's close of 35.9. Barrons.com: Wall Street\u2019s Fear Gauge Tumbles But Volatility Remains High",
    "headline": {
     "source": "Barrons.com",
     "title": "Wall Street\u2019s Fear Gauge Tumbles But Volatility Remains High"
@@ -67,7 +67,7 @@
   },
   "oil": {
    "name": "Crude",
-   "price": 81.06,
+   "price": 81.09,
    "prev": 83.47,
    "chg_pct": -2.9,
    "move": "Down 2.9% from yesterday's close of 83.47.",
@@ -81,9 +81,9 @@
   },
   "yield": {
    "name": "10-year",
-   "price": 4.94,
-   "chg_bps": 2.8,
-   "move": "10-year is 4.94%, up 2.8 bp."
+   "price": 4.944,
+   "chg_bps": 3.2,
+   "move": "10-year is 4.94%, up 3.2 bp."
   }
  },
  "curve": [
@@ -145,9 +145,9 @@
   }
  ],
  "session": true,
- "next_check": "1:20 PM",
+ "next_check": "1:30 PM",
  "mode": "paper",
- "updated": "2026-11-23T13:15:32-05:00",
+ "updated": "2026-11-23T13:26:20-05:00",
  "date": "Mon \u00b7 Nov 23",
  "day": {
   "pills": [
@@ -218,7 +218,9 @@
      "12:55",
      "13:00",
      "13:05",
-     "13:10"
+     "13:10",
+     "13:15",
+     "13:20"
     ],
     "closes": [
      718.61,
@@ -265,7 +267,9 @@
      722.11,
      722.43,
      723.07,
-     723.6
+     723.6,
+     724.3,
+     724.9
     ],
     "box": {
      "hi": 724.81,
@@ -286,6 +290,11 @@
       "i": 10,
       "kind": "buy",
       "label": "BUY"
+     },
+     {
+      "i": 15,
+      "kind": "sell",
+      "label": "SELL"
      }
     ]
    },
@@ -400,6 +409,10 @@
       "SPY 726 call at $3.59 (10:25)"
      ],
      [
+      "Sold",
+      "the 10:50 close"
+     ],
+     [
       "Why it ended",
       "SPY fell back inside its opening range"
      ],
@@ -463,7 +476,9 @@
      "12:55",
      "13:00",
      "13:05",
-     "13:10"
+     "13:10",
+     "13:15",
+     "13:20"
     ],
     "closes": [
      648.41,
@@ -510,7 +525,9 @@
      650.7,
      650.8,
      651.26,
-     651.74
+     651.74,
+     652.39,
+     653.13
     ],
     "box": {
      "hi": 656.3,
@@ -531,6 +548,11 @@
       "i": 10,
       "kind": "buy",
       "label": "BUY"
+     },
+     {
+      "i": 11,
+      "kind": "sell",
+      "label": "SELL"
      }
     ]
    },
@@ -645,6 +667,10 @@
       "QQQ 656 call at $4.31 (10:25)"
      ],
      [
+      "Sold",
+      "the 10:30 close"
+     ],
+     [
       "Why it ended",
       "QQQ fell back inside its opening range"
      ],
@@ -708,7 +734,9 @@
      "12:55",
      "13:00",
      "13:05",
-     "13:10"
+     "13:10",
+     "13:15",
+     "13:20"
     ],
     "closes": [
      159.79,
@@ -755,7 +783,9 @@
      164.19,
      163.96,
      164.66,
-     164.64
+     164.64,
+     165.43,
+     165.74
     ],
     "box": {
      "hi": 167.21,
@@ -767,6 +797,11 @@
       "i": 5,
       "kind": "buy",
       "label": "BUY"
+     },
+     {
+      "i": 6,
+      "kind": "sell",
+      "label": "SELL"
      }
     ]
    },
@@ -876,6 +911,10 @@
       "NVDA 167.5 call at $4.15 (10:00)"
      ],
      [
+      "Sold",
+      "the 10:05 close"
+     ],
+     [
       "Why it ended",
       "NVDA fell back inside its opening range"
      ],
@@ -939,7 +978,9 @@
      "12:55",
      "13:00",
      "13:05",
-     "13:10"
+     "13:10",
+     "13:15",
+     "13:20"
     ],
     "closes": [
      384.49,
@@ -986,7 +1027,9 @@
      387.68,
      387.92,
      388.19,
-     388.45
+     388.45,
+     387.98,
+     388.29
     ],
     "box": {
      "hi": 389.39,
@@ -999,6 +1042,11 @@
      }
     ],
     "marks": [
+     {
+      "i": 8,
+      "kind": "buy",
+      "label": "BUY"
+     },
      {
       "i": 25,
       "kind": "sell",
@@ -1184,7 +1232,9 @@
      "12:55",
      "13:00",
      "13:05",
-     "13:10"
+     "13:10",
+     "13:15",
+     "13:20"
     ],
     "closes": [
      140.9,
@@ -1231,7 +1281,9 @@
      135.99,
      136.06,
      135.87,
-     136.05
+     136.05,
+     136.32,
+     136.76
     ],
     "box": {
      "hi": 141.87,
