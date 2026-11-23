@@ -1,15 +1,111 @@
 {
  "v": 2,
  "sample": false,
+ "size_pct": 4,
+ "progress": {
+  "ready": false,
+  "checks": [
+   {
+    "name": "Paper trades",
+    "value": "5 of 20",
+    "ok": false,
+    "progress": 0.25
+   },
+   {
+    "name": "Profit factor",
+    "value": "0.27",
+    "need": "\u2265 1.2",
+    "ok": false
+   },
+   {
+    "name": "Average trade",
+    "value": "-16%",
+    "need": "> 0%",
+    "ok": false
+   },
+   {
+    "name": "Worst drawdown",
+    "value": "4.4%",
+    "need": "\u2264 12%",
+    "ok": true
+   },
+   {
+    "name": "Backtest",
+    "value": "failed",
+    "need": "pass",
+    "ok": false
+   }
+  ]
+ },
+ "curve": [
+  {
+   "date": "2026-11-23",
+   "acct": -1.01
+  },
+  {
+   "date": "2026-11-23",
+   "acct": -3.04
+  },
+  {
+   "date": "2026-11-23",
+   "acct": -3.09
+  },
+  {
+   "date": "2026-11-23",
+   "acct": -4.38
+  },
+  {
+   "date": "2026-11-23",
+   "acct": -3.22
+  }
+ ],
+ "max_dd": 4.38,
+ "days": [
+  {
+   "date": "2026-11-23",
+   "n": 5,
+   "wins": 1,
+   "acct": -3.22,
+   "items": [
+    {
+     "symbol": "NVDA",
+     "dir": "calls",
+     "result": -25
+    },
+    {
+     "symbol": "QQQ",
+     "dir": "calls",
+     "result": -1
+    },
+    {
+     "symbol": "SPY",
+     "dir": "calls",
+     "result": -33
+    },
+    {
+     "symbol": "SPCX",
+     "dir": "puts",
+     "result": 30
+    },
+    {
+     "symbol": "TSLA",
+     "dir": "calls",
+     "result": -51
+    }
+   ]
+  }
+ ],
+ "session": true,
+ "next_check": "11:45 AM",
  "mode": "paper",
- "updated": "2026-11-23T11:30:31-05:00",
+ "updated": "2026-11-23T11:40:29-05:00",
  "date": "Mon \u00b7 Nov 23",
  "day": {
   "pills": [
    "Trade day",
    "Paper"
   ],
-  "headline": "5 trades today: SPY sold -33%, QQQ sold -1%, NVDA sold -25%, TSLA holding calls, SPCX sold +30%.",
+  "headline": "5 trades today: SPY sold -33%, QQQ sold -1%, NVDA sold -25%, TSLA sold -51%, SPCX sold +30%.",
   "sub": "Tap a ticker to see its box, levels and numbers."
  },
  "symbols": [
@@ -52,7 +148,9 @@
      "11:10",
      "11:15",
      "11:20",
-     "11:25"
+     "11:25",
+     "11:30",
+     "11:35"
     ],
     "closes": [
      718.61,
@@ -76,9 +174,11 @@
      722.78,
      724.1,
      724.33,
-     724.65,
-     724.68,
-     724.07
+     724.56,
+     724.71,
+     724.07,
+     723.99,
+     721.04
     ],
     "box": {
      "hi": 724.81,
@@ -196,6 +296,11 @@
      "Paper record",
      "1 trade",
      "0% win \u00b7 avg -33% \u00b7 best -33%"
+    ],
+    [
+     "Backtest, 59 days",
+     "mixed",
+     "54 trades \u00b7 profit factor 1.23 on the stock \u00b7 options est. -10%/trade"
     ]
    ],
    "action": {
@@ -250,7 +355,9 @@
      "11:10",
      "11:15",
      "11:20",
-     "11:25"
+     "11:25",
+     "11:30",
+     "11:35"
     ],
     "closes": [
      648.41,
@@ -274,9 +381,11 @@
      650.63,
      652.29,
      652.32,
-     652.84,
+     652.85,
      653.12,
-     652.64
+     652.64,
+     652.32,
+     648.82
     ],
     "box": {
      "hi": 656.3,
@@ -394,6 +503,11 @@
      "Paper record",
      "1 trade",
      "0% win \u00b7 avg -1% \u00b7 best -1%"
+    ],
+    [
+     "Backtest, 59 days",
+     "mixed",
+     "50 trades \u00b7 profit factor 1.82 on the stock \u00b7 options est. -9%/trade"
     ]
    ],
    "action": {
@@ -448,7 +562,9 @@
      "11:10",
      "11:15",
      "11:20",
-     "11:25"
+     "11:25",
+     "11:30",
+     "11:35"
     ],
     "closes": [
      159.79,
@@ -474,7 +590,9 @@
      167.41,
      165.47,
      166.63,
-     166.72
+     166.72,
+     165.77,
+     164.15
     ],
     "box": {
      "hi": 167.21,
@@ -578,6 +696,11 @@
      "Paper record",
      "1 trade",
      "0% win \u00b7 avg -25% \u00b7 best -25%"
+    ],
+    [
+     "Backtest, 59 days",
+     "weak",
+     "44 trades \u00b7 profit factor 0.66 on the stock \u00b7 options est. -21%/trade"
     ]
    ],
    "action": {
@@ -601,11 +724,11 @@
    }
   },
   "TSLA": {
-   "status": "up",
-   "label": "Holding calls",
-   "result": null,
-   "headline": "TSLA broke up at 10:15. Calls.",
-   "sub": "5-minute close 390.11 above the box (389.39). Paper trade is open.",
+   "status": "loss",
+   "label": "Sold -51%",
+   "result": -51,
+   "headline": "TSLA broke up at 10:15. Closed -51%.",
+   "sub": "Calls from the 10:15 close at 390.11. Paper result on the option, whole trade.",
    "chart": {
     "symbol": "TSLA",
     "times": [
@@ -632,7 +755,9 @@
      "11:10",
      "11:15",
      "11:20",
-     "11:25"
+     "11:25",
+     "11:30",
+     "11:35"
     ],
     "closes": [
      384.49,
@@ -656,9 +781,11 @@
      389.69,
      391.35,
      391.27,
-     392.12,
+     392.19,
      392.5,
-     390.89
+     390.89,
+     390.57,
+     388.48
     ],
     "box": {
      "hi": 389.39,
@@ -672,9 +799,9 @@
     ],
     "marks": [
      {
-      "i": 8,
-      "kind": "buy",
-      "label": "BUY"
+      "i": 25,
+      "kind": "sell",
+      "label": "SELL"
      }
     ]
    },
@@ -729,7 +856,7 @@
     [
      "Stop",
      "A 5-min close back under 389.39, or -50%",
-     false
+     true
     ],
     [
      "R3",
@@ -770,26 +897,35 @@
     ],
     [
      "Paper record",
-     "no trades yet",
-     ""
+     "1 trade",
+     "0% win \u00b7 avg -51% \u00b7 best -51%"
+    ],
+    [
+     "Backtest, 59 days",
+     "weak",
+     "40 trades \u00b7 profit factor 1.40 on the stock \u00b7 options est. -20%/trade"
     ]
    ],
    "action": {
-    "word": "HOLD CALLS",
-    "tone": "hold",
-    "tile": "Holding calls",
+    "word": "SOLD -51%",
+    "tone": "loss",
+    "tile": "Sold -51%",
     "lines": [
      [
       "Bought",
       "TSLA 390 call at $3.85 (10:15)"
      ],
      [
-      "Take profit",
-      "1/3 at 394.69"
+      "Sold",
+      "the rest at $1.88 (11:40)"
      ],
      [
-      "Sell all if",
-      "a 5-minute candle closes back under 389.39, or the option drops to $1.93"
+      "Why it ended",
+      "TSLA fell back inside its opening range (388.48)"
+     ],
+     [
+      "Result",
+      "-51% on the whole trade (paper)"
      ]
     ]
    }
@@ -826,7 +962,9 @@
      "11:10",
      "11:15",
      "11:20",
-     "11:25"
+     "11:25",
+     "11:30",
+     "11:35"
     ],
     "closes": [
      140.9,
@@ -851,8 +989,10 @@
      136.77,
      136.66,
      136.59,
-     137.27,
-     137.22
+     137.26,
+     137.22,
+     137.09,
+     136.48
     ],
     "box": {
      "hi": 141.87,
@@ -975,6 +1115,11 @@
      "Paper record",
      "1 trade",
      "100% win \u00b7 avg +30% \u00b7 best +30%"
+    ],
+    [
+     "Backtest, 59 days",
+     "weak",
+     "44 trades \u00b7 profit factor 0.70 on the stock \u00b7 options est. -18%/trade"
     ]
    ],
    "action": {
@@ -1029,6 +1174,14 @@
    "call": "SPCX puts",
    "result": 30,
    "note": "Profit lock: best was +69%, now +26% (floor +45%).",
+   "tag": ""
+  },
+  {
+   "date": "2026-11-23",
+   "symbol": "TSLA",
+   "call": "TSLA calls",
+   "result": -51,
+   "note": "5-min close 388.48 back inside the box.",
    "tag": ""
   }
  ]
