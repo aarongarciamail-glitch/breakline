@@ -1,0 +1,34 @@
+{
+ "sample": true,
+ "mode": "paper",
+ "updated": "2026-11-23T09:45:00-05:00",
+ "today": {
+  "date": "Mon · Nov 23",
+  "status": "trade",
+  "pills": ["Trade day", "Paper", "Example"],
+  "headline": "SPY closed above the box at 10:05. Calls.",
+  "sub": "The first 15 minutes set a range of $716.85 to $719.20. The 10:05 five-minute candle closed outside it with volume behind it.",
+  "chart": {
+   "symbol": "SPY",
+   "times": ["9:30","9:35","9:40","9:45","9:50","9:55","10:00","10:05","10:10","10:15","10:20","10:25","10:30","10:35","10:40","10:45","10:50","10:55"],
+   "closes": [717.40,718.60,717.90,718.30,718.90,718.70,719.05,719.62,719.90,720.35,720.20,720.80,721.10,721.42,721.00,721.20,720.90,721.30],
+   "box": {"hi": 719.20, "lo": 716.85},
+   "lines": [{"name": "PM high", "price": 720.10}, {"name": "R1", "price": 721.35}],
+   "marks": [{"i": 7, "label": "10:05 break", "kind": "break"}, {"i": 13, "label": "R1 hit", "kind": "hit"}]
+  },
+  "levels": [["Prior-day high", 722.80, false], ["R1 pivot (target 1)", 721.35, true], ["Pre-market high", 720.10, false], ["Range high", 719.20, true], ["Range low", 716.85, true], ["Pre-market low", 715.90, false]],
+  "plan": [["Entry", "SPY 720 calls at the 10:05 close", false], ["Stop", "A 5-min close back under 719.20, or -50%", false], ["+20%", "Sell a third. Stop moves to break-even. Done 10:15", true], ["+50-75%", "Two-thirds out by here", false], ["+100%", "Keep a small runner, nothing more", false]]
+ },
+ "record": [
+  ["2026-11-20", "skip", null, "Monthly options expiration. Sat out.", ""],
+  ["2026-11-19", "QQQ calls", 62, "Trimmed at +20% and +50%. Runner stopped at break-even.", ""],
+  ["2026-11-18", "SPY puts", -38, "Closed back inside the box at 10:20. Out.", ""],
+  ["2026-11-17", "none", null, "Stayed inside the box all morning. No trade.", ""],
+  ["2026-11-16", "SPY calls", 24, "Tapped the pre-market high and stalled. Took the +20% trim and break-even.", ""],
+  ["2026-11-13", "SPY puts", -100, "Friday lotto, sized to go to zero. It did.", "Lotto"],
+  ["2026-11-12", "skip", null, "Box was $4.10 wide. Too wide to trade.", ""],
+  ["2026-11-11", "QQQ puts", 41, "Clean break down. Two-thirds out before the bounce.", ""],
+  ["2026-11-10", "SPY calls", 88, "Ran from the box to R1. Most sold by +75%.", ""],
+  ["2026-11-09", "SPY calls", -22, "Broke out, then closed back inside at 9:55. Out.", ""]
+ ]
+}
