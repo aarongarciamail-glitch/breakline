@@ -39,26 +39,26 @@
  },
  "tape": {
   "ok": true,
-  "asof": "2026-11-23T14:45:35-05:00",
+  "asof": "2026-11-23T15:00:36-05:00",
   "lean": "bullish",
   "label": "Lean up",
-  "strategy": "Calls and puts both stay open. Oil is down 4.0% and the 10-year is up 1.8 bp, which is my lean toward calls. The opening-range close still picks the side.",
+  "strategy": "Calls and puts both stay open. Oil is down 4.1% and the 10-year is up 1.6 bp, which is my lean toward calls. The opening-range close still picks the side.",
   "block_calls": false,
   "block_puts": false,
   "vix_small": false,
   "size_note": "",
   "skip_calls": "",
   "skip_puts": "",
-  "agree_calls": "Oil is down 4.0%, so my lean is up. This call goes with that.",
-  "agree_puts": "Oil is down 4.0%, so my lean is up. This put is still the opening-range break.",
+  "agree_calls": "Oil is down 4.1%, so my lean is up. This call goes with that.",
+  "agree_puts": "Oil is down 4.1%, so my lean is up. This put is still the opening-range break.",
   "note": "Context only. Oil 1% and the 10-year 5 bp describe the lean. VIX 35 is a size note. Neither one blocks a call or a put.",
   "vix": {
    "name": "VIX",
-   "price": 26.6,
+   "price": 27.42,
    "prev": 35.89,
-   "chg_pct": -25.9,
-   "move": "Down 25.9% from yesterday's close of 35.9.",
-   "why": "Down 25.9% from yesterday's close of 35.9. Barrons.com: Wall Street\u2019s Fear Gauge Tumbles But Volatility Remains High",
+   "chg_pct": -23.6,
+   "move": "Down 23.6% from yesterday's close of 35.9.",
+   "why": "Down 23.6% from yesterday's close of 35.9. Barrons.com: Wall Street\u2019s Fear Gauge Tumbles But Volatility Remains High",
    "headline": {
     "source": "Barrons.com",
     "title": "Wall Street\u2019s Fear Gauge Tumbles But Volatility Remains High"
@@ -67,12 +67,12 @@
   },
   "oil": {
    "name": "Crude",
-   "price": 80.12,
+   "price": 80.02,
    "prev": 83.47,
-   "chg_pct": -4.0,
-   "move": "Down 4.0% from yesterday's close of 83.47.",
+   "chg_pct": -4.1,
+   "move": "Down 4.1% from yesterday's close of 83.47.",
    "range": "Under the last month's low of 81.55.",
-   "why": "Down 4.0% from yesterday's close of 83.47. Reuters: Oil falls around 3% on increased Middle East flows, Libyan pipeline restart",
+   "why": "Down 4.1% from yesterday's close of 83.47. Reuters: Oil falls around 3% on increased Middle East flows, Libyan pipeline restart",
    "headline": {
     "source": "Reuters",
     "title": "Oil falls around 3% on increased Middle East flows, Libyan pipeline restart"
@@ -81,9 +81,9 @@
   },
   "yield": {
    "name": "10-year",
-   "price": 4.93,
-   "chg_bps": 1.8,
-   "move": "10-year is 4.93%, up 1.8 bp."
+   "price": 4.928,
+   "chg_bps": 1.6,
+   "move": "10-year is 4.93%, up 1.6 bp."
   }
  },
  "curve": [
@@ -145,9 +145,9 @@
   }
  ],
  "session": true,
- "next_check": "2:50 PM",
+ "next_check": "3:05 PM",
  "mode": "paper",
- "updated": "2026-11-23T14:45:32-05:00",
+ "updated": "2026-11-23T15:00:32-05:00",
  "date": "Mon \u00b7 Nov 23",
  "day": {
   "pills": [
@@ -236,7 +236,10 @@
      "14:25",
      "14:30",
      "14:35",
-     "14:40"
+     "14:40",
+     "14:45",
+     "14:50",
+     "14:55"
     ],
     "closes": [
      718.61,
@@ -299,9 +302,12 @@
      723.77,
      723.57,
      723.61,
-     723.26,
+     723.29,
      721.82,
-     721.19
+     721.17,
+     721.05,
+     721.78,
+     722.52
     ],
     "box": {
      "hi": 724.81,
@@ -526,7 +532,10 @@
      "14:25",
      "14:30",
      "14:35",
-     "14:40"
+     "14:40",
+     "14:45",
+     "14:50",
+     "14:55"
     ],
     "closes": [
      648.41,
@@ -591,7 +600,10 @@
      651.38,
      650.83,
      649.22,
-     648.61
+     648.58,
+     648.47,
+     649.38,
+     650.26
     ],
     "box": {
      "hi": 656.3,
@@ -816,7 +828,10 @@
      "14:25",
      "14:30",
      "14:35",
-     "14:40"
+     "14:40",
+     "14:45",
+     "14:50",
+     "14:55"
     ],
     "closes": [
      159.79,
@@ -881,7 +896,10 @@
      165.16,
      165.05,
      164.3,
-     164.25
+     164.25,
+     164.19,
+     164.88,
+     165.65
     ],
     "box": {
      "hi": 167.21,
@@ -1092,7 +1110,10 @@
      "14:25",
      "14:30",
      "14:35",
-     "14:40"
+     "14:40",
+     "14:45",
+     "14:50",
+     "14:55"
     ],
     "closes": [
      384.49,
@@ -1156,8 +1177,11 @@
      387.82,
      387.64,
      387.33,
-     386.21,
-     385.83
+     386.2,
+     385.83,
+     386.16,
+     386.8,
+     386.9
     ],
     "box": {
      "hi": 389.39,
@@ -1378,7 +1402,10 @@
      "14:25",
      "14:30",
      "14:35",
-     "14:40"
+     "14:40",
+     "14:45",
+     "14:50",
+     "14:55"
     ],
     "closes": [
      140.9,
@@ -1443,7 +1470,10 @@
      134.75,
      134.45,
      133.94,
-     133.99
+     133.99,
+     134.01,
+     134.28,
+     134.22
     ],
     "box": {
      "hi": 141.87,
