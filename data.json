@@ -1,81 +1,100 @@
 {
  "sample": false,
  "mode": "paper",
- "updated": "2026-11-23T09:55:29-05:00",
+ "updated": "2026-11-23T10:00:33-05:00",
  "today": {
   "date": "Mon \u00b7 Nov 23",
   "pills": [
    "Trade day",
    "Paper"
   ],
-  "headline": "Waiting for a 5-minute close outside the box.",
-  "sub": "SPY box: $713.54 to $724.81. Entries allowed until 11:00.",
+  "headline": "NVDA broke up at 10:00. Calls.",
+  "sub": "The first 15 minutes set a range of $156.93 to $167.21. The 10:00 five-minute candle closed above it at 168.56.",
   "chart": {
-   "symbol": "SPY",
+   "symbol": "NVDA",
    "times": [
     "9:30",
     "9:35",
     "9:40",
     "9:45",
-    "9:50"
+    "9:50",
+    "9:55"
    ],
    "closes": [
-    718.61,
-    715.58,
-    717.12,
-    718.91,
-    719.38
+    159.79,
+    158.05,
+    161.42,
+    164.38,
+    164.95,
+    168.56
    ],
    "box": {
-    "hi": 724.81,
-    "lo": 713.54
+    "hi": 167.21,
+    "lo": 156.93
    },
    "lines": [],
-   "marks": []
+   "marks": [
+    {
+     "i": 5,
+     "label": "10:00 break",
+     "kind": "break"
+    }
+   ]
   },
   "levels": [
    [
-    "Range high",
-    724.81,
-    true
-   ],
-   [
     "Pre-market high",
-    724.48,
+    169.05,
     false
    ],
    [
-    "Prior-day high",
-    718.29,
-    false
+    "Range high",
+    167.21,
+    true
    ],
    [
     "Range low",
-    713.54,
+    156.93,
     true
    ],
    [
+    "Prior-day high",
+    143.72,
+    false
+   ],
+   [
     "R1 pivot",
-    710.4833333333333,
+    138.18666666666667,
     true
    ],
    [
     "Pre-market low",
-    704.06,
+    133.57,
     false
    ],
    [
     "Prior-day low",
-    686.75,
+    124.5,
     false
    ],
    [
     "S1 pivot",
-    678.9433333333334,
+    118.96666666666667,
     true
    ]
   ],
-  "plan": []
+  "plan": [
+   [
+    "Entry",
+    "NVDA 167.5 calls at the 10:00 close",
+    false
+   ],
+   [
+    "Stop",
+    "A 5-min close back under 167.21, or -50%",
+    false
+   ]
+  ]
  },
  "record": []
 }
