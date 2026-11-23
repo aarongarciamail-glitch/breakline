@@ -39,51 +39,51 @@
  },
  "tape": {
   "ok": true,
-  "asof": "2026-11-23T13:00:23-05:00",
+  "asof": "2026-11-23T13:03:44-05:00",
   "lean": "bullish",
   "label": "Lean up",
-  "strategy": "Calls and puts both stay open. Oil is down 2.9% and the 10-year is up 2.2 bp, which is his lean toward calls. The opening-range close still picks the side.",
+  "strategy": "Calls and puts both stay open. Oil is down 2.8% and the 10-year is up 2.4 bp, which is my lean toward calls. The opening-range close still picks the side.",
   "block_calls": false,
   "block_puts": false,
   "vix_small": false,
   "size_note": "",
   "skip_calls": "",
   "skip_puts": "",
-  "agree_calls": "Oil is down 2.9%, so his lean is up. This call goes with that.",
-  "agree_puts": "Oil is down 2.9%, so his lean is up. This put is still the opening-range break.",
-  "note": "Context only. Oil 1% and the 10-year 5 bp describe his lean. VIX 35 is a size note. Neither one blocks a call or a put.",
+  "agree_calls": "Oil is down 2.8%, so my lean is up. This call goes with that.",
+  "agree_puts": "Oil is down 2.8%, so my lean is up. This put is still the opening-range break.",
+  "note": "Context only. Oil 1% and the 10-year 5 bp describe the lean. VIX 35 is a size note. Neither one blocks a call or a put.",
   "vix": {
    "name": "VIX",
-   "price": 27.96,
+   "price": 28.3,
    "prev": 35.89,
-   "chg_pct": -22.1,
-   "move": "Down 22.1% from yesterday's close of 35.9.",
-   "why": "Down 22.1% from yesterday's close of 35.9. Barrons.com: Wall Street\u2019s Fear Gauge Tumbles But Volatility Remains High",
+   "chg_pct": -21.1,
+   "move": "Down 21.1% from yesterday's close of 35.9.",
+   "why": "Down 21.1% from yesterday's close of 35.9. Barrons.com: Wall Street\u2019s Fear Gauge Tumbles But Volatility Remains High",
    "headline": {
     "source": "Barrons.com",
     "title": "Wall Street\u2019s Fear Gauge Tumbles But Volatility Remains High"
    },
-   "means": "Fear eased. He shrinks size at 35 or higher, and this print is under that, so size stays normal."
+   "means": "Fear eased. I shrink size at 35 or higher, and this print is under that, so size stays normal."
   },
   "oil": {
    "name": "Crude",
-   "price": 81.04,
+   "price": 81.1,
    "prev": 83.47,
-   "chg_pct": -2.9,
-   "move": "Down 2.9% from yesterday's close of 83.47.",
+   "chg_pct": -2.8,
+   "move": "Down 2.8% from yesterday's close of 83.47.",
    "range": "Under the last month's low of 81.55.",
-   "why": "Down 2.9% from yesterday's close of 83.47. Reuters: Oil drops more than 3% on increased Middle East flows, Libyan pipeline restart",
+   "why": "Down 2.8% from yesterday's close of 83.47. Reuters: Oil drops more than 3% on increased Middle East flows, Libyan pipeline restart",
    "headline": {
     "source": "Reuters",
     "title": "Oil drops more than 3% on increased Middle East flows, Libyan pipeline restart"
    },
-   "means": "A down oil day is his lean toward calls on SPY and QQQ. Calls and puts both stay open. The box picks the side."
+   "means": "A down oil day is my lean toward calls on SPY and QQQ. Calls and puts both stay open. The box picks the side."
   },
   "yield": {
    "name": "10-year",
-   "price": 4.934,
-   "chg_bps": 2.2,
-   "move": "10-year is 4.93%, up 2.2 bp."
+   "price": 4.936,
+   "chg_bps": 2.4,
+   "move": "10-year is 4.94%, up 2.4 bp."
   }
  },
  "curve": [
@@ -147,7 +147,7 @@
  "session": true,
  "next_check": "1:05 PM",
  "mode": "paper",
- "updated": "2026-11-23T13:00:32-05:00",
+ "updated": "2026-11-23T13:03:41-05:00",
  "date": "Mon \u00b7 Nov 23",
  "day": {
   "pills": [
