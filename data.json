@@ -2,14 +2,14 @@
  "v": 2,
  "sample": false,
  "mode": "paper",
- "updated": "2026-11-23T11:15:35-05:00",
+ "updated": "2026-11-23T11:29:50-05:00",
  "date": "Mon \u00b7 Nov 23",
  "day": {
   "pills": [
    "Trade day",
    "Paper"
   ],
-  "headline": "5 trades today: SPY closed -33%, QQQ closed -1%, NVDA closed -25%, TSLA in trade \u00b7 calls, SPCX closed +30%.",
+  "headline": "5 trades today: SPY sold -33%, QQQ sold -1%, NVDA sold -25%, TSLA holding calls, SPCX sold +30%.",
   "sub": "Tap a ticker to see its box, levels and numbers."
  },
  "symbols": [
@@ -22,7 +22,7 @@
  "stocks": {
   "SPY": {
    "status": "loss",
-   "label": "Closed -33%",
+   "label": "Sold -33%",
    "result": -33,
    "headline": "SPY broke up at 10:25. Closed -33%.",
    "sub": "Calls from the 10:25 close at 726.36. Paper result on the option, whole trade.",
@@ -49,7 +49,9 @@
      "10:55",
      "11:00",
      "11:05",
-     "11:10"
+     "11:10",
+     "11:15",
+     "11:20"
     ],
     "closes": [
      718.61,
@@ -71,8 +73,10 @@
      723.53,
      724.32,
      722.78,
-     724.09,
-     724.33
+     724.1,
+     724.33,
+     724.65,
+     724.68
     ],
     "box": {
      "hi": 724.81,
@@ -91,8 +95,8 @@
     "marks": [
      {
       "i": 10,
-      "label": "10:25 break",
-      "kind": "break"
+      "kind": "buy",
+      "label": "BUY"
      }
     ]
    },
@@ -191,11 +195,30 @@
      "1 trade",
      "0% win \u00b7 avg -33% \u00b7 best -33%"
     ]
-   ]
+   ],
+   "action": {
+    "word": "SOLD -33%",
+    "tone": "loss",
+    "tile": "Sold -33%",
+    "lines": [
+     [
+      "Bought",
+      "SPY 726 call at $3.59 (10:25)"
+     ],
+     [
+      "Why it ended",
+      "SPY fell back inside its opening range"
+     ],
+     [
+      "Result",
+      "-33% on the whole trade (paper)"
+     ]
+    ]
+   }
   },
   "QQQ": {
    "status": "loss",
-   "label": "Closed -1%",
+   "label": "Sold -1%",
    "result": -1,
    "headline": "QQQ broke up at 10:25. Closed -1%.",
    "sub": "Calls from the 10:25 close at 656.37. Paper result on the option, whole trade.",
@@ -222,7 +245,9 @@
      "10:55",
      "11:00",
      "11:05",
-     "11:10"
+     "11:10",
+     "11:15",
+     "11:20"
     ],
     "closes": [
      648.41,
@@ -245,7 +270,9 @@
      652.38,
      650.63,
      652.29,
-     652.24
+     652.24,
+     652.84,
+     653.12
     ],
     "box": {
      "hi": 656.3,
@@ -264,8 +291,8 @@
     "marks": [
      {
       "i": 10,
-      "label": "10:25 break",
-      "kind": "break"
+      "kind": "buy",
+      "label": "BUY"
      }
     ]
    },
@@ -364,11 +391,30 @@
      "1 trade",
      "0% win \u00b7 avg -1% \u00b7 best -1%"
     ]
-   ]
+   ],
+   "action": {
+    "word": "SOLD -1%",
+    "tone": "loss",
+    "tile": "Sold -1%",
+    "lines": [
+     [
+      "Bought",
+      "QQQ 656 call at $4.31 (10:25)"
+     ],
+     [
+      "Why it ended",
+      "QQQ fell back inside its opening range"
+     ],
+     [
+      "Result",
+      "-1% on the whole trade (paper)"
+     ]
+    ]
+   }
   },
   "NVDA": {
    "status": "loss",
-   "label": "Closed -25%",
+   "label": "Sold -25%",
    "result": -25,
    "headline": "NVDA broke up at 10:00. Closed -25%.",
    "sub": "Calls from the 10:00 close at 168.56. Paper result on the option, whole trade.",
@@ -395,7 +441,9 @@
      "10:55",
      "11:00",
      "11:05",
-     "11:10"
+     "11:10",
+     "11:15",
+     "11:20"
     ],
     "closes": [
      159.79,
@@ -418,7 +466,9 @@
      168.44,
      167.32,
      168.13,
-     167.4
+     167.4,
+     165.47,
+     166.63
     ],
     "box": {
      "hi": 167.21,
@@ -428,8 +478,8 @@
     "marks": [
      {
       "i": 5,
-      "label": "10:00 break",
-      "kind": "break"
+      "kind": "buy",
+      "label": "BUY"
      }
     ]
    },
@@ -523,11 +573,30 @@
      "1 trade",
      "0% win \u00b7 avg -25% \u00b7 best -25%"
     ]
-   ]
+   ],
+   "action": {
+    "word": "SOLD -25%",
+    "tone": "loss",
+    "tile": "Sold -25%",
+    "lines": [
+     [
+      "Bought",
+      "NVDA 167.5 call at $4.15 (10:00)"
+     ],
+     [
+      "Why it ended",
+      "NVDA fell back inside its opening range"
+     ],
+     [
+      "Result",
+      "-25% on the whole trade (paper)"
+     ]
+    ]
+   }
   },
   "TSLA": {
    "status": "up",
-   "label": "In trade \u00b7 calls",
+   "label": "Holding calls",
    "result": null,
    "headline": "TSLA broke up at 10:15. Calls.",
    "sub": "5-minute close 390.11 above the box (389.39). Paper trade is open.",
@@ -554,7 +623,9 @@
      "10:55",
      "11:00",
      "11:05",
-     "11:10"
+     "11:10",
+     "11:15",
+     "11:20"
     ],
     "closes": [
      384.49,
@@ -577,7 +648,9 @@
      390.37,
      389.69,
      391.35,
-     391.27
+     391.27,
+     392.12,
+     392.5
     ],
     "box": {
      "hi": 389.39,
@@ -592,8 +665,8 @@
     "marks": [
      {
       "i": 8,
-      "label": "10:15 break",
-      "kind": "break"
+      "kind": "buy",
+      "label": "BUY"
      }
     ]
    },
@@ -692,11 +765,30 @@
      "no trades yet",
      ""
     ]
-   ]
+   ],
+   "action": {
+    "word": "HOLD CALLS",
+    "tone": "hold",
+    "tile": "Holding calls",
+    "lines": [
+     [
+      "Bought",
+      "TSLA 390 call at $3.85 (10:15)"
+     ],
+     [
+      "Take profit",
+      "1/3 at 394.69"
+     ],
+     [
+      "Sell all if",
+      "a 5-minute candle closes back under 389.39, or the option drops to $1.93"
+     ]
+    ]
+   }
   },
   "SPCX": {
    "status": "win",
-   "label": "Closed +30%",
+   "label": "Sold +30%",
    "result": 30,
    "headline": "SPCX broke down at 10:35. Closed +30%.",
    "sub": "Puts from the 10:35 close at 137.77. Paper result on the option, whole trade.",
@@ -723,7 +815,9 @@
      "10:55",
      "11:00",
      "11:05",
-     "11:10"
+     "11:10",
+     "11:15",
+     "11:20"
     ],
     "closes": [
      140.9,
@@ -746,7 +840,9 @@
      136.63,
      136.15,
      136.77,
-     136.66
+     136.66,
+     136.59,
+     137.27
     ],
     "box": {
      "hi": 141.87,
@@ -765,8 +861,8 @@
     "marks": [
      {
       "i": 12,
-      "label": "10:35 break",
-      "kind": "break"
+      "kind": "buy",
+      "label": "BUY"
      }
     ]
    },
@@ -870,7 +966,26 @@
      "1 trade",
      "100% win \u00b7 avg +30% \u00b7 best +30%"
     ]
-   ]
+   ],
+   "action": {
+    "word": "SOLD +30%",
+    "tone": "win",
+    "tile": "Sold +30%",
+    "lines": [
+     [
+      "Bought",
+      "SPCX 138 put at $1.42 (10:35)"
+     ],
+     [
+      "Why it ended",
+      "locked in profit after a pullback from the high"
+     ],
+     [
+      "Result",
+      "+30% on the whole trade (paper)"
+     ]
+    ]
+   }
   }
  },
  "record": [
