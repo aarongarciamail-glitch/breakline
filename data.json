@@ -1,7 +1,7 @@
 {
  "sample": false,
  "mode": "paper",
- "updated": "2026-11-23T10:00:33-05:00",
+ "updated": "2026-11-23T10:05:29-05:00",
  "today": {
   "date": "Mon \u00b7 Nov 23",
   "pills": [
@@ -9,7 +9,7 @@
    "Paper"
   ],
   "headline": "NVDA broke up at 10:00. Calls.",
-  "sub": "The first 15 minutes set a range of $156.93 to $167.21. The 10:00 five-minute candle closed above it at 168.56.",
+  "sub": "The first 15 minutes set a range of $156.93 to $167.21. The 10:00 five-minute candle closed above it at 168.56. Closed for -25% on the option (paper).",
   "chart": {
    "symbol": "NVDA",
    "times": [
@@ -18,7 +18,8 @@
     "9:40",
     "9:45",
     "9:50",
-    "9:55"
+    "9:55",
+    "10:00"
    ],
    "closes": [
     159.79,
@@ -26,7 +27,8 @@
     161.42,
     164.38,
     164.95,
-    168.56
+    168.56,
+    166.48
    ],
    "box": {
     "hi": 167.21,
@@ -92,9 +94,17 @@
    [
     "Stop",
     "A 5-min close back under 167.21, or -50%",
-    false
+    true
    ]
   ]
  },
- "record": []
+ "record": [
+  [
+   "2026-11-23",
+   "NVDA calls",
+   -25,
+   "5-min close 166.48 back inside the box.",
+   ""
+  ]
+ ]
 }
