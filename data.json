@@ -39,7 +39,7 @@
  },
  "tape": {
   "ok": true,
-  "asof": "2026-11-23T13:30:17-05:00",
+  "asof": "2026-11-23T13:30:35-05:00",
   "lean": "bullish",
   "label": "Lean up",
   "strategy": "Calls and puts both stay open. Oil is down 2.9% and the 10-year is up 2.6 bp, which is my lean toward calls. The opening-range close still picks the side.",
@@ -54,7 +54,7 @@
   "note": "Context only. Oil 1% and the 10-year 5 bp describe the lean. VIX 35 is a size note. Neither one blocks a call or a put.",
   "vix": {
    "name": "VIX",
-   "price": 26.79,
+   "price": 26.78,
    "prev": 35.89,
    "chg_pct": -25.4,
    "move": "Down 25.4% from yesterday's close of 35.9.",
@@ -67,7 +67,7 @@
   },
   "oil": {
    "name": "Crude",
-   "price": 81.06,
+   "price": 81.07,
    "prev": 83.47,
    "chg_pct": -2.9,
    "move": "Down 2.9% from yesterday's close of 83.47.",
@@ -147,7 +147,7 @@
  "session": true,
  "next_check": "1:35 PM",
  "mode": "paper",
- "updated": "2026-11-23T13:30:13-05:00",
+ "updated": "2026-11-23T13:30:32-05:00",
  "date": "Mon \u00b7 Nov 23",
  "day": {
   "pills": [
