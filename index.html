@@ -238,6 +238,23 @@ dl.al dd{margin:0;color:var(--text)}
 .curvep svg{width:100%;height:auto;display:block}
 .curvep text{font-family:var(--mono);font-size:10px}
 
+.tape{display:grid;gap:14px;margin-bottom:14px}
+.tapecards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+@media (max-width:700px){.tapecards{grid-template-columns:minmax(0,1fr)}}
+.tapecard{padding:16px 18px;display:grid;gap:6px;align-content:start}
+.tapetop{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.tapetop .k,.taperule .k{font:500 12px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
+.chg{font:500 14px/1 var(--mono);font-variant-numeric:tabular-nums}
+.chg.win{color:var(--win)}.chg.loss{color:var(--loss)}.chg.flat{color:var(--dim)}
+.px{font:300 40px/1 var(--display);letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.tapecard p,.taperule p{margin:0}
+.why{color:var(--text);font-size:14.5px}
+.means,.range,.yieldline{color:var(--dim);font-size:14px}
+.taperule{padding:16px 18px;display:grid;gap:8px}
+.taperule .strat{font-size:16px;line-height:1.45}
+.taperule .note{color:var(--faint);font-size:12.5px}
+.tape[hidden]{display:none}
+
 /* phone */
 @media (max-width:600px){
  .hero{padding-block:36px 24px;gap:14px}
@@ -304,6 +321,13 @@ dl.al dd{margin:0;color:var(--text)}
   <div class="sh"><h2 id="today-h">Today</h2><span class="meta" id="todayDate"></span></div>
   <p class="fresh" id="fresh"></p>
   <div class="dayline"><div class="callrow" id="pills"></div><p class="dayhead" id="dayHead">Loading today's call…</p></div>
+  <div class="tape" id="tape" hidden>
+   <div class="tapecards">
+    <article class="panel tapecard" id="vixCard" aria-label="VIX"></article>
+    <article class="panel tapecard" id="oilCard" aria-label="Crude oil"></article>
+   </div>
+   <div class="panel taperule" id="tapeRule"></div>
+  </div>
   <div class="tickers" id="tickers" role="tablist" aria-label="Tickers I'm watching"></div>
   <div class="today">
    <div class="panel chartp" role="tabpanel" id="stockPanel">
@@ -370,7 +394,7 @@ dl.al dd{margin:0;color:var(--text)}
   <div class="panel sitout">
    <h3>Days I sit out</h3>
    <ul>
-    <li>Monthly options expiration</li><li>Fed decision days</li><li>CPI and PPI mornings</li><li>A box that's too wide</li><li>No momentum on the break</li><li>Fridays: small bets only</li>
+    <li>Monthly options expiration</li><li>Fed decision days</li><li>CPI and PPI mornings</li><li>A box that's too wide</li><li>No momentum on the break</li><li>Fridays: small bets only</li><li>A break that fights oil and yields</li>
    </ul>
   </div>
  </section>
@@ -454,6 +478,28 @@ dl.al dd{margin:0;color:var(--text)}
   mk('circle',{cx:x(n-1),cy:y(last),r:4,fill:last>=0?T('--win'):T('--loss')},svg);
   mk('text',{x:L,y:H-4,fill:T('--faint')},svg,'start');mk('text',{x:W-R,y:H-4,fill:T('--faint'),'text-anchor':'end'},svg,C.length+' trades');
  }
+ function chgEl(pct){
+  if(pct==null||pct===undefined)return '';
+  const cls=pct>0.05?'win':pct<-0.05?'loss':'flat';
+  const sign=pct>0.05?'+':pct<-0.05?'−':'';
+  return '<span class="chg '+cls+'">'+sign+Math.abs(pct).toFixed(1)+'%</span>';
+ }
+ function renderTape(D){
+  const t=D.tape,box=$('tape');
+  if(!t||(!t.vix&&!t.oil&&!t.strategy)){box.hidden=true;return}
+  box.hidden=false;
+  const v=t.vix,o=t.oil;
+  $('vixCard').innerHTML=v?('<div class="tapetop"><span class="k">VIX</span>'+chgEl(v.chg_pct)+'</div><div class="px">'+Number(v.price).toFixed(1)+'</div><p class="why">'+esc(v.why||v.move||'')+'</p><p class="means">'+esc(v.means||'')+'</p>'):'<div class="tapetop"><span class="k">VIX</span></div><p class="means">VIX did not load.</p>';
+  let oil='<div class="tapetop"><span class="k">Crude oil</span>'+(o?chgEl(o.chg_pct):'')+'</div>';
+  if(o){
+   oil+='<div class="px">'+Number(o.price).toFixed(2)+'</div>';
+   if(t.yield&&t.yield.move)oil+='<p class="yieldline">'+esc(t.yield.move)+'</p>';
+   if(o.range)oil+='<p class="range">'+esc(o.range)+'</p>';
+   oil+='<p class="why">'+esc(o.why||o.move||'')+'</p><p class="means">'+esc(o.means||'')+'</p>';
+  }else oil+='<p class="means">Crude did not load. Neither side is blocked.</p>';
+  $('oilCard').innerHTML=oil;
+  $('tapeRule').innerHTML='<span class="k">For the strategy · '+esc(t.label||'')+'</span><p class="strat">'+esc(t.strategy||'')+'</p>'+(t.note?'<p class="note">'+esc(t.note)+'</p>':'');
+ }
  function renderFresh(D){
   const u=new Date(D.updated),mins=Math.round((Date.now()-u)/60000),t=u.toLocaleTimeString([], {hour:'numeric',minute:'2-digit'});
   const f=$('fresh');const stale=D.session&&mins>25;f.className='fresh'+(stale?' stale':'');
@@ -469,7 +515,7 @@ dl.al dd{margin:0;color:var(--text)}
   if(!SEL||!S[SEL]){const saved=store.get('bl.sym');SEL=(saved&&S[saved])?saved:(syms.find(x=>['up','down'].includes(S[x].status))||syms.find(x=>['win','loss'].includes(S[x].status))||syms[0])}
   $('tickers').innerHTML=syms.map(x=>{const b=S[x]||{};return '<button type="button" class="tk" role="tab" data-s="'+esc(x)+'" aria-selected="false" aria-controls="stockPanel"><span class="t1"><span class="s">'+esc(x)+'</span><span class="dot '+esc(b.status||'')+'"></span></span><span class="l">'+esc(b.label||'')+'</span></button>'}).join('');
   document.querySelectorAll('.tk').forEach(t=>t.onclick=()=>{SEL=t.dataset.s;store.set('bl.sym',SEL);renderStock(D)});
-  renderStock(D);renderRoad(D);renderCurve(D);renderFresh(D);
+  renderStock(D);renderTape(D);renderRoad(D);renderCurve(D);renderFresh(D);
 
   const rows=(D.record||[]).map(r=>Array.isArray(r)?r:[r.date,r.call,r.result,r.note,r.tag,r.symbol]);
   const WD=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],MO=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
