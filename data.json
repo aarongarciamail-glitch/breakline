@@ -39,10 +39,10 @@
  },
  "tape": {
   "ok": true,
-  "asof": "2026-11-23T14:00:35-05:00",
+  "asof": "2026-11-23T14:15:37-05:00",
   "lean": "bullish",
   "label": "Lean up",
-  "strategy": "Calls and puts both stay open. Oil is down 3.4% and the 10-year is up 2.8 bp, which is my lean toward calls. The opening-range close still picks the side.",
+  "strategy": "Calls and puts both stay open. Oil is down 3.4% and the 10-year is up 1.6 bp, which is my lean toward calls. The opening-range close still picks the side.",
   "block_calls": false,
   "block_puts": false,
   "vix_small": false,
@@ -54,11 +54,11 @@
   "note": "Context only. Oil 1% and the 10-year 5 bp describe the lean. VIX 35 is a size note. Neither one blocks a call or a put.",
   "vix": {
    "name": "VIX",
-   "price": 27.11,
+   "price": 27.49,
    "prev": 35.89,
-   "chg_pct": -24.5,
-   "move": "Down 24.5% from yesterday's close of 35.9.",
-   "why": "Down 24.5% from yesterday's close of 35.9. Barrons.com: Wall Street\u2019s Fear Gauge Tumbles But Volatility Remains High",
+   "chg_pct": -23.4,
+   "move": "Down 23.4% from yesterday's close of 35.9.",
+   "why": "Down 23.4% from yesterday's close of 35.9. Barrons.com: Wall Street\u2019s Fear Gauge Tumbles But Volatility Remains High",
    "headline": {
     "source": "Barrons.com",
     "title": "Wall Street\u2019s Fear Gauge Tumbles But Volatility Remains High"
@@ -67,7 +67,7 @@
   },
   "oil": {
    "name": "Crude",
-   "price": 80.66,
+   "price": 80.62,
    "prev": 83.47,
    "chg_pct": -3.4,
    "move": "Down 3.4% from yesterday's close of 83.47.",
@@ -81,9 +81,9 @@
   },
   "yield": {
    "name": "10-year",
-   "price": 4.94,
-   "chg_bps": 2.8,
-   "move": "10-year is 4.94%, up 2.8 bp."
+   "price": 4.928,
+   "chg_bps": 1.6,
+   "move": "10-year is 4.93%, up 1.6 bp."
   }
  },
  "curve": [
@@ -145,9 +145,9 @@
   }
  ],
  "session": true,
- "next_check": "2:05 PM",
+ "next_check": "2:20 PM",
  "mode": "paper",
- "updated": "2026-11-23T14:00:32-05:00",
+ "updated": "2026-11-23T14:15:35-05:00",
  "date": "Mon \u00b7 Nov 23",
  "day": {
   "pills": [
@@ -227,7 +227,10 @@
      "13:40",
      "13:45",
      "13:50",
-     "13:55"
+     "13:55",
+     "14:00",
+     "14:05",
+     "14:10"
     ],
     "closes": [
      718.61,
@@ -283,7 +286,10 @@
      721.87,
      722.1,
      721.85,
-     721.21
+     721.21,
+     724.1,
+     723.04,
+     723.47
     ],
     "box": {
      "hi": 724.81,
@@ -499,7 +505,10 @@
      "13:40",
      "13:45",
      "13:50",
-     "13:55"
+     "13:55",
+     "14:00",
+     "14:05",
+     "14:10"
     ],
     "closes": [
      648.41,
@@ -555,7 +564,10 @@
      649.72,
      650.14,
      649.68,
-     648.94
+     648.94,
+     652.37,
+     650.92,
+     651.52
     ],
     "box": {
      "hi": 656.3,
@@ -771,7 +783,10 @@
      "13:40",
      "13:45",
      "13:50",
-     "13:55"
+     "13:55",
+     "14:00",
+     "14:05",
+     "14:10"
     ],
     "closes": [
      159.79,
@@ -827,7 +842,10 @@
      164.38,
      164.64,
      164.34,
-     163.94
+     163.94,
+     165.24,
+     164.58,
+     164.43
     ],
     "box": {
      "hi": 167.21,
@@ -1029,7 +1047,10 @@
      "13:40",
      "13:45",
      "13:50",
-     "13:55"
+     "13:55",
+     "14:00",
+     "14:05",
+     "14:10"
     ],
     "closes": [
      384.49,
@@ -1085,7 +1106,10 @@
      387.57,
      387.93,
      387.32,
-     386.36
+     386.36,
+     388.11,
+     387.42,
+     388.54
     ],
     "box": {
      "hi": 389.39,
@@ -1297,7 +1321,10 @@
      "13:40",
      "13:45",
      "13:50",
-     "13:55"
+     "13:55",
+     "14:00",
+     "14:05",
+     "14:10"
     ],
     "closes": [
      140.9,
@@ -1353,7 +1380,10 @@
      135.38,
      135.53,
      135.18,
-     134.62
+     134.62,
+     135.29,
+     134.97,
+     135.19
     ],
     "box": {
      "hi": 141.87,
