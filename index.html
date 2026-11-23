@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
 <meta name="theme-color" content="#060708">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Breakline">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="manifest" href="manifest.webmanifest">
 <title>Breakline</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='3.5' y='13.5' width='17' height='13' rx='3.5' fill='none' stroke='%238e98a4' stroke-width='1.8'/%3E%3Cpath d='M6.5 22.5 L11 18.5 L14.5 20.5 L27.5 5.5' fill='none' stroke='%23e9edf1' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='27.5' cy='5.5' r='2.3' fill='%233aa9b8'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,7 +38,7 @@
  color-scheme:dark;
 }
 *{box-sizing:border-box}
-html{background:var(--ink)}
+html{background:var(--ink);overflow-x:clip}
 body{margin:0;background:var(--ink);color:var(--text);font:400 16px/1.6 var(--display);-webkit-font-smoothing:antialiased;
  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--ink)}
@@ -55,7 +61,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 /* ---- header ---- */
 header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;align-items:center;gap:16px;padding-block:14px;
  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
-header.top::before{content:"";position:absolute;inset:0 -100vw;background:rgba(6,7,8,.55);z-index:-1}
+header.top::before{content:"";position:absolute;top:0;bottom:0;left:calc(-1 * max(16px, env(safe-area-inset-left, 0px)));right:calc(-1 * max(16px, env(safe-area-inset-right, 0px)));background:rgba(6,7,8,.55);z-index:-1}
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text)}
 .brand svg{width:30px;height:30px;flex:none}
 .word{font:500 19px/1 var(--display);letter-spacing:-.03em;background:linear-gradient(100deg,var(--silver-hi) 10%,var(--silver-lo) 90%);-webkit-background-clip:text;background-clip:text;color:transparent}
@@ -98,7 +104,7 @@ h2{margin:0;font:400 28px/1.15 var(--display);letter-spacing:-.03em}
 .chart{width:100%;height:auto;display:block}
 .chart text{font-family:var(--mono);font-size:11px}
 .legend{display:flex;flex-wrap:wrap;gap:6px 16px;color:var(--faint);font:400 12px/1.4 var(--mono);padding-top:6px}
-.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend>span{display:inline-flex;align-items:center;gap:6px}
 .legend i{display:inline-block;width:14px;height:10px;border-radius:2px}
 
 .side{display:grid;gap:14px;align-content:start;min-width:0}
@@ -156,6 +162,32 @@ footer .nfa{font:500 13px/1 var(--mono);letter-spacing:.1em;color:var(--text)}
 footer p{margin:0;max-width:70ch}
 a{color:var(--text)}
 :focus-visible{outline:2px solid var(--teal);outline-offset:3px;border-radius:6px}
+
+/* phone */
+@media (max-width:600px){
+ .hero{padding-block:36px 24px;gap:14px}
+ .lede{font-size:16.5px}
+ h2{font-size:24px}
+ section{padding-block:20px 28px}
+ .chartp{padding:14px 12px 10px}
+ .box,.step,.sitout{padding:16px}
+ .headline{font-size:20px}
+ nav.links{gap:0}
+ nav.links a{padding:8px 9px;font-size:13.5px}
+ nav.links .long{display:none}
+ .stat{padding:14px}
+ .stat .n{font-size:28px}
+ table{min-width:0}
+ thead{display:none}
+ tbody tr{display:grid;grid-template-columns:1fr auto;grid-template-areas:"d r" "c c" "n n";gap:2px 12px;padding:13px 16px;border-bottom:1px solid var(--line)}
+ tbody tr:last-child{border-bottom:0}
+ tbody td{padding:0;border:0}
+ td.d{grid-area:d}
+ td.r{grid-area:r;align-self:start}
+ tbody td:nth-child(2){grid-area:c;font-weight:500}
+ td.note{grid-area:n;font-size:13.5px}
+ .sample{margin-block:0 18px}
+}
 </style>
 </head>
 <body>
@@ -175,12 +207,12 @@ a{color:var(--text)}
    <span class="word">Breakline</span>
   </a>
   <nav class="links" aria-label="Sections">
-   <a href="#today">Today</a><a href="#record">Record</a><a href="#how">How it works</a>
+   <a href="#today">Today</a><a href="#record">Record</a><a href="#how">How<span class="long"> it works</span></a>
   </nav>
  </header>
 
  <div class="hero">
-  <span class="eyebrow"><b></b>Paper trading · SPY &amp; QQQ</span>
+  <span class="eyebrow"><b></b>Paper trading · SPY QQQ NVDA TSLA SPCX</span>
   <h1>This is what I'm doing. <em>Plain to see.</em></h1>
   <p class="lede">One setup, every market morning. I wait for the first fifteen minutes to draw a box, then trade the break out of it. Every call lands here: the wins, the losses, and the days I sit on my hands.</p>
  </div>
@@ -200,7 +232,7 @@ a{color:var(--text)}
     <svg class="chart" id="chart" viewBox="0 0 640 270" role="img" aria-label="Today's price against the opening-range box"></svg>
     <div class="legend">
      <span><i style="background:rgba(214,222,230,.16);border:1px solid rgba(214,222,230,.4)"></i>Opening range, 9:30–9:45</span>
-     <span><i style="background:var(--teal);height:3px"></i><span id="legendSym">Price</span>, 5-min closes</span>
+     <span><i style="background:var(--teal);height:3px"></i><b id="legendSym" style="font-weight:400">Price, 5-min closes</b></span>
      <span><i style="border-top:1px dashed var(--dim);height:0"></i>Targets</span>
     </div>
    </div>
@@ -253,11 +285,14 @@ a{color:var(--text)}
  const sgn=v=>(v>0?'+':'−')+Math.abs(v)+'%';
 
  function chart(c){
-  const svg=$('chart');svg.textContent='';if(!c||!c.closes||c.closes.length<2){mk('text',{x:320,y:135,fill:T('--faint'),'text-anchor':'middle'},svg,'Chart appears after 9:45');return}
-  $('legendSym').textContent=c.symbol;
+  const svg=$('chart');svg.textContent='';
+  const W=Math.min(900,Math.max(300,Math.round(svg.parentNode.clientWidth-(svg.parentNode.clientWidth>500?36:24))||640)),H=W<520?230:270,R=W<520?84:96;
+  svg.setAttribute('viewBox','0 0 '+W+' '+H);
+  if(!c||!c.closes||c.closes.length<2){mk('text',{x:W/2,y:H/2,fill:T('--faint'),'text-anchor':'middle'},svg,'Chart appears after 9:45');return}
+  $('legendSym').textContent=c.symbol+', 5-min closes';
   const all=[...c.closes,c.box.hi,c.box.lo,...(c.lines||[]).map(l=>l.price)];
   const pad=(Math.max(...all)-Math.min(...all))*.08||1,lo=Math.min(...all)-pad,hi=Math.max(...all)+pad;
-  const W=640,H=270,L=8,R=96,TOP=14,B=26,n=c.closes.length;
+  const L=8,TOP=14,B=26,n=c.closes.length;
   const x=i=>L+i*(W-L-R)/(n-1),y=p=>TOP+(hi-p)/(hi-lo)*(H-TOP-B);
   for(let k=0;k<=4;k++){const p=lo+(hi-lo)*k/4;mk('line',{x1:L,x2:W-R,y1:y(p),y2:y(p),stroke:T('--line'),'stroke-width':1},svg)}
   const bi=Math.min(3,n-1);
@@ -272,7 +307,7 @@ a{color:var(--text)}
   (c.marks||[]).forEach(m=>{if(m.i>=n)return;const hit=m.kind==='hit';
    mk('circle',hit?{cx:x(m.i),cy:y(c.closes[m.i]),r:4,fill:T('--win')}:{cx:x(m.i),cy:y(c.closes[m.i]),r:5,fill:T('--ink'),stroke:T('--silver-hi'),'stroke-width':2},svg);
    mk('text',{x:x(m.i),y:y(c.closes[m.i])+(hit?-10:22),fill:hit?T('--win'):T('--silver-hi'),'text-anchor':'middle'},svg,m.label)});
-  const step=Math.max(1,Math.round(n/6));for(let i=0;i<n;i+=step)mk('text',{x:x(i),y:H-6,fill:T('--faint'),'text-anchor':i?'middle':'start'},svg,c.times[i]);
+  const step=Math.max(1,Math.round(n/(W<520?4:6)));for(let i=0;i<n;i+=step)mk('text',{x:x(i),y:H-6,fill:T('--faint'),'text-anchor':i?'middle':'start'},svg,c.times[i]);
  }
 
  function render(D){
@@ -297,8 +332,8 @@ a{color:var(--text)}
   const avg=a=>a.length?Math.round(a.reduce((s,r)=>s+r[2],0)/a.length):0;
   const st=[[tr.length,'Trades taken',''],[tr.length?Math.round(w.length/tr.length*100)+'%':'—','Win rate',''],[w.length?'+'+avg(w)+'%':'—','Average winner','win'],[l.length?'−'+Math.abs(avg(l))+'%':'—','Average loser','loss']];
   $('stats').innerHTML=st.map(s=>'<div class="stat"><div class="n '+s[2]+'">'+s[0]+'</div><div class="l">'+s[1]+'</div></div>').join('');
-  const bs=$('bars');bs.textContent='';const seq=tr.slice().reverse(),BW=640,BH=170,pad=34,mid=86;
-  if(!seq.length){mk('text',{x:320,y:90,fill:T('--faint'),'text-anchor':'middle'},bs,'Results chart fills in as trades close');return}
+  const bs=$('bars');bs.textContent='';const seq=tr.slice().reverse(),BW=Math.min(900,Math.max(300,Math.round(bs.parentNode.clientWidth-30)||640)),BH=170,pad=40,mid=86;bs.setAttribute('viewBox','0 0 '+BW+' '+BH);
+  if(!seq.length){mk('text',{x:BW/2,y:90,fill:T('--faint'),'text-anchor':'middle'},bs,'Results chart fills in as trades close');return}
   const mx=Math.max(100,...seq.map(r=>Math.abs(r[2]))),sc=60/mx;
   mk('line',{x1:pad,x2:BW-8,y1:mid,y2:mid,stroke:T('--line-2'),'stroke-width':1},bs);
   [mx,mx/2,-mx/2,-mx].forEach(v=>{mk('line',{x1:pad,x2:BW-8,y1:mid-v*sc,y2:mid-v*sc,stroke:T('--line'),'stroke-width':1},bs);mk('text',{x:pad-6,y:mid-v*sc+3,fill:T('--faint'),'text-anchor':'end'},bs,sgn(Math.round(v)))});
@@ -306,9 +341,14 @@ a{color:var(--text)}
   seq.forEach((r,i)=>{const v=r[2],cx=pad+stp*(i+.5),h=Math.abs(v)*sc,c=v>0?T('--win'):T('--loss');
    mk('rect',{x:cx-bw/2,y:v>0?mid-h:mid,width:bw,height:Math.max(h,1.5),rx:3,fill:c,'fill-opacity':.85},bs);
    mk('text',{x:cx,y:v>0?mid-h-5:mid+h+12,fill:c,'text-anchor':'middle'},bs,sgn(v));
-   if(seq.length<=16)mk('text',{x:cx,y:BH-4,fill:T('--faint'),'text-anchor':'middle'},bs,r[0].slice(5).replace('-','/'))});
+   if(stp>=34)mk('text',{x:cx,y:BH-4,fill:T('--faint'),'text-anchor':'middle'},bs,r[0].slice(5).replace('-','/'))});
  }
- fetch('data.json',{cache:'no-store'}).then(r=>r.json()).then(render).catch(()=>{$('headline').textContent='Couldn’t load today’s data. Refresh in a minute.'});
+ let LAST=null;
+ const load=()=>fetch('data.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.json()).then(d=>{LAST=d;render(d)}).catch(()=>{if(!LAST)$('headline').textContent='Couldn’t load today’s data. Refresh in a minute.'});
+ load();
+ setInterval(()=>{if(!document.hidden)load()},60000);
+ document.addEventListener('visibilitychange',()=>{if(!document.hidden)load()});
+ let rz;addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(()=>{if(LAST)render(LAST)},150)});
 })();
 </script>
 </body>
