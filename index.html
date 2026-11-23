@@ -196,6 +196,28 @@ dl.ms .nt{grid-column:1/-1;font-size:12.5px;color:var(--faint)}
  .tk{flex:0 0 136px;scroll-snap-align:start}
  .tickers{scroll-padding-inline:max(16px, env(safe-area-inset-left, 0px))}}
 
+.act{display:grid;gap:10px;margin:10px 0 12px;padding:14px 16px;border-radius:14px;border:1px solid var(--line-2);background:rgba(255,255,255,.03)}
+.aw{font:600 30px/1 var(--display);letter-spacing:-.01em}
+.act.wait .aw{color:var(--silver-hi)}.act.hold .aw{color:var(--teal)}.act.win .aw{color:var(--win)}.act.loss .aw{color:var(--loss)}.act.none .aw{color:var(--dim)}
+.act.hold{border-color:color-mix(in srgb,var(--teal) 55%,transparent);background:var(--teal-soft)}
+.act.win{border-color:color-mix(in srgb,var(--win) 45%,transparent);background:color-mix(in srgb,var(--win) 8%,transparent)}
+.act.loss{border-color:color-mix(in srgb,var(--loss) 45%,transparent);background:color-mix(in srgb,var(--loss) 8%,transparent)}
+dl.al{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:15px}
+dl.al dt{color:var(--dim);white-space:nowrap}
+dl.al dd{margin:0;color:var(--text)}
+.lg-buy{color:var(--win);font-weight:400}.lg-sell{color:var(--loss);font-weight:400}
+.readkey{padding:18px;margin-bottom:14px}
+.readkey h3{margin:0 0 12px;font:500 12px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
+.readkey ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+.readkey li{display:grid;grid-template-columns:92px 1fr;gap:12px;align-items:baseline;font-size:14.5px;color:var(--dim)}
+.k{font:600 13px/1 var(--mono);letter-spacing:.06em;padding:6px 8px;border-radius:7px;text-align:center;border:1px solid}
+.k.buy{color:var(--win);border-color:color-mix(in srgb,var(--win) 45%,transparent)}
+.k.hold{color:var(--teal);border-color:color-mix(in srgb,var(--teal) 50%,transparent)}
+.k.sell{color:var(--loss);border-color:color-mix(in srgb,var(--loss) 45%,transparent)}
+.k.wait{color:var(--silver-hi);border-color:var(--line-2)}
+.k.none{color:var(--faint);border-color:var(--line-2)}
+@media (max-width:600px){.aw{font-size:26px}dl.al{grid-template-columns:1fr;gap:2px}dl.al dd{margin-bottom:6px}.readkey li{grid-template-columns:84px 1fr}}
+
 /* phone */
 @media (max-width:600px){
  .hero{padding-block:36px 24px;gap:14px}
@@ -264,7 +286,8 @@ dl.ms .nt{grid-column:1/-1;font-size:12.5px;color:var(--faint)}
   <div class="tickers" id="tickers" role="tablist" aria-label="Tickers I'm watching"></div>
   <div class="today">
    <div class="panel chartp" role="tabpanel" id="stockPanel">
-    <div class="stockhead"><span class="sym" id="sym">—</span><span class="pill" id="symPill"></span></div>
+    <div class="stockhead"><span class="sym" id="sym">—</span></div>
+    <div class="act" id="act"><div class="aw" id="actWord">WAIT</div><dl class="al" id="actLines"></dl></div>
     <p class="headline" id="headline"></p>
     <p class="sub" id="sub"></p>
     <svg class="chart" id="chart" viewBox="0 0 640 270" role="img" aria-label="Today's price against the opening-range box"></svg>
@@ -272,12 +295,12 @@ dl.ms .nt{grid-column:1/-1;font-size:12.5px;color:var(--faint)}
      <span><i style="background:rgba(214,222,230,.16);border:1px solid rgba(214,222,230,.4)"></i>Opening range, 9:30–9:45</span>
      <span><i style="background:var(--teal);height:3px"></i><b id="legendSym" style="font-weight:400">Price, 5-min closes</b></span>
      <span><i style="border-top:1px dashed var(--dim);height:0"></i>Targets</span>
+     <span><b class="lg-buy">▲</b>Buy</span><span><b class="lg-sell">▼</b>Sell</span>
     </div>
    </div>
    <div class="side">
     <div class="panel box"><h3>This stock</h3><dl class="ms" id="measures"></dl></div>
     <div class="panel box"><h3>Levels</h3><dl class="lv" id="levels"></dl></div>
-    <div class="panel box"><h3>The plan</h3><ol class="plan" id="plan"></ol></div>
    </div>
   </div>
  </section>
@@ -297,6 +320,16 @@ dl.ms .nt{grid-column:1/-1;font-size:12.5px;color:var(--faint)}
 
  <section id="how" aria-labelledby="how-h">
   <div class="sh"><h2 id="how-h">How it works</h2><span class="meta">Same rules every day</span></div>
+  <div class="panel readkey">
+   <h3>How to read a call</h3>
+   <ul>
+    <li><b class="k buy">BUY</b><span>Price closed outside the opening range. Buy the option named, at about the price shown.</span></li>
+    <li><b class="k hold">HOLD</b><span>You're in. Take profit in thirds at the targets. The "Sell all if" line is your exit.</span></li>
+    <li><b class="k sell">SELL</b><span>A target hit (sell a third) or an exit rule hit (sell everything). Do it, no second-guessing.</span></li>
+    <li><b class="k wait">WAIT</b><span>No signal yet. The buy levels are listed. Nothing to do until one breaks.</span></li>
+    <li><b class="k none">NO TRADE</b><span>No break, or a reason to pass. Sitting out is part of the plan.</span></li>
+   </ul>
+  </div>
   <div class="steps">
    <div class="panel step"><span class="t">9:30–9:45</span><h3>Draw the box</h3><p>The first three five-minute candles make a box: the high and low of the opening fifteen minutes. No trades before it's done.</p></div>
    <div class="panel step"><span class="t">After 9:45</span><h3>Wait for a close outside</h3><p>A five-minute candle has to close above or below the box, with volume picking up. A quick poke that closes back inside doesn't count.</p></div>
@@ -344,9 +377,10 @@ dl.ms .nt{grid-column:1/-1;font-size:12.5px;color:var(--faint)}
   const pts=c.closes.map((v,i)=>x(i).toFixed(1)+','+y(v).toFixed(1));
   mk('path',{d:'M'+pts.join(' L')+' L'+x(n-1)+','+(H-B)+' L'+x(0)+','+(H-B)+' Z',fill:'url(#area)'},svg);
   mk('path',{d:'M'+pts.join(' L'),fill:'none',stroke:T('--teal'),'stroke-width':2.2,'stroke-linejoin':'round','stroke-linecap':'round'},svg);
-  (c.marks||[]).forEach(m=>{if(m.i>=n)return;const hit=m.kind==='hit';
-   mk('circle',hit?{cx:x(m.i),cy:y(c.closes[m.i]),r:4,fill:T('--win')}:{cx:x(m.i),cy:y(c.closes[m.i]),r:5,fill:T('--ink'),stroke:T('--silver-hi'),'stroke-width':2},svg);
-   mk('text',{x:x(m.i),y:y(c.closes[m.i])+(hit?-10:22),fill:hit?T('--win'):T('--silver-hi'),'text-anchor':'middle'},svg,m.label)});
+  (c.marks||[]).forEach(m=>{if(m.i>=n)return;const cx=x(m.i),cy=y(c.closes[m.i]);
+   if(m.kind==='buy'){const g=T('--win');mk('path',{d:`M${cx} ${cy+8} l7 12 h-14 z`,fill:g},svg);mk('text',{x:cx,y:cy+34,fill:g,'text-anchor':'middle','font-weight':'600'},svg,m.label)}
+   else if(m.kind==='sell'){const r=T('--loss');mk('path',{d:`M${cx} ${cy-8} l7 -12 h-14 z`,fill:r},svg);mk('text',{x:cx,y:cy-26,fill:r,'text-anchor':'middle','font-weight':'600'},svg,m.label)}
+   else{mk('circle',{cx,cy,r:5,fill:T('--ink'),stroke:T('--faint'),'stroke-width':2},svg);mk('text',{x:cx,y:cy+20,fill:T('--faint'),'text-anchor':'middle'},svg,m.label)}});
   const step=Math.max(1,Math.round(n/(W<520?4:6)));for(let i=0;i<n;i+=step)mk('text',{x:x(i),y:H-6,fill:T('--faint'),'text-anchor':i?'middle':'start'},svg,c.times[i]);
  }
 
@@ -357,13 +391,14 @@ dl.ms .nt{grid-column:1/-1;font-size:12.5px;color:var(--faint)}
   const b=(D.stocks||{})[SEL];if(!b)return;
   document.querySelectorAll('.tk').forEach(t=>t.setAttribute('aria-selected',t.dataset.s===SEL?'true':'false'));
   $('sym').textContent=SEL;
-  const sp=$('symPill');sp.className='pill '+b.status;sp.textContent=b.label;
-  $('headline').textContent=b.headline||'';
+  const A=b.action||{word:'WAIT',tone:'wait',lines:[]};
+  $('act').className='act '+A.tone;$('actWord').textContent=A.word;
+  $('actLines').innerHTML=(A.lines||[]).map(l=>'<dt>'+esc(l[0])+'</dt><dd>'+esc(l[1])+'</dd>').join('');
+  $('headline').textContent=b.headline||'';$('headline').hidden=['up','down','win','loss'].includes(b.status);
   $('sub').textContent=b.sub||'';
   chart(b.chart);
   $('measures').innerHTML=(b.measures||[]).map(m=>'<div><dt>'+esc(m[0])+'</dt><dd>'+esc(m[1])+'</dd>'+(m[2]?'<dd class="nt">'+esc(m[2])+'</dd>':'')+'</div>').join('')||'<div><dt>Numbers show up after the morning brief.</dt></div>';
   $('levels').innerHTML=(b.levels||[]).map(l=>'<dt>'+esc(l[0])+'</dt><dd'+(l[2]?' class="key"':'')+'>'+Number(l[1]).toFixed(2)+'</dd>').join('')||'<dt>Levels post at 9:20.</dt><dd></dd>';
-  $('plan').innerHTML=(b.plan||[]).map(p=>'<li><b'+(p[2]?' class="done"':'')+'>'+esc(p[0])+'</b><span>'+esc(p[1])+'</span></li>').join('')||'<li><b>—</b><span>The plan shows up when this stock triggers a trade.</span></li>';
  }
  function render(D){
   $('sample').hidden=!D.sample;
