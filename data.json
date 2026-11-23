@@ -39,26 +39,26 @@
  },
  "tape": {
   "ok": true,
-  "asof": "2026-11-23T12:55:23-05:00",
+  "asof": "2026-11-23T13:00:23-05:00",
   "lean": "bullish",
-  "label": "Puts off",
-  "strategy": "Puts are off. Oil is down 2.9% and the 10-year is up 3.2 bp. A close above the box can still be a call. A close below the box is tracked and passed.",
+  "label": "Lean up",
+  "strategy": "Calls and puts both stay open. Oil is down 2.9% and the 10-year is up 2.2 bp, which is his lean toward calls. The opening-range close still picks the side.",
   "block_calls": false,
-  "block_puts": true,
+  "block_puts": false,
   "vix_small": false,
   "size_note": "",
   "skip_calls": "",
-  "skip_puts": "oil is down 2.9% and the 10-year is up 3.2 bp, so puts are off",
-  "agree_calls": "Oil is down 2.9%, so this call goes with the tape.",
-  "agree_puts": "",
-  "note": "Cuts in the rules: oil 1% on the day, 10-year 5 bp, VIX 35 for size. He describes this in words. These exact lines are ours. A passed break is still tracked.",
+  "skip_puts": "",
+  "agree_calls": "Oil is down 2.9%, so his lean is up. This call goes with that.",
+  "agree_puts": "Oil is down 2.9%, so his lean is up. This put is still the opening-range break.",
+  "note": "Context only. Oil 1% and the 10-year 5 bp describe his lean. VIX 35 is a size note. Neither one blocks a call or a put.",
   "vix": {
    "name": "VIX",
-   "price": 27.32,
+   "price": 27.96,
    "prev": 35.89,
-   "chg_pct": -23.9,
-   "move": "Down 23.9% from yesterday's close of 35.9.",
-   "why": "Down 23.9% from yesterday's close of 35.9. Barrons.com: Wall Street\u2019s Fear Gauge Tumbles But Volatility Remains High",
+   "chg_pct": -22.1,
+   "move": "Down 22.1% from yesterday's close of 35.9.",
+   "why": "Down 22.1% from yesterday's close of 35.9. Barrons.com: Wall Street\u2019s Fear Gauge Tumbles But Volatility Remains High",
    "headline": {
     "source": "Barrons.com",
     "title": "Wall Street\u2019s Fear Gauge Tumbles But Volatility Remains High"
@@ -67,7 +67,7 @@
   },
   "oil": {
    "name": "Crude",
-   "price": 81.03,
+   "price": 81.04,
    "prev": 83.47,
    "chg_pct": -2.9,
    "move": "Down 2.9% from yesterday's close of 83.47.",
@@ -77,13 +77,13 @@
     "source": "Reuters",
     "title": "Oil drops more than 3% on increased Middle East flows, Libyan pipeline restart"
    },
-   "means": "A down oil day is his bullish lean for SPY and QQQ. Put breaks are passed and tracked. Call breaks stay allowed."
+   "means": "A down oil day is his lean toward calls on SPY and QQQ. Calls and puts both stay open. The box picks the side."
   },
   "yield": {
    "name": "10-year",
-   "price": 4.944,
-   "chg_bps": 3.2,
-   "move": "10-year is 4.94%, up 3.2 bp."
+   "price": 4.934,
+   "chg_bps": 2.2,
+   "move": "10-year is 4.93%, up 2.2 bp."
   }
  },
  "curve": [
@@ -145,9 +145,9 @@
   }
  ],
  "session": true,
- "next_check": "1:00 PM",
+ "next_check": "1:05 PM",
  "mode": "paper",
- "updated": "2026-11-23T12:57:27-05:00",
+ "updated": "2026-11-23T13:00:32-05:00",
  "date": "Mon \u00b7 Nov 23",
  "day": {
   "pills": [
@@ -214,7 +214,8 @@
      "12:35",
      "12:40",
      "12:45",
-     "12:50"
+     "12:50",
+     "12:55"
     ],
     "closes": [
      718.61,
@@ -257,7 +258,8 @@
      723.14,
      721.06,
      719.91,
-     722.42
+     722.42,
+     722.11
     ],
     "box": {
      "hi": 724.81,
@@ -451,7 +453,8 @@
      "12:35",
      "12:40",
      "12:45",
-     "12:50"
+     "12:50",
+     "12:55"
     ],
     "closes": [
      648.41,
@@ -494,7 +497,8 @@
      651.7,
      649.48,
      648.26,
-     651.08
+     651.08,
+     650.66
     ],
     "box": {
      "hi": 656.3,
@@ -688,7 +692,8 @@
      "12:35",
      "12:40",
      "12:45",
-     "12:50"
+     "12:50",
+     "12:55"
     ],
     "closes": [
      159.79,
@@ -731,7 +736,8 @@
      166.08,
      164.38,
      163.4,
-     164.79
+     164.79,
+     164.19
     ],
     "box": {
      "hi": 167.21,
@@ -911,7 +917,8 @@
      "12:35",
      "12:40",
      "12:45",
-     "12:50"
+     "12:50",
+     "12:55"
     ],
     "closes": [
      384.49,
@@ -952,9 +959,10 @@
      389.57,
      389.82,
      389.29,
-     387.52,
+     387.62,
      386.47,
-     388.18
+     388.18,
+     387.68
     ],
     "box": {
      "hi": 389.39,
@@ -1148,7 +1156,8 @@
      "12:35",
      "12:40",
      "12:45",
-     "12:50"
+     "12:50",
+     "12:55"
     ],
     "closes": [
      140.9,
@@ -1191,7 +1200,8 @@
      136.11,
      135.56,
      135.43,
-     135.97
+     135.97,
+     135.99
     ],
     "box": {
      "hi": 141.87,
