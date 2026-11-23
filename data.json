@@ -39,26 +39,26 @@
  },
  "tape": {
   "ok": true,
-  "asof": "2026-11-23T12:54:23-05:00",
+  "asof": "2026-11-23T12:55:23-05:00",
   "lean": "bullish",
   "label": "Puts off",
-  "strategy": "Puts are off. Oil is down 3.0% and the 10-year is up 3.4 bp. A close above the box can still be a call. A close below the box is tracked and passed.",
+  "strategy": "Puts are off. Oil is down 2.9% and the 10-year is up 3.2 bp. A close above the box can still be a call. A close below the box is tracked and passed.",
   "block_calls": false,
   "block_puts": true,
   "vix_small": false,
   "size_note": "",
   "skip_calls": "",
-  "skip_puts": "oil is down 3.0% and the 10-year is up 3.4 bp, so puts are off",
-  "agree_calls": "Oil is down 3.0%, so this call goes with the tape.",
+  "skip_puts": "oil is down 2.9% and the 10-year is up 3.2 bp, so puts are off",
+  "agree_calls": "Oil is down 2.9%, so this call goes with the tape.",
   "agree_puts": "",
   "note": "Cuts in the rules: oil 1% on the day, 10-year 5 bp, VIX 35 for size. He describes this in words. These exact lines are ours. A passed break is still tracked.",
   "vix": {
    "name": "VIX",
-   "price": 27.36,
+   "price": 27.32,
    "prev": 35.89,
-   "chg_pct": -23.8,
-   "move": "Down 23.8% from yesterday's close of 35.9.",
-   "why": "Down 23.8% from yesterday's close of 35.9. Barrons.com: Wall Street\u2019s Fear Gauge Tumbles But Volatility Remains High",
+   "chg_pct": -23.9,
+   "move": "Down 23.9% from yesterday's close of 35.9.",
+   "why": "Down 23.9% from yesterday's close of 35.9. Barrons.com: Wall Street\u2019s Fear Gauge Tumbles But Volatility Remains High",
    "headline": {
     "source": "Barrons.com",
     "title": "Wall Street\u2019s Fear Gauge Tumbles But Volatility Remains High"
@@ -67,12 +67,12 @@
   },
   "oil": {
    "name": "Crude",
-   "price": 81.0,
+   "price": 81.03,
    "prev": 83.47,
-   "chg_pct": -3.0,
-   "move": "Down 3.0% from yesterday's close of 83.47.",
+   "chg_pct": -2.9,
+   "move": "Down 2.9% from yesterday's close of 83.47.",
    "range": "Under the last month's low of 81.55.",
-   "why": "Down 3.0% from yesterday's close of 83.47. Reuters: Oil drops more than 3% on increased Middle East flows, Libyan pipeline restart",
+   "why": "Down 2.9% from yesterday's close of 83.47. Reuters: Oil drops more than 3% on increased Middle East flows, Libyan pipeline restart",
    "headline": {
     "source": "Reuters",
     "title": "Oil drops more than 3% on increased Middle East flows, Libyan pipeline restart"
@@ -81,9 +81,9 @@
   },
   "yield": {
    "name": "10-year",
-   "price": 4.946,
-   "chg_bps": 3.4,
-   "move": "10-year is 4.95%, up 3.4 bp."
+   "price": 4.944,
+   "chg_bps": 3.2,
+   "move": "10-year is 4.94%, up 3.2 bp."
   }
  },
  "curve": [
@@ -145,9 +145,9 @@
   }
  ],
  "session": true,
- "next_check": "12:55 PM",
+ "next_check": "1:00 PM",
  "mode": "paper",
- "updated": "2026-11-23T12:54:20-05:00",
+ "updated": "2026-11-23T12:55:51-05:00",
  "date": "Mon \u00b7 Nov 23",
  "day": {
   "pills": [
