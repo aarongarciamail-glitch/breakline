@@ -2,7 +2,7 @@
  "v": 2,
  "sample": false,
  "mode": "paper",
- "updated": "2026-11-23T11:13:42-05:00",
+ "updated": "2026-11-23T11:15:35-05:00",
  "date": "Mon \u00b7 Nov 23",
  "day": {
   "pills": [
@@ -48,7 +48,8 @@
      "10:50",
      "10:55",
      "11:00",
-     "11:05"
+     "11:05",
+     "11:10"
     ],
     "closes": [
      718.61,
@@ -68,9 +69,10 @@
      724.96,
      723.78,
      723.53,
-     724.3,
+     724.32,
      722.78,
-     724.09
+     724.09,
+     724.33
     ],
     "box": {
      "hi": 724.81,
@@ -162,7 +164,12 @@
     [
      "Today's box",
      "1.58%",
-     ""
+     "5.9x its normal \u00b7 very wide"
+    ],
+    [
+     "Normal box",
+     "0.27%",
+     "median of the last 40 sessions"
     ],
     [
      "20-day volatility",
@@ -214,7 +221,8 @@
      "10:50",
      "10:55",
      "11:00",
-     "11:05"
+     "11:05",
+     "11:10"
     ],
     "closes": [
      648.41,
@@ -234,9 +242,10 @@
      654.44,
      651.92,
      651.25,
-     652.41,
+     652.38,
      650.63,
-     652.29
+     652.29,
+     652.24
     ],
     "box": {
      "hi": 656.3,
@@ -328,7 +337,12 @@
     [
      "Today's box",
      "2.24%",
-     ""
+     "4.1x its normal \u00b7 very wide"
+    ],
+    [
+     "Normal box",
+     "0.55%",
+     "median of the last 40 sessions"
     ],
     [
      "20-day volatility",
@@ -380,7 +394,8 @@
      "10:50",
      "10:55",
      "11:00",
-     "11:05"
+     "11:05",
+     "11:10"
     ],
     "closes": [
      159.79,
@@ -402,7 +417,8 @@
      168.22,
      168.44,
      167.32,
-     168.13
+     168.13,
+     167.4
     ],
     "box": {
      "hi": 167.21,
@@ -475,17 +491,22 @@
     [
      "Today's box",
      "6.55%",
-     ""
+     "4.6x its normal \u00b7 very wide"
+    ],
+    [
+     "Normal box",
+     "1.42%",
+     "median of the last 40 sessions"
     ],
     [
      "20-day volatility",
-     "133%",
+     "130%",
      "annualized, from daily closes"
     ],
     [
      "Earnings",
-     "none in view",
-     ""
+     "Nov 17",
+     "4 trading days ago"
     ],
     [
      "Option at the break",
@@ -532,7 +553,8 @@
      "10:50",
      "10:55",
      "11:00",
-     "11:05"
+     "11:05",
+     "11:10"
     ],
     "closes": [
      384.49,
@@ -554,7 +576,8 @@
      389.8,
      390.37,
      389.69,
-     391.35
+     391.35,
+     391.27
     ],
     "box": {
      "hi": 389.39,
@@ -637,11 +660,16 @@
     [
      "Today's box",
      "4.69%",
-     ""
+     "2.5x its normal \u00b7 very wide"
+    ],
+    [
+     "Normal box",
+     "1.88%",
+     "median of the last 40 sessions"
     ],
     [
      "20-day volatility",
-     "75%",
+     "77%",
      "annualized, from daily closes"
     ],
     [
@@ -694,7 +722,8 @@
      "10:50",
      "10:55",
      "11:00",
-     "11:05"
+     "11:05",
+     "11:10"
     ],
     "closes": [
      140.9,
@@ -716,7 +745,8 @@
      136.52,
      136.63,
      136.15,
-     136.77
+     136.77,
+     136.66
     ],
     "box": {
      "hi": 141.87,
@@ -808,11 +838,16 @@
     [
      "Today's box",
      "2.20%",
-     ""
+     "0.9x its normal \u00b7 normal"
+    ],
+    [
+     "Normal box",
+     "2.37%",
+     "median of the last 40 sessions"
     ],
     [
      "20-day volatility",
-     "77%",
+     "74%",
      "annualized, from daily closes"
     ],
     [
