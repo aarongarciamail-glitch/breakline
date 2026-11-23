@@ -1,157 +1,875 @@
 {
+ "v": 2,
  "sample": false,
  "mode": "paper",
- "updated": "2026-11-23T11:10:30-05:00",
- "today": {
-  "date": "Mon \u00b7 Nov 23",
+ "updated": "2026-11-23T11:13:42-05:00",
+ "date": "Mon \u00b7 Nov 23",
+ "day": {
   "pills": [
    "Trade day",
    "Paper"
   ],
-  "headline": "NVDA broke up at 10:00. Calls.",
-  "sub": "The first 15 minutes set a range of $156.93 to $167.21. The 10:00 five-minute candle closed above it at 168.56. Closed for -25% on the option (paper).",
-  "chart": {
-   "symbol": "NVDA",
-   "times": [
-    "9:30",
-    "9:35",
-    "9:40",
-    "9:45",
-    "9:50",
-    "9:55",
-    "10:00",
-    "10:05",
-    "10:10",
-    "10:15",
-    "10:20",
-    "10:25",
-    "10:30",
-    "10:35",
-    "10:40",
-    "10:45",
-    "10:50",
-    "10:55",
-    "11:00",
-    "11:05"
-   ],
-   "closes": [
-    159.79,
-    158.05,
-    161.42,
-    164.38,
-    164.95,
-    168.56,
-    166.48,
-    164.94,
-    166.5,
-    167.37,
-    170.58,
-    169.99,
-    168.49,
-    168.51,
-    168.65,
-    168.61,
-    168.22,
-    168.44,
-    167.32,
-    168.13
-   ],
-   "box": {
-    "hi": 167.21,
-    "lo": 156.93
+  "headline": "5 trades today: SPY closed -33%, QQQ closed -1%, NVDA closed -25%, TSLA in trade \u00b7 calls, SPCX closed +30%.",
+  "sub": "Tap a ticker to see its box, levels and numbers."
+ },
+ "symbols": [
+  "SPY",
+  "QQQ",
+  "NVDA",
+  "TSLA",
+  "SPCX"
+ ],
+ "stocks": {
+  "SPY": {
+   "status": "loss",
+   "label": "Closed -33%",
+   "result": -33,
+   "headline": "SPY broke up at 10:25. Closed -33%.",
+   "sub": "Calls from the 10:25 close at 726.36. Paper result on the option, whole trade.",
+   "chart": {
+    "symbol": "SPY",
+    "times": [
+     "9:30",
+     "9:35",
+     "9:40",
+     "9:45",
+     "9:50",
+     "9:55",
+     "10:00",
+     "10:05",
+     "10:10",
+     "10:15",
+     "10:20",
+     "10:25",
+     "10:30",
+     "10:35",
+     "10:40",
+     "10:45",
+     "10:50",
+     "10:55",
+     "11:00",
+     "11:05"
+    ],
+    "closes": [
+     718.61,
+     715.58,
+     717.12,
+     718.91,
+     719.38,
+     720.99,
+     721.82,
+     720.31,
+     722.55,
+     724.22,
+     726.32,
+     726.14,
+     726.04,
+     727.08,
+     724.96,
+     723.78,
+     723.53,
+     724.3,
+     722.78,
+     724.09
+    ],
+    "box": {
+     "hi": 724.81,
+     "lo": 713.54
+    },
+    "lines": [
+     {
+      "name": "R2",
+      "price": 730.16
+     },
+     {
+      "name": "R3",
+      "price": 742.02
+     }
+    ],
+    "marks": [
+     {
+      "i": 10,
+      "label": "10:25 break",
+      "kind": "break"
+     }
+    ]
    },
-   "lines": [],
-   "marks": [
-    {
-     "i": 5,
-     "label": "10:00 break",
-     "kind": "break"
-    }
+   "levels": [
+    [
+     "Range high",
+     724.81,
+     true
+    ],
+    [
+     "Pre-market high",
+     724.48,
+     false
+    ],
+    [
+     "Prior-day high",
+     718.29,
+     false
+    ],
+    [
+     "Range low",
+     713.54,
+     true
+    ],
+    [
+     "R1 pivot",
+     710.4833333333333,
+     true
+    ],
+    [
+     "Pre-market low",
+     704.06,
+     false
+    ],
+    [
+     "Prior-day low",
+     686.75,
+     false
+    ],
+    [
+     "S1 pivot",
+     678.9433333333334,
+     true
+    ]
+   ],
+   "plan": [
+    [
+     "Entry",
+     "SPY 726 calls at the 10:25 close",
+     true
+    ],
+    [
+     "Stop",
+     "A 5-min close back under 724.81, or -50%",
+     true
+    ],
+    [
+     "R2",
+     "Sell a third at 730.16. Stop to break-even",
+     false
+    ],
+    [
+     "R3",
+     "Sell a third at 742.02",
+     false
+    ]
+   ],
+   "measures": [
+    [
+     "Today's box",
+     "1.58%",
+     ""
+    ],
+    [
+     "20-day volatility",
+     "32%",
+     "annualized, from daily closes"
+    ],
+    [
+     "Option at the break",
+     "IV 44%",
+     "vs 32% realized \u00b7 rich"
+    ],
+    [
+     "Option spread",
+     "1%",
+     "of mid at entry (max 15%)"
+    ],
+    [
+     "Paper record",
+     "1 trade",
+     "0% win \u00b7 avg -33% \u00b7 best -33%"
+    ]
    ]
   },
-  "levels": [
-   [
-    "Pre-market high",
-    169.05,
-    false
+  "QQQ": {
+   "status": "loss",
+   "label": "Closed -1%",
+   "result": -1,
+   "headline": "QQQ broke up at 10:25. Closed -1%.",
+   "sub": "Calls from the 10:25 close at 656.37. Paper result on the option, whole trade.",
+   "chart": {
+    "symbol": "QQQ",
+    "times": [
+     "9:30",
+     "9:35",
+     "9:40",
+     "9:45",
+     "9:50",
+     "9:55",
+     "10:00",
+     "10:05",
+     "10:10",
+     "10:15",
+     "10:20",
+     "10:25",
+     "10:30",
+     "10:35",
+     "10:40",
+     "10:45",
+     "10:50",
+     "10:55",
+     "11:00",
+     "11:05"
+    ],
+    "closes": [
+     648.41,
+     644.84,
+     645.39,
+     646.9,
+     646.67,
+     649.45,
+     650.46,
+     648.64,
+     651.88,
+     653.64,
+     656.37,
+     655.62,
+     655.12,
+     656.53,
+     654.44,
+     651.92,
+     651.25,
+     652.41,
+     650.63,
+     652.29
+    ],
+    "box": {
+     "hi": 656.3,
+     "lo": 641.95
+    },
+    "lines": [
+     {
+      "name": "R2",
+      "price": 656.9
+     },
+     {
+      "name": "R3",
+      "price": 670.52
+     }
+    ],
+    "marks": [
+     {
+      "i": 10,
+      "label": "10:25 break",
+      "kind": "break"
+     }
+    ]
+   },
+   "levels": [
+    [
+     "Pre-market high",
+     657.0,
+     false
+    ],
+    [
+     "Range high",
+     656.3,
+     true
+    ],
+    [
+     "Prior-day high",
+     643.28,
+     false
+    ],
+    [
+     "Range low",
+     641.95,
+     true
+    ],
+    [
+     "R1 pivot",
+     633.47,
+     true
+    ],
+    [
+     "Pre-market low",
+     624.64,
+     false
+    ],
+    [
+     "Prior-day low",
+     606.23,
+     false
+    ],
+    [
+     "S1 pivot",
+     596.4200000000001,
+     true
+    ]
    ],
-   [
-    "Range high",
-    167.21,
-    true
+   "plan": [
+    [
+     "Entry",
+     "QQQ 656 calls at the 10:25 close",
+     true
+    ],
+    [
+     "Stop",
+     "A 5-min close back under 656.30, or -50%",
+     true
+    ],
+    [
+     "R2",
+     "Sell a third at 656.90. Stop to break-even",
+     false
+    ],
+    [
+     "R3",
+     "Sell a third at 670.52",
+     false
+    ]
    ],
-   [
-    "Range low",
-    156.93,
-    true
-   ],
-   [
-    "Prior-day high",
-    143.72,
-    false
-   ],
-   [
-    "R1 pivot",
-    138.18666666666667,
-    true
-   ],
-   [
-    "Pre-market low",
-    133.57,
-    false
-   ],
-   [
-    "Prior-day low",
-    124.5,
-    false
-   ],
-   [
-    "S1 pivot",
-    118.96666666666667,
-    true
+   "measures": [
+    [
+     "Today's box",
+     "2.24%",
+     ""
+    ],
+    [
+     "20-day volatility",
+     "48%",
+     "annualized, from daily closes"
+    ],
+    [
+     "Option at the break",
+     "IV 59%",
+     "vs 48% realized \u00b7 elevated"
+    ],
+    [
+     "Option spread",
+     "0%",
+     "of mid at entry (max 15%)"
+    ],
+    [
+     "Paper record",
+     "1 trade",
+     "0% win \u00b7 avg -1% \u00b7 best -1%"
+    ]
    ]
-  ],
-  "plan": [
-   [
-    "Entry",
-    "NVDA 167.5 calls at the 10:00 close",
-    false
+  },
+  "NVDA": {
+   "status": "loss",
+   "label": "Closed -25%",
+   "result": -25,
+   "headline": "NVDA broke up at 10:00. Closed -25%.",
+   "sub": "Calls from the 10:00 close at 168.56. Paper result on the option, whole trade.",
+   "chart": {
+    "symbol": "NVDA",
+    "times": [
+     "9:30",
+     "9:35",
+     "9:40",
+     "9:45",
+     "9:50",
+     "9:55",
+     "10:00",
+     "10:05",
+     "10:10",
+     "10:15",
+     "10:20",
+     "10:25",
+     "10:30",
+     "10:35",
+     "10:40",
+     "10:45",
+     "10:50",
+     "10:55",
+     "11:00",
+     "11:05"
+    ],
+    "closes": [
+     159.79,
+     158.05,
+     161.42,
+     164.38,
+     164.95,
+     168.56,
+     166.48,
+     164.94,
+     166.5,
+     167.37,
+     170.58,
+     169.99,
+     168.49,
+     168.51,
+     168.65,
+     168.61,
+     168.22,
+     168.44,
+     167.32,
+     168.13
+    ],
+    "box": {
+     "hi": 167.21,
+     "lo": 156.93
+    },
+    "lines": [],
+    "marks": [
+     {
+      "i": 5,
+      "label": "10:00 break",
+      "kind": "break"
+     }
+    ]
+   },
+   "levels": [
+    [
+     "Pre-market high",
+     169.05,
+     false
+    ],
+    [
+     "Range high",
+     167.21,
+     true
+    ],
+    [
+     "Range low",
+     156.93,
+     true
+    ],
+    [
+     "Prior-day high",
+     143.72,
+     false
+    ],
+    [
+     "R1 pivot",
+     138.18666666666667,
+     true
+    ],
+    [
+     "Pre-market low",
+     133.57,
+     false
+    ],
+    [
+     "Prior-day low",
+     124.5,
+     false
+    ],
+    [
+     "S1 pivot",
+     118.96666666666667,
+     true
+    ]
    ],
-   [
-    "Stop",
-    "A 5-min close back under 167.21, or -50%",
-    true
+   "plan": [
+    [
+     "Entry",
+     "NVDA 167.5 calls at the 10:00 close",
+     true
+    ],
+    [
+     "Stop",
+     "A 5-min close back under 167.21, or -50%",
+     true
+    ]
+   ],
+   "measures": [
+    [
+     "Today's box",
+     "6.55%",
+     ""
+    ],
+    [
+     "20-day volatility",
+     "133%",
+     "annualized, from daily closes"
+    ],
+    [
+     "Earnings",
+     "none in view",
+     ""
+    ],
+    [
+     "Option at the break",
+     "IV 203%",
+     "vs 133% realized \u00b7 rich"
+    ],
+    [
+     "Option spread",
+     "4%",
+     "of mid at entry (max 15%)"
+    ],
+    [
+     "Paper record",
+     "1 trade",
+     "0% win \u00b7 avg -25% \u00b7 best -25%"
+    ]
    ]
-  ]
+  },
+  "TSLA": {
+   "status": "up",
+   "label": "In trade \u00b7 calls",
+   "result": null,
+   "headline": "TSLA broke up at 10:15. Calls.",
+   "sub": "5-minute close 390.11 above the box (389.39). Paper trade is open.",
+   "chart": {
+    "symbol": "TSLA",
+    "times": [
+     "9:30",
+     "9:35",
+     "9:40",
+     "9:45",
+     "9:50",
+     "9:55",
+     "10:00",
+     "10:05",
+     "10:10",
+     "10:15",
+     "10:20",
+     "10:25",
+     "10:30",
+     "10:35",
+     "10:40",
+     "10:45",
+     "10:50",
+     "10:55",
+     "11:00",
+     "11:05"
+    ],
+    "closes": [
+     384.49,
+     386.81,
+     384.98,
+     385.0,
+     386.8,
+     387.35,
+     388.86,
+     387.81,
+     390.16,
+     391.33,
+     392.85,
+     392.07,
+     391.9,
+     392.89,
+     391.92,
+     389.68,
+     389.8,
+     390.37,
+     389.69,
+     391.35
+    ],
+    "box": {
+     "hi": 389.39,
+     "lo": 371.95
+    },
+    "lines": [
+     {
+      "name": "R3",
+      "price": 394.69
+     }
+    ],
+    "marks": [
+     {
+      "i": 8,
+      "label": "10:15 break",
+      "kind": "break"
+     }
+    ]
+   },
+   "levels": [
+    [
+     "Range high",
+     389.39,
+     true
+    ],
+    [
+     "Pre-market high",
+     376.0,
+     false
+    ],
+    [
+     "Prior-day high",
+     373.88,
+     false
+    ],
+    [
+     "Range low",
+     371.95,
+     true
+    ],
+    [
+     "R1 pivot",
+     365.1366666666667,
+     true
+    ],
+    [
+     "Pre-market low",
+     358.11,
+     false
+    ],
+    [
+     "Prior-day low",
+     344.33,
+     false
+    ],
+    [
+     "S1 pivot",
+     335.5866666666667,
+     true
+    ]
+   ],
+   "plan": [
+    [
+     "Entry",
+     "TSLA 390 calls at the 10:15 close",
+     true
+    ],
+    [
+     "Stop",
+     "A 5-min close back under 389.39, or -50%",
+     false
+    ],
+    [
+     "R3",
+     "Sell a third at 394.69. Stop to break-even",
+     false
+    ]
+   ],
+   "measures": [
+    [
+     "Today's box",
+     "4.69%",
+     ""
+    ],
+    [
+     "20-day volatility",
+     "75%",
+     "annualized, from daily closes"
+    ],
+    [
+     "Earnings",
+     "Jan 27",
+     "in 47 trading days"
+    ],
+    [
+     "Option at the break",
+     "IV 90%",
+     "vs 75% realized \u00b7 elevated"
+    ],
+    [
+     "Option spread",
+     "4%",
+     "of mid at entry (max 15%)"
+    ],
+    [
+     "Paper record",
+     "no trades yet",
+     ""
+    ]
+   ]
+  },
+  "SPCX": {
+   "status": "win",
+   "label": "Closed +30%",
+   "result": 30,
+   "headline": "SPCX broke down at 10:35. Closed +30%.",
+   "sub": "Puts from the 10:35 close at 137.77. Paper result on the option, whole trade.",
+   "chart": {
+    "symbol": "SPCX",
+    "times": [
+     "9:30",
+     "9:35",
+     "9:40",
+     "9:45",
+     "9:50",
+     "9:55",
+     "10:00",
+     "10:05",
+     "10:10",
+     "10:15",
+     "10:20",
+     "10:25",
+     "10:30",
+     "10:35",
+     "10:40",
+     "10:45",
+     "10:50",
+     "10:55",
+     "11:00",
+     "11:05"
+    ],
+    "closes": [
+     140.9,
+     139.85,
+     139.83,
+     140.02,
+     139.91,
+     139.86,
+     139.71,
+     139.23,
+     139.73,
+     139.43,
+     139.68,
+     139.22,
+     137.77,
+     138.81,
+     138.21,
+     136.7,
+     136.52,
+     136.63,
+     136.15,
+     136.77
+    ],
+    "box": {
+     "hi": 141.87,
+     "lo": 138.82
+    },
+    "lines": [
+     {
+      "name": "R2",
+      "price": 136.92
+     },
+     {
+      "name": "R1",
+      "price": 132.44
+     }
+    ],
+    "marks": [
+     {
+      "i": 12,
+      "label": "10:35 break",
+      "kind": "break"
+     }
+    ]
+   },
+   "levels": [
+    [
+     "Range high",
+     141.87,
+     true
+    ],
+    [
+     "Pre-market high",
+     140.22,
+     false
+    ],
+    [
+     "Range low",
+     138.82,
+     true
+    ],
+    [
+     "Prior-day high",
+     133.84,
+     false
+    ],
+    [
+     "R1 pivot",
+     132.43999999999997,
+     true
+    ],
+    [
+     "Pre-market low",
+     130.5,
+     false
+    ],
+    [
+     "Prior-day low",
+     126.28,
+     false
+    ],
+    [
+     "S1 pivot",
+     124.87999999999997,
+     true
+    ]
+   ],
+   "plan": [
+    [
+     "Entry",
+     "SPCX 138 puts at the 10:35 close",
+     true
+    ],
+    [
+     "Stop",
+     "A 5-min close back over 138.82, or -50%",
+     false
+    ],
+    [
+     "R2",
+     "Sell a third at 136.92. Stop to break-even",
+     true
+    ],
+    [
+     "R1",
+     "Sell a third at 132.44",
+     false
+    ]
+   ],
+   "measures": [
+    [
+     "Today's box",
+     "2.20%",
+     ""
+    ],
+    [
+     "20-day volatility",
+     "77%",
+     "annualized, from daily closes"
+    ],
+    [
+     "Earnings",
+     "none in view",
+     ""
+    ],
+    [
+     "Option at the break",
+     "IV 97%",
+     "vs 77% realized \u00b7 elevated"
+    ],
+    [
+     "Option spread",
+     "1%",
+     "of mid at entry (max 15%)"
+    ],
+    [
+     "Paper record",
+     "1 trade",
+     "100% win \u00b7 avg +30% \u00b7 best +30%"
+    ]
+   ]
+  }
  },
  "record": [
-  [
-   "2026-11-23",
-   "NVDA calls",
-   -25,
-   "5-min close 166.48 back inside the box.",
-   ""
-  ],
-  [
-   "2026-11-23",
-   "QQQ calls",
-   -1,
-   "5-min close 655.62 back inside the box.",
-   ""
-  ],
-  [
-   "2026-11-23",
-   "SPY calls",
-   -33,
-   "5-min close 723.78 back inside the box.",
-   ""
-  ],
-  [
-   "2026-11-23",
-   "SPCX puts",
-   30,
-   "Profit lock: best was +69%, now +26% (floor +45%).",
-   ""
-  ]
+  {
+   "date": "2026-11-23",
+   "symbol": "NVDA",
+   "call": "NVDA calls",
+   "result": -25,
+   "note": "5-min close 166.48 back inside the box.",
+   "tag": ""
+  },
+  {
+   "date": "2026-11-23",
+   "symbol": "QQQ",
+   "call": "QQQ calls",
+   "result": -1,
+   "note": "5-min close 655.62 back inside the box.",
+   "tag": ""
+  },
+  {
+   "date": "2026-11-23",
+   "symbol": "SPY",
+   "call": "SPY calls",
+   "result": -33,
+   "note": "5-min close 723.78 back inside the box.",
+   "tag": ""
+  },
+  {
+   "date": "2026-11-23",
+   "symbol": "SPCX",
+   "call": "SPCX puts",
+   "result": 30,
+   "note": "Profit lock: best was +69%, now +26% (floor +45%).",
+   "tag": ""
+  }
  ]
 }
