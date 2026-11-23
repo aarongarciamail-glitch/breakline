@@ -61,7 +61,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 /* ---- header ---- */
 header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;align-items:center;gap:16px;padding-block:14px;
  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
-header.top::before{content:"";position:absolute;top:0;bottom:0;left:calc(-1 * max(16px, env(safe-area-inset-left, 0px)));right:calc(-1 * max(16px, env(safe-area-inset-right, 0px)));background:rgba(6,7,8,.55);z-index:-1}
+header.top::before{content:"";position:absolute;top:0;bottom:0;left:50%;width:100vw;transform:translateX(-50%);background:rgba(6,7,8,.55);z-index:-1}
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text)}
 .brand svg{width:30px;height:30px;flex:none}
 .word{font:500 19px/1 var(--display);letter-spacing:-.03em;background:linear-gradient(100deg,var(--silver-hi) 10%,var(--silver-lo) 90%);-webkit-background-clip:text;background-clip:text;color:transparent}
@@ -163,6 +163,39 @@ footer p{margin:0;max-width:70ch}
 a{color:var(--text)}
 :focus-visible{outline:2px solid var(--teal);outline-offset:3px;border-radius:6px}
 
+.today{align-items:start}
+.dayline{display:flex;flex-wrap:wrap;align-items:center;gap:10px 12px;margin-bottom:14px}
+.dayline .callrow{margin:0}
+.dayhead{margin:0;font-size:16px;color:var(--dim);min-width:0}
+.tickers{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-bottom:14px}
+.tk{display:grid;gap:6px;text-align:left;padding:12px 14px;min-height:64px;border-radius:14px;border:1px solid var(--line);background:var(--glass);color:var(--text);cursor:pointer;font:inherit;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.tk:hover{border-color:var(--line-2)}
+.tk[aria-selected=true]{border-color:color-mix(in srgb,var(--teal) 70%,transparent);box-shadow:0 0 0 1px color-mix(in srgb,var(--teal) 60%,transparent) inset,0 0 22px color-mix(in srgb,var(--teal) 18%,transparent)}
+.tk .t1{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.tk .s{font:600 16px/1 var(--mono);letter-spacing:.02em}
+.tk .l{font-size:12.5px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--faint);flex:none}
+.dot.waiting{background:var(--silver-lo)}.dot.up,.dot.down{background:var(--teal);box-shadow:0 0 10px var(--teal)}
+.dot.win{background:var(--win)}.dot.loss{background:var(--loss)}.dot.skip,.dot.none,.dot.sitout,.dot.pending{background:transparent;border:1px solid var(--faint)}
+.stockhead{display:flex;align-items:center;gap:10px;margin-bottom:2px}
+.sym{font:600 22px/1 var(--mono);letter-spacing:.02em}
+.pill.win{color:var(--win);border-color:color-mix(in srgb,var(--win) 45%,transparent)}
+.pill.loss{color:var(--loss);border-color:color-mix(in srgb,var(--loss) 45%,transparent)}
+.pill.up,.pill.down{color:var(--teal);border-color:color-mix(in srgb,var(--teal) 50%,transparent);background:var(--teal-soft)}
+.pill.waiting,.pill.none,.pill.skip,.pill.sitout,.pill.pending{color:var(--skip);border-color:var(--line-2)}
+dl.ms{margin:0;display:grid;gap:12px}
+dl.ms div{display:grid;grid-template-columns:1fr auto;gap:2px 12px;align-items:baseline}
+dl.ms dt{color:var(--dim);font-size:14px}
+dl.ms dd{margin:0;font:500 14px/1.4 var(--mono);text-align:right;font-variant-numeric:tabular-nums}
+dl.ms .nt{grid-column:1/-1;font-size:12.5px;color:var(--faint)}
+.bytick{margin-bottom:14px}
+.bytick td,.bytick th{white-space:nowrap}
+.bytick td:first-child{font:600 14px/1.4 var(--mono)}
+@media (max-width:860px){.tickers{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;margin-inline:calc(-1 * max(16px, env(safe-area-inset-left, 0px)));padding-inline:max(16px, env(safe-area-inset-left, 0px))}
+ .tickers::-webkit-scrollbar{display:none}
+ .tk{flex:0 0 136px;scroll-snap-align:start}
+ .tickers{scroll-padding-inline:max(16px, env(safe-area-inset-left, 0px))}}
+
 /* phone */
 @media (max-width:600px){
  .hero{padding-block:36px 24px;gap:14px}
@@ -178,13 +211,16 @@ a{color:var(--text)}
  .stat{padding:14px}
  .stat .n{font-size:28px}
  table{min-width:0}
- thead{display:none}
- tbody tr{display:grid;grid-template-columns:1fr auto;grid-template-areas:"d r" "c c" "n n";gap:2px 12px;padding:13px 16px;border-bottom:1px solid var(--line)}
- tbody tr:last-child{border-bottom:0}
- tbody td{padding:0;border:0}
+ .tablewrap:not(.bytick) thead{display:none}
+ .tablewrap:not(.bytick) tbody tr{display:grid;grid-template-columns:1fr auto;grid-template-areas:"d r" "c c" "n n";gap:2px 12px;padding:13px 16px;border-bottom:1px solid var(--line)}
+ .tablewrap:not(.bytick) tbody tr:last-child{border-bottom:0}
+ .tablewrap:not(.bytick) tbody td{padding:0;border:0}
+ .bytick th,.bytick td{padding:11px 10px}
+ .bytick th:nth-child(n+5),.bytick td:nth-child(n+5){display:none}
+ .bytick th:first-child,.bytick td:first-child{padding-left:16px}
  td.d{grid-area:d}
  td.r{grid-area:r;align-self:start}
- tbody td:nth-child(2){grid-area:c;font-weight:500}
+ .tablewrap:not(.bytick) tbody td:nth-child(2){grid-area:c;font-weight:500}
  td.note{grid-area:n;font-size:13.5px}
  .sample{margin-block:0 18px}
 }
@@ -207,7 +243,7 @@ a{color:var(--text)}
    <span class="word">Breakline</span>
   </a>
   <nav class="links" aria-label="Sections">
-   <a href="#today">Today</a><a href="#record">Record</a><a href="#how">How<span class="long"> it works</span></a>
+   <a href="#today">Today</a><a href="#record">Record</a><a href="#how">How<span class="long">&nbsp;it works</span></a>
   </nav>
  </header>
 
@@ -224,10 +260,12 @@ a{color:var(--text)}
 
  <section id="today" aria-labelledby="today-h">
   <div class="sh"><h2 id="today-h">Today</h2><span class="meta" id="todayDate"></span></div>
+  <div class="dayline"><div class="callrow" id="pills"></div><p class="dayhead" id="dayHead">Loading today's call…</p></div>
+  <div class="tickers" id="tickers" role="tablist" aria-label="Tickers I'm watching"></div>
   <div class="today">
-   <div class="panel chartp">
-    <div class="callrow" id="pills"></div>
-    <p class="headline" id="headline">Loading today's call…</p>
+   <div class="panel chartp" role="tabpanel" id="stockPanel">
+    <div class="stockhead"><span class="sym" id="sym">—</span><span class="pill" id="symPill"></span></div>
+    <p class="headline" id="headline"></p>
     <p class="sub" id="sub"></p>
     <svg class="chart" id="chart" viewBox="0 0 640 270" role="img" aria-label="Today's price against the opening-range box"></svg>
     <div class="legend">
@@ -237,6 +275,7 @@ a{color:var(--text)}
     </div>
    </div>
    <div class="side">
+    <div class="panel box"><h3>This stock</h3><dl class="ms" id="measures"></dl></div>
     <div class="panel box"><h3>Levels</h3><dl class="lv" id="levels"></dl></div>
     <div class="panel box"><h3>The plan</h3><ol class="plan" id="plan"></ol></div>
    </div>
@@ -246,6 +285,7 @@ a{color:var(--text)}
  <section id="record" aria-labelledby="record-h">
   <div class="sh"><h2 id="record-h">Track record</h2><span class="meta">Percent per trade · no dollar amounts</span></div>
   <div class="stats" id="stats"></div>
+  <div class="panel tablewrap bytick"><table><thead><tr><th>Ticker</th><th class="r">Trades</th><th class="r">Win rate</th><th class="r">Avg</th><th class="r">Best</th><th class="r">Worst</th></tr></thead><tbody id="byTick"></tbody></table></div>
   <div class="panel bars"><svg id="bars" viewBox="0 0 640 170" role="img" aria-label="Result of each trade as a percent, oldest to newest."></svg></div>
   <div class="panel tablewrap">
    <table>
@@ -310,28 +350,46 @@ a{color:var(--text)}
   const step=Math.max(1,Math.round(n/(W<520?4:6)));for(let i=0;i<n;i+=step)mk('text',{x:x(i),y:H-6,fill:T('--faint'),'text-anchor':i?'middle':'start'},svg,c.times[i]);
  }
 
+ let SEL=null;
+ const store={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+ const pillCls={'Trade day':'go','Paper':'paper'};
+ function renderStock(D){
+  const b=(D.stocks||{})[SEL];if(!b)return;
+  document.querySelectorAll('.tk').forEach(t=>t.setAttribute('aria-selected',t.dataset.s===SEL?'true':'false'));
+  $('sym').textContent=SEL;
+  const sp=$('symPill');sp.className='pill '+b.status;sp.textContent=b.label;
+  $('headline').textContent=b.headline||'';
+  $('sub').textContent=b.sub||'';
+  chart(b.chart);
+  $('measures').innerHTML=(b.measures||[]).map(m=>'<div><dt>'+esc(m[0])+'</dt><dd>'+esc(m[1])+'</dd>'+(m[2]?'<dd class="nt">'+esc(m[2])+'</dd>':'')+'</div>').join('')||'<div><dt>Numbers show up after the morning brief.</dt></div>';
+  $('levels').innerHTML=(b.levels||[]).map(l=>'<dt>'+esc(l[0])+'</dt><dd'+(l[2]?' class="key"':'')+'>'+Number(l[1]).toFixed(2)+'</dd>').join('')||'<dt>Levels post at 9:20.</dt><dd></dd>';
+  $('plan').innerHTML=(b.plan||[]).map(p=>'<li><b'+(p[2]?' class="done"':'')+'>'+esc(p[0])+'</b><span>'+esc(p[1])+'</span></li>').join('')||'<li><b>—</b><span>The plan shows up when this stock triggers a trade.</span></li>';
+ }
  function render(D){
   $('sample').hidden=!D.sample;
-  const t=D.today||{};
-  $('todayDate').textContent=t.date||'';
-  const pc={'Trade day':'go','Paper':'paper'};
-  $('pills').innerHTML=(t.pills||[]).map(p=>'<span class="pill '+(pc[p]||'sit')+'">'+esc(p)+'</span>').join('');
-  $('headline').textContent=t.headline||'No call yet today.';
-  $('sub').textContent=t.sub||'';
-  chart(t.chart);
-  $('levels').innerHTML=(t.levels||[]).map(l=>'<dt>'+esc(l[0])+'</dt><dd'+(l[2]?' class="key"':'')+'>'+Number(l[1]).toFixed(2)+'</dd>').join('');
-  $('plan').innerHTML=(t.plan||[]).map(p=>'<li><b'+(p[2]?' class="done"':'')+'>'+esc(p[0])+'</b><span>'+esc(p[1])+'</span></li>').join('')||'<li><b>—</b><span>The plan shows up when a trade triggers.</span></li>';
+  $('todayDate').textContent=D.date||'';
+  const day=D.day||{};
+  $('pills').innerHTML=(day.pills||[]).map(p=>'<span class="pill '+(pillCls[p]||'sit')+'">'+esc(p)+'</span>').join('');
+  $('dayHead').textContent=day.headline||'';
+  const syms=D.symbols||Object.keys(D.stocks||{}),S=D.stocks||{};
+  if(!SEL||!S[SEL]){const saved=store.get('bl.sym');SEL=(saved&&S[saved])?saved:(syms.find(x=>['up','down'].includes(S[x].status))||syms.find(x=>['win','loss'].includes(S[x].status))||syms[0])}
+  $('tickers').innerHTML=syms.map(x=>{const b=S[x]||{};return '<button type="button" class="tk" role="tab" data-s="'+esc(x)+'" aria-selected="false" aria-controls="stockPanel"><span class="t1"><span class="s">'+esc(x)+'</span><span class="dot '+esc(b.status||'')+'"></span></span><span class="l">'+esc(b.label||'')+'</span></button>'}).join('');
+  document.querySelectorAll('.tk').forEach(t=>t.onclick=()=>{SEL=t.dataset.s;store.set('bl.sym',SEL);renderStock(D)});
+  renderStock(D);
 
-  const rows=D.record||[],WD=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],MO=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const rows=(D.record||[]).map(r=>Array.isArray(r)?r:[r.date,r.call,r.result,r.note,r.tag,r.symbol]);
+  const WD=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],MO=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   const dl=s=>{const d=new Date(s+'T12:00:00');return WD[d.getDay()]+' '+MO[d.getMonth()]+' '+d.getDate()};
   $('rows').innerHTML=rows.map(([d,call,res,note,tag])=>{const sit=res==null,cls=sit?'sit':res>0?'win':'loss';
-   const ct=call==='skip'?'Sat out':call==='none'?'No break':esc(call);
+   const ct=call==='skip'?'Sat out':call==='none'?'No trade':esc(call);
    return '<tr><td class="d">'+dl(d)+'</td><td>'+ct+(tag?'<span class="tag">'+esc(tag)+'</span>':'')+'</td><td class="note">'+esc(note)+'</td><td class="r '+cls+'">'+(sit?'—':sgn(res))+'</td></tr>'}).join('')
    ||'<tr><td colspan="4" class="note">No trades yet. The first paper call lands here.</td></tr>';
   const tr=rows.filter(r=>r[2]!=null),w=tr.filter(r=>r[2]>0),l=tr.filter(r=>r[2]<=0);
   const avg=a=>a.length?Math.round(a.reduce((s,r)=>s+r[2],0)/a.length):0;
   const st=[[tr.length,'Trades taken',''],[tr.length?Math.round(w.length/tr.length*100)+'%':'—','Win rate',''],[w.length?'+'+avg(w)+'%':'—','Average winner','win'],[l.length?'−'+Math.abs(avg(l))+'%':'—','Average loser','loss']];
   $('stats').innerHTML=st.map(s=>'<div class="stat"><div class="n '+s[2]+'">'+s[0]+'</div><div class="l">'+s[1]+'</div></div>').join('');
+  const bySym=syms.map(x=>{const r=tr.filter(q=>q[5]===x),ww=r.filter(q=>q[2]>0);return [x,r.length,r.length?Math.round(ww.length/r.length*100)+'%':'—',r.length?sgn(avg(r)):'—',r.length?sgn(Math.max(...r.map(q=>q[2]))):'—',r.length?sgn(Math.min(...r.map(q=>q[2]))):'—',r.length?avg(r):0]});
+  $('byTick').innerHTML=bySym.map(r=>'<tr><td>'+esc(r[0])+'</td><td class="r">'+r[1]+'</td><td class="r">'+r[2]+'</td><td class="r '+(r[1]?(r[6]>0?'win':'loss'):'sit')+'">'+r[3]+'</td><td class="r">'+r[4]+'</td><td class="r">'+r[5]+'</td></tr>').join('');
   const bs=$('bars');bs.textContent='';const seq=tr.slice().reverse(),BW=Math.min(900,Math.max(300,Math.round(bs.parentNode.clientWidth-30)||640)),BH=170,pad=40,mid=86;bs.setAttribute('viewBox','0 0 '+BW+' '+BH);
   if(!seq.length){mk('text',{x:BW/2,y:90,fill:T('--faint'),'text-anchor':'middle'},bs,'Results chart fills in as trades close');return}
   const mx=Math.max(100,...seq.map(r=>Math.abs(r[2]))),sc=60/mx;
@@ -341,7 +399,7 @@ a{color:var(--text)}
   seq.forEach((r,i)=>{const v=r[2],cx=pad+stp*(i+.5),h=Math.abs(v)*sc,c=v>0?T('--win'):T('--loss');
    mk('rect',{x:cx-bw/2,y:v>0?mid-h:mid,width:bw,height:Math.max(h,1.5),rx:3,fill:c,'fill-opacity':.85},bs);
    mk('text',{x:cx,y:v>0?mid-h-5:mid+h+12,fill:c,'text-anchor':'middle'},bs,sgn(v));
-   if(stp>=34)mk('text',{x:cx,y:BH-4,fill:T('--faint'),'text-anchor':'middle'},bs,r[0].slice(5).replace('-','/'))});
+   if(stp>=34)mk('text',{x:cx,y:BH-4,fill:T('--faint'),'text-anchor':'middle'},bs,(r[5]?r[5]+' ':'')+r[0].slice(5).replace('-','/'))});
  }
  let LAST=null;
  const load=()=>fetch('data.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.json()).then(d=>{LAST=d;render(d)}).catch(()=>{if(!LAST)$('headline').textContent='Couldn’t load today’s data. Refresh in a minute.'});
