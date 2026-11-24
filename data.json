@@ -7,25 +7,25 @@
   "checks": [
    {
     "name": "Paper trades",
-    "value": "5 of 20",
+    "value": "6 of 20",
     "ok": false,
-    "progress": 0.25
+    "progress": 0.3
    },
    {
     "name": "Profit factor",
-    "value": "0.27",
+    "value": "0.21",
     "need": "\u2265 1.2",
     "ok": false
    },
    {
     "name": "Average trade",
-    "value": "-16%",
+    "value": "-19%",
     "need": "> 0%",
     "ok": false
    },
    {
     "name": "Worst drawdown",
-    "value": "4.4%",
+    "value": "4.6%",
     "need": "\u2264 12%",
     "ok": true
    },
@@ -39,10 +39,10 @@
  },
  "tape": {
   "ok": true,
-  "asof": "2026-11-24T10:05:37-05:00",
+  "asof": "2026-11-24T10:10:37-05:00",
   "lean": "mixed",
   "label": "Tape split",
-  "strategy": "Calls and puts both stay open. Oil is up 2.4% and the 10-year is down 0.6 bp, so they disagree. The opening-range close picks the side.",
+  "strategy": "Calls and puts both stay open. Oil is up 2.5% and the 10-year is down 0.6 bp, so they disagree. The opening-range close picks the side.",
   "block_calls": false,
   "block_puts": false,
   "vix_small": false,
@@ -54,11 +54,11 @@
   "note": "Context only. Oil 1% and the 10-year 5 bp describe the lean. VIX 35 is a size note. Neither one blocks a call or a put.",
   "vix": {
    "name": "VIX",
-   "price": 27.55,
+   "price": 27.44,
    "prev": 26.61,
-   "chg_pct": 3.5,
-   "move": "Up 3.5% from yesterday's close of 26.6.",
-   "why": "Up 3.5% from yesterday's close of 26.6. Barrons.com: Market's Fear Gauge Rises",
+   "chg_pct": 3.1,
+   "move": "Up 3.1% from yesterday's close of 26.6.",
+   "why": "Up 3.1% from yesterday's close of 26.6. Barrons.com: Market's Fear Gauge Rises",
    "headline": {
     "source": "Barrons.com",
     "title": "Market's Fear Gauge Rises"
@@ -67,15 +67,15 @@
   },
   "oil": {
    "name": "Crude",
-   "price": 81.5,
+   "price": 81.59,
    "prev": 79.59,
-   "chg_pct": 2.4,
-   "move": "Up 2.4% from yesterday's close of 79.59.",
+   "chg_pct": 2.5,
+   "move": "Up 2.5% from yesterday's close of 79.59.",
    "range": "Inside the last month, 79.87 to 104.99.",
-   "why": "Up 2.4% from yesterday's close of 79.59. MT Newswires: Newfoundland and Labrador Sees Sharp Fiscal Improvement as Oil Windfall Lifts Fiscal Outlook, Scotiabank Says",
+   "why": "Up 2.5% from yesterday's close of 79.59. Associated Press: BC-Crude Oil Futures",
    "headline": {
-    "source": "MT Newswires",
-    "title": "Newfoundland and Labrador Sees Sharp Fiscal Improvement as Oil Windfall Lifts Fiscal Outlook, Scotiabank Says"
+    "source": "Associated Press",
+    "title": "BC-Crude Oil Futures"
    },
    "means": "Oil and yields point different ways. Calls and puts both stay open. The box picks the side."
   },
@@ -106,10 +106,27 @@
   {
    "date": "2026-11-23",
    "acct": -3.22
+  },
+  {
+   "date": "2026-11-24",
+   "acct": -4.6
   }
  ],
- "max_dd": 4.38,
+ "max_dd": 4.6,
  "days": [
+  {
+   "date": "2026-11-24",
+   "n": 1,
+   "wins": 0,
+   "acct": -1.42,
+   "items": [
+    {
+     "symbol": "QQQ",
+     "dir": "calls",
+     "result": -36
+    }
+   ]
+  },
   {
    "date": "2026-11-23",
    "n": 5,
@@ -145,16 +162,16 @@
   }
  ],
  "session": true,
- "next_check": "10:10 AM",
+ "next_check": "10:15 AM",
  "mode": "paper",
- "updated": "2026-11-24T10:05:34-05:00",
+ "updated": "2026-11-24T10:10:34-05:00",
  "date": "Tue \u00b7 Nov 24",
  "day": {
   "pills": [
    "Trade day",
    "Paper"
   ],
-  "headline": "3 trades today: SPY holding calls, QQQ holding calls, SPCX holding puts.",
+  "headline": "3 trades today: SPY holding calls, QQQ sold -36%, SPCX holding puts.",
   "sub": "Tap a ticker to see its box, levels and numbers."
  },
  "symbols": [
@@ -180,7 +197,8 @@
      "9:45",
      "9:50",
      "9:55",
-     "10:00"
+     "10:00",
+     "10:05"
     ],
     "closes": [
      714.24,
@@ -189,7 +207,8 @@
      718.05,
      718.89,
      719.8,
-     720.36
+     720.36,
+     718.8
     ],
     "box": {
      "hi": 717.83,
@@ -335,11 +354,11 @@
    }
   },
   "QQQ": {
-   "status": "up",
-   "label": "Holding calls",
-   "result": null,
-   "headline": "QQQ broke up at 10:00. Calls.",
-   "sub": "5-minute close 641.98 above the box (641.25). Paper trade is open.",
+   "status": "loss",
+   "label": "Sold -36%",
+   "result": -36,
+   "headline": "QQQ broke up at 10:00. Closed -36%.",
+   "sub": "Calls from the 10:00 close at 641.98. Paper result on the option, whole trade.",
    "chart": {
     "symbol": "QQQ",
     "times": [
@@ -349,16 +368,18 @@
      "9:45",
      "9:50",
      "9:55",
-     "10:00"
+     "10:00",
+     "10:05"
     ],
     "closes": [
      639.16,
      636.6,
      640.04,
      640.65,
-     640.79,
+     640.89,
      641.98,
-     641.42
+     641.42,
+     639.44
     ],
     "box": {
      "hi": 641.25,
@@ -384,6 +405,11 @@
       "i": 6,
       "kind": "sell",
       "label": "SELL 1/3"
+     },
+     {
+      "i": 7,
+      "kind": "sell",
+      "label": "SELL"
      }
     ]
    },
@@ -479,8 +505,8 @@
     ],
     [
      "Paper record",
-     "1 trade",
-     "0% win \u00b7 avg -1% \u00b7 best -1%"
+     "2 trades",
+     "0% win \u00b7 avg -18% \u00b7 best -1%"
     ],
     [
      "Backtest, 59 days",
@@ -489,21 +515,25 @@
     ]
    ],
    "action": {
-    "word": "HOLD CALLS",
-    "tone": "hold",
-    "tile": "Holding calls",
+    "word": "SOLD -36%",
+    "tone": "loss",
+    "tile": "Sold -36%",
     "lines": [
      [
       "Bought",
       "QQQ 642 call at $4.00 (10:00)"
      ],
      [
-      "Take profit",
-      "1/3 at 642.70 \u2713 done, 1/3 at 650.12"
+      "Sold",
+      "1/3 at $3.15 (10:05); the rest at $2.29 (10:10)"
      ],
      [
-      "Sell all if",
-      "QQQ gets back to 641.98 (the buy price)"
+      "Why it ended",
+      "QQQ came back to the buy price 641.98"
+     ],
+     [
+      "Result",
+      "-36% on the whole trade (paper)"
      ]
     ]
    }
@@ -523,7 +553,8 @@
      "9:45",
      "9:50",
      "9:55",
-     "10:00"
+     "10:00",
+     "10:05"
     ],
     "closes": [
      155.78,
@@ -532,7 +563,8 @@
      155.42,
      155.97,
      156.22,
-     155.0
+     155.0,
+     154.24
     ],
     "box": {
      "hi": 159.92,
@@ -651,7 +683,8 @@
      "9:45",
      "9:50",
      "9:55",
-     "10:00"
+     "10:00",
+     "10:05"
     ],
     "closes": [
      387.68,
@@ -660,7 +693,8 @@
      386.76,
      387.87,
      387.71,
-     386.89
+     386.89,
+     384.0
     ],
     "box": {
      "hi": 390.09,
@@ -779,7 +813,8 @@
      "9:45",
      "9:50",
      "9:55",
-     "10:00"
+     "10:00",
+     "10:05"
     ],
     "closes": [
      132.26,
@@ -788,7 +823,8 @@
      130.36,
      129.95,
      129.67,
-     128.7
+     128.7,
+     127.96
     ],
     "box": {
      "hi": 132.5,
@@ -940,6 +976,14 @@
   }
  },
  "record": [
+  {
+   "date": "2026-11-24",
+   "symbol": "QQQ",
+   "call": "QQQ calls",
+   "result": -36,
+   "note": "Back to the entry price 641.98 (break-even stop).",
+   "tag": ""
+  },
   {
    "date": "2026-11-23",
    "symbol": "NVDA",
