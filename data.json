@@ -7,19 +7,19 @@
   "checks": [
    {
     "name": "Paper trades",
-    "value": "8 of 20",
+    "value": "10 of 20",
     "ok": false,
-    "progress": 0.4
+    "progress": 0.5
    },
    {
     "name": "Profit factor",
-    "value": "0.20",
+    "value": "0.59",
     "need": "\u2265 1.2",
     "ok": false
    },
    {
     "name": "Average trade",
-    "value": "-18%",
+    "value": "-7%",
     "need": "> 0%",
     "ok": false
    },
@@ -39,26 +39,26 @@
  },
  "tape": {
   "ok": true,
-  "asof": "2026-11-24T11:15:35-05:00",
+  "asof": "2026-11-24T11:25:36-05:00",
   "lean": "quiet",
   "label": "Oil quiet",
-  "strategy": "Calls and puts both stay open. Oil moved 0.6%, under the 1% line, so it does not pick a side.",
+  "strategy": "Calls and puts both stay open. Oil moved 0.7%, under the 1% line, so it does not pick a side.",
   "block_calls": false,
   "block_puts": false,
   "vix_small": false,
   "size_note": "",
   "skip_calls": "",
   "skip_puts": "",
-  "agree_calls": "Oil moved 0.6%, so the tape is not picking a side.",
-  "agree_puts": "Oil moved 0.6%, so the tape is not picking a side.",
+  "agree_calls": "Oil moved 0.7%, so the tape is not picking a side.",
+  "agree_puts": "Oil moved 0.7%, so the tape is not picking a side.",
   "note": "Context only. Oil 1% and the 10-year 5 bp describe the lean. VIX 35 is a size note. Neither one blocks a call or a put.",
   "vix": {
    "name": "VIX",
-   "price": 28.66,
+   "price": 28.64,
    "prev": 26.61,
-   "chg_pct": 7.7,
-   "move": "Up 7.7% from yesterday's close of 26.6.",
-   "why": "Up 7.7% from yesterday's close of 26.6. Barrons.com: Market's Fear Gauge Rises",
+   "chg_pct": 7.6,
+   "move": "Up 7.6% from yesterday's close of 26.6.",
+   "why": "Up 7.6% from yesterday's close of 26.6. Barrons.com: Market's Fear Gauge Rises",
    "headline": {
     "source": "Barrons.com",
     "title": "Market's Fear Gauge Rises"
@@ -67,12 +67,12 @@
   },
   "oil": {
    "name": "Crude",
-   "price": 80.05,
+   "price": 80.11,
    "prev": 79.59,
-   "chg_pct": 0.6,
-   "move": "Up 0.6% from yesterday's close of 79.59.",
+   "chg_pct": 0.7,
+   "move": "Up 0.7% from yesterday's close of 79.59.",
    "range": "Near the bottom of the last month (low 79.87).",
-   "why": "Up 0.6% from yesterday's close of 79.59. Oilprice.com: Libya and Iraq Could Be the Next Big Headache for Oil Markets",
+   "why": "Up 0.7% from yesterday's close of 79.59. Oilprice.com: Libya and Iraq Could Be the Next Big Headache for Oil Markets",
    "headline": {
     "source": "Oilprice.com",
     "title": "Libya and Iraq Could Be the Next Big Headache for Oil Markets"
@@ -81,9 +81,9 @@
   },
   "yield": {
    "name": "10-year",
-   "price": 4.886,
-   "chg_bps": -3.2,
-   "move": "10-year is 4.89%, down 3.2 bp."
+   "price": 4.884,
+   "chg_bps": -3.4,
+   "move": "10-year is 4.88%, down 3.4 bp."
   }
  },
  "curve": [
@@ -117,16 +117,24 @@
   },
   {
    "date": "2026-11-24",
-   "acct": -5.67
+   "acct": -3.86
+  },
+  {
+   "date": "2026-11-24",
+   "acct": -3.64
+  },
+  {
+   "date": "2026-11-24",
+   "acct": -3.01
   }
  ],
  "max_dd": 5.89,
  "days": [
   {
    "date": "2026-11-24",
-   "n": 3,
-   "wins": 1,
-   "acct": -2.54,
+   "n": 5,
+   "wins": 3,
+   "acct": 0.21,
    "items": [
     {
      "symbol": "QQQ",
@@ -142,6 +150,16 @@
      "symbol": "TSLA",
      "dir": "puts",
      "result": 6
+    },
+    {
+     "symbol": "NVDA",
+     "dir": "puts",
+     "result": 16
+    },
+    {
+     "symbol": "SPCX",
+     "dir": "puts",
+     "result": 54
     }
    ]
   },
@@ -180,16 +198,16 @@
   }
  ],
  "session": true,
- "next_check": "11:20 AM",
+ "next_check": "11:30 AM",
  "mode": "paper",
- "updated": "2026-11-24T11:15:32-05:00",
+ "updated": "2026-11-24T11:25:33-05:00",
  "date": "Tue \u00b7 Nov 24",
  "day": {
   "pills": [
    "Trade day",
    "Paper"
   ],
-  "headline": "5 trades today: SPY sold -34%, QQQ sold -36%, NVDA holding puts, TSLA sold +6%, SPCX holding puts.",
+  "headline": "5 trades today: SPY sold -34%, QQQ sold -36%, NVDA sold +16%, TSLA sold +6%, SPCX sold +54%.",
   "sub": "Tap a ticker to see its box, levels and numbers."
  },
  "symbols": [
@@ -229,7 +247,9 @@
      "10:55",
      "11:00",
      "11:05",
-     "11:10"
+     "11:10",
+     "11:15",
+     "11:20"
     ],
     "closes": [
      714.24,
@@ -252,7 +272,9 @@
      714.56,
      713.28,
      714.29,
-     713.44
+     713.44,
+     713.73,
+     716.09
     ],
     "box": {
      "hi": 717.83,
@@ -435,7 +457,9 @@
      "10:55",
      "11:00",
      "11:05",
-     "11:10"
+     "11:10",
+     "11:15",
+     "11:20"
     ],
     "closes": [
      639.16,
@@ -457,8 +481,10 @@
      635.07,
      633.95,
      632.3,
-     633.42,
-     631.86
+     633.43,
+     631.86,
+     631.98,
+     634.82
     ],
     "box": {
      "hi": 641.25,
@@ -618,11 +644,11 @@
    }
   },
   "NVDA": {
-   "status": "down",
-   "label": "Holding puts",
-   "result": null,
-   "headline": "NVDA broke down at 10:20. Puts.",
-   "sub": "5-minute close 153.31 below the box (153.69). Paper trade is open.",
+   "status": "win",
+   "label": "Sold +16%",
+   "result": 16,
+   "headline": "NVDA broke down at 10:20. Closed +16%.",
+   "sub": "Puts from the 10:20 close at 153.31. Paper result on the option, whole trade.",
    "chart": {
     "symbol": "NVDA",
     "times": [
@@ -646,7 +672,9 @@
      "10:55",
      "11:00",
      "11:05",
-     "11:10"
+     "11:10",
+     "11:15",
+     "11:20"
     ],
     "closes": [
      155.78,
@@ -669,7 +697,9 @@
      152.17,
      151.62,
      151.91,
-     151.21
+     151.21,
+     151.54,
+     152.44
     ],
     "box": {
      "hi": 159.92,
@@ -690,6 +720,11 @@
       "i": 9,
       "kind": "buy",
       "label": "BUY"
+     },
+     {
+      "i": 22,
+      "kind": "sell",
+      "label": "SELL"
      }
     ]
    },
@@ -744,7 +779,7 @@
     [
      "Stop",
      "A 5-min close back over 153.69, or -50%",
-     false
+     true
     ],
     [
      "S2",
@@ -790,8 +825,8 @@
     ],
     [
      "Paper record",
-     "1 trade",
-     "0% win \u00b7 avg -25% \u00b7 best -25%"
+     "2 trades",
+     "50% win \u00b7 avg -5% \u00b7 best +16%"
     ],
     [
      "Backtest, 59 days",
@@ -800,21 +835,25 @@
     ]
    ],
    "action": {
-    "word": "HOLD PUTS",
-    "tone": "hold",
-    "tile": "Holding puts",
+    "word": "SOLD +16%",
+    "tone": "win",
+    "tile": "Sold +16%",
     "lines": [
      [
       "Bought",
       "NVDA 152.5 put at $3.40 (10:20)"
      ],
      [
-      "Take profit",
-      "1/3 at 149.97, 1/3 at 143.01"
+      "Sold",
+      "the rest at $3.95 (11:25)"
      ],
      [
-      "Sell all if",
-      "a 5-minute candle closes back over 153.69, or the option drops to $1.70"
+      "Why it ended",
+      "locking in profit: it was up +38%, now +16%"
+     ],
+     [
+      "Result",
+      "+16% on the whole trade (paper)"
      ]
     ]
    }
@@ -848,7 +887,9 @@
      "10:55",
      "11:00",
      "11:05",
-     "11:10"
+     "11:10",
+     "11:15",
+     "11:20"
     ],
     "closes": [
      387.68,
@@ -871,7 +912,9 @@
      379.12,
      379.2,
      379.47,
-     377.06
+     377.06,
+     376.93,
+     377.86
     ],
     "box": {
      "hi": 390.09,
@@ -1031,11 +1074,11 @@
    }
   },
   "SPCX": {
-   "status": "down",
-   "label": "Holding puts",
-   "result": null,
-   "headline": "SPCX broke down at 10:05. Puts.",
-   "sub": "5-minute close 128.70 below the box (129.40). Paper trade is open.",
+   "status": "win",
+   "label": "Sold +54%",
+   "result": 54,
+   "headline": "SPCX broke down at 10:05. Closed +54%.",
+   "sub": "Puts from the 10:05 close at 128.70. Paper result on the option, whole trade.",
    "chart": {
     "symbol": "SPCX",
     "times": [
@@ -1059,7 +1102,9 @@
      "10:55",
      "11:00",
      "11:05",
-     "11:10"
+     "11:10",
+     "11:15",
+     "11:20"
     ],
     "closes": [
      132.26,
@@ -1082,7 +1127,9 @@
      124.78,
      124.4,
      124.96,
-     124.35
+     124.35,
+     124.52,
+     125.33
     ],
     "box": {
      "hi": 132.5,
@@ -1108,6 +1155,11 @@
       "i": 9,
       "kind": "sell",
       "label": "SELL 1/3"
+     },
+     {
+      "i": 22,
+      "kind": "sell",
+      "label": "SELL"
      }
     ]
    },
@@ -1208,8 +1260,8 @@
     ],
     [
      "Paper record",
-     "1 trade",
-     "100% win \u00b7 avg +30% \u00b7 best +30%"
+     "2 trades",
+     "100% win \u00b7 avg +42% \u00b7 best +54%"
     ],
     [
      "Backtest, 59 days",
@@ -1218,21 +1270,25 @@
     ]
    ],
    "action": {
-    "word": "HOLD PUTS",
-    "tone": "hold",
-    "tile": "Holding puts",
+    "word": "SOLD +54%",
+    "tone": "win",
+    "tile": "Sold +54%",
     "lines": [
      [
       "Bought",
       "SPCX 129 put at $2.74 (10:05)"
      ],
      [
-      "Take profit",
-      "1/3 at 127.32 \u2713 done, 1/3 at 121.54"
+      "Sold",
+      "1/3 at $3.55 (10:20); the rest at $4.55 (11:25)"
      ],
      [
-      "Sell all if",
-      "SPCX gets back to 128.70 (the buy price)"
+      "Why it ended",
+      "locking in profit: it was up +103%, now +66%"
+     ],
+     [
+      "Result",
+      "+54% on the whole trade (paper)"
      ]
     ]
    }
@@ -1261,6 +1317,22 @@
    "call": "TSLA puts",
    "result": 6,
    "note": "Profit lock: best was +42%, now +6% (floor +28%).",
+   "tag": ""
+  },
+  {
+   "date": "2026-11-24",
+   "symbol": "NVDA",
+   "call": "NVDA puts",
+   "result": 16,
+   "note": "Profit lock: best was +38%, now +16% (floor +25%).",
+   "tag": ""
+  },
+  {
+   "date": "2026-11-24",
+   "symbol": "SPCX",
+   "call": "SPCX puts",
+   "result": 54,
+   "note": "Profit lock: best was +103%, now +66% (floor +72%).",
    "tag": ""
   },
   {
