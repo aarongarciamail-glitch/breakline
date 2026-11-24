@@ -39,26 +39,26 @@
  },
  "tape": {
   "ok": true,
-  "asof": "2026-11-24T11:25:36-05:00",
-  "lean": "quiet",
-  "label": "Oil quiet",
-  "strategy": "Calls and puts both stay open. Oil moved 0.7%, under the 1% line, so it does not pick a side.",
+  "asof": "2026-11-24T11:30:35-05:00",
+  "lean": "mixed",
+  "label": "Tape split",
+  "strategy": "Calls and puts both stay open. Oil is up 1.0% and the 10-year is down 3.4 bp, so they disagree. The opening-range close picks the side.",
   "block_calls": false,
   "block_puts": false,
   "vix_small": false,
   "size_note": "",
   "skip_calls": "",
   "skip_puts": "",
-  "agree_calls": "Oil moved 0.7%, so the tape is not picking a side.",
-  "agree_puts": "Oil moved 0.7%, so the tape is not picking a side.",
+  "agree_calls": "Oil and yields disagree. This trade is the opening-range break.",
+  "agree_puts": "Oil and yields disagree. This trade is the opening-range break.",
   "note": "Context only. Oil 1% and the 10-year 5 bp describe the lean. VIX 35 is a size note. Neither one blocks a call or a put.",
   "vix": {
    "name": "VIX",
-   "price": 28.64,
+   "price": 29.04,
    "prev": 26.61,
-   "chg_pct": 7.6,
-   "move": "Up 7.6% from yesterday's close of 26.6.",
-   "why": "Up 7.6% from yesterday's close of 26.6. Barrons.com: Market's Fear Gauge Rises",
+   "chg_pct": 9.1,
+   "move": "Up 9.1% from yesterday's close of 26.6.",
+   "why": "Up 9.1% from yesterday's close of 26.6. Barrons.com: Market's Fear Gauge Rises",
    "headline": {
     "source": "Barrons.com",
     "title": "Market's Fear Gauge Rises"
@@ -67,17 +67,17 @@
   },
   "oil": {
    "name": "Crude",
-   "price": 80.11,
+   "price": 80.39,
    "prev": 79.59,
-   "chg_pct": 0.7,
-   "move": "Up 0.7% from yesterday's close of 79.59.",
+   "chg_pct": 1.0,
+   "move": "Up 1.0% from yesterday's close of 79.59.",
    "range": "Near the bottom of the last month (low 79.87).",
-   "why": "Up 0.7% from yesterday's close of 79.59. Oilprice.com: Libya and Iraq Could Be the Next Big Headache for Oil Markets",
+   "why": "Up 1.0% from yesterday's close of 79.59. Oilprice.com: Libya and Iraq Could Be the Next Big Headache for Oil Markets",
    "headline": {
     "source": "Oilprice.com",
     "title": "Libya and Iraq Could Be the Next Big Headache for Oil Markets"
    },
-   "means": "A move under 1% does not pick a side. Calls and puts both stay open."
+   "means": "Oil and yields point different ways. Calls and puts both stay open. The box picks the side."
   },
   "yield": {
    "name": "10-year",
@@ -198,9 +198,9 @@
   }
  ],
  "session": true,
- "next_check": "11:30 AM",
+ "next_check": "11:35 AM",
  "mode": "paper",
- "updated": "2026-11-24T11:25:33-05:00",
+ "updated": "2026-11-24T11:30:32-05:00",
  "date": "Tue \u00b7 Nov 24",
  "day": {
   "pills": [
@@ -249,7 +249,8 @@
      "11:05",
      "11:10",
      "11:15",
-     "11:20"
+     "11:20",
+     "11:25"
     ],
     "closes": [
      714.24,
@@ -274,7 +275,8 @@
      714.29,
      713.44,
      713.73,
-     716.09
+     716.09,
+     714.6
     ],
     "box": {
      "hi": 717.83,
@@ -459,7 +461,8 @@
      "11:05",
      "11:10",
      "11:15",
-     "11:20"
+     "11:20",
+     "11:25"
     ],
     "closes": [
      639.16,
@@ -484,7 +487,8 @@
      633.43,
      631.86,
      631.98,
-     634.82
+     634.82,
+     633.26
     ],
     "box": {
      "hi": 641.25,
@@ -674,7 +678,8 @@
      "11:05",
      "11:10",
      "11:15",
-     "11:20"
+     "11:20",
+     "11:25"
     ],
     "closes": [
      155.78,
@@ -699,7 +704,8 @@
      151.91,
      151.21,
      151.54,
-     152.44
+     152.44,
+     151.47
     ],
     "box": {
      "hi": 159.92,
@@ -889,7 +895,8 @@
      "11:05",
      "11:10",
      "11:15",
-     "11:20"
+     "11:20",
+     "11:25"
     ],
     "closes": [
      387.68,
@@ -912,9 +919,10 @@
      379.12,
      379.2,
      379.47,
-     377.06,
+     377.05,
      376.93,
-     377.86
+     377.86,
+     377.03
     ],
     "box": {
      "hi": 390.09,
@@ -1104,7 +1112,8 @@
      "11:05",
      "11:10",
      "11:15",
-     "11:20"
+     "11:20",
+     "11:25"
     ],
     "closes": [
      132.26,
@@ -1129,7 +1138,8 @@
      124.96,
      124.35,
      124.52,
-     125.33
+     125.33,
+     125.21
     ],
     "box": {
      "hi": 132.5,
