@@ -27,11 +27,11 @@ showB    = input.bool(true, "Show Strategy B (paper test)", group = "Show")
 showTbl  = input.bool(true, "Show info panel", group = "Show")
 
 TZ = "America/New_York"
-cUp   = color.new(#3fbf7f, 0)
-cDn   = color.new(#e0605a, 0)
-cTeal = color.new(#3aa9b8, 0)
-cSilv = color.new(#d6dee6, 0)
-cDim  = color.new(#8e98a4, 0)
+cUp   = color.rgb(63, 191, 127)
+cDn   = color.rgb(224, 96, 90)
+cTeal = color.rgb(58, 169, 184)
+cSilv = color.rgb(214, 222, 230)
+cDim  = color.rgb(142, 152, 164)
 
 // ── clock (minutes since midnight ET) ─────────────────────────────────────────
 barMin  = timeframe.in_seconds() / 60
@@ -136,16 +136,14 @@ if t0 >= OR_S and t1 <= OR_E
     orH := na(orH) ? high : math.max(orH, high)
     orL := na(orL) ? low : math.min(orL, low)
     if t1 == OR_E
-        orBox := box.new(orT, orH, orT + (CLOSE_T - OR_S) * 60000, orL, xloc = xloc.bar_time,
-             border_color = color.new(cSilv, 55), bgcolor = color.new(cSilv, 88))
+        orBox := box.new(orT, orH, orT + (CLOSE_T - OR_S) * 60000, orL, xloc = xloc.bar_time, border_color = color.new(cSilv, 55), bgcolor = color.new(cSilv, 88))
         w = (orH - orL) / orL * 100
         boxX := array.size(widths) >= 10 ? w / array.median(widths) : na
         array.push(widths, w)
         if array.size(widths) > 40
             array.shift(widths)
         if not na(boxX) and boxX >= wideMult
-            label.new(bar_index, orH, "Wide box " + str.tostring(boxX, "#.0") + "x normal", color = color.new(cDim, 30),
-                 textcolor = color.white, style = label.style_label_down, size = size.tiny)
+            label.new(bar_index, orH, "Wide box " + str.tostring(boxX, "#.0") + "x normal", color = color.new(cDim, 30), textcolor = color.white, style = label.style_label_down, size = size.tiny)
 
 say(string msg) =>
     alert(syminfo.ticker + " " + msg, alert.freq_once_per_bar_close)
@@ -173,9 +171,7 @@ if okTF and inSession and not na(orH) and t1 > OR_E
             aStatus := aDir == 1 ? "BUY CALLS" : "BUY PUTS"
             aBuyUp := aDir == 1
             aBuyDn := aDir == -1
-            label.new(bar_index, aDir == 1 ? low : high, (aDir == 1 ? "BUY CALLS\n" : "BUY PUTS\n") + str.tostring(close, format.mintick),
-                 color = aDir == 1 ? cUp : cDn, textcolor = color.white,
-                 style = aDir == 1 ? label.style_label_up : label.style_label_down, size = size.small)
+            label.new(bar_index, aDir == 1 ? low : high, (aDir == 1 ? "BUY CALLS\n" : "BUY PUTS\n") + str.tostring(close, format.mintick), color = aDir == 1 ? cUp : cDn, textcolor = color.white, style = aDir == 1 ? label.style_label_up : label.style_label_down, size = size.small)
             say((aDir == 1 ? "🟢 BUY CALLS" : "🟢 BUY PUTS") + " · 5-min close " + str.tostring(close, format.mintick) + " outside the opening range")
     else if aDir != 0 and not aBuyUp and not aBuyDn
         string why = ""
@@ -183,14 +179,12 @@ if okTF and inSession and not na(orH) and t1 > OR_E
         if aTrims == 0 and not na(tgt1) and (aDir == 1 ? high >= tgt1 : low <= tgt1)
             aTrims := 1
             aTrim := true
-            label.new(bar_index, aDir == 1 ? high : low, "SELL 1/3", color = cTeal, textcolor = color.white,
-                 style = aDir == 1 ? label.style_label_down : label.style_label_up, size = size.tiny)
+            label.new(bar_index, aDir == 1 ? high : low, "SELL 1/3", color = cTeal, textcolor = color.white, style = aDir == 1 ? label.style_label_down : label.style_label_up, size = size.tiny)
             say("🔴 SELL 1/3 · hit " + str.tostring(tgt1, format.mintick) + ". Stop now break-even")
         else if aTrims == 1 and not na(tgt2) and (aDir == 1 ? high >= tgt2 : low <= tgt2)
             aTrims := 2
             aTrim := true
-            label.new(bar_index, aDir == 1 ? high : low, "SELL 1/3", color = cTeal, textcolor = color.white,
-                 style = aDir == 1 ? label.style_label_down : label.style_label_up, size = size.tiny)
+            label.new(bar_index, aDir == 1 ? high : low, "SELL 1/3", color = cTeal, textcolor = color.white, style = aDir == 1 ? label.style_label_down : label.style_label_up, size = size.tiny)
             say("🔴 SELL 1/3 · hit " + str.tostring(tgt2, format.mintick))
         // stops
         if aTrims == 0 and (aDir == 1 ? close < orH : close > orL)
@@ -201,9 +195,8 @@ if okTF and inSession and not na(orH) and t1 > OR_E
             why := "3:30"
         if why != ""
             aSellAll := true
-            aStatus := "SOLD (" + why + ")"
-            label.new(bar_index, aDir == 1 ? high : low, "SELL ALL\n" + why, color = cDim, textcolor = color.white,
-                 style = aDir == 1 ? label.style_label_down : label.style_label_up, size = size.small)
+            aStatus := "SOLD: " + why
+            label.new(bar_index, aDir == 1 ? high : low, "SELL ALL\n" + why, color = cDim, textcolor = color.white, style = aDir == 1 ? label.style_label_down : label.style_label_up, size = size.small)
             say("🔴 SELL ALL · " + why)
             aDir := 0
     if not aDone and t1 > LAST
@@ -236,13 +229,11 @@ else if showB and okTF and bState == "watch" and t0 > OR_S
         entry = bDir == 1 ? math.max(open, bLvl) : math.min(open, bLvl)
         bStop := entry - bDir * 0.25 * atr14
         bState := "open"
-        label.new(bar_index, bDir == 1 ? low : high, "B " + (bDir == 1 ? "BUY" : "SELL SHORT"), color = color.new(cTeal, 20),
-             textcolor = color.white, style = bDir == 1 ? label.style_label_up : label.style_label_down, size = size.tiny)
+        label.new(bar_index, bDir == 1 ? low : high, "B " + (bDir == 1 ? "BUY" : "SELL SHORT"), color = color.new(cTeal, 20), textcolor = color.white, style = bDir == 1 ? label.style_label_up : label.style_label_down, size = size.tiny)
 else if showB and okTF and bState == "open"
     if (bDir == 1 ? low <= bStop : high >= bStop) or t1 >= EXIT_B
         bState := "done"
-        label.new(bar_index, bDir == 1 ? high : low, "B out", color = color.new(cDim, 20), textcolor = color.white,
-             style = bDir == 1 ? label.style_label_down : label.style_label_up, size = size.tiny)
+        label.new(bar_index, bDir == 1 ? high : low, "B out", color = color.new(cDim, 20), textcolor = color.white, style = bDir == 1 ? label.style_label_down : label.style_label_up, size = size.tiny)
 plot(showB and bState == "open" ? bStop : na, "B stop", color.new(cDn, 30), 1, plot.style_linebr)
 
 // ── alerts (create one alert: "Any alert() function call", or pick these) ─────────
@@ -252,7 +243,7 @@ alertcondition(aTrim, "Breakline SELL 1/3", "{{ticker}} SELL 1/3 at a pivot targ
 alertcondition(aSellAll, "Breakline SELL ALL", "{{ticker}} SELL ALL")
 
 // ── info panel ──────────────────────────────────────────────────────────────
-var table tbl = table.new(position.top_right, 2, 5, bgcolor = color.new(#0b1013, 15), border_width = 0, frame_color = color.new(cSilv, 70), frame_width = 1)
+var table tbl = table.new(position.top_right, 2, 5, bgcolor = color.new(color.rgb(11, 16, 19), 15), border_width = 0, frame_color = color.new(cSilv, 70), frame_width = 1)
 if showTbl and barstate.islast
     table.cell(tbl, 0, 0, "BREAKLINE", text_color = cSilv, text_size = size.small)
     table.cell(tbl, 1, 0, okTF ? aStatus : "Use a 5-min chart", text_color = aStatus == "BUY CALLS" ? cUp : aStatus == "BUY PUTS" ? cDn : cSilv, text_size = size.small)
