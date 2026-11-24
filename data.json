@@ -39,10 +39,10 @@
  },
  "tape": {
   "ok": true,
-  "asof": "2026-11-24T10:10:37-05:00",
+  "asof": "2026-11-24T10:15:36-05:00",
   "lean": "mixed",
   "label": "Tape split",
-  "strategy": "Calls and puts both stay open. Oil is up 2.5% and the 10-year is down 0.6 bp, so they disagree. The opening-range close picks the side.",
+  "strategy": "Calls and puts both stay open. Oil is up 2.0% and the 10-year is flat, so they disagree. The opening-range close picks the side.",
   "block_calls": false,
   "block_puts": false,
   "vix_small": false,
@@ -54,11 +54,11 @@
   "note": "Context only. Oil 1% and the 10-year 5 bp describe the lean. VIX 35 is a size note. Neither one blocks a call or a put.",
   "vix": {
    "name": "VIX",
-   "price": 27.44,
+   "price": 27.33,
    "prev": 26.61,
-   "chg_pct": 3.1,
-   "move": "Up 3.1% from yesterday's close of 26.6.",
-   "why": "Up 3.1% from yesterday's close of 26.6. Barrons.com: Market's Fear Gauge Rises",
+   "chg_pct": 2.7,
+   "move": "Up 2.7% from yesterday's close of 26.6.",
+   "why": "Up 2.7% from yesterday's close of 26.6. Barrons.com: Market's Fear Gauge Rises",
    "headline": {
     "source": "Barrons.com",
     "title": "Market's Fear Gauge Rises"
@@ -67,23 +67,23 @@
   },
   "oil": {
    "name": "Crude",
-   "price": 81.59,
+   "price": 81.2,
    "prev": 79.59,
-   "chg_pct": 2.5,
-   "move": "Up 2.5% from yesterday's close of 79.59.",
+   "chg_pct": 2.0,
+   "move": "Up 2.0% from yesterday's close of 79.59.",
    "range": "Inside the last month, 79.87 to 104.99.",
-   "why": "Up 2.5% from yesterday's close of 79.59. Associated Press: BC-Crude Oil Futures",
+   "why": "Up 2.0% from yesterday's close of 79.59. Reuters: Brazil's tax revenue extends record run in October, buoyed by higher oil prices",
    "headline": {
-    "source": "Associated Press",
-    "title": "BC-Crude Oil Futures"
+    "source": "Reuters",
+    "title": "Brazil's tax revenue extends record run in October, buoyed by higher oil prices"
    },
    "means": "Oil and yields point different ways. Calls and puts both stay open. The box picks the side."
   },
   "yield": {
    "name": "10-year",
-   "price": 4.912,
-   "chg_bps": -0.6,
-   "move": "10-year is 4.91%, down 0.6 bp."
+   "price": 4.914,
+   "chg_bps": -0.4,
+   "move": "10-year is 4.91%, flat."
   }
  },
  "curve": [
@@ -162,9 +162,9 @@
   }
  ],
  "session": true,
- "next_check": "10:15 AM",
+ "next_check": "10:20 AM",
  "mode": "paper",
- "updated": "2026-11-24T10:10:34-05:00",
+ "updated": "2026-11-24T10:15:33-05:00",
  "date": "Tue \u00b7 Nov 24",
  "day": {
   "pills": [
@@ -198,7 +198,8 @@
      "9:50",
      "9:55",
      "10:00",
-     "10:05"
+     "10:05",
+     "10:10"
     ],
     "closes": [
      714.24,
@@ -206,9 +207,10 @@
      717.57,
      718.05,
      718.89,
-     719.8,
+     719.74,
      720.36,
-     718.8
+     718.8,
+     719.58
     ],
     "box": {
      "hi": 717.83,
@@ -369,7 +371,8 @@
      "9:50",
      "9:55",
      "10:00",
-     "10:05"
+     "10:05",
+     "10:10"
     ],
     "closes": [
      639.16,
@@ -377,9 +380,10 @@
      640.04,
      640.65,
      640.89,
-     641.98,
+     642.0,
      641.42,
-     639.44
+     639.44,
+     640.67
     ],
     "box": {
      "hi": 641.25,
@@ -554,7 +558,8 @@
      "9:50",
      "9:55",
      "10:00",
-     "10:05"
+     "10:05",
+     "10:10"
     ],
     "closes": [
      155.78,
@@ -564,7 +569,8 @@
      155.97,
      156.22,
      155.0,
-     154.24
+     154.24,
+     155.37
     ],
     "box": {
      "hi": 159.92,
@@ -684,7 +690,8 @@
      "9:50",
      "9:55",
      "10:00",
-     "10:05"
+     "10:05",
+     "10:10"
     ],
     "closes": [
      387.68,
@@ -692,9 +699,10 @@
      385.88,
      386.76,
      387.87,
-     387.71,
+     387.65,
      386.89,
-     384.0
+     384.0,
+     382.99
     ],
     "box": {
      "hi": 390.09,
@@ -814,7 +822,8 @@
      "9:50",
      "9:55",
      "10:00",
-     "10:05"
+     "10:05",
+     "10:10"
     ],
     "closes": [
      132.26,
@@ -822,9 +831,10 @@
      129.57,
      130.36,
      129.95,
-     129.67,
+     129.66,
      128.7,
-     127.96
+     127.96,
+     128.25
     ],
     "box": {
      "hi": 132.5,
