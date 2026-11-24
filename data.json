@@ -39,10 +39,10 @@
  },
  "tape": {
   "ok": true,
-  "asof": "2026-11-24T09:20:32-05:00",
+  "asof": "2026-11-24T09:30:32-05:00",
   "lean": "mixed",
   "label": "Tape split",
-  "strategy": "Calls and puts both stay open. Oil is up 2.0% and the 10-year is down 2.6 bp, so they disagree. The opening-range close picks the side.",
+  "strategy": "Calls and puts both stay open. Oil is up 1.9% and the 10-year is down 2.4 bp, so they disagree. The opening-range close picks the side.",
   "block_calls": false,
   "block_puts": false,
   "vix_small": false,
@@ -54,11 +54,11 @@
   "note": "Context only. Oil 1% and the 10-year 5 bp describe the lean. VIX 35 is a size note. Neither one blocks a call or a put.",
   "vix": {
    "name": "VIX",
-   "price": 29.39,
+   "price": 29.2,
    "prev": 26.61,
-   "chg_pct": 10.4,
-   "move": "Up 10.4% from yesterday's close of 26.6.",
-   "why": "Up 10.4% from yesterday's close of 26.6. Barrons.com: Market's Fear Gauge Rises",
+   "chg_pct": 9.7,
+   "move": "Up 9.7% from yesterday's close of 26.6.",
+   "why": "Up 9.7% from yesterday's close of 26.6. Barrons.com: Market's Fear Gauge Rises",
    "headline": {
     "source": "Barrons.com",
     "title": "Market's Fear Gauge Rises"
@@ -67,12 +67,12 @@
   },
   "oil": {
    "name": "Crude",
-   "price": 81.17,
+   "price": 81.13,
    "prev": 79.59,
-   "chg_pct": 2.0,
-   "move": "Up 2.0% from yesterday's close of 79.59.",
+   "chg_pct": 1.9,
+   "move": "Up 1.9% from yesterday's close of 79.59.",
    "range": "Inside the last month, 79.87 to 104.99.",
-   "why": "Up 2.0% from yesterday's close of 79.59. Reuters: Oil touches three-month lows before recovering on Hormuz threat",
+   "why": "Up 1.9% from yesterday's close of 79.59. Reuters: Oil touches three-month lows before recovering on Hormuz threat",
    "headline": {
     "source": "Reuters",
     "title": "Oil touches three-month lows before recovering on Hormuz threat"
@@ -81,9 +81,9 @@
   },
   "yield": {
    "name": "10-year",
-   "price": 4.892,
-   "chg_bps": -2.6,
-   "move": "10-year is 4.89%, down 2.6 bp."
+   "price": 4.894,
+   "chg_bps": -2.4,
+   "move": "10-year is 4.89%, down 2.4 bp."
   }
  },
  "curve": [
@@ -145,9 +145,9 @@
   }
  ],
  "session": true,
- "next_check": "9:25 AM",
+ "next_check": "9:35 AM",
  "mode": "paper",
- "updated": "2026-11-24T09:20:32-05:00",
+ "updated": "2026-11-24T09:30:32-05:00",
  "date": "Tue \u00b7 Nov 24",
  "day": {
   "pills": [
