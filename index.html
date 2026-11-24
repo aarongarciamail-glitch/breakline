@@ -280,9 +280,6 @@ dl.al dd{margin:0;color:var(--text)}
  td.note{grid-area:n;font-size:13.5px}
  .sample{margin-block:0 18px}
 }
-.chartit ol{margin:.4rem 0 .8rem 1.2rem;padding:0;line-height:1.6}
-.copybtn{font:inherit;color:var(--text);background:rgba(214,222,230,.08);border:1px solid rgba(214,222,230,.3);border-radius:10px;padding:.55rem .9rem;cursor:pointer}
-.copybtn:active{transform:scale(.98)}
 </style>
 </head>
 <body>
@@ -395,14 +392,6 @@ dl.al dd{margin:0;color:var(--text)}
    <ul>
     <li>Monthly options expiration</li><li>Fed decision days</li><li>CPI and PPI mornings</li><li>A box that's too wide</li><li>No momentum on the break</li><li>Fridays: small bets only</li>
    </ul>
-  </div>
-  <div class="panel sitout chartit">
-   <h3>Chart it yourself</h3>
-   <p class="meta">The same box, pivots and buy/sell marks on your own chart. Free on <a href="https://vela.luxalgo.com/chart" rel="noopener">Vela</a> or TradingView.</p>
-   <ol>
-    <li>Open a 5-minute chart (extended hours on).</li><li>Open the Pine editor and paste the code.</li><li>Add it to the chart. Optional: set an alert on "Any alert() function call".</li>
-   </ol>
-   <p><button type="button" id="copyPine" class="copybtn">Copy indicator code</button> <a href="breakline.pine.txt" class="meta">or view it</a></p>
   </div>
  </section>
 
@@ -557,7 +546,6 @@ dl.al dd{margin:0;color:var(--text)}
 })();
 </script>
 <script>
-document.getElementById('copyPine')?.addEventListener('click',async e=>{const b=e.currentTarget;try{const t=await (await fetch('breakline.pine.txt',{cache:'no-store'})).text();await navigator.clipboard.writeText(t);b.textContent='Copied ✓'}catch(_){location.href='breakline.pine.txt'}setTimeout(()=>b.textContent='Copy indicator code',2500)});
 </script>
 </body>
 </html>
