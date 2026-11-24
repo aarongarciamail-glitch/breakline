@@ -39,10 +39,10 @@
  },
  "tape": {
   "ok": true,
-  "asof": "2026-11-24T09:30:32-05:00",
+  "asof": "2026-11-24T09:45:35-05:00",
   "lean": "mixed",
   "label": "Tape split",
-  "strategy": "Calls and puts both stay open. Oil is up 1.9% and the 10-year is down 2.4 bp, so they disagree. The opening-range close picks the side.",
+  "strategy": "Calls and puts both stay open. Oil is up 1.9% and the 10-year is down 1.0 bp, so they disagree. The opening-range close picks the side.",
   "block_calls": false,
   "block_puts": false,
   "vix_small": false,
@@ -54,11 +54,11 @@
   "note": "Context only. Oil 1% and the 10-year 5 bp describe the lean. VIX 35 is a size note. Neither one blocks a call or a put.",
   "vix": {
    "name": "VIX",
-   "price": 29.2,
+   "price": 29.34,
    "prev": 26.61,
-   "chg_pct": 9.7,
-   "move": "Up 9.7% from yesterday's close of 26.6.",
-   "why": "Up 9.7% from yesterday's close of 26.6. Barrons.com: Market's Fear Gauge Rises",
+   "chg_pct": 10.3,
+   "move": "Up 10.3% from yesterday's close of 26.6.",
+   "why": "Up 10.3% from yesterday's close of 26.6. Barrons.com: Market's Fear Gauge Rises",
    "headline": {
     "source": "Barrons.com",
     "title": "Market's Fear Gauge Rises"
@@ -67,23 +67,23 @@
   },
   "oil": {
    "name": "Crude",
-   "price": 81.13,
+   "price": 81.12,
    "prev": 79.59,
    "chg_pct": 1.9,
    "move": "Up 1.9% from yesterday's close of 79.59.",
    "range": "Inside the last month, 79.87 to 104.99.",
-   "why": "Up 1.9% from yesterday's close of 79.59. Reuters: Oil touches three-month lows before recovering on Hormuz threat",
+   "why": "Up 1.9% from yesterday's close of 79.59. Reuters: Oil rebounds from three-month lows on Hormuz threat",
    "headline": {
     "source": "Reuters",
-    "title": "Oil touches three-month lows before recovering on Hormuz threat"
+    "title": "Oil rebounds from three-month lows on Hormuz threat"
    },
    "means": "Oil and yields point different ways. Calls and puts both stay open. The box picks the side."
   },
   "yield": {
    "name": "10-year",
-   "price": 4.894,
-   "chg_bps": -2.4,
-   "move": "10-year is 4.89%, down 2.4 bp."
+   "price": 4.908,
+   "chg_bps": -1.0,
+   "move": "10-year is 4.91%, down 1.0 bp."
   }
  },
  "curve": [
@@ -145,9 +145,9 @@
   }
  ],
  "session": true,
- "next_check": "9:35 AM",
+ "next_check": "9:50 AM",
  "mode": "paper",
- "updated": "2026-11-24T09:30:32-05:00",
+ "updated": "2026-11-24T09:45:32-05:00",
  "date": "Tue \u00b7 Nov 24",
  "day": {
   "pills": [
@@ -166,12 +166,30 @@
  ],
  "stocks": {
   "SPY": {
-   "status": "pending",
-   "label": "Wait",
+   "status": "waiting",
+   "label": "Wait for a break",
    "result": null,
-   "headline": "The box forms 9:30 to 9:45.",
-   "sub": "A trade needs a 5-minute close outside it.",
-   "chart": null,
+   "headline": "Waiting for a 5-minute close outside the SPY box.",
+   "sub": "Box $712.14 to $717.83. Entries allowed until 11:00.",
+   "chart": {
+    "symbol": "SPY",
+    "times": [
+     "9:30",
+     "9:35",
+     "9:40"
+    ],
+    "closes": [
+     714.24,
+     714.55,
+     717.53
+    ],
+    "box": {
+     "hi": 717.83,
+     "lo": 712.14
+    },
+    "lines": [],
+    "marks": []
+   },
    "levels": [
     [
      "R1 pivot",
@@ -189,6 +207,11 @@
      false
     ],
     [
+     "Range high",
+     717.83,
+     true
+    ],
+    [
      "S1 pivot",
      714.6399999999999,
      true
@@ -199,6 +222,11 @@
      false
     ],
     [
+     "Range low",
+     712.14,
+     true
+    ],
+    [
      "Pre-market low",
      711.4,
      false
@@ -206,6 +234,11 @@
    ],
    "plan": [],
    "measures": [
+    [
+     "Today's box",
+     "0.80%",
+     "3.0x its normal \u00b7 very wide"
+    ],
     [
      "Normal box",
      "0.27%",
@@ -230,22 +263,48 @@
    "action": {
     "word": "WAIT",
     "tone": "wait",
-    "tile": "Wait",
+    "tile": "Wait for a break",
     "lines": [
      [
-      "When",
-      "The opening range forms 9:30 to 9:45. Buy levels post at 9:45."
+      "Buy calls if",
+      "a 5-minute candle closes above 717.83"
+     ],
+     [
+      "Buy puts if",
+      "a 5-minute candle closes below 712.14"
+     ],
+     [
+      "Until",
+      "11:00. No break by then means no trade today."
      ]
     ]
    }
   },
   "QQQ": {
-   "status": "pending",
-   "label": "Wait",
+   "status": "waiting",
+   "label": "Wait for a break",
    "result": null,
-   "headline": "The box forms 9:30 to 9:45.",
-   "sub": "A trade needs a 5-minute close outside it.",
-   "chart": null,
+   "headline": "Waiting for a 5-minute close outside the QQQ box.",
+   "sub": "Box $635.86 to $641.25. Entries allowed until 11:00.",
+   "chart": {
+    "symbol": "QQQ",
+    "times": [
+     "9:30",
+     "9:35",
+     "9:40"
+    ],
+    "closes": [
+     639.22,
+     636.6,
+     640.04
+    ],
+    "box": {
+     "hi": 641.25,
+     "lo": 635.86
+    },
+    "lines": [],
+    "marks": []
+   },
    "levels": [
     [
      "R1 pivot",
@@ -273,6 +332,16 @@
      false
     ],
     [
+     "Range high",
+     641.25,
+     true
+    ],
+    [
+     "Range low",
+     635.86,
+     true
+    ],
+    [
      "Pre-market low",
      634.79,
      false
@@ -280,6 +349,11 @@
    ],
    "plan": [],
    "measures": [
+    [
+     "Today's box",
+     "0.85%",
+     "1.5x its normal \u00b7 wider than usual"
+    ],
     [
      "Normal box",
      "0.56%",
@@ -304,22 +378,48 @@
    "action": {
     "word": "WAIT",
     "tone": "wait",
-    "tile": "Wait",
+    "tile": "Wait for a break",
     "lines": [
      [
-      "When",
-      "The opening range forms 9:30 to 9:45. Buy levels post at 9:45."
+      "Buy calls if",
+      "a 5-minute candle closes above 641.25"
+     ],
+     [
+      "Buy puts if",
+      "a 5-minute candle closes below 635.86"
+     ],
+     [
+      "Until",
+      "11:00. No break by then means no trade today."
      ]
     ]
    }
   },
   "NVDA": {
-   "status": "pending",
-   "label": "Wait",
+   "status": "waiting",
+   "label": "Wait for a break",
    "result": null,
-   "headline": "The box forms 9:30 to 9:45.",
-   "sub": "A trade needs a 5-minute close outside it.",
-   "chart": null,
+   "headline": "Waiting for a 5-minute close outside the NVDA box.",
+   "sub": "Box $153.69 to $159.92. Entries allowed until 11:00.",
+   "chart": {
+    "symbol": "NVDA",
+    "times": [
+     "9:30",
+     "9:35",
+     "9:40"
+    ],
+    "closes": [
+     155.78,
+     154.59,
+     154.86
+    ],
+    "box": {
+     "hi": 159.92,
+     "lo": 153.69
+    },
+    "lines": [],
+    "marks": []
+   },
    "levels": [
     [
      "R1 pivot",
@@ -337,6 +437,11 @@
      false
     ],
     [
+     "Range high",
+     159.92,
+     true
+    ],
+    [
      "S1 pivot",
      157.57999999999998,
      true
@@ -350,10 +455,20 @@
      "Pre-market low",
      154.84,
      false
+    ],
+    [
+     "Range low",
+     153.69,
+     true
     ]
    ],
    "plan": [],
    "measures": [
+    [
+     "Today's box",
+     "4.05%",
+     "2.9x its normal \u00b7 very wide"
+    ],
     [
      "Normal box",
      "1.42%",
@@ -383,22 +498,48 @@
    "action": {
     "word": "WAIT",
     "tone": "wait",
-    "tile": "Wait",
+    "tile": "Wait for a break",
     "lines": [
      [
-      "When",
-      "The opening range forms 9:30 to 9:45. Buy levels post at 9:45."
+      "Buy calls if",
+      "a 5-minute candle closes above 159.92"
+     ],
+     [
+      "Buy puts if",
+      "a 5-minute candle closes below 153.69"
+     ],
+     [
+      "Until",
+      "11:00. No break by then means no trade today."
      ]
     ]
    }
   },
   "TSLA": {
-   "status": "pending",
-   "label": "Wait",
+   "status": "waiting",
+   "label": "Wait for a break",
    "result": null,
-   "headline": "The box forms 9:30 to 9:45.",
-   "sub": "A trade needs a 5-minute close outside it.",
-   "chart": null,
+   "headline": "Waiting for a 5-minute close outside the TSLA box.",
+   "sub": "Box $380.48 to $390.09. Entries allowed until 11:00.",
+   "chart": {
+    "symbol": "TSLA",
+    "times": [
+     "9:30",
+     "9:35",
+     "9:40"
+    ],
+    "closes": [
+     387.68,
+     386.11,
+     385.88
+    ],
+    "box": {
+     "hi": 390.09,
+     "lo": 380.48
+    },
+    "lines": [],
+    "marks": []
+   },
    "levels": [
     [
      "R1 pivot",
@@ -411,9 +552,19 @@
      false
     ],
     [
+     "Range high",
+     390.09,
+     true
+    ],
+    [
      "Pre-market high",
      388.68,
      false
+    ],
+    [
+     "Range low",
+     380.48,
+     true
     ],
     [
      "Pre-market low",
@@ -433,6 +584,11 @@
    ],
    "plan": [],
    "measures": [
+    [
+     "Today's box",
+     "2.53%",
+     "1.3x its normal \u00b7 wider than usual"
+    ],
     [
      "Normal box",
      "1.88%",
@@ -462,22 +618,48 @@
    "action": {
     "word": "WAIT",
     "tone": "wait",
-    "tile": "Wait",
+    "tile": "Wait for a break",
     "lines": [
      [
-      "When",
-      "The opening range forms 9:30 to 9:45. Buy levels post at 9:45."
+      "Buy calls if",
+      "a 5-minute candle closes above 390.09"
+     ],
+     [
+      "Buy puts if",
+      "a 5-minute candle closes below 380.48"
+     ],
+     [
+      "Until",
+      "11:00. No break by then means no trade today."
      ]
     ]
    }
   },
   "SPCX": {
-   "status": "pending",
-   "label": "Wait",
+   "status": "waiting",
+   "label": "Wait for a break",
    "result": null,
-   "headline": "The box forms 9:30 to 9:45.",
-   "sub": "A trade needs a 5-minute close outside it.",
-   "chart": null,
+   "headline": "Waiting for a 5-minute close outside the SPCX box.",
+   "sub": "Box $129.40 to $132.50. Entries allowed until 11:00.",
+   "chart": {
+    "symbol": "SPCX",
+    "times": [
+     "9:30",
+     "9:35",
+     "9:40"
+    ],
+    "closes": [
+     132.24,
+     129.86,
+     129.57
+    ],
+    "box": {
+     "hi": 132.5,
+     "lo": 129.4
+    },
+    "lines": [],
+    "marks": []
+   },
    "levels": [
     [
      "Prior-day high",
@@ -500,6 +682,11 @@
      false
     ],
     [
+     "Range high",
+     132.5,
+     true
+    ],
+    [
      "Pre-market low",
      130.31,
      false
@@ -508,10 +695,20 @@
      "S1 pivot",
      130.31,
      true
+    ],
+    [
+     "Range low",
+     129.4,
+     true
     ]
    ],
    "plan": [],
    "measures": [
+    [
+     "Today's box",
+     "2.40%",
+     "1.0x its normal \u00b7 normal"
+    ],
     [
      "Normal box",
      "2.37%",
@@ -541,11 +738,19 @@
    "action": {
     "word": "WAIT",
     "tone": "wait",
-    "tile": "Wait",
+    "tile": "Wait for a break",
     "lines": [
      [
-      "When",
-      "The opening range forms 9:30 to 9:45. Buy levels post at 9:45."
+      "Buy calls if",
+      "a 5-minute candle closes above 132.50"
+     ],
+     [
+      "Buy puts if",
+      "a 5-minute candle closes below 129.40"
+     ],
+     [
+      "Until",
+      "11:00. No break by then means no trade today."
      ]
     ]
    }
