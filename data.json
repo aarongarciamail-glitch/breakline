@@ -39,10 +39,10 @@
  },
  "tape": {
   "ok": true,
-  "asof": "2026-11-24T10:20:39-05:00",
+  "asof": "2026-11-24T10:30:36-05:00",
   "lean": "mixed",
   "label": "Tape split",
-  "strategy": "Calls and puts both stay open. Oil is up 2.1% and the 10-year is flat, so they disagree. The opening-range close picks the side.",
+  "strategy": "Calls and puts both stay open. Oil is up 1.8% and the 10-year is flat, so they disagree. The opening-range close picks the side.",
   "block_calls": false,
   "block_puts": false,
   "vix_small": false,
@@ -54,11 +54,11 @@
   "note": "Context only. Oil 1% and the 10-year 5 bp describe the lean. VIX 35 is a size note. Neither one blocks a call or a put.",
   "vix": {
    "name": "VIX",
-   "price": 27.25,
+   "price": 27.33,
    "prev": 26.61,
-   "chg_pct": 2.4,
-   "move": "Up 2.4% from yesterday's close of 26.6.",
-   "why": "Up 2.4% from yesterday's close of 26.6. Barrons.com: Market's Fear Gauge Rises",
+   "chg_pct": 2.7,
+   "move": "Up 2.7% from yesterday's close of 26.6.",
+   "why": "Up 2.7% from yesterday's close of 26.6. Barrons.com: Market's Fear Gauge Rises",
    "headline": {
     "source": "Barrons.com",
     "title": "Market's Fear Gauge Rises"
@@ -67,12 +67,12 @@
   },
   "oil": {
    "name": "Crude",
-   "price": 81.29,
+   "price": 81.04,
    "prev": 79.59,
-   "chg_pct": 2.1,
-   "move": "Up 2.1% from yesterday's close of 79.59.",
-   "range": "Inside the last month, 79.87 to 104.99.",
-   "why": "Up 2.1% from yesterday's close of 79.59. Reuters: Brazil's tax revenue extends record run in October, buoyed by higher oil prices",
+   "chg_pct": 1.8,
+   "move": "Up 1.8% from yesterday's close of 79.59.",
+   "range": "Near the bottom of the last month (low 79.87).",
+   "why": "Up 1.8% from yesterday's close of 79.59. Reuters: Brazil's tax revenue extends record run in October, buoyed by higher oil prices",
    "headline": {
     "source": "Reuters",
     "title": "Brazil's tax revenue extends record run in October, buoyed by higher oil prices"
@@ -171,9 +171,9 @@
   }
  ],
  "session": true,
- "next_check": "10:25 AM",
+ "next_check": "10:35 AM",
  "mode": "paper",
- "updated": "2026-11-24T10:20:36-05:00",
+ "updated": "2026-11-24T10:30:33-05:00",
  "date": "Tue \u00b7 Nov 24",
  "day": {
   "pills": [
@@ -209,7 +209,9 @@
      "10:00",
      "10:05",
      "10:10",
-     "10:15"
+     "10:15",
+     "10:20",
+     "10:25"
     ],
     "closes": [
      714.24,
@@ -221,7 +223,9 @@
      720.35,
      718.8,
      719.58,
-     716.79
+     716.79,
+     716.24,
+     714.78
     ],
     "box": {
      "hi": 717.83,
@@ -393,7 +397,9 @@
      "10:00",
      "10:05",
      "10:10",
-     "10:15"
+     "10:15",
+     "10:20",
+     "10:25"
     ],
     "closes": [
      639.16,
@@ -403,9 +409,11 @@
      640.89,
      642.0,
      641.48,
-     639.44,
-     640.67,
-     637.15
+     639.46,
+     640.66,
+     637.15,
+     636.84,
+     635.25
     ],
     "box": {
      "hi": 641.25,
@@ -582,7 +590,9 @@
      "10:00",
      "10:05",
      "10:10",
-     "10:15"
+     "10:15",
+     "10:20",
+     "10:25"
     ],
     "closes": [
      155.78,
@@ -593,8 +603,10 @@
      156.22,
      155.0,
      154.24,
-     155.37,
-     153.31
+     155.39,
+     153.31,
+     153.03,
+     152.46
     ],
     "box": {
      "hi": 159.92,
@@ -762,7 +774,9 @@
      "10:00",
      "10:05",
      "10:10",
-     "10:15"
+     "10:15",
+     "10:20",
+     "10:25"
     ],
     "closes": [
      387.68,
@@ -774,7 +788,9 @@
      386.75,
      384.0,
      382.99,
-     380.4
+     380.4,
+     379.48,
+     377.18
     ],
     "box": {
      "hi": 390.09,
@@ -942,7 +958,9 @@
      "10:00",
      "10:05",
      "10:10",
-     "10:15"
+     "10:15",
+     "10:20",
+     "10:25"
     ],
     "closes": [
      132.26,
@@ -954,7 +972,9 @@
      128.7,
      127.96,
      128.25,
-     126.72
+     126.72,
+     126.66,
+     125.62
     ],
     "box": {
      "hi": 132.5,
