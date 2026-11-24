@@ -39,26 +39,26 @@
  },
  "tape": {
   "ok": true,
-  "asof": "2026-11-24T10:45:36-05:00",
-  "lean": "mixed",
-  "label": "Tape split",
-  "strategy": "Calls and puts both stay open. Oil is up 1.1% and the 10-year is down 1.8 bp, so they disagree. The opening-range close picks the side.",
+  "asof": "2026-11-24T10:55:36-05:00",
+  "lean": "quiet",
+  "label": "Oil quiet",
+  "strategy": "Calls and puts both stay open. Oil moved 0.8%, under the 1% line, so it does not pick a side.",
   "block_calls": false,
   "block_puts": false,
   "vix_small": false,
   "size_note": "",
   "skip_calls": "",
   "skip_puts": "",
-  "agree_calls": "Oil and yields disagree. This trade is the opening-range break.",
-  "agree_puts": "Oil and yields disagree. This trade is the opening-range break.",
+  "agree_calls": "Oil moved 0.8%, so the tape is not picking a side.",
+  "agree_puts": "Oil moved 0.8%, so the tape is not picking a side.",
   "note": "Context only. Oil 1% and the 10-year 5 bp describe the lean. VIX 35 is a size note. Neither one blocks a call or a put.",
   "vix": {
    "name": "VIX",
-   "price": 28.8,
+   "price": 28.12,
    "prev": 26.61,
-   "chg_pct": 8.2,
-   "move": "Up 8.2% from yesterday's close of 26.6.",
-   "why": "Up 8.2% from yesterday's close of 26.6. Barrons.com: Market's Fear Gauge Rises",
+   "chg_pct": 5.7,
+   "move": "Up 5.7% from yesterday's close of 26.6.",
+   "why": "Up 5.7% from yesterday's close of 26.6. Barrons.com: Market's Fear Gauge Rises",
    "headline": {
     "source": "Barrons.com",
     "title": "Market's Fear Gauge Rises"
@@ -67,23 +67,23 @@
   },
   "oil": {
    "name": "Crude",
-   "price": 80.47,
+   "price": 80.21,
    "prev": 79.59,
-   "chg_pct": 1.1,
-   "move": "Up 1.1% from yesterday's close of 79.59.",
+   "chg_pct": 0.8,
+   "move": "Up 0.8% from yesterday's close of 79.59.",
    "range": "Near the bottom of the last month (low 79.87).",
-   "why": "Up 1.1% from yesterday's close of 79.59. Reuters: Brazil's tax revenue extends record run in October, buoyed by higher oil prices",
+   "why": "Up 0.8% from yesterday's close of 79.59. Reuters: Brazil's tax revenue extends record run in October, buoyed by higher oil prices",
    "headline": {
     "source": "Reuters",
     "title": "Brazil's tax revenue extends record run in October, buoyed by higher oil prices"
    },
-   "means": "Oil and yields point different ways. Calls and puts both stay open. The box picks the side."
+   "means": "A move under 1% does not pick a side. Calls and puts both stay open."
   },
   "yield": {
    "name": "10-year",
-   "price": 4.9,
-   "chg_bps": -1.8,
-   "move": "10-year is 4.90%, down 1.8 bp."
+   "price": 4.902,
+   "chg_bps": -1.6,
+   "move": "10-year is 4.90%, down 1.6 bp."
   }
  },
  "curve": [
@@ -180,9 +180,9 @@
   }
  ],
  "session": true,
- "next_check": "10:50 AM",
+ "next_check": "11:00 AM",
  "mode": "paper",
- "updated": "2026-11-24T10:45:33-05:00",
+ "updated": "2026-11-24T10:55:33-05:00",
  "date": "Tue \u00b7 Nov 24",
  "day": {
   "pills": [
@@ -223,7 +223,9 @@
      "10:25",
      "10:30",
      "10:35",
-     "10:40"
+     "10:40",
+     "10:45",
+     "10:50"
     ],
     "closes": [
      714.24,
@@ -240,7 +242,9 @@
      714.78,
      716.52,
      715.9,
-     713.5
+     713.5,
+     713.98,
+     715.45
     ],
     "box": {
      "hi": 717.83,
@@ -417,7 +421,9 @@
      "10:25",
      "10:30",
      "10:35",
-     "10:40"
+     "10:40",
+     "10:45",
+     "10:50"
     ],
     "closes": [
      639.16,
@@ -432,9 +438,11 @@
      637.15,
      636.84,
      635.25,
-     636.88,
-     636.01,
-     632.87
+     636.97,
+     636.02,
+     632.87,
+     633.8,
+     635.07
     ],
     "box": {
      "hi": 641.25,
@@ -616,7 +624,9 @@
      "10:25",
      "10:30",
      "10:35",
-     "10:40"
+     "10:40",
+     "10:45",
+     "10:50"
     ],
     "closes": [
      155.78,
@@ -633,7 +643,9 @@
      152.46,
      153.07,
      153.37,
-     151.65
+     151.65,
+     152.16,
+     152.23
     ],
     "box": {
      "hi": 159.92,
@@ -806,7 +818,9 @@
      "10:25",
      "10:30",
      "10:35",
-     "10:40"
+     "10:40",
+     "10:45",
+     "10:50"
     ],
     "closes": [
      387.68,
@@ -823,7 +837,9 @@
      377.18,
      380.85,
      380.63,
-     378.73
+     378.73,
+     379.07,
+     380.0
     ],
     "box": {
      "hi": 390.09,
@@ -1005,7 +1021,9 @@
      "10:25",
      "10:30",
      "10:35",
-     "10:40"
+     "10:40",
+     "10:45",
+     "10:50"
     ],
     "closes": [
      132.26,
@@ -1022,7 +1040,9 @@
      125.62,
      125.53,
      124.76,
-     123.72
+     123.72,
+     124.79,
+     125.17
     ],
     "box": {
      "hi": 132.5,
