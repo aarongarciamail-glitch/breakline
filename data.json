@@ -7,19 +7,19 @@
   "checks": [
    {
     "name": "Paper trades",
-    "value": "7 of 20",
+    "value": "8 of 20",
     "ok": false,
-    "progress": 0.35
+    "progress": 0.4
    },
    {
     "name": "Profit factor",
-    "value": "0.17",
+    "value": "0.20",
     "need": "\u2265 1.2",
     "ok": false
    },
    {
     "name": "Average trade",
-    "value": "-21%",
+    "value": "-18%",
     "need": "> 0%",
     "ok": false
    },
@@ -39,10 +39,10 @@
  },
  "tape": {
   "ok": true,
-  "asof": "2026-11-24T10:30:36-05:00",
+  "asof": "2026-11-24T10:35:36-05:00",
   "lean": "mixed",
   "label": "Tape split",
-  "strategy": "Calls and puts both stay open. Oil is up 1.8% and the 10-year is flat, so they disagree. The opening-range close picks the side.",
+  "strategy": "Calls and puts both stay open. Oil is up 1.2% and the 10-year is down 1.2 bp, so they disagree. The opening-range close picks the side.",
   "block_calls": false,
   "block_puts": false,
   "vix_small": false,
@@ -54,11 +54,11 @@
   "note": "Context only. Oil 1% and the 10-year 5 bp describe the lean. VIX 35 is a size note. Neither one blocks a call or a put.",
   "vix": {
    "name": "VIX",
-   "price": 27.33,
+   "price": 27.94,
    "prev": 26.61,
-   "chg_pct": 2.7,
-   "move": "Up 2.7% from yesterday's close of 26.6.",
-   "why": "Up 2.7% from yesterday's close of 26.6. Barrons.com: Market's Fear Gauge Rises",
+   "chg_pct": 5.0,
+   "move": "Up 5.0% from yesterday's close of 26.6.",
+   "why": "Up 5.0% from yesterday's close of 26.6. Barrons.com: Market's Fear Gauge Rises",
    "headline": {
     "source": "Barrons.com",
     "title": "Market's Fear Gauge Rises"
@@ -67,12 +67,12 @@
   },
   "oil": {
    "name": "Crude",
-   "price": 81.04,
+   "price": 80.51,
    "prev": 79.59,
-   "chg_pct": 1.8,
-   "move": "Up 1.8% from yesterday's close of 79.59.",
+   "chg_pct": 1.2,
+   "move": "Up 1.2% from yesterday's close of 79.59.",
    "range": "Near the bottom of the last month (low 79.87).",
-   "why": "Up 1.8% from yesterday's close of 79.59. Reuters: Brazil's tax revenue extends record run in October, buoyed by higher oil prices",
+   "why": "Up 1.2% from yesterday's close of 79.59. Reuters: Brazil's tax revenue extends record run in October, buoyed by higher oil prices",
    "headline": {
     "source": "Reuters",
     "title": "Brazil's tax revenue extends record run in October, buoyed by higher oil prices"
@@ -81,9 +81,9 @@
   },
   "yield": {
    "name": "10-year",
-   "price": 4.918,
-   "chg_bps": 0.0,
-   "move": "10-year is 4.92%, flat."
+   "price": 4.906,
+   "chg_bps": -1.2,
+   "move": "10-year is 4.91%, down 1.2 bp."
   }
  },
  "curve": [
@@ -114,15 +114,19 @@
   {
    "date": "2026-11-24",
    "acct": -5.89
+  },
+  {
+   "date": "2026-11-24",
+   "acct": -5.67
   }
  ],
  "max_dd": 5.89,
  "days": [
   {
    "date": "2026-11-24",
-   "n": 2,
-   "wins": 0,
-   "acct": -2.76,
+   "n": 3,
+   "wins": 1,
+   "acct": -2.54,
    "items": [
     {
      "symbol": "QQQ",
@@ -133,6 +137,11 @@
      "symbol": "SPY",
      "dir": "calls",
      "result": -34
+    },
+    {
+     "symbol": "TSLA",
+     "dir": "puts",
+     "result": 6
     }
    ]
   },
@@ -171,16 +180,16 @@
   }
  ],
  "session": true,
- "next_check": "10:35 AM",
+ "next_check": "10:40 AM",
  "mode": "paper",
- "updated": "2026-11-24T10:30:33-05:00",
+ "updated": "2026-11-24T10:35:33-05:00",
  "date": "Tue \u00b7 Nov 24",
  "day": {
   "pills": [
    "Trade day",
    "Paper"
   ],
-  "headline": "5 trades today: SPY sold -34%, QQQ sold -36%, NVDA holding puts, TSLA holding puts, SPCX holding puts.",
+  "headline": "5 trades today: SPY sold -34%, QQQ sold -36%, NVDA holding puts, TSLA sold +6%, SPCX holding puts.",
   "sub": "Tap a ticker to see its box, levels and numbers."
  },
  "symbols": [
@@ -211,7 +220,8 @@
      "10:10",
      "10:15",
      "10:20",
-     "10:25"
+     "10:25",
+     "10:30"
     ],
     "closes": [
      714.24,
@@ -225,7 +235,8 @@
      719.58,
      716.79,
      716.24,
-     714.78
+     714.78,
+     716.52
     ],
     "box": {
      "hi": 717.83,
@@ -399,7 +410,8 @@
      "10:10",
      "10:15",
      "10:20",
-     "10:25"
+     "10:25",
+     "10:30"
     ],
     "closes": [
      639.16,
@@ -413,7 +425,8 @@
      640.66,
      637.15,
      636.84,
-     635.25
+     635.25,
+     636.88
     ],
     "box": {
      "hi": 641.25,
@@ -592,7 +605,8 @@
      "10:10",
      "10:15",
      "10:20",
-     "10:25"
+     "10:25",
+     "10:30"
     ],
     "closes": [
      155.78,
@@ -604,9 +618,10 @@
      155.0,
      154.24,
      155.39,
-     153.31,
+     153.3,
      153.03,
-     152.46
+     152.46,
+     153.07
     ],
     "box": {
      "hi": 159.92,
@@ -757,11 +772,11 @@
    }
   },
   "TSLA": {
-   "status": "down",
-   "label": "Holding puts",
-   "result": null,
-   "headline": "TSLA broke down at 10:20. Puts.",
-   "sub": "5-minute close 380.40 below the box (380.48). Paper trade is open.",
+   "status": "win",
+   "label": "Sold +6%",
+   "result": 6,
+   "headline": "TSLA broke down at 10:20. Closed +6%.",
+   "sub": "Puts from the 10:20 close at 380.40. Paper result on the option, whole trade.",
    "chart": {
     "symbol": "TSLA",
     "times": [
@@ -776,7 +791,8 @@
      "10:10",
      "10:15",
      "10:20",
-     "10:25"
+     "10:25",
+     "10:30"
     ],
     "closes": [
      387.68,
@@ -790,7 +806,8 @@
      382.99,
      380.4,
      379.48,
-     377.18
+     377.18,
+     380.85
     ],
     "box": {
      "hi": 390.09,
@@ -811,6 +828,11 @@
       "i": 9,
       "kind": "buy",
       "label": "BUY"
+     },
+     {
+      "i": 12,
+      "kind": "sell",
+      "label": "SELL"
      }
     ]
    },
@@ -865,7 +887,7 @@
     [
      "Stop",
      "A 5-min close back over 380.48, or -50%",
-     false
+     true
     ],
     [
      "S1",
@@ -911,8 +933,8 @@
     ],
     [
      "Paper record",
-     "1 trade",
-     "0% win \u00b7 avg -51% \u00b7 best -51%"
+     "2 trades",
+     "50% win \u00b7 avg -23% \u00b7 best +6%"
     ],
     [
      "Backtest, 59 days",
@@ -921,21 +943,25 @@
     ]
    ],
    "action": {
-    "word": "HOLD PUTS",
-    "tone": "hold",
-    "tile": "Holding puts",
+    "word": "SOLD +6%",
+    "tone": "win",
+    "tile": "Sold +6%",
     "lines": [
      [
       "Bought",
       "TSLA 380 put at $5.20 (10:20)"
      ],
      [
-      "Take profit",
-      "1/3 at 373.94, 1/3 at 362.01"
+      "Sold",
+      "the rest at $5.50 (10:35)"
      ],
      [
-      "Sell all if",
-      "a 5-minute candle closes back over 380.48, or the option drops to $2.60"
+      "Why it ended",
+      "locking in profit: it was up +42%, now +6%"
+     ],
+     [
+      "Result",
+      "+6% on the whole trade (paper)"
      ]
     ]
    }
@@ -960,7 +986,8 @@
      "10:10",
      "10:15",
      "10:20",
-     "10:25"
+     "10:25",
+     "10:30"
     ],
     "closes": [
      132.26,
@@ -974,7 +1001,8 @@
      128.25,
      126.72,
      126.66,
-     125.62
+     125.62,
+     125.53
     ],
     "box": {
      "hi": 132.5,
@@ -1145,6 +1173,14 @@
    "call": "SPY calls",
    "result": -34,
    "note": "5-min close 716.79 back inside the box.",
+   "tag": ""
+  },
+  {
+   "date": "2026-11-24",
+   "symbol": "TSLA",
+   "call": "TSLA puts",
+   "result": 6,
+   "note": "Profit lock: best was +42%, now +6% (floor +28%).",
    "tag": ""
   },
   {
