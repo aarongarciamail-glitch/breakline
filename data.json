@@ -39,26 +39,26 @@
  },
  "tape": {
   "ok": true,
-  "asof": "2026-11-24T11:00:36-05:00",
+  "asof": "2026-11-24T11:15:35-05:00",
   "lean": "quiet",
   "label": "Oil quiet",
-  "strategy": "Calls and puts both stay open. Oil moved 0.3%, under the 1% line, so it does not pick a side.",
+  "strategy": "Calls and puts both stay open. Oil moved 0.6%, under the 1% line, so it does not pick a side.",
   "block_calls": false,
   "block_puts": false,
   "vix_small": false,
   "size_note": "",
   "skip_calls": "",
   "skip_puts": "",
-  "agree_calls": "Oil moved 0.3%, so the tape is not picking a side.",
-  "agree_puts": "Oil moved 0.3%, so the tape is not picking a side.",
+  "agree_calls": "Oil moved 0.6%, so the tape is not picking a side.",
+  "agree_puts": "Oil moved 0.6%, so the tape is not picking a side.",
   "note": "Context only. Oil 1% and the 10-year 5 bp describe the lean. VIX 35 is a size note. Neither one blocks a call or a put.",
   "vix": {
    "name": "VIX",
-   "price": 28.57,
+   "price": 28.66,
    "prev": 26.61,
-   "chg_pct": 7.4,
-   "move": "Up 7.4% from yesterday's close of 26.6.",
-   "why": "Up 7.4% from yesterday's close of 26.6. Barrons.com: Market's Fear Gauge Rises",
+   "chg_pct": 7.7,
+   "move": "Up 7.7% from yesterday's close of 26.6.",
+   "why": "Up 7.7% from yesterday's close of 26.6. Barrons.com: Market's Fear Gauge Rises",
    "headline": {
     "source": "Barrons.com",
     "title": "Market's Fear Gauge Rises"
@@ -67,23 +67,23 @@
   },
   "oil": {
    "name": "Crude",
-   "price": 79.82,
+   "price": 80.05,
    "prev": 79.59,
-   "chg_pct": 0.3,
-   "move": "Up 0.3% from yesterday's close of 79.59.",
-   "range": "Under the last month's low of 79.87.",
-   "why": "Up 0.3% from yesterday's close of 79.59. Reuters: Brazil's tax revenue extends record run in October, buoyed by higher oil prices",
+   "chg_pct": 0.6,
+   "move": "Up 0.6% from yesterday's close of 79.59.",
+   "range": "Near the bottom of the last month (low 79.87).",
+   "why": "Up 0.6% from yesterday's close of 79.59. Oilprice.com: Libya and Iraq Could Be the Next Big Headache for Oil Markets",
    "headline": {
-    "source": "Reuters",
-    "title": "Brazil's tax revenue extends record run in October, buoyed by higher oil prices"
+    "source": "Oilprice.com",
+    "title": "Libya and Iraq Could Be the Next Big Headache for Oil Markets"
    },
    "means": "A move under 1% does not pick a side. Calls and puts both stay open."
   },
   "yield": {
    "name": "10-year",
-   "price": 4.894,
-   "chg_bps": -2.4,
-   "move": "10-year is 4.89%, down 2.4 bp."
+   "price": 4.886,
+   "chg_bps": -3.2,
+   "move": "10-year is 4.89%, down 3.2 bp."
   }
  },
  "curve": [
@@ -180,9 +180,9 @@
   }
  ],
  "session": true,
- "next_check": "11:05 AM",
+ "next_check": "11:20 AM",
  "mode": "paper",
- "updated": "2026-11-24T11:00:33-05:00",
+ "updated": "2026-11-24T11:15:32-05:00",
  "date": "Tue \u00b7 Nov 24",
  "day": {
   "pills": [
@@ -226,7 +226,10 @@
      "10:40",
      "10:45",
      "10:50",
-     "10:55"
+     "10:55",
+     "11:00",
+     "11:05",
+     "11:10"
     ],
     "closes": [
      714.24,
@@ -246,7 +249,10 @@
      713.5,
      713.98,
      715.45,
-     714.56
+     714.56,
+     713.28,
+     714.29,
+     713.44
     ],
     "box": {
      "hi": 717.83,
@@ -426,7 +432,10 @@
      "10:40",
      "10:45",
      "10:50",
-     "10:55"
+     "10:55",
+     "11:00",
+     "11:05",
+     "11:10"
     ],
     "closes": [
      639.16,
@@ -446,7 +455,10 @@
      632.89,
      633.8,
      635.07,
-     633.96
+     633.95,
+     632.3,
+     633.42,
+     631.86
     ],
     "box": {
      "hi": 641.25,
@@ -631,7 +643,10 @@
      "10:40",
      "10:45",
      "10:50",
-     "10:55"
+     "10:55",
+     "11:00",
+     "11:05",
+     "11:10"
     ],
     "closes": [
      155.78,
@@ -651,7 +666,10 @@
      151.65,
      152.16,
      152.23,
-     152.16
+     152.17,
+     151.62,
+     151.91,
+     151.21
     ],
     "box": {
      "hi": 159.92,
@@ -827,7 +845,10 @@
      "10:40",
      "10:45",
      "10:50",
-     "10:55"
+     "10:55",
+     "11:00",
+     "11:05",
+     "11:10"
     ],
     "closes": [
      387.68,
@@ -845,9 +866,12 @@
      380.85,
      380.63,
      378.73,
-     379.07,
+     379.15,
      380.0,
-     379.12
+     379.12,
+     379.2,
+     379.47,
+     377.06
     ],
     "box": {
      "hi": 390.09,
@@ -1032,7 +1056,10 @@
      "10:40",
      "10:45",
      "10:50",
-     "10:55"
+     "10:55",
+     "11:00",
+     "11:05",
+     "11:10"
     ],
     "closes": [
      132.26,
@@ -1050,9 +1077,12 @@
      125.53,
      124.76,
      123.72,
-     124.79,
+     124.8,
      125.17,
-     124.78
+     124.78,
+     124.4,
+     124.96,
+     124.35
     ],
     "box": {
      "hi": 132.5,
