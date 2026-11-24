@@ -39,10 +39,10 @@
  },
  "tape": {
   "ok": true,
-  "asof": "2026-11-24T12:15:35-05:00",
+  "asof": "2026-11-24T12:30:37-05:00",
   "lean": "mixed",
   "label": "Tape split",
-  "strategy": "Calls and puts both stay open. Oil is up 1.2% and the 10-year is down 2.8 bp, so they disagree. The opening-range close picks the side.",
+  "strategy": "Calls and puts both stay open. Oil is up 2.1% and the 10-year is down 2.4 bp, so they disagree. The opening-range close picks the side.",
   "block_calls": false,
   "block_puts": false,
   "vix_small": false,
@@ -54,25 +54,25 @@
   "note": "Context only. Oil 1% and the 10-year 5 bp describe the lean. VIX 35 is a size note. Neither one blocks a call or a put.",
   "vix": {
    "name": "VIX",
-   "price": 28.33,
+   "price": 27.06,
    "prev": 26.61,
-   "chg_pct": 6.5,
-   "move": "Up 6.5% from yesterday's close of 26.6.",
-   "why": "Up 6.5% from yesterday's close of 26.6. Barrons.com: Market's Fear Gauge Rises",
+   "chg_pct": 1.7,
+   "move": "Up 1.7% from yesterday's close of 26.6.",
+   "why": "Up 1.7% from yesterday's close of 26.6. Barrons.com: Market's Fear Gauge Rises",
    "headline": {
     "source": "Barrons.com",
     "title": "Market's Fear Gauge Rises"
    },
-   "means": "Fear picked up and VIX is still under 35, so size stays normal."
+   "means": "VIX is close to yesterday. Size stays normal until it reaches 35."
   },
   "oil": {
    "name": "Crude",
-   "price": 80.51,
+   "price": 81.24,
    "prev": 79.59,
-   "chg_pct": 1.2,
-   "move": "Up 1.2% from yesterday's close of 79.59.",
-   "range": "Near the bottom of the last month (low 79.87).",
-   "why": "Up 1.2% from yesterday's close of 79.59. Reuters: Oil rises on Hormuz ship attacks, surplus supply outlook curbs gains",
+   "chg_pct": 2.1,
+   "move": "Up 2.1% from yesterday's close of 79.59.",
+   "range": "Inside the last month, 79.87 to 104.99.",
+   "why": "Up 2.1% from yesterday's close of 79.59. Reuters: Oil rises on Hormuz ship attacks, surplus supply outlook curbs gains",
    "headline": {
     "source": "Reuters",
     "title": "Oil rises on Hormuz ship attacks, surplus supply outlook curbs gains"
@@ -81,9 +81,9 @@
   },
   "yield": {
    "name": "10-year",
-   "price": 4.89,
-   "chg_bps": -2.8,
-   "move": "10-year is 4.89%, down 2.8 bp."
+   "price": 4.894,
+   "chg_bps": -2.4,
+   "move": "10-year is 4.89%, down 2.4 bp."
   }
  },
  "curve": [
@@ -198,9 +198,9 @@
   }
  ],
  "session": true,
- "next_check": "12:20 PM",
+ "next_check": "12:35 PM",
  "mode": "paper",
- "updated": "2026-11-24T12:15:32-05:00",
+ "updated": "2026-11-24T12:30:33-05:00",
  "date": "Tue \u00b7 Nov 24",
  "day": {
   "pills": [
@@ -258,7 +258,10 @@
      "11:55",
      "12:00",
      "12:05",
-     "12:10"
+     "12:10",
+     "12:15",
+     "12:20",
+     "12:25"
     ],
     "closes": [
      714.24,
@@ -291,9 +294,12 @@
      716.3,
      715.41,
      714.12,
-     714.64,
+     714.66,
      717.7,
-     718.2
+     718.18,
+     717.7,
+     718.11,
+     718.74
     ],
     "box": {
      "hi": 717.83,
@@ -488,7 +494,10 @@
      "11:55",
      "12:00",
      "12:05",
-     "12:10"
+     "12:10",
+     "12:15",
+     "12:20",
+     "12:25"
     ],
     "closes": [
      639.16,
@@ -521,9 +530,12 @@
      635.8,
      634.52,
      633.05,
-     633.58,
+     633.59,
      637.28,
-     637.95
+     637.95,
+     637.24,
+     637.69,
+     638.86
     ],
     "box": {
      "hi": 641.25,
@@ -723,7 +735,10 @@
      "11:55",
      "12:00",
      "12:05",
-     "12:10"
+     "12:10",
+     "12:15",
+     "12:20",
+     "12:25"
     ],
     "closes": [
      155.78,
@@ -758,7 +773,10 @@
      150.82,
      150.83,
      152.75,
-     153.11
+     153.11,
+     152.99,
+     152.74,
+     153.83
     ],
     "box": {
      "hi": 159.92,
@@ -958,7 +976,10 @@
      "11:55",
      "12:00",
      "12:05",
-     "12:10"
+     "12:10",
+     "12:15",
+     "12:20",
+     "12:25"
     ],
     "closes": [
      387.68,
@@ -993,7 +1014,10 @@
      377.53,
      377.08,
      379.82,
-     381.74
+     381.74,
+     381.88,
+     382.39,
+     383.0
     ],
     "box": {
      "hi": 390.09,
@@ -1193,7 +1217,10 @@
      "11:55",
      "12:00",
      "12:05",
-     "12:10"
+     "12:10",
+     "12:15",
+     "12:20",
+     "12:25"
     ],
     "closes": [
      132.26,
@@ -1226,9 +1253,12 @@
      125.91,
      125.49,
      125.36,
-     125.96,
+     125.97,
      126.49,
-     126.45
+     126.45,
+     125.83,
+     125.63,
+     126.31
     ],
     "box": {
      "hi": 132.5,
