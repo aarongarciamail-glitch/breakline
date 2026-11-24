@@ -39,10 +39,10 @@
  },
  "tape": {
   "ok": true,
-  "asof": "2026-11-24T09:45:35-05:00",
+  "asof": "2026-11-24T09:50:37-05:00",
   "lean": "mixed",
   "label": "Tape split",
-  "strategy": "Calls and puts both stay open. Oil is up 1.9% and the 10-year is down 1.0 bp, so they disagree. The opening-range close picks the side.",
+  "strategy": "Calls and puts both stay open. Oil is up 2.2% and the 10-year is down 1.6 bp, so they disagree. The opening-range close picks the side.",
   "block_calls": false,
   "block_puts": false,
   "vix_small": false,
@@ -54,11 +54,11 @@
   "note": "Context only. Oil 1% and the 10-year 5 bp describe the lean. VIX 35 is a size note. Neither one blocks a call or a put.",
   "vix": {
    "name": "VIX",
-   "price": 29.34,
+   "price": 29.26,
    "prev": 26.61,
-   "chg_pct": 10.3,
-   "move": "Up 10.3% from yesterday's close of 26.6.",
-   "why": "Up 10.3% from yesterday's close of 26.6. Barrons.com: Market's Fear Gauge Rises",
+   "chg_pct": 10.0,
+   "move": "Up 10.0% from yesterday's close of 26.6.",
+   "why": "Up 10.0% from yesterday's close of 26.6. Barrons.com: Market's Fear Gauge Rises",
    "headline": {
     "source": "Barrons.com",
     "title": "Market's Fear Gauge Rises"
@@ -67,12 +67,12 @@
   },
   "oil": {
    "name": "Crude",
-   "price": 81.12,
+   "price": 81.36,
    "prev": 79.59,
-   "chg_pct": 1.9,
-   "move": "Up 1.9% from yesterday's close of 79.59.",
+   "chg_pct": 2.2,
+   "move": "Up 2.2% from yesterday's close of 79.59.",
    "range": "Inside the last month, 79.87 to 104.99.",
-   "why": "Up 1.9% from yesterday's close of 79.59. Reuters: Oil rebounds from three-month lows on Hormuz threat",
+   "why": "Up 2.2% from yesterday's close of 79.59. Reuters: Oil rebounds from three-month lows on Hormuz threat",
    "headline": {
     "source": "Reuters",
     "title": "Oil rebounds from three-month lows on Hormuz threat"
@@ -81,9 +81,9 @@
   },
   "yield": {
    "name": "10-year",
-   "price": 4.908,
-   "chg_bps": -1.0,
-   "move": "10-year is 4.91%, down 1.0 bp."
+   "price": 4.902,
+   "chg_bps": -1.6,
+   "move": "10-year is 4.90%, down 1.6 bp."
   }
  },
  "curve": [
@@ -145,16 +145,16 @@
   }
  ],
  "session": true,
- "next_check": "9:50 AM",
+ "next_check": "9:55 AM",
  "mode": "paper",
- "updated": "2026-11-24T09:45:32-05:00",
+ "updated": "2026-11-24T09:50:34-05:00",
  "date": "Tue \u00b7 Nov 24",
  "day": {
   "pills": [
    "Trade day",
    "Paper"
   ],
-  "headline": "No trades yet today.",
+  "headline": "1 trade today: SPY holding calls.",
   "sub": "Tap a ticker to see its box, levels and numbers."
  },
  "symbols": [
@@ -166,29 +166,46 @@
  ],
  "stocks": {
   "SPY": {
-   "status": "waiting",
-   "label": "Wait for a break",
+   "status": "up",
+   "label": "Holding calls",
    "result": null,
-   "headline": "Waiting for a 5-minute close outside the SPY box.",
-   "sub": "Box $712.14 to $717.83. Entries allowed until 11:00.",
+   "headline": "SPY broke up at 09:50. Calls.",
+   "sub": "5-minute close 718.04 above the box (717.83). Paper trade is open.",
    "chart": {
     "symbol": "SPY",
     "times": [
      "9:30",
      "9:35",
-     "9:40"
+     "9:40",
+     "9:45"
     ],
     "closes": [
      714.24,
      714.55,
-     717.53
+     717.53,
+     718.04
     ],
     "box": {
      "hi": 717.83,
      "lo": 712.14
     },
-    "lines": [],
-    "marks": []
+    "lines": [
+     {
+      "name": "P",
+      "price": 721.31
+     },
+     {
+      "name": "R1",
+      "price": 729.09
+     }
+    ],
+    "marks": [
+     {
+      "i": 3,
+      "kind": "buy",
+      "label": "BUY"
+     }
+    ]
    },
    "levels": [
     [
@@ -232,7 +249,28 @@
      false
     ]
    ],
-   "plan": [],
+   "plan": [
+    [
+     "Entry",
+     "SPY 718 calls at the 09:50 close",
+     true
+    ],
+    [
+     "Stop",
+     "A 5-min close back under 717.83, or -50%",
+     false
+    ],
+    [
+     "P",
+     "Sell a third at 721.31. Stop to break-even",
+     false
+    ],
+    [
+     "R1",
+     "Sell a third at 729.09",
+     false
+    ]
+   ],
    "measures": [
     [
      "Today's box",
@@ -250,6 +288,16 @@
      "annualized, from daily closes"
     ],
     [
+     "Option at the break",
+     "IV 47%",
+     "vs 32% realized \u00b7 rich"
+    ],
+    [
+     "Option spread",
+     "0%",
+     "of mid at entry (max 15%)"
+    ],
+    [
      "Paper record",
      "1 trade",
      "0% win \u00b7 avg -33% \u00b7 best -33%"
@@ -261,21 +309,21 @@
     ]
    ],
    "action": {
-    "word": "WAIT",
-    "tone": "wait",
-    "tile": "Wait for a break",
+    "word": "HOLD CALLS",
+    "tone": "hold",
+    "tile": "Holding calls",
     "lines": [
      [
-      "Buy calls if",
-      "a 5-minute candle closes above 717.83"
+      "Bought",
+      "SPY 718 call at $4.22 (09:50)"
      ],
      [
-      "Buy puts if",
-      "a 5-minute candle closes below 712.14"
+      "Take profit",
+      "1/3 at 721.31, 1/3 at 729.09"
      ],
      [
-      "Until",
-      "11:00. No break by then means no trade today."
+      "Sell all if",
+      "a 5-minute candle closes back under 717.83, or the option drops to $2.11"
      ]
     ]
    }
@@ -291,12 +339,14 @@
     "times": [
      "9:30",
      "9:35",
-     "9:40"
+     "9:40",
+     "9:45"
     ],
     "closes": [
-     639.22,
+     639.16,
      636.6,
-     640.04
+     640.04,
+     640.65
     ],
     "box": {
      "hi": 641.25,
@@ -406,12 +456,14 @@
     "times": [
      "9:30",
      "9:35",
-     "9:40"
+     "9:40",
+     "9:45"
     ],
     "closes": [
      155.78,
      154.59,
-     154.86
+     154.86,
+     155.42
     ],
     "box": {
      "hi": 159.92,
@@ -526,12 +578,14 @@
     "times": [
      "9:30",
      "9:35",
-     "9:40"
+     "9:40",
+     "9:45"
     ],
     "closes": [
      387.68,
      386.11,
-     385.88
+     385.88,
+     386.76
     ],
     "box": {
      "hi": 390.09,
@@ -646,12 +700,14 @@
     "times": [
      "9:30",
      "9:35",
-     "9:40"
+     "9:40",
+     "9:45"
     ],
     "closes": [
-     132.24,
+     132.26,
      129.86,
-     129.57
+     129.57,
+     130.37
     ],
     "box": {
      "hi": 132.5,
