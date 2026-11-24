@@ -7,25 +7,25 @@
   "checks": [
    {
     "name": "Paper trades",
-    "value": "6 of 20",
+    "value": "7 of 20",
     "ok": false,
-    "progress": 0.3
+    "progress": 0.35
    },
    {
     "name": "Profit factor",
-    "value": "0.21",
+    "value": "0.17",
     "need": "\u2265 1.2",
     "ok": false
    },
    {
     "name": "Average trade",
-    "value": "-19%",
+    "value": "-21%",
     "need": "> 0%",
     "ok": false
    },
    {
     "name": "Worst drawdown",
-    "value": "4.6%",
+    "value": "5.9%",
     "need": "\u2264 12%",
     "ok": true
    },
@@ -39,10 +39,10 @@
  },
  "tape": {
   "ok": true,
-  "asof": "2026-11-24T10:15:36-05:00",
+  "asof": "2026-11-24T10:20:39-05:00",
   "lean": "mixed",
   "label": "Tape split",
-  "strategy": "Calls and puts both stay open. Oil is up 2.0% and the 10-year is flat, so they disagree. The opening-range close picks the side.",
+  "strategy": "Calls and puts both stay open. Oil is up 2.1% and the 10-year is flat, so they disagree. The opening-range close picks the side.",
   "block_calls": false,
   "block_puts": false,
   "vix_small": false,
@@ -54,11 +54,11 @@
   "note": "Context only. Oil 1% and the 10-year 5 bp describe the lean. VIX 35 is a size note. Neither one blocks a call or a put.",
   "vix": {
    "name": "VIX",
-   "price": 27.33,
+   "price": 27.25,
    "prev": 26.61,
-   "chg_pct": 2.7,
-   "move": "Up 2.7% from yesterday's close of 26.6.",
-   "why": "Up 2.7% from yesterday's close of 26.6. Barrons.com: Market's Fear Gauge Rises",
+   "chg_pct": 2.4,
+   "move": "Up 2.4% from yesterday's close of 26.6.",
+   "why": "Up 2.4% from yesterday's close of 26.6. Barrons.com: Market's Fear Gauge Rises",
    "headline": {
     "source": "Barrons.com",
     "title": "Market's Fear Gauge Rises"
@@ -67,12 +67,12 @@
   },
   "oil": {
    "name": "Crude",
-   "price": 81.2,
+   "price": 81.29,
    "prev": 79.59,
-   "chg_pct": 2.0,
-   "move": "Up 2.0% from yesterday's close of 79.59.",
+   "chg_pct": 2.1,
+   "move": "Up 2.1% from yesterday's close of 79.59.",
    "range": "Inside the last month, 79.87 to 104.99.",
-   "why": "Up 2.0% from yesterday's close of 79.59. Reuters: Brazil's tax revenue extends record run in October, buoyed by higher oil prices",
+   "why": "Up 2.1% from yesterday's close of 79.59. Reuters: Brazil's tax revenue extends record run in October, buoyed by higher oil prices",
    "headline": {
     "source": "Reuters",
     "title": "Brazil's tax revenue extends record run in October, buoyed by higher oil prices"
@@ -81,9 +81,9 @@
   },
   "yield": {
    "name": "10-year",
-   "price": 4.914,
-   "chg_bps": -0.4,
-   "move": "10-year is 4.91%, flat."
+   "price": 4.918,
+   "chg_bps": 0.0,
+   "move": "10-year is 4.92%, flat."
   }
  },
  "curve": [
@@ -109,21 +109,30 @@
   },
   {
    "date": "2026-11-24",
-   "acct": -4.6
+   "acct": -4.53
+  },
+  {
+   "date": "2026-11-24",
+   "acct": -5.89
   }
  ],
- "max_dd": 4.6,
+ "max_dd": 5.89,
  "days": [
   {
    "date": "2026-11-24",
-   "n": 1,
+   "n": 2,
    "wins": 0,
-   "acct": -1.42,
+   "acct": -2.76,
    "items": [
     {
      "symbol": "QQQ",
      "dir": "calls",
      "result": -36
+    },
+    {
+     "symbol": "SPY",
+     "dir": "calls",
+     "result": -34
     }
    ]
   },
@@ -162,16 +171,16 @@
   }
  ],
  "session": true,
- "next_check": "10:20 AM",
+ "next_check": "10:25 AM",
  "mode": "paper",
- "updated": "2026-11-24T10:15:33-05:00",
+ "updated": "2026-11-24T10:20:36-05:00",
  "date": "Tue \u00b7 Nov 24",
  "day": {
   "pills": [
    "Trade day",
    "Paper"
   ],
-  "headline": "3 trades today: SPY holding calls, QQQ sold -36%, SPCX holding puts.",
+  "headline": "5 trades today: SPY sold -34%, QQQ sold -36%, NVDA holding puts, TSLA holding puts, SPCX holding puts.",
   "sub": "Tap a ticker to see its box, levels and numbers."
  },
  "symbols": [
@@ -183,11 +192,11 @@
  ],
  "stocks": {
   "SPY": {
-   "status": "up",
-   "label": "Holding calls",
-   "result": null,
-   "headline": "SPY broke up at 09:50. Calls.",
-   "sub": "5-minute close 718.04 above the box (717.83). Paper trade is open.",
+   "status": "loss",
+   "label": "Sold -34%",
+   "result": -34,
+   "headline": "SPY broke up at 09:50. Closed -34%.",
+   "sub": "Calls from the 09:50 close at 718.04. Paper result on the option, whole trade.",
    "chart": {
     "symbol": "SPY",
     "times": [
@@ -199,7 +208,8 @@
      "9:55",
      "10:00",
      "10:05",
-     "10:10"
+     "10:10",
+     "10:15"
     ],
     "closes": [
      714.24,
@@ -208,9 +218,10 @@
      718.05,
      718.89,
      719.74,
-     720.36,
+     720.35,
      718.8,
-     719.58
+     719.58,
+     716.79
     ],
     "box": {
      "hi": 717.83,
@@ -231,6 +242,11 @@
       "i": 3,
       "kind": "buy",
       "label": "BUY"
+     },
+     {
+      "i": 9,
+      "kind": "sell",
+      "label": "SELL"
      }
     ]
    },
@@ -285,7 +301,7 @@
     [
      "Stop",
      "A 5-min close back under 717.83, or -50%",
-     false
+     true
     ],
     [
      "P",
@@ -326,8 +342,8 @@
     ],
     [
      "Paper record",
-     "1 trade",
-     "0% win \u00b7 avg -33% \u00b7 best -33%"
+     "2 trades",
+     "0% win \u00b7 avg -34% \u00b7 best -33%"
     ],
     [
      "Backtest, 59 days",
@@ -336,21 +352,25 @@
     ]
    ],
    "action": {
-    "word": "HOLD CALLS",
-    "tone": "hold",
-    "tile": "Holding calls",
+    "word": "SOLD -34%",
+    "tone": "loss",
+    "tile": "Sold -34%",
     "lines": [
      [
       "Bought",
       "SPY 718 call at $4.22 (09:50)"
      ],
      [
-      "Take profit",
-      "1/3 at 721.31, 1/3 at 729.09"
+      "Sold",
+      "the rest at $2.79 (10:20)"
      ],
      [
-      "Sell all if",
-      "a 5-minute candle closes back under 717.83, or the option drops to $2.11"
+      "Why it ended",
+      "SPY fell back inside its opening range (716.79)"
+     ],
+     [
+      "Result",
+      "-34% on the whole trade (paper)"
      ]
     ]
    }
@@ -372,7 +392,8 @@
      "9:55",
      "10:00",
      "10:05",
-     "10:10"
+     "10:10",
+     "10:15"
     ],
     "closes": [
      639.16,
@@ -381,9 +402,10 @@
      640.65,
      640.89,
      642.0,
-     641.42,
+     641.48,
      639.44,
-     640.67
+     640.67,
+     637.15
     ],
     "box": {
      "hi": 641.25,
@@ -543,11 +565,11 @@
    }
   },
   "NVDA": {
-   "status": "waiting",
-   "label": "Wait for a break",
+   "status": "down",
+   "label": "Holding puts",
    "result": null,
-   "headline": "Waiting for a 5-minute close outside the NVDA box.",
-   "sub": "Box $153.69 to $159.92. Entries allowed until 11:00.",
+   "headline": "NVDA broke down at 10:20. Puts.",
+   "sub": "5-minute close 153.31 below the box (153.69). Paper trade is open.",
    "chart": {
     "symbol": "NVDA",
     "times": [
@@ -559,7 +581,8 @@
      "9:55",
      "10:00",
      "10:05",
-     "10:10"
+     "10:10",
+     "10:15"
     ],
     "closes": [
      155.78,
@@ -570,14 +593,30 @@
      156.22,
      155.0,
      154.24,
-     155.37
+     155.37,
+     153.31
     ],
     "box": {
      "hi": 159.92,
      "lo": 153.69
     },
-    "lines": [],
-    "marks": []
+    "lines": [
+     {
+      "name": "S2",
+      "price": 149.97
+     },
+     {
+      "name": "S3",
+      "price": 143.01
+     }
+    ],
+    "marks": [
+     {
+      "i": 9,
+      "kind": "buy",
+      "label": "BUY"
+     }
+    ]
    },
    "levels": [
     [
@@ -621,7 +660,28 @@
      true
     ]
    ],
-   "plan": [],
+   "plan": [
+    [
+     "Entry",
+     "NVDA 152.5 puts at the 10:20 close",
+     true
+    ],
+    [
+     "Stop",
+     "A 5-min close back over 153.69, or -50%",
+     false
+    ],
+    [
+     "S2",
+     "Sell a third at 149.97. Stop to break-even",
+     false
+    ],
+    [
+     "S3",
+     "Sell a third at 143.01",
+     false
+    ]
+   ],
    "measures": [
     [
      "Today's box",
@@ -644,6 +704,16 @@
      "5 trading days ago"
     ],
     [
+     "Option at the break",
+     "IV 109%",
+     "vs 126% realized \u00b7 fair"
+    ],
+    [
+     "Option spread",
+     "3%",
+     "of mid at entry (max 15%)"
+    ],
+    [
      "Paper record",
      "1 trade",
      "0% win \u00b7 avg -25% \u00b7 best -25%"
@@ -655,31 +725,31 @@
     ]
    ],
    "action": {
-    "word": "WAIT",
-    "tone": "wait",
-    "tile": "Wait for a break",
+    "word": "HOLD PUTS",
+    "tone": "hold",
+    "tile": "Holding puts",
     "lines": [
      [
-      "Buy calls if",
-      "a 5-minute candle closes above 159.92"
+      "Bought",
+      "NVDA 152.5 put at $3.40 (10:20)"
      ],
      [
-      "Buy puts if",
-      "a 5-minute candle closes below 153.69"
+      "Take profit",
+      "1/3 at 149.97, 1/3 at 143.01"
      ],
      [
-      "Until",
-      "11:00. No break by then means no trade today."
+      "Sell all if",
+      "a 5-minute candle closes back over 153.69, or the option drops to $1.70"
      ]
     ]
    }
   },
   "TSLA": {
-   "status": "waiting",
-   "label": "Wait for a break",
+   "status": "down",
+   "label": "Holding puts",
    "result": null,
-   "headline": "Waiting for a 5-minute close outside the TSLA box.",
-   "sub": "Box $380.48 to $390.09. Entries allowed until 11:00.",
+   "headline": "TSLA broke down at 10:20. Puts.",
+   "sub": "5-minute close 380.40 below the box (380.48). Paper trade is open.",
    "chart": {
     "symbol": "TSLA",
     "times": [
@@ -691,7 +761,8 @@
      "9:55",
      "10:00",
      "10:05",
-     "10:10"
+     "10:10",
+     "10:15"
     ],
     "closes": [
      387.68,
@@ -700,16 +771,32 @@
      386.76,
      387.87,
      387.65,
-     386.89,
+     386.75,
      384.0,
-     382.99
+     382.99,
+     380.4
     ],
     "box": {
      "hi": 390.09,
      "lo": 380.48
     },
-    "lines": [],
-    "marks": []
+    "lines": [
+     {
+      "name": "S1",
+      "price": 373.94
+     },
+     {
+      "name": "S2",
+      "price": 362.01
+     }
+    ],
+    "marks": [
+     {
+      "i": 9,
+      "kind": "buy",
+      "label": "BUY"
+     }
+    ]
    },
    "levels": [
     [
@@ -753,7 +840,28 @@
      false
     ]
    ],
-   "plan": [],
+   "plan": [
+    [
+     "Entry",
+     "TSLA 380 puts at the 10:20 close",
+     true
+    ],
+    [
+     "Stop",
+     "A 5-min close back over 380.48, or -50%",
+     false
+    ],
+    [
+     "S1",
+     "Sell a third at 373.94. Stop to break-even",
+     false
+    ],
+    [
+     "S2",
+     "Sell a third at 362.01",
+     false
+    ]
+   ],
    "measures": [
     [
      "Today's box",
@@ -776,6 +884,16 @@
      "in 46 trading days"
     ],
     [
+     "Option at the break",
+     "IV 65%",
+     "vs 74% realized \u00b7 fair"
+    ],
+    [
+     "Option spread",
+     "3%",
+     "of mid at entry (max 15%)"
+    ],
+    [
      "Paper record",
      "1 trade",
      "0% win \u00b7 avg -51% \u00b7 best -51%"
@@ -787,21 +905,21 @@
     ]
    ],
    "action": {
-    "word": "WAIT",
-    "tone": "wait",
-    "tile": "Wait for a break",
+    "word": "HOLD PUTS",
+    "tone": "hold",
+    "tile": "Holding puts",
     "lines": [
      [
-      "Buy calls if",
-      "a 5-minute candle closes above 390.09"
+      "Bought",
+      "TSLA 380 put at $5.20 (10:20)"
      ],
      [
-      "Buy puts if",
-      "a 5-minute candle closes below 380.48"
+      "Take profit",
+      "1/3 at 373.94, 1/3 at 362.01"
      ],
      [
-      "Until",
-      "11:00. No break by then means no trade today."
+      "Sell all if",
+      "a 5-minute candle closes back over 380.48, or the option drops to $2.60"
      ]
     ]
    }
@@ -823,7 +941,8 @@
      "9:55",
      "10:00",
      "10:05",
-     "10:10"
+     "10:10",
+     "10:15"
     ],
     "closes": [
      132.26,
@@ -834,7 +953,8 @@
      129.66,
      128.7,
      127.96,
-     128.25
+     128.25,
+     126.72
     ],
     "box": {
      "hi": 132.5,
@@ -855,6 +975,11 @@
       "i": 6,
       "kind": "buy",
       "label": "BUY"
+     },
+     {
+      "i": 9,
+      "kind": "sell",
+      "label": "SELL 1/3"
      }
     ]
    },
@@ -914,7 +1039,7 @@
     [
      "S2",
      "Sell a third at 127.32. Stop to break-even",
-     false
+     true
     ],
     [
      "S3",
@@ -975,11 +1100,11 @@
      ],
      [
       "Take profit",
-      "1/3 at 127.32, 1/3 at 121.54"
+      "1/3 at 127.32 \u2713 done, 1/3 at 121.54"
      ],
      [
       "Sell all if",
-      "a 5-minute candle closes back over 129.40, or the option drops to $1.37"
+      "SPCX gets back to 128.70 (the buy price)"
      ]
     ]
    }
@@ -992,6 +1117,14 @@
    "call": "QQQ calls",
    "result": -36,
    "note": "Back to the entry price 641.98 (break-even stop).",
+   "tag": ""
+  },
+  {
+   "date": "2026-11-24",
+   "symbol": "SPY",
+   "call": "SPY calls",
+   "result": -34,
+   "note": "5-min close 716.79 back inside the box.",
    "tag": ""
   },
   {
