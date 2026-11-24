@@ -39,10 +39,10 @@
  },
  "tape": {
   "ok": true,
-  "asof": "2026-11-24T11:45:35-05:00",
+  "asof": "2026-11-24T12:00:36-05:00",
   "lean": "mixed",
   "label": "Tape split",
-  "strategy": "Calls and puts both stay open. Oil is up 1.1% and the 10-year is down 3.0 bp, so they disagree. The opening-range close picks the side.",
+  "strategy": "Calls and puts both stay open. Oil is up 1.8% and the 10-year is down 3.0 bp, so they disagree. The opening-range close picks the side.",
   "block_calls": false,
   "block_puts": false,
   "vix_small": false,
@@ -54,11 +54,11 @@
   "note": "Context only. Oil 1% and the 10-year 5 bp describe the lean. VIX 35 is a size note. Neither one blocks a call or a put.",
   "vix": {
    "name": "VIX",
-   "price": 28.52,
+   "price": 28.31,
    "prev": 26.61,
-   "chg_pct": 7.2,
-   "move": "Up 7.2% from yesterday's close of 26.6.",
-   "why": "Up 7.2% from yesterday's close of 26.6. Barrons.com: Market's Fear Gauge Rises",
+   "chg_pct": 6.4,
+   "move": "Up 6.4% from yesterday's close of 26.6.",
+   "why": "Up 6.4% from yesterday's close of 26.6. Barrons.com: Market's Fear Gauge Rises",
    "headline": {
     "source": "Barrons.com",
     "title": "Market's Fear Gauge Rises"
@@ -67,13 +67,16 @@
   },
   "oil": {
    "name": "Crude",
-   "price": 80.43,
+   "price": 80.99,
    "prev": 79.59,
-   "chg_pct": 1.1,
-   "move": "Up 1.1% from yesterday's close of 79.59.",
+   "chg_pct": 1.8,
+   "move": "Up 1.8% from yesterday's close of 79.59.",
    "range": "Near the bottom of the last month (low 79.87).",
-   "why": "Up 1.1% from yesterday's close of 79.59.",
-   "headline": null,
+   "why": "Up 1.8% from yesterday's close of 79.59. Insider Monkey: Chevron Corporation (CVX) Is Benefiting From Rising Oil Prices: Could Geopolitical Tensions Fuel Further Gains?",
+   "headline": {
+    "source": "Insider Monkey",
+    "title": "Chevron Corporation (CVX) Is Benefiting From Rising Oil Prices: Could Geopolitical Tensions Fuel Further Gains?"
+   },
    "means": "Oil and yields point different ways. Calls and puts both stay open. The box picks the side."
   },
   "yield": {
@@ -195,9 +198,9 @@
   }
  ],
  "session": true,
- "next_check": "11:50 AM",
+ "next_check": "12:05 PM",
  "mode": "paper",
- "updated": "2026-11-24T11:45:32-05:00",
+ "updated": "2026-11-24T12:00:33-05:00",
  "date": "Tue \u00b7 Nov 24",
  "day": {
   "pills": [
@@ -250,7 +253,10 @@
      "11:25",
      "11:30",
      "11:35",
-     "11:40"
+     "11:40",
+     "11:45",
+     "11:50",
+     "11:55"
     ],
     "closes": [
      714.24,
@@ -277,9 +283,12 @@
      713.73,
      716.09,
      714.6,
-     715.17,
+     715.16,
      713.66,
-     715.0
+     715.0,
+     716.3,
+     715.51,
+     714.12
     ],
     "box": {
      "hi": 717.83,
@@ -468,7 +477,10 @@
      "11:25",
      "11:30",
      "11:35",
-     "11:40"
+     "11:40",
+     "11:45",
+     "11:50",
+     "11:55"
     ],
     "closes": [
      639.16,
@@ -495,9 +507,12 @@
      631.98,
      634.82,
      633.26,
-     633.82,
+     633.78,
      632.16,
-     634.19
+     634.19,
+     635.8,
+     634.52,
+     633.05
     ],
     "box": {
      "hi": 641.25,
@@ -691,7 +706,10 @@
      "11:25",
      "11:30",
      "11:35",
-     "11:40"
+     "11:40",
+     "11:45",
+     "11:50",
+     "11:55"
     ],
     "closes": [
      155.78,
@@ -718,9 +736,12 @@
      151.54,
      152.44,
      151.48,
-     151.69,
+     151.7,
      150.81,
-     151.3
+     151.3,
+     151.78,
+     151.31,
+     150.82
     ],
     "box": {
      "hi": 159.92,
@@ -914,7 +935,10 @@
      "11:25",
      "11:30",
      "11:35",
-     "11:40"
+     "11:40",
+     "11:45",
+     "11:50",
+     "11:55"
     ],
     "closes": [
      387.68,
@@ -942,8 +966,11 @@
      377.86,
      377.03,
      377.75,
-     376.18,
-     377.89
+     376.24,
+     377.89,
+     378.19,
+     378.0,
+     377.53
     ],
     "box": {
      "hi": 390.09,
@@ -1137,7 +1164,10 @@
      "11:25",
      "11:30",
      "11:35",
-     "11:40"
+     "11:40",
+     "11:45",
+     "11:50",
+     "11:55"
     ],
     "closes": [
      132.26,
@@ -1166,7 +1196,10 @@
      125.21,
      125.51,
      125.15,
-     125.47
+     125.47,
+     125.91,
+     125.5,
+     125.36
     ],
     "box": {
      "hi": 132.5,
