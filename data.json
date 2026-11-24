@@ -39,10 +39,10 @@
  },
  "tape": {
   "ok": true,
-  "asof": "2026-11-24T12:02:02-05:00",
+  "asof": "2026-11-24T12:15:35-05:00",
   "lean": "mixed",
   "label": "Tape split",
-  "strategy": "Calls and puts both stay open. Oil is up 1.6% and the 10-year is down 2.8 bp, so they disagree. The opening-range close picks the side.",
+  "strategy": "Calls and puts both stay open. Oil is up 1.2% and the 10-year is down 2.8 bp, so they disagree. The opening-range close picks the side.",
   "block_calls": false,
   "block_puts": false,
   "vix_small": false,
@@ -54,11 +54,11 @@
   "note": "Context only. Oil 1% and the 10-year 5 bp describe the lean. VIX 35 is a size note. Neither one blocks a call or a put.",
   "vix": {
    "name": "VIX",
-   "price": 28.24,
+   "price": 28.33,
    "prev": 26.61,
-   "chg_pct": 6.1,
-   "move": "Up 6.1% from yesterday's close of 26.6.",
-   "why": "Up 6.1% from yesterday's close of 26.6. Barrons.com: Market's Fear Gauge Rises",
+   "chg_pct": 6.5,
+   "move": "Up 6.5% from yesterday's close of 26.6.",
+   "why": "Up 6.5% from yesterday's close of 26.6. Barrons.com: Market's Fear Gauge Rises",
    "headline": {
     "source": "Barrons.com",
     "title": "Market's Fear Gauge Rises"
@@ -67,12 +67,12 @@
   },
   "oil": {
    "name": "Crude",
-   "price": 80.84,
+   "price": 80.51,
    "prev": 79.59,
-   "chg_pct": 1.6,
-   "move": "Up 1.6% from yesterday's close of 79.59.",
+   "chg_pct": 1.2,
+   "move": "Up 1.2% from yesterday's close of 79.59.",
    "range": "Near the bottom of the last month (low 79.87).",
-   "why": "Up 1.6% from yesterday's close of 79.59. Reuters: Oil rises on Hormuz ship attacks, surplus supply outlook curbs gains",
+   "why": "Up 1.2% from yesterday's close of 79.59. Reuters: Oil rises on Hormuz ship attacks, surplus supply outlook curbs gains",
    "headline": {
     "source": "Reuters",
     "title": "Oil rises on Hormuz ship attacks, surplus supply outlook curbs gains"
@@ -198,9 +198,9 @@
   }
  ],
  "session": true,
- "next_check": "12:05 PM",
+ "next_check": "12:20 PM",
  "mode": "paper",
- "updated": "2026-11-24T12:01:40-05:00",
+ "updated": "2026-11-24T12:15:32-05:00",
  "date": "Tue \u00b7 Nov 24",
  "day": {
   "pills": [
@@ -255,7 +255,10 @@
      "11:40",
      "11:45",
      "11:50",
-     "11:55"
+     "11:55",
+     "12:00",
+     "12:05",
+     "12:10"
     ],
     "closes": [
      714.24,
@@ -286,8 +289,11 @@
      713.66,
      715.0,
      716.3,
-     715.51,
-     714.12
+     715.41,
+     714.12,
+     714.64,
+     717.7,
+     718.2
     ],
     "box": {
      "hi": 717.83,
@@ -479,7 +485,10 @@
      "11:40",
      "11:45",
      "11:50",
-     "11:55"
+     "11:55",
+     "12:00",
+     "12:05",
+     "12:10"
     ],
     "closes": [
      639.16,
@@ -511,7 +520,10 @@
      634.19,
      635.8,
      634.52,
-     633.05
+     633.05,
+     633.58,
+     637.28,
+     637.95
     ],
     "box": {
      "hi": 641.25,
@@ -708,7 +720,10 @@
      "11:40",
      "11:45",
      "11:50",
-     "11:55"
+     "11:55",
+     "12:00",
+     "12:05",
+     "12:10"
     ],
     "closes": [
      155.78,
@@ -740,7 +755,10 @@
      151.3,
      151.78,
      151.31,
-     150.82
+     150.82,
+     150.83,
+     152.75,
+     153.11
     ],
     "box": {
      "hi": 159.92,
@@ -937,7 +955,10 @@
      "11:40",
      "11:45",
      "11:50",
-     "11:55"
+     "11:55",
+     "12:00",
+     "12:05",
+     "12:10"
     ],
     "closes": [
      387.68,
@@ -968,8 +989,11 @@
      376.24,
      377.89,
      378.19,
-     378.0,
-     377.53
+     378.05,
+     377.53,
+     377.08,
+     379.82,
+     381.74
     ],
     "box": {
      "hi": 390.09,
@@ -1166,7 +1190,10 @@
      "11:40",
      "11:45",
      "11:50",
-     "11:55"
+     "11:55",
+     "12:00",
+     "12:05",
+     "12:10"
     ],
     "closes": [
      132.26,
@@ -1197,8 +1224,11 @@
      125.15,
      125.47,
      125.91,
-     125.5,
-     125.36
+     125.49,
+     125.36,
+     125.96,
+     126.49,
+     126.45
     ],
     "box": {
      "hi": 132.5,
