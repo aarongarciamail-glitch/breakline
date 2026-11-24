@@ -39,10 +39,10 @@
  },
  "tape": {
   "ok": true,
-  "asof": "2026-11-24T12:00:36-05:00",
+  "asof": "2026-11-24T12:02:02-05:00",
   "lean": "mixed",
   "label": "Tape split",
-  "strategy": "Calls and puts both stay open. Oil is up 1.8% and the 10-year is down 3.0 bp, so they disagree. The opening-range close picks the side.",
+  "strategy": "Calls and puts both stay open. Oil is up 1.6% and the 10-year is down 2.8 bp, so they disagree. The opening-range close picks the side.",
   "block_calls": false,
   "block_puts": false,
   "vix_small": false,
@@ -54,11 +54,11 @@
   "note": "Context only. Oil 1% and the 10-year 5 bp describe the lean. VIX 35 is a size note. Neither one blocks a call or a put.",
   "vix": {
    "name": "VIX",
-   "price": 28.31,
+   "price": 28.24,
    "prev": 26.61,
-   "chg_pct": 6.4,
-   "move": "Up 6.4% from yesterday's close of 26.6.",
-   "why": "Up 6.4% from yesterday's close of 26.6. Barrons.com: Market's Fear Gauge Rises",
+   "chg_pct": 6.1,
+   "move": "Up 6.1% from yesterday's close of 26.6.",
+   "why": "Up 6.1% from yesterday's close of 26.6. Barrons.com: Market's Fear Gauge Rises",
    "headline": {
     "source": "Barrons.com",
     "title": "Market's Fear Gauge Rises"
@@ -67,23 +67,23 @@
   },
   "oil": {
    "name": "Crude",
-   "price": 80.99,
+   "price": 80.84,
    "prev": 79.59,
-   "chg_pct": 1.8,
-   "move": "Up 1.8% from yesterday's close of 79.59.",
+   "chg_pct": 1.6,
+   "move": "Up 1.6% from yesterday's close of 79.59.",
    "range": "Near the bottom of the last month (low 79.87).",
-   "why": "Up 1.8% from yesterday's close of 79.59. Insider Monkey: Chevron Corporation (CVX) Is Benefiting From Rising Oil Prices: Could Geopolitical Tensions Fuel Further Gains?",
+   "why": "Up 1.6% from yesterday's close of 79.59. Reuters: Oil rises on Hormuz ship attacks, surplus supply outlook curbs gains",
    "headline": {
-    "source": "Insider Monkey",
-    "title": "Chevron Corporation (CVX) Is Benefiting From Rising Oil Prices: Could Geopolitical Tensions Fuel Further Gains?"
+    "source": "Reuters",
+    "title": "Oil rises on Hormuz ship attacks, surplus supply outlook curbs gains"
    },
    "means": "Oil and yields point different ways. Calls and puts both stay open. The box picks the side."
   },
   "yield": {
    "name": "10-year",
-   "price": 4.888,
-   "chg_bps": -3.0,
-   "move": "10-year is 4.89%, down 3.0 bp."
+   "price": 4.89,
+   "chg_bps": -2.8,
+   "move": "10-year is 4.89%, down 2.8 bp."
   }
  },
  "curve": [
@@ -200,14 +200,13 @@
  "session": true,
  "next_check": "12:05 PM",
  "mode": "paper",
- "updated": "2026-11-24T12:00:33-05:00",
+ "updated": "2026-11-24T12:01:40-05:00",
  "date": "Tue \u00b7 Nov 24",
  "day": {
   "pills": [
-   "Trade day",
    "Paper"
   ],
-  "headline": "5 trades today: SPY sold -34%, QQQ sold -36%, NVDA sold +16%, TSLA sold +6%, SPCX sold +54%.",
+  "headline": "5 trades: 3 won, 2 lost.",
   "sub": "Tap a ticker to see its box, levels and numbers."
  },
  "symbols": [
