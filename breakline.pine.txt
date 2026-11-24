@@ -1,0 +1,266 @@
+//@version=6
+// Breakline — the same rules the Breakline bot uses, drawn on your chart.
+// Paper-trading study. Not financial advice. The Telegram alert is the final word:
+// the bot also checks things a chart can't see (option spread, earnings, IV, max open trades).
+//
+// Use on a 5-minute chart. Turn on extended hours to see the pre-market high/low.
+// Works on Vela (vela.luxalgo.com) and TradingView. Rules source: ~/breakline/rules.yaml
+//
+// Strategy A (main): opening range 9:30-9:45. A 5-minute close outside it, by 11:00, = BUY.
+//   A close back inside = SELL ALL. Sell 1/3 at each of the next two pivots beyond entry,
+//   then the stop moves to break-even. Anything left is sold at 3:30.
+// Strategy B (paper test): the first 5-minute bar's direction, only if its volume is at least
+//   its 14-day normal and it isn't a doji. Buy the break of that bar by 11:00, stop 0.25 x ATR(14),
+//   hold to 3:55.
+
+indicator("Breakline", shorttitle = "Breakline", overlay = true, max_boxes_count = 200, max_lines_count = 500, max_labels_count = 500)
+
+// ── inputs ──────────────────────────────────────────────────────────────────
+lastH    = input.int(11, "Last entry: hour (ET)", minval = 9, maxval = 15, group = "Rules")
+lastM    = input.int(0,  "Last entry: minute",    minval = 0, maxval = 55, step = 5, group = "Rules")
+exitH    = input.int(15, "Time exit: hour (ET)",  group = "Rules")
+exitM    = input.int(30, "Time exit: minute",     step = 5, group = "Rules")
+wideMult = input.float(2.0, "Wide box = this many times normal", group = "Rules")
+showPiv  = input.bool(true, "Show pivots (P, R1-R3, S1-S3)", group = "Show")
+showPM   = input.bool(true, "Show pre-market and prior-day high/low", group = "Show")
+showB    = input.bool(true, "Show Strategy B (paper test)", group = "Show")
+showTbl  = input.bool(true, "Show info panel", group = "Show")
+
+TZ = "America/New_York"
+cUp   = color.new(#3fbf7f, 0)
+cDn   = color.new(#e0605a, 0)
+cTeal = color.new(#3aa9b8, 0)
+cSilv = color.new(#d6dee6, 0)
+cDim  = color.new(#8e98a4, 0)
+
+// ── clock (minutes since midnight ET) ─────────────────────────────────────────
+barMin  = timeframe.in_seconds() / 60
+t0      = hour(time, TZ) * 60 + minute(time, TZ)     // bar open
+t1      = t0 + barMin                                 // bar close
+OR_S    = 9 * 60 + 30
+OR_E    = 9 * 60 + 45
+LAST    = lastH * 60 + lastM
+EXIT_A  = exitH * 60 + exitM
+EXIT_B  = 15 * 60 + 55
+CLOSE_T = 16 * 60
+dayKey  = year(time, TZ) * 10000 + month(time, TZ) * 100 + dayofmonth(time, TZ)
+newDay  = bar_index == 0 or dayKey != dayKey[1]
+okTF    = timeframe.isminutes and timeframe.multiplier == 5
+
+// ── prior-day levels (no repainting: yesterday's finished bar) ──────────────────
+[pdH, pdL, pdC, atr14] = request.security(syminfo.tickerid, "D", [high[1], low[1], close[1], ta.atr(14)[1]], lookahead = barmerge.lookahead_on)
+P  = (pdH + pdL + pdC) / 3
+R1 = 2 * P - pdL
+R2 = P + (pdH - pdL)
+R3 = pdH + 2 * (P - pdL)
+S1 = 2 * P - pdH
+S2 = P - (pdH - pdL)
+S3 = pdL - 2 * (pdH - P)
+
+pv(x) => showPiv and not newDay ? x : na
+plot(pv(R3), "R3", color.new(cDim, 40), 1, plot.style_linebr)
+plot(pv(R2), "R2", color.new(cDim, 30), 1, plot.style_linebr)
+plot(pv(R1), "R1", color.new(cDim, 10), 1, plot.style_linebr)
+plot(pv(P),  "P",  color.new(cSilv, 40), 1, plot.style_linebr)
+plot(pv(S1), "S1", color.new(cDim, 10), 1, plot.style_linebr)
+plot(pv(S2), "S2", color.new(cDim, 30), 1, plot.style_linebr)
+plot(pv(S3), "S3", color.new(cDim, 40), 1, plot.style_linebr)
+plot(showPM and not newDay ? pdH : na, "Prior-day high", color.new(cTeal, 50), 1, plot.style_linebr)
+plot(showPM and not newDay ? pdL : na, "Prior-day low",  color.new(cTeal, 50), 1, plot.style_linebr)
+
+// ── state ───────────────────────────────────────────────────────────────────
+var float orH = na
+var float orL = na
+var int   orT = na
+var box   orBox = na
+var float pmH = na
+var float pmL = na
+var float pmHd = na          // yesterday-free copy for plotting after the open
+var float pmLd = na
+var array<float> widths = array.new<float>()     // last 40 box widths (%)
+var array<float> firstVols = array.new<float>()  // last 14 first-bar volumes
+var float boxX = na          // today's box vs normal
+
+// Strategy A
+var bool  aDone = false
+var int   aDir = 0
+var float aEntry = na
+var int   aTrims = 0
+var float tgt1 = na
+var float tgt2 = na
+var string aStatus = "WAIT"
+
+// Strategy B
+var string bState = ""       // "", "watch", "open", "done"
+var int   bDir = 0
+var float bLvl = na
+var float bStop = na
+var float relvol = na
+
+if newDay
+    orH := na
+    orL := na
+    orT := na
+    pmH := na
+    pmL := na
+    pmHd := na
+    pmLd := na
+    aDone := false
+    aDir := 0
+    aEntry := na
+    aTrims := 0
+    tgt1 := na
+    tgt2 := na
+    aStatus := "WAIT"
+    bState := ""
+    bDir := 0
+    bLvl := na
+    bStop := na
+    relvol := na
+    boxX := na
+
+// pre-market 4:00-9:30
+if t0 >= 4 * 60 and t0 < OR_S
+    pmH := na(pmH) ? high : math.max(pmH, high)
+    pmL := na(pmL) ? low : math.min(pmL, low)
+if t0 == OR_S
+    pmHd := pmH
+    pmLd := pmL
+plot(showPM and t0 >= OR_S and t0 < CLOSE_T ? pmHd : na, "Pre-market high", color.new(cTeal, 20), 1, plot.style_linebr)
+plot(showPM and t0 >= OR_S and t0 < CLOSE_T ? pmLd : na, "Pre-market low",  color.new(cTeal, 20), 1, plot.style_linebr)
+
+// opening range 9:30-9:45
+if t0 >= OR_S and t1 <= OR_E
+    if na(orT)
+        orT := time
+    orH := na(orH) ? high : math.max(orH, high)
+    orL := na(orL) ? low : math.min(orL, low)
+    if t1 == OR_E
+        orBox := box.new(orT, orH, orT + (CLOSE_T - OR_S) * 60000, orL, xloc = xloc.bar_time,
+             border_color = color.new(cSilv, 55), bgcolor = color.new(cSilv, 88))
+        w = (orH - orL) / orL * 100
+        boxX := array.size(widths) >= 10 ? w / array.median(widths) : na
+        array.push(widths, w)
+        if array.size(widths) > 40
+            array.shift(widths)
+        if not na(boxX) and boxX >= wideMult
+            label.new(bar_index, orH, "Wide box " + str.tostring(boxX, "#.0") + "x normal", color = color.new(cDim, 30),
+                 textcolor = color.white, style = label.style_label_down, size = size.tiny)
+
+say(string msg) =>
+    alert(syminfo.ticker + " " + msg, alert.freq_once_per_bar_close)
+
+// ── Strategy A ──────────────────────────────────────────────────────────────
+inSession = t0 >= OR_S and t0 < CLOSE_T
+aBuyUp = false
+aBuyDn = false
+aSellAll = false
+aTrim = false
+
+if okTF and inSession and not na(orH) and t1 > OR_E
+    if not aDone and aDir == 0 and t1 <= LAST
+        if close > orH or close < orL
+            aDir := close > orH ? 1 : -1
+            aDone := true
+            aEntry := close
+            float[] ladder = aDir == 1 ? array.from(R1, R2, R3) : array.from(S1, S2, S3)
+            float[] beyond = array.new<float>()
+            for x in ladder
+                if (x - aEntry) * aDir > 0
+                    beyond.push(x)
+            tgt1 := beyond.size() > 0 ? beyond.get(0) : na
+            tgt2 := beyond.size() > 1 ? beyond.get(1) : na
+            aStatus := aDir == 1 ? "BUY CALLS" : "BUY PUTS"
+            aBuyUp := aDir == 1
+            aBuyDn := aDir == -1
+            label.new(bar_index, aDir == 1 ? low : high, (aDir == 1 ? "BUY CALLS\n" : "BUY PUTS\n") + str.tostring(close, format.mintick),
+                 color = aDir == 1 ? cUp : cDn, textcolor = color.white,
+                 style = aDir == 1 ? label.style_label_up : label.style_label_down, size = size.small)
+            say((aDir == 1 ? "🟢 BUY CALLS" : "🟢 BUY PUTS") + " · 5-min close " + str.tostring(close, format.mintick) + " outside the opening range")
+    else if aDir != 0 and not aBuyUp and not aBuyDn
+        string why = ""
+        // trims at the next pivots beyond entry
+        if aTrims == 0 and not na(tgt1) and (aDir == 1 ? high >= tgt1 : low <= tgt1)
+            aTrims := 1
+            aTrim := true
+            label.new(bar_index, aDir == 1 ? high : low, "SELL 1/3", color = cTeal, textcolor = color.white,
+                 style = aDir == 1 ? label.style_label_down : label.style_label_up, size = size.tiny)
+            say("🔴 SELL 1/3 · hit " + str.tostring(tgt1, format.mintick) + ". Stop now break-even")
+        else if aTrims == 1 and not na(tgt2) and (aDir == 1 ? high >= tgt2 : low <= tgt2)
+            aTrims := 2
+            aTrim := true
+            label.new(bar_index, aDir == 1 ? high : low, "SELL 1/3", color = cTeal, textcolor = color.white,
+                 style = aDir == 1 ? label.style_label_down : label.style_label_up, size = size.tiny)
+            say("🔴 SELL 1/3 · hit " + str.tostring(tgt2, format.mintick))
+        // stops
+        if aTrims == 0 and (aDir == 1 ? close < orH : close > orL)
+            why := "back inside"
+        else if aTrims >= 1 and (close - aEntry) * aDir <= 0
+            why := "break-even"
+        else if t1 >= EXIT_A
+            why := "3:30"
+        if why != ""
+            aSellAll := true
+            aStatus := "SOLD (" + why + ")"
+            label.new(bar_index, aDir == 1 ? high : low, "SELL ALL\n" + why, color = cDim, textcolor = color.white,
+                 style = aDir == 1 ? label.style_label_down : label.style_label_up, size = size.small)
+            say("🔴 SELL ALL · " + why)
+            aDir := 0
+    if not aDone and t1 > LAST
+        aDone := true
+        aStatus := "NO TRADE"
+
+plot(aDir != 0 ? tgt1 : na, "Target 1", color.new(cTeal, 0), 2, plot.style_linebr)
+plot(aDir != 0 ? tgt2 : na, "Target 2", color.new(cTeal, 40), 2, plot.style_linebr)
+
+// ── Strategy B (paper test) ───────────────────────────────────────────────────
+if showB and okTF and t0 == OR_S
+    rng = high - low
+    volMean = array.size(firstVols) >= 14 ? array.avg(firstVols) : na
+    relvol := na(volMean) or volMean <= 0 ? na : volume / volMean
+    array.push(firstVols, volume)
+    if array.size(firstVols) > 14
+        array.shift(firstVols)
+    if rng <= 0 or math.abs(close - open) < 0.05 * rng
+        bState := "done"          // doji
+    else if na(relvol) or relvol < 1
+        bState := "done"          // quiet open
+    else
+        bState := "watch"
+        bDir := close > open ? 1 : -1
+        bLvl := bDir == 1 ? high : low
+else if showB and okTF and bState == "watch" and t0 > OR_S
+    if t1 > LAST
+        bState := "done"
+    else if (bDir == 1 ? high >= bLvl : low <= bLvl)
+        entry = bDir == 1 ? math.max(open, bLvl) : math.min(open, bLvl)
+        bStop := entry - bDir * 0.25 * atr14
+        bState := "open"
+        label.new(bar_index, bDir == 1 ? low : high, "B " + (bDir == 1 ? "BUY" : "SELL SHORT"), color = color.new(cTeal, 20),
+             textcolor = color.white, style = bDir == 1 ? label.style_label_up : label.style_label_down, size = size.tiny)
+else if showB and okTF and bState == "open"
+    if (bDir == 1 ? low <= bStop : high >= bStop) or t1 >= EXIT_B
+        bState := "done"
+        label.new(bar_index, bDir == 1 ? high : low, "B out", color = color.new(cDim, 20), textcolor = color.white,
+             style = bDir == 1 ? label.style_label_down : label.style_label_up, size = size.tiny)
+plot(showB and bState == "open" ? bStop : na, "B stop", color.new(cDn, 30), 1, plot.style_linebr)
+
+// ── alerts (create one alert: "Any alert() function call", or pick these) ─────────
+alertcondition(aBuyUp, "Breakline BUY CALLS", "{{ticker}} BUY CALLS: 5-min close above the opening range")
+alertcondition(aBuyDn, "Breakline BUY PUTS", "{{ticker}} BUY PUTS: 5-min close below the opening range")
+alertcondition(aTrim, "Breakline SELL 1/3", "{{ticker}} SELL 1/3 at a pivot target")
+alertcondition(aSellAll, "Breakline SELL ALL", "{{ticker}} SELL ALL")
+
+// ── info panel ──────────────────────────────────────────────────────────────
+var table tbl = table.new(position.top_right, 2, 5, bgcolor = color.new(#0b1013, 15), border_width = 0, frame_color = color.new(cSilv, 70), frame_width = 1)
+if showTbl and barstate.islast
+    table.cell(tbl, 0, 0, "BREAKLINE", text_color = cSilv, text_size = size.small)
+    table.cell(tbl, 1, 0, okTF ? aStatus : "Use a 5-min chart", text_color = aStatus == "BUY CALLS" ? cUp : aStatus == "BUY PUTS" ? cDn : cSilv, text_size = size.small)
+    table.cell(tbl, 0, 1, "Box", text_color = cDim, text_size = size.tiny)
+    table.cell(tbl, 1, 1, na(orH) ? "after 9:45" : str.tostring(orL, format.mintick) + " – " + str.tostring(orH, format.mintick), text_color = cSilv, text_size = size.tiny)
+    table.cell(tbl, 0, 2, "vs normal", text_color = cDim, text_size = size.tiny)
+    table.cell(tbl, 1, 2, na(boxX) ? "—" : str.tostring(boxX, "#.0") + "x" + (boxX >= wideMult ? "  wide" : ""), text_color = cSilv, text_size = size.tiny)
+    table.cell(tbl, 0, 3, "First 5-min volume", text_color = cDim, text_size = size.tiny)
+    table.cell(tbl, 1, 3, na(relvol) ? "—" : str.tostring(relvol, "#.0") + "x normal", text_color = cSilv, text_size = size.tiny)
+    table.cell(tbl, 0, 4, "Paper only", text_color = cDim, text_size = size.tiny)
+    table.cell(tbl, 1, 4, "Telegram alert is final", text_color = cDim, text_size = size.tiny)

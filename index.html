@@ -280,6 +280,9 @@ dl.al dd{margin:0;color:var(--text)}
  td.note{grid-area:n;font-size:13.5px}
  .sample{margin-block:0 18px}
 }
+.chartit ol{margin:.4rem 0 .8rem 1.2rem;padding:0;line-height:1.6}
+.copybtn{font:inherit;color:var(--text);background:rgba(214,222,230,.08);border:1px solid rgba(214,222,230,.3);border-radius:10px;padding:.55rem .9rem;cursor:pointer}
+.copybtn:active{transform:scale(.98)}
 </style>
 </head>
 <body>
@@ -384,7 +387,7 @@ dl.al dd{margin:0;color:var(--text)}
   <div class="steps">
    <div class="panel step"><span class="t">9:30–9:45</span><h3>Draw the box</h3><p>The first three five-minute candles make a box: the high and low of the opening fifteen minutes. No trades before it's done.</p></div>
    <div class="panel step"><span class="t">After 9:45</span><h3>Wait for a close outside</h3><p>A five-minute candle has to close above or below the box, with volume picking up. A quick poke that closes back inside doesn't count.</p></div>
-   <div class="panel step"><span class="t">In the trade</span><h3>Take profit in pieces</h3><p>A third off at +20%, most of it gone by +75%. After the first sale the stop moves to break-even, so a winner can't turn into a loser.</p></div>
+   <div class="panel step"><span class="t">In the trade</span><h3>Take profit in pieces</h3><p>A third off at each of the next two pivot levels, the rest out by 3:30. After the first sale the stop moves to break-even, so a winner can't turn into a loser.</p></div>
    <div class="panel step"><span class="t">If it's wrong</span><h3>Get out fast</h3><p>A five-minute close back inside the box ends the trade. These are same-day options, so a hard −50% stop backs that up.</p></div>
   </div>
   <div class="panel sitout">
@@ -392,6 +395,14 @@ dl.al dd{margin:0;color:var(--text)}
    <ul>
     <li>Monthly options expiration</li><li>Fed decision days</li><li>CPI and PPI mornings</li><li>A box that's too wide</li><li>No momentum on the break</li><li>Fridays: small bets only</li>
    </ul>
+  </div>
+  <div class="panel sitout chartit">
+   <h3>Chart it yourself</h3>
+   <p class="meta">The same box, pivots and buy/sell marks on your own chart. Free on <a href="https://vela.luxalgo.com/chart" rel="noopener">Vela</a> or TradingView.</p>
+   <ol>
+    <li>Open a 5-minute chart (extended hours on).</li><li>Open the Pine editor and paste the code.</li><li>Add it to the chart. Optional: set an alert on "Any alert() function call".</li>
+   </ol>
+   <p><button type="button" id="copyPine" class="copybtn">Copy indicator code</button> <a href="breakline.pine.txt" class="meta">or view it</a></p>
   </div>
  </section>
 
@@ -544,6 +555,9 @@ dl.al dd{margin:0;color:var(--text)}
  document.addEventListener('visibilitychange',()=>{if(!document.hidden)load()});
  let rz;addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(()=>{if(LAST)render(LAST)},150)});
 })();
+</script>
+<script>
+document.getElementById('copyPine')?.addEventListener('click',async e=>{const b=e.currentTarget;try{const t=await (await fetch('breakline.pine.txt',{cache:'no-store'})).text();await navigator.clipboard.writeText(t);b.textContent='Copied ✓'}catch(_){location.href='breakline.pine.txt'}setTimeout(()=>b.textContent='Copy indicator code',2500)});
 </script>
 </body>
 </html>

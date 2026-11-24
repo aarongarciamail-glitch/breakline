@@ -39,26 +39,26 @@
  },
  "tape": {
   "ok": true,
-  "asof": "2026-11-23T15:45:35-05:00",
+  "asof": "2026-11-23T21:46:34-05:00",
   "lean": "bullish",
   "label": "Lean up",
-  "strategy": "Calls and puts both stay open. Oil is down 4.0% and the 10-year is up 0.6 bp, which is my lean toward calls. The opening-range close still picks the side.",
+  "strategy": "Calls and puts both stay open. Oil is down 4.4% and the 10-year is up 0.6 bp, which is my lean toward calls. The opening-range close still picks the side.",
   "block_calls": false,
   "block_puts": false,
   "vix_small": false,
   "size_note": "",
   "skip_calls": "",
   "skip_puts": "",
-  "agree_calls": "Oil is down 4.0%, so my lean is up. This call goes with that.",
-  "agree_puts": "Oil is down 4.0%, so my lean is up. This put is still the opening-range break.",
+  "agree_calls": "Oil is down 4.4%, so my lean is up. This call goes with that.",
+  "agree_puts": "Oil is down 4.4%, so my lean is up. This put is still the opening-range break.",
   "note": "Context only. Oil 1% and the 10-year 5 bp describe the lean. VIX 35 is a size note. Neither one blocks a call or a put.",
   "vix": {
    "name": "VIX",
-   "price": 26.71,
+   "price": 26.62,
    "prev": 35.89,
-   "chg_pct": -25.6,
-   "move": "Down 25.6% from yesterday's close of 35.9.",
-   "why": "Down 25.6% from yesterday's close of 35.9. Barrons.com: Wall Street\u2019s Fear Gauge Tumbles But Volatility Remains High",
+   "chg_pct": -25.8,
+   "move": "Down 25.8% from yesterday's close of 35.9.",
+   "why": "Down 25.8% from yesterday's close of 35.9. Barrons.com: Wall Street\u2019s Fear Gauge Tumbles But Volatility Remains High",
    "headline": {
     "source": "Barrons.com",
     "title": "Wall Street\u2019s Fear Gauge Tumbles But Volatility Remains High"
@@ -67,15 +67,15 @@
   },
   "oil": {
    "name": "Crude",
-   "price": 80.13,
+   "price": 79.83,
    "prev": 83.47,
-   "chg_pct": -4.0,
-   "move": "Down 4.0% from yesterday's close of 83.47.",
+   "chg_pct": -4.4,
+   "move": "Down 4.4% from yesterday's close of 83.47.",
    "range": "Under the last month's low of 81.55.",
-   "why": "Down 4.0% from yesterday's close of 83.47. Reuters: JD Vance's ties to prized Venezuelan oil contract under investigation by US Senate panel",
+   "why": "Down 4.4% from yesterday's close of 83.47. Simply Wall St.: 3 North Sea Oil Stocks Riding Europe EandP Consolidation",
    "headline": {
-    "source": "Reuters",
-    "title": "JD Vance's ties to prized Venezuelan oil contract under investigation by US Senate panel"
+    "source": "Simply Wall St.",
+    "title": "3 North Sea Oil Stocks Riding Europe EandP Consolidation"
    },
    "means": "A down oil day is my lean toward calls on SPY and QQQ. Calls and puts both stay open. The box picks the side."
   },
@@ -144,10 +144,10 @@
    ]
   }
  ],
- "session": true,
- "next_check": "3:50 PM",
+ "session": false,
+ "next_check": null,
  "mode": "paper",
- "updated": "2026-11-23T15:45:32-05:00",
+ "updated": "2026-11-23T21:46:30-05:00",
  "date": "Mon \u00b7 Nov 23",
  "day": {
   "pills": [
@@ -248,7 +248,10 @@
      "15:25",
      "15:30",
      "15:35",
-     "15:40"
+     "15:40",
+     "15:45",
+     "15:50",
+     "15:55"
     ],
     "closes": [
      718.61,
@@ -325,7 +328,10 @@
      724.53,
      723.82,
      724.2,
-     724.36
+     724.36,
+     724.19,
+     722.12,
+     722.42
     ],
     "box": {
      "hi": 724.81,
@@ -562,7 +568,10 @@
      "15:25",
      "15:30",
      "15:35",
-     "15:40"
+     "15:40",
+     "15:45",
+     "15:50",
+     "15:55"
     ],
     "closes": [
      648.41,
@@ -638,8 +647,11 @@
      652.71,
      652.83,
      652.36,
-     653.0,
-     653.28
+     653.04,
+     653.3,
+     652.68,
+     650.0,
+     650.87
     ],
     "box": {
      "hi": 656.3,
@@ -876,7 +888,10 @@
      "15:25",
      "15:30",
      "15:35",
-     "15:40"
+     "15:40",
+     "15:45",
+     "15:50",
+     "15:55"
     ],
     "closes": [
      159.79,
@@ -953,7 +968,10 @@
      166.39,
      166.35,
      165.88,
-     165.73
+     165.73,
+     165.2,
+     164.46,
+     165.19
     ],
     "box": {
      "hi": 167.21,
@@ -1176,7 +1194,10 @@
      "15:25",
      "15:30",
      "15:35",
-     "15:40"
+     "15:40",
+     "15:45",
+     "15:50",
+     "15:55"
     ],
     "closes": [
      384.49,
@@ -1253,7 +1274,10 @@
      388.21,
      387.84,
      388.41,
-     388.32
+     388.33,
+     387.77,
+     385.44,
+     385.88
     ],
     "box": {
      "hi": 389.39,
@@ -1486,7 +1510,10 @@
      "15:25",
      "15:30",
      "15:35",
-     "15:40"
+     "15:40",
+     "15:45",
+     "15:50",
+     "15:55"
     ],
     "closes": [
      140.9,
@@ -1563,7 +1590,10 @@
      133.82,
      133.84,
      133.99,
-     134.03
+     134.03,
+     133.44,
+     133.6,
+     133.3
     ],
     "box": {
      "hi": 141.87,
