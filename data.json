@@ -39,10 +39,10 @@
  },
  "tape": {
   "ok": true,
-  "asof": "2026-11-24T12:30:37-05:00",
+  "asof": "2026-11-24T12:45:35-05:00",
   "lean": "mixed",
   "label": "Tape split",
-  "strategy": "Calls and puts both stay open. Oil is up 2.1% and the 10-year is down 2.4 bp, so they disagree. The opening-range close picks the side.",
+  "strategy": "Calls and puts both stay open. Oil is up 2.4% and the 10-year is down 1.0 bp, so they disagree. The opening-range close picks the side.",
   "block_calls": false,
   "block_puts": false,
   "vix_small": false,
@@ -54,11 +54,11 @@
   "note": "Context only. Oil 1% and the 10-year 5 bp describe the lean. VIX 35 is a size note. Neither one blocks a call or a put.",
   "vix": {
    "name": "VIX",
-   "price": 27.06,
+   "price": 26.54,
    "prev": 26.61,
-   "chg_pct": 1.7,
-   "move": "Up 1.7% from yesterday's close of 26.6.",
-   "why": "Up 1.7% from yesterday's close of 26.6. Barrons.com: Market's Fear Gauge Rises",
+   "chg_pct": -0.3,
+   "move": "Down 0.3% from yesterday's close of 26.6.",
+   "why": "Down 0.3% from yesterday's close of 26.6. Barrons.com: Market's Fear Gauge Rises",
    "headline": {
     "source": "Barrons.com",
     "title": "Market's Fear Gauge Rises"
@@ -67,12 +67,12 @@
   },
   "oil": {
    "name": "Crude",
-   "price": 81.24,
+   "price": 81.51,
    "prev": 79.59,
-   "chg_pct": 2.1,
-   "move": "Up 2.1% from yesterday's close of 79.59.",
+   "chg_pct": 2.4,
+   "move": "Up 2.4% from yesterday's close of 79.59.",
    "range": "Inside the last month, 79.87 to 104.99.",
-   "why": "Up 2.1% from yesterday's close of 79.59. Reuters: Oil rises on Hormuz ship attacks, surplus supply outlook curbs gains",
+   "why": "Up 2.4% from yesterday's close of 79.59. Reuters: Oil rises on Hormuz ship attacks, surplus supply outlook curbs gains",
    "headline": {
     "source": "Reuters",
     "title": "Oil rises on Hormuz ship attacks, surplus supply outlook curbs gains"
@@ -81,9 +81,9 @@
   },
   "yield": {
    "name": "10-year",
-   "price": 4.894,
-   "chg_bps": -2.4,
-   "move": "10-year is 4.89%, down 2.4 bp."
+   "price": 4.908,
+   "chg_bps": -1.0,
+   "move": "10-year is 4.91%, down 1.0 bp."
   }
  },
  "curve": [
@@ -198,9 +198,9 @@
   }
  ],
  "session": true,
- "next_check": "12:35 PM",
+ "next_check": "12:50 PM",
  "mode": "paper",
- "updated": "2026-11-24T12:30:33-05:00",
+ "updated": "2026-11-24T12:45:32-05:00",
  "date": "Tue \u00b7 Nov 24",
  "day": {
   "pills": [
@@ -261,7 +261,10 @@
      "12:10",
      "12:15",
      "12:20",
-     "12:25"
+     "12:25",
+     "12:30",
+     "12:35",
+     "12:40"
     ],
     "closes": [
      714.24,
@@ -297,9 +300,12 @@
      714.66,
      717.7,
      718.18,
-     717.7,
-     718.11,
-     718.74
+     717.69,
+     718.1,
+     718.74,
+     719.73,
+     719.08,
+     720.01
     ],
     "box": {
      "hi": 717.83,
@@ -497,7 +503,10 @@
      "12:10",
      "12:15",
      "12:20",
-     "12:25"
+     "12:25",
+     "12:30",
+     "12:35",
+     "12:40"
     ],
     "closes": [
      639.16,
@@ -533,9 +542,12 @@
      633.59,
      637.28,
      637.95,
-     637.24,
-     637.69,
-     638.86
+     637.23,
+     637.64,
+     638.85,
+     639.88,
+     639.22,
+     640.19
     ],
     "box": {
      "hi": 641.25,
@@ -738,7 +750,10 @@
      "12:10",
      "12:15",
      "12:20",
-     "12:25"
+     "12:25",
+     "12:30",
+     "12:35",
+     "12:40"
     ],
     "closes": [
      155.78,
@@ -776,7 +791,10 @@
      153.11,
      152.99,
      152.74,
-     153.83
+     153.83,
+     153.69,
+     153.33,
+     153.81
     ],
     "box": {
      "hi": 159.92,
@@ -979,7 +997,10 @@
      "12:10",
      "12:15",
      "12:20",
-     "12:25"
+     "12:25",
+     "12:30",
+     "12:35",
+     "12:40"
     ],
     "closes": [
      387.68,
@@ -1017,7 +1038,10 @@
      381.74,
      381.88,
      382.39,
-     383.0
+     383.0,
+     383.9,
+     384.01,
+     384.7
     ],
     "box": {
      "hi": 390.09,
@@ -1220,7 +1244,10 @@
      "12:10",
      "12:15",
      "12:20",
-     "12:25"
+     "12:25",
+     "12:30",
+     "12:35",
+     "12:40"
     ],
     "closes": [
      132.26,
@@ -1258,7 +1285,10 @@
      126.45,
      125.83,
      125.63,
-     126.31
+     126.31,
+     126.62,
+     126.26,
+     126.56
     ],
     "box": {
      "hi": 132.5,
