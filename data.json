@@ -39,10 +39,10 @@
  },
  "tape": {
   "ok": true,
-  "asof": "2026-11-25T08:18:34-05:00",
+  "asof": "2026-11-25T09:20:33-05:00",
   "lean": "mixed",
   "label": "Tape split",
-  "strategy": "Calls and puts both stay open. Oil is up 2.4% and the 10-year is down 1.4 bp, so they disagree. The opening-range close picks the side.",
+  "strategy": "Calls and puts both stay open. Oil is up 2.2% and the 10-year is down 7.0 bp, so they disagree. The opening-range close picks the side.",
   "block_calls": false,
   "block_puts": false,
   "vix_small": false,
@@ -54,11 +54,11 @@
   "note": "Context only. Oil 1% and the 10-year 5 bp describe the lean. VIX 35 is a size note. Neither one blocks a call or a put.",
   "vix": {
    "name": "VIX",
-   "price": 30.88,
+   "price": 31.56,
    "prev": 26.36,
-   "chg_pct": 17.1,
-   "move": "Up 17.1% from yesterday's close of 26.4.",
-   "why": "Up 17.1% from yesterday's close of 26.4. Barrons.com: Market's Fear Gauge Rises",
+   "chg_pct": 19.7,
+   "move": "Up 19.7% from yesterday's close of 26.4.",
+   "why": "Up 19.7% from yesterday's close of 26.4. Barrons.com: Market's Fear Gauge Rises",
    "headline": {
     "source": "Barrons.com",
     "title": "Market's Fear Gauge Rises"
@@ -67,23 +67,20 @@
   },
   "oil": {
    "name": "Crude",
-   "price": 82.69,
+   "price": 82.52,
    "prev": 80.73,
-   "chg_pct": 2.4,
-   "move": "Up 2.4% from yesterday's close of 80.73.",
+   "chg_pct": 2.2,
+   "move": "Up 2.2% from yesterday's close of 80.73.",
    "range": "Inside the last month, 79.07 to 104.99.",
-   "why": "Up 2.4% from yesterday's close of 80.73. The Wall Street Journal: Oil Prices Fall as Traders Weigh Supply Outlook, Renewed Middle East Tensions",
-   "headline": {
-    "source": "The Wall Street Journal",
-    "title": "Oil Prices Fall as Traders Weigh Supply Outlook, Renewed Middle East Tensions"
-   },
+   "why": "Up 2.2% from yesterday's close of 80.73.",
+   "headline": null,
    "means": "Oil and yields point different ways. Calls and puts both stay open. The box picks the side."
   },
   "yield": {
    "name": "10-year",
-   "price": 4.904,
-   "chg_bps": -1.4,
-   "move": "10-year is 4.90%, down 1.4 bp."
+   "price": 4.834,
+   "chg_bps": -7.0,
+   "move": "10-year is 4.83%, down 7.0 bp."
   }
  },
  "curve": [
@@ -197,18 +194,17 @@
    ]
   }
  ],
- "session": false,
- "next_check": null,
+ "session": true,
+ "next_check": "9:25 AM",
  "mode": "paper",
- "updated": "2026-11-25T08:18:34-05:00",
+ "updated": "2026-11-25T09:20:33-05:00",
  "date": "Wed \u00b7 Nov 25",
  "day": {
   "pills": [
-   "Paper",
-   "New day"
+   "Paper"
   ],
   "headline": "No trades yet. The box forms 9:30\u20139:45.",
-  "sub": "Check the game plan above. Buy alerts can start at 9:45."
+  "sub": "Tap a ticker to see its box, levels and numbers."
  },
  "symbols": [
   "SPY",
@@ -222,12 +218,53 @@
    "status": "pending",
    "label": "Wait",
    "result": null,
-   "headline": "Morning brief posts at 9:20.",
-   "sub": "Levels first, then the box from 9:30 to 9:45.",
+   "headline": "The box forms 9:30 to 9:45.",
+   "sub": "A trade needs a 5-minute close outside it.",
    "chart": null,
-   "levels": [],
+   "levels": [
+    [
+     "R1 pivot",
+     722.433333333333,
+     true
+    ],
+    [
+     "Prior-day high",
+     720.93,
+     false
+    ],
+    [
+     "Pre-market high",
+     714.24,
+     false
+    ],
+    [
+     "S1 pivot",
+     713.6433333333331,
+     true
+    ],
+    [
+     "Prior-day low",
+     712.14,
+     false
+    ],
+    [
+     "Pre-market low",
+     703.46,
+     false
+    ]
+   ],
    "plan": [],
    "measures": [
+    [
+     "Normal box",
+     "0.28%",
+     "median of the last 40 sessions"
+    ],
+    [
+     "20-day volatility",
+     "32%",
+     "annualized, from daily closes"
+    ],
     [
      "Paper record",
      "2 trades",
@@ -246,7 +283,7 @@
     "lines": [
      [
       "When",
-      "Buy levels post at 9:45, after the opening range forms."
+      "The opening range forms 9:30 to 9:45. Buy levels post at 9:45."
      ]
     ]
    }
@@ -255,12 +292,53 @@
    "status": "pending",
    "label": "Wait",
    "result": null,
-   "headline": "Morning brief posts at 9:20.",
-   "sub": "Levels first, then the box from 9:30 to 9:45.",
+   "headline": "The box forms 9:30 to 9:45.",
+   "sub": "A trade needs a 5-minute close outside it.",
    "chart": null,
-   "levels": [],
+   "levels": [
+    [
+     "Prior-day high",
+     648.0,
+     false
+    ],
+    [
+     "R1 pivot",
+     647.0300000000001,
+     true
+    ],
+    [
+     "Prior-day low",
+     631.15,
+     false
+    ],
+    [
+     "Pre-market high",
+     631.06,
+     false
+    ],
+    [
+     "S1 pivot",
+     630.1800000000001,
+     true
+    ],
+    [
+     "Pre-market low",
+     616.69,
+     false
+    ]
+   ],
    "plan": [],
    "measures": [
+    [
+     "Normal box",
+     "0.56%",
+     "median of the last 40 sessions"
+    ],
+    [
+     "20-day volatility",
+     "48%",
+     "annualized, from daily closes"
+    ],
     [
      "Paper record",
      "2 trades",
@@ -279,7 +357,7 @@
     "lines": [
      [
       "When",
-      "Buy levels post at 9:45, after the opening range forms."
+      "The opening range forms 9:30 to 9:45. Buy levels post at 9:45."
      ]
     ]
    }
@@ -288,16 +366,57 @@
    "status": "pending",
    "label": "Wait",
    "result": null,
-   "headline": "Morning brief posts at 9:20.",
-   "sub": "Levels first, then the box from 9:30 to 9:45.",
+   "headline": "The box forms 9:30 to 9:45.",
+   "sub": "A trade needs a 5-minute close outside it.",
    "chart": null,
-   "levels": [],
+   "levels": [
+    [
+     "R1 pivot",
+     160.09999999999997,
+     true
+    ],
+    [
+     "Prior-day high",
+     159.92,
+     false
+    ],
+    [
+     "Pre-market high",
+     155.77,
+     false
+    ],
+    [
+     "S1 pivot",
+     150.67999999999998,
+     true
+    ],
+    [
+     "Prior-day low",
+     150.5,
+     false
+    ],
+    [
+     "Pre-market low",
+     145.15,
+     false
+    ]
+   ],
    "plan": [],
    "measures": [
     [
+     "Normal box",
+     "1.47%",
+     "median of the last 40 sessions"
+    ],
+    [
+     "20-day volatility",
+     "127%",
+     "annualized, from daily closes"
+    ],
+    [
      "Earnings",
-     "none in view",
-     ""
+     "Nov 17",
+     "6 trading days ago"
     ],
     [
      "Paper record",
@@ -317,7 +436,7 @@
     "lines": [
      [
       "When",
-      "Buy levels post at 9:45, after the opening range forms."
+      "The opening range forms 9:30 to 9:45. Buy levels post at 9:45."
      ]
     ]
    }
@@ -326,16 +445,57 @@
    "status": "pending",
    "label": "Wait",
    "result": null,
-   "headline": "Morning brief posts at 9:20.",
-   "sub": "Levels first, then the box from 9:30 to 9:45.",
+   "headline": "The box forms 9:30 to 9:45.",
+   "sub": "A trade needs a 5-minute close outside it.",
    "chart": null,
-   "levels": [],
+   "levels": [
+    [
+     "R1 pivot",
+     391.38666666666666,
+     true
+    ],
+    [
+     "Prior-day high",
+     390.09,
+     false
+    ],
+    [
+     "Pre-market high",
+     383.72,
+     false
+    ],
+    [
+     "S1 pivot",
+     376.7966666666667,
+     true
+    ],
+    [
+     "Prior-day low",
+     375.5,
+     false
+    ],
+    [
+     "Pre-market low",
+     369.34,
+     false
+    ]
+   ],
    "plan": [],
    "measures": [
     [
+     "Normal box",
+     "1.88%",
+     "median of the last 40 sessions"
+    ],
+    [
+     "20-day volatility",
+     "73%",
+     "annualized, from daily closes"
+    ],
+    [
      "Earnings",
-     "none in view",
-     ""
+     "Jan 27",
+     "in 45 trading days"
     ],
     [
      "Paper record",
@@ -355,7 +515,7 @@
     "lines": [
      [
       "When",
-      "Buy levels post at 9:45, after the opening range forms."
+      "The opening range forms 9:30 to 9:45. Buy levels post at 9:45."
      ]
     ]
    }
@@ -364,16 +524,57 @@
    "status": "pending",
    "label": "Wait",
    "result": null,
-   "headline": "Morning brief posts at 9:20.",
-   "sub": "Levels first, then the box from 9:30 to 9:45.",
+   "headline": "The box forms 9:30 to 9:45.",
+   "sub": "A trade needs a 5-minute close outside it.",
    "chart": null,
-   "levels": [],
+   "levels": [
+    [
+     "Prior-day high",
+     132.5,
+     false
+    ],
+    [
+     "R1 pivot",
+     131.07333333333332,
+     true
+    ],
+    [
+     "Pre-market high",
+     125.81,
+     false
+    ],
+    [
+     "Prior-day low",
+     123.52,
+     false
+    ],
+    [
+     "S1 pivot",
+     122.09333333333333,
+     true
+    ],
+    [
+     "Pre-market low",
+     115.38,
+     false
+    ]
+   ],
    "plan": [],
    "measures": [
     [
+     "Normal box",
+     "2.39%",
+     "median of the last 40 sessions"
+    ],
+    [
+     "20-day volatility",
+     "73%",
+     "annualized, from daily closes"
+    ],
+    [
      "Earnings",
-     "none in view",
-     ""
+     "Feb 09",
+     "in 54 trading days"
     ],
     [
      "Paper record",
@@ -393,7 +594,7 @@
     "lines": [
      [
       "When",
-      "Buy levels post at 9:45, after the opening range forms."
+      "The opening range forms 9:30 to 9:45. Buy levels post at 9:45."
      ]
     ]
    }
