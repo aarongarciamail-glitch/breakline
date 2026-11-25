@@ -22,7 +22,8 @@
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500;600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Literata:opsz,wght@7..72,500;7..72,600&display=swap">
+<script>try{var q=new URLSearchParams(location.search).get('theme');var k=q||localStorage.getItem('bl.skin');if(k==='ledger')document.documentElement.dataset.skin='ledger'}catch(e){}</script>
 <!-- Page source. publish.py should commit data.json only. Chart reads closes, and OHLCV when chart_payload.py adds it. -->
 <style>
 :root{
@@ -449,6 +450,43 @@ h2,.sh h2{font:500 22px/1.2 var(--display);letter-spacing:-.03em}
  .tk .ls{font:500 12.5px/1 var(--display);font-variant-numeric:tabular-nums}
  .pflag{font-size:13.5px}
 }
+/* ---------- theme toggle: Haze (default) / Ledger (warm, editorial) ---------- */
+.skinbtn{display:inline-flex;align-items:center;gap:7px;min-height:34px;padding:6px 12px;border-radius:999px;border:1px solid var(--line-2);background:transparent;color:var(--dim);font:500 12.5px/1 var(--display);cursor:pointer}
+.skinbtn:hover{color:var(--text);border-color:var(--text)}
+.skinbtn svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.6}
+.skinbtn .half{fill:currentColor;stroke:none}
+@media (max-width:640px){.skinbtn{margin-left:auto;padding:6px 10px}}
+html[data-skin=ledger]{
+ --ink:#14120b; --panel:#1b1913; --panel-2:#221f18;
+ --line:rgba(237,236,236,.09); --line-2:rgba(237,236,236,.18);
+ --text:#edecec; --dim:#b4b1aa; --faint:#86827a;
+ --silver-hi:#f5f3ef; --silver-lo:#b4b1aa;
+ --teal:#b8a965; --paper:#b8a965; --teal-soft:rgba(184,169,101,.14);
+ --win:#5fae9f; --loss:#d0907f; --warn:#d9a35b; --info:#9fb4c9; --pm:#c3b3d6; --vwap:#b8a965;
+ --display:"Inter",ui-sans-serif,system-ui,sans-serif;
+ --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+ --serif:"Literata",Georgia,serif;
+}
+html[data-skin=ledger] body{background:var(--ink)}
+html[data-skin=ledger] .sky{display:none}
+html[data-skin=ledger] .panel,html[data-skin=ledger] .tk,html[data-skin=ledger] .stat,html[data-skin=ledger] .chip,html[data-skin=ledger] .day,
+html[data-skin=ledger] .kpi,html[data-skin=ledger] .pflag,html[data-skin=ledger] .tip,html[data-skin=ledger] .sidewrap>summary{backdrop-filter:none;-webkit-backdrop-filter:none}
+html[data-skin=ledger] .panel,html[data-skin=ledger] .kpi,html[data-skin=ledger] .tk,html[data-skin=ledger] .stat{border-radius:10px}
+html[data-skin=ledger] header.top::before{background:var(--ink)}
+html[data-skin=ledger] .tabbar{background:rgba(20,18,11,.96)}
+html[data-skin=ledger] .word{font:600 19px/1 var(--serif);letter-spacing:-.01em;background:none;-webkit-text-fill-color:var(--silver-hi);color:var(--silver-hi)}
+html[data-skin=ledger] .brand svg{filter:none}
+html[data-skin=ledger] .brand svg rect{stroke:#b4b1aa;fill:rgba(237,236,236,.05)}
+html[data-skin=ledger] .brand svg path{stroke:#f5f3ef}
+html[data-skin=ledger] .brand svg circle{fill:#b8a965}
+html[data-skin=ledger] .brand svg circle:first-of-type{fill:rgba(184,169,101,.2)}
+html[data-skin=ledger] h2,html[data-skin=ledger] .sh h2,html[data-skin=ledger] #dayHead{font-family:var(--serif);font-weight:600;letter-spacing:-.015em}
+html[data-skin=ledger] .kpi .kv,html[data-skin=ledger] .stat .n,html[data-skin=ledger] .aw,html[data-skin=ledger] .curvehead #acctNow{font-family:var(--serif);font-weight:500;letter-spacing:-.02em}
+html[data-skin=ledger] nav.links{background:transparent;border-color:var(--line)}
+html[data-skin=ledger] nav.links a.on{background:#f5f3ef;color:#14120b;box-shadow:none}
+html[data-skin=ledger] .tline li{background:linear-gradient(90deg,rgba(184,169,101,.08),transparent);border-left-color:rgba(184,169,101,.55)}
+html[data-skin=ledger] .kpi .kbar i,html[data-skin=ledger] .ck .bar i{background:linear-gradient(90deg,#86827a,#b8a965)}
+html[data-skin=ledger] .pill.paper{background:rgba(184,169,101,.1)}
 </style>
 </head>
 <body>
@@ -467,6 +505,10 @@ h2,.sh h2{font:500 22px/1.2 var(--display);letter-spacing:-.03em}
   <nav class="links" aria-label="Sections">
    <a href="#today" data-go="today">Today</a><a href="#plan" data-go="plan">Plan</a><a href="#record" data-go="record">Record</a><a href="#how" data-go="how">How<span class="long">&nbsp;it works</span></a>
   </nav>
+  <button type="button" class="skinbtn" id="skinBtn" aria-label="Switch look" title="Switch look (Haze / Ledger)">
+   <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5a8.5 8.5 0 0 1 0 17z" class="half"/></svg>
+   <span id="skinName">Haze</span>
+  </button>
  </header>
 
  <div class="strip">
@@ -1452,6 +1494,14 @@ h2,.sh h2{font:500 22px/1.2 var(--display);letter-spacing:-.03em}
  load();
  setInterval(()=>{if(!document.hidden){load();loadPlan()}},60000);
  loadPlan();
+
+ /* look switch: Haze <-> Ledger, remembered on this device */
+ const skinBtn=document.getElementById('skinBtn');
+ function paintSkin(){const led=document.documentElement.dataset.skin==='ledger';document.getElementById('skinName').textContent=led?'Ledger':'Haze';
+  const m=document.querySelector('meta[name=theme-color]');if(m)m.content=led?'#14120b':'#060708'}
+ skinBtn.addEventListener('click',()=>{const r=document.documentElement;if(r.dataset.skin==='ledger')delete r.dataset.skin;else r.dataset.skin='ledger';
+  try{localStorage.setItem('bl.skin',r.dataset.skin||'haze')}catch(e){}paintSkin();if(LAST)render(LAST);try{renderPlan()}catch(e){}});
+ paintSkin();
 
  /* tabs: one page, four views, each with its own address */
  const TABS=['today','plan','record','how'];
