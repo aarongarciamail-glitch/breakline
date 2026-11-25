@@ -487,6 +487,10 @@ html[data-skin=ledger] nav.links a.on{background:#f5f3ef;color:#14120b;box-shado
 html[data-skin=ledger] .tline li{background:linear-gradient(90deg,rgba(184,169,101,.08),transparent);border-left-color:rgba(184,169,101,.55)}
 html[data-skin=ledger] .kpi .kbar i,html[data-skin=ledger] .ck .bar i{background:linear-gradient(90deg,#86827a,#b8a965)}
 html[data-skin=ledger] .pill.paper{background:rgba(184,169,101,.1)}
+:root{--wall:#e59a6a}
+html[data-skin=ledger]{--wall:#d39a6a}
+.sw.wall{background:var(--wall);height:2px}
+.ladder .wall dt,.ladder .wall dd{color:var(--wall)}
 </style>
 </head>
 <body>
@@ -774,10 +778,11 @@ html[data-skin=ledger] .pill.paper{background:rgba(184,169,101,.1)}
   if(n.includes('prior'))return n.includes('low')?'pdl':'pdh';
   if(n.includes('pre-market')||n.includes('premarket')||/^pm\b/.test(n))return n.includes('low')?'pml':'pmh';
   if(n.includes('range'))return 'box';
+  if(n.includes('wall')||n.includes('magnet')||n.includes('busiest'))return 'wall';
   return 'pivot';
  }
  function displayLevel(name){const n=String(name).trim();if(/^p$/i.test(n))return 'P pivot';if(/^[rs]\d$/i.test(n))return n.toUpperCase();return n}
- function shortName(name){return String(name).replace(/Pre-market high/ig,'PMH').replace(/Pre-market low/ig,'PML').replace(/Prior-day high/ig,'PDH').replace(/Prior-day low/ig,'PDL').replace(/\s*pivot/ig,'')}
+ function shortName(name){return String(name).replace(/Busiest strike/i,'Busiest').replace(/Call wall/i,'C wall').replace(/Put wall/i,'P wall').replace(/Pre-market high/ig,'PMH').replace(/Pre-market low/ig,'PML').replace(/Prior-day high/ig,'PDH').replace(/Prior-day low/ig,'PDL').replace(/\s*pivot/ig,'')}
  function collectLevels(stock){
   const c=stock.chart||{}, out=[], seen=new Set();
   function add(name, price){
@@ -791,7 +796,7 @@ html[data-skin=ledger] .pill.paper{background:rgba(184,169,101,.1)}
   out.sort((a,b)=>b.price-a.price);
   return out;
  }
- function levelColor(kind){if(kind==='pdh'||kind==='pdl')return T('--info');if(kind==='pmh'||kind==='pml')return T('--pm');return T('--dim')}
+ function levelColor(kind){if(kind==='wall')return T('--wall');if(kind==='pdh'||kind==='pdl')return T('--info');if(kind==='pmh'||kind==='pml')return T('--pm');return T('--dim')}
  function tradeOf(stock, ohlc){
   const c=stock.chart||{}, preset=c.trade||stock.trade||{};
   const sub=stock.sub||'', lines=(stock.action&&stock.action.lines)||[];
@@ -952,7 +957,7 @@ html[data-skin=ledger] .pill.paper{background:rgba(184,169,101,.1)}
    if(lv.kind==='box')return;
    if(!inScale(lv.price)){(lv.price>hi?hiPins:loPins).push(lv);return}
    const y=yP(lv.price), col=levelColor(lv.kind);
-   const dash=(lv.kind==='pivot'||lv.kind==='pmh'||lv.kind==='pml')?'4 4':null;
+   const dash=lv.kind==='wall'?'7 4':(lv.kind==='pivot'||lv.kind==='pmh'||lv.kind==='pml')?'4 4':null;
    mk('line',{x1:L,x2:plotRight,y1:y,y2:y,stroke:col,'stroke-width':1,'stroke-dasharray':dash,'data-level':lv.name},svg);
    hits.levels.push({y, html:tipHTML(lv.name, [['Price', pxFmt(lv.price)], ['Kind', lv.kind==='pivot'?'Pivot':lv.name]])});
   });
@@ -1167,6 +1172,7 @@ html[data-skin=ledger] .pill.paper{background:rgba(184,169,101,.1)}
    '<span><i class="sw stop"></i>Stop</span>',
    levs.some(l=>l.kind==='pdh'||l.kind==='pdl')?'<span><i class="sw pd"></i>Prior day</span>':'',
    levs.some(l=>l.kind==='pmh'||l.kind==='pml')?'<span><i class="sw pm"></i>Pre-market</span>':'',
+   levs.some(l=>l.kind==='wall')?'<span><i class="sw wall"></i>Options walls</span>':'',
    '<span class="pos">▲ Buy</span><span class="neg">▼ Sell</span>',
    extras.some(e=>e._k==='skip')?'<span>◯ skipped</span>':'',
    extras.some(e=>e._k==='b')?'<span>△ strategy B</span>':''
@@ -1468,7 +1474,7 @@ html[data-skin=ledger] .pill.paper{background:rgba(184,169,101,.1)}
   const wide=matchMedia('(min-width:641px)').matches;
   $('pTick').innerHTML=Object.entries(P.tickers).map(([sym,t],i)=>{
    const pv=Object.entries(t.piv||{}), upv=pv.filter(x=>x[1]>t.last).sort((a,b)=>a[1]-b[1]).slice(0,2), dnv=pv.filter(x=>x[1]<t.last).sort((a,b)=>b[1]-a[1]).slice(0,2);
-   const rows=[...upv,...dnv].map(x=>[x[0]==='P'?'Pivot P':x[0],x[1],'tp']).concat([['Prior-day high',t.ph],['Pre-market high',t.pmh],['Yesterday\u2019s close',t.pc],['Pre-market low',t.pml],['Prior-day low',t.pl]]).filter(r=>r[1]!=null);
+   const rows=[...upv,...dnv].map(x=>[x[0]==='P'?'Pivot P':x[0],x[1],'tp']).concat(Object.entries(t.walls||{}).map(([n,v])=>[n,v,'wall'])).concat([['Prior-day high',t.ph],['Pre-market high',t.pmh],['Yesterday\u2019s close',t.pc],['Pre-market low',t.pml],['Prior-day low',t.pl]]).filter(r=>r[1]!=null);
    if(t.gap_pct!=null)rows.push(['Now',t.last,'now']);
    rows.sort((a,b)=>b[1]-a[1]);
    const lad=rows.map(r=>'<div class="'+(r[2]||'')+'" style="display:contents"><dt>'+esc(r[0])+'</dt><span class="bar"></span><dd>'+f2(r[1])+'</dd></div>').join('');

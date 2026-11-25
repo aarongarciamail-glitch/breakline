@@ -39,10 +39,10 @@
  },
  "tape": {
   "ok": true,
-  "asof": "2026-11-25T09:30:32-05:00",
+  "asof": "2026-11-25T09:34:09-05:00",
   "lean": "mixed",
   "label": "Tape split",
-  "strategy": "Calls and puts both stay open. Oil is up 2.5% and the 10-year is down 6.6 bp, so they disagree. The opening-range close picks the side.",
+  "strategy": "Calls and puts both stay open. Oil is up 2.7% and the 10-year is down 6.8 bp, so they disagree. The opening-range close picks the side.",
   "block_calls": false,
   "block_puts": false,
   "vix_small": false,
@@ -54,11 +54,11 @@
   "note": "Context only. Oil 1% and the 10-year 5 bp describe the lean. VIX 35 is a size note. Neither one blocks a call or a put.",
   "vix": {
    "name": "VIX",
-   "price": 31.62,
+   "price": 31.71,
    "prev": 26.36,
-   "chg_pct": 20.0,
-   "move": "Up 20.0% from yesterday's close of 26.4.",
-   "why": "Up 20.0% from yesterday's close of 26.4. Barrons.com: Market's Fear Gauge Rises",
+   "chg_pct": 20.3,
+   "move": "Up 20.3% from yesterday's close of 26.4.",
+   "why": "Up 20.3% from yesterday's close of 26.4. Barrons.com: Market's Fear Gauge Rises",
    "headline": {
     "source": "Barrons.com",
     "title": "Market's Fear Gauge Rises"
@@ -67,20 +67,20 @@
   },
   "oil": {
    "name": "Crude",
-   "price": 82.75,
+   "price": 82.87,
    "prev": 80.73,
-   "chg_pct": 2.5,
-   "move": "Up 2.5% from yesterday's close of 80.73.",
+   "chg_pct": 2.7,
+   "move": "Up 2.7% from yesterday's close of 80.73.",
    "range": "Inside the last month, 79.07 to 104.99.",
-   "why": "Up 2.5% from yesterday's close of 80.73.",
+   "why": "Up 2.7% from yesterday's close of 80.73.",
    "headline": null,
    "means": "Oil and yields point different ways. Calls and puts both stay open. The box picks the side."
   },
   "yield": {
    "name": "10-year",
-   "price": 4.838,
-   "chg_bps": -6.6,
-   "move": "10-year is 4.84%, down 6.6 bp."
+   "price": 4.836,
+   "chg_bps": -6.8,
+   "move": "10-year is 4.84%, down 6.8 bp."
   }
  },
  "curve": [
@@ -197,7 +197,7 @@
  "session": true,
  "next_check": "9:35 AM",
  "mode": "paper",
- "updated": "2026-11-25T09:30:32-05:00",
+ "updated": "2026-11-25T09:34:05-05:00",
  "date": "Wed \u00b7 Nov 25",
  "day": {
   "pills": [
@@ -233,6 +233,11 @@
      false
     ],
     [
+     "Call wall",
+     715.0,
+     false
+    ],
+    [
      "Pre-market high",
      714.24,
      false
@@ -250,6 +255,11 @@
     [
      "Pre-market low",
      703.06,
+     false
+    ],
+    [
+     "Put wall",
+     700.0,
      false
     ]
    ],
@@ -286,6 +296,28 @@
       "The opening range forms 9:30 to 9:45. Buy levels post at 9:45."
      ]
     ]
+   },
+   "walls": {
+    "expiration": "2026-11-25",
+    "price": 701.02,
+    "at": "2026-11-25T09:33:42-05:00",
+    "call_wall": {
+     "strike": 715.0,
+     "oi": 5580
+    },
+    "put_wall": {
+     "strike": 700.0,
+     "oi": 11226
+    },
+    "magnet": {
+     "strike": 700.0,
+     "oi": 15771,
+     "share": 12
+    },
+    "busiest": {
+     "strike": 700.0,
+     "vol": 24286
+    }
    }
   },
   "QQQ": {
@@ -322,8 +354,23 @@
      true
     ],
     [
+     "Call wall",
+     625.0,
+     false
+    ],
+    [
      "Pre-market low",
      616.69,
+     false
+    ],
+    [
+     "Busiest strike",
+     610.0,
+     false
+    ],
+    [
+     "Put wall",
+     605.0,
      false
     ]
    ],
@@ -360,6 +407,28 @@
       "The opening range forms 9:30 to 9:45. Buy levels post at 9:45."
      ]
     ]
+   },
+   "walls": {
+    "expiration": "2026-11-25",
+    "price": 613.98,
+    "at": "2026-11-25T09:33:43-05:00",
+    "call_wall": {
+     "strike": 625.0,
+     "oi": 410
+    },
+    "put_wall": {
+     "strike": 605.0,
+     "oi": 18790
+    },
+    "magnet": {
+     "strike": 605.0,
+     "oi": 19112,
+     "share": 24
+    },
+    "busiest": {
+     "strike": 610.0,
+     "vol": 8071
+    }
    }
   },
   "NVDA": {
@@ -396,8 +465,18 @@
      false
     ],
     [
+     "Call wall",
+     150.0,
+     false
+    ],
+    [
      "Pre-market low",
      142.74,
+     false
+    ],
+    [
+     "Put wall",
+     140.0,
      false
     ]
    ],
@@ -439,6 +518,28 @@
       "The opening range forms 9:30 to 9:45. Buy levels post at 9:45."
      ]
     ]
+   },
+   "walls": {
+    "expiration": "2026-11-25",
+    "price": 142.48,
+    "at": "2026-11-25T09:33:45-05:00",
+    "call_wall": {
+     "strike": 150.0,
+     "oi": 10637
+    },
+    "put_wall": {
+     "strike": 140.0,
+     "oi": 20691
+    },
+    "magnet": {
+     "strike": 150.0,
+     "oi": 35105,
+     "share": 24
+    },
+    "busiest": {
+     "strike": 140.0,
+     "vol": 22990
+    }
    }
   },
   "TSLA": {
@@ -460,8 +561,18 @@
      false
     ],
     [
+     "Call wall",
+     385.0,
+     false
+    ],
+    [
      "Pre-market high",
      383.72,
+     false
+    ],
+    [
+     "Magnet",
+     380.0,
      false
     ],
     [
@@ -477,6 +588,16 @@
     [
      "Pre-market low",
      369.34,
+     false
+    ],
+    [
+     "Busiest strike",
+     365.0,
+     false
+    ],
+    [
+     "Put wall",
+     360.0,
      false
     ]
    ],
@@ -518,6 +639,28 @@
       "The opening range forms 9:30 to 9:45. Buy levels post at 9:45."
      ]
     ]
+   },
+   "walls": {
+    "expiration": "2026-11-25",
+    "price": 365.79,
+    "at": "2026-11-25T09:33:46-05:00",
+    "call_wall": {
+     "strike": 385.0,
+     "oi": 1995
+    },
+    "put_wall": {
+     "strike": 360.0,
+     "oi": 3171
+    },
+    "magnet": {
+     "strike": 380.0,
+     "oi": 4571,
+     "share": 10
+    },
+    "busiest": {
+     "strike": 365.0,
+     "vol": 4064
+    }
    }
   },
   "SPCX": {
@@ -554,8 +697,18 @@
      true
     ],
     [
+     "Call wall",
+     120.0,
+     false
+    ],
+    [
      "Pre-market low",
      115.38,
+     false
+    ],
+    [
+     "Put wall",
+     115.0,
      false
     ]
    ],
@@ -597,6 +750,28 @@
       "The opening range forms 9:30 to 9:45. Buy levels post at 9:45."
      ]
     ]
+   },
+   "walls": {
+    "expiration": "2026-11-25",
+    "price": 115.34,
+    "at": "2026-11-25T09:33:48-05:00",
+    "call_wall": {
+     "strike": 120.0,
+     "oi": 103
+    },
+    "put_wall": {
+     "strike": 115.0,
+     "oi": 2587
+    },
+    "magnet": {
+     "strike": 120.0,
+     "oi": 3594,
+     "share": 26
+    },
+    "busiest": {
+     "strike": 120.0,
+     "vol": 993
+    }
    }
   }
  },
