@@ -39,10 +39,10 @@
  },
  "tape": {
   "ok": true,
-  "asof": "2026-11-25T13:55:29-05:00",
+  "asof": "2026-11-25T14:00:30-05:00",
   "lean": "mixed",
   "label": "Tape split",
-  "strategy": "Calls and puts both stay open. Oil is up 3.5% and the 10-year is down 7.2 bp, so they disagree. The opening-range close picks the side.",
+  "strategy": "Calls and puts both stay open. Oil is up 3.8% and the 10-year is down 7.0 bp, so they disagree. The opening-range close picks the side.",
   "block_calls": false,
   "block_puts": false,
   "vix_small": false,
@@ -54,22 +54,22 @@
   "note": "Context only. Oil 1% and the 10-year 5 bp describe the lean. VIX 35 is a size note. Neither one blocks a call or a put.",
   "vix": {
    "name": "VIX",
-   "price": 28.59,
+   "price": 28.08,
    "prev": 26.36,
-   "chg_pct": 8.5,
-   "move": "Up 8.5% from yesterday's close of 26.4.",
-   "why": "Up 8.5% from yesterday's close of 26.4.",
+   "chg_pct": 6.5,
+   "move": "Up 6.5% from yesterday's close of 26.4.",
+   "why": "Up 6.5% from yesterday's close of 26.4.",
    "headline": null,
    "means": "Fear picked up and VIX is still under 35, so size stays normal."
   },
   "oil": {
    "name": "Crude",
-   "price": 83.59,
+   "price": 83.82,
    "prev": 80.73,
-   "chg_pct": 3.5,
-   "move": "Up 3.5% from yesterday's close of 80.73.",
+   "chg_pct": 3.8,
+   "move": "Up 3.8% from yesterday's close of 80.73.",
    "range": "Inside the last month, 79.07 to 104.99.",
-   "why": "Up 3.5% from yesterday's close of 80.73. CNN Business: Russian oil firm Lukoil\u2019s overseas assets sold to investors led by US billionaire Todd Boehly",
+   "why": "Up 3.8% from yesterday's close of 80.73. CNN Business: Russian oil firm Lukoil\u2019s overseas assets sold to investors led by US billionaire Todd Boehly",
    "headline": {
     "source": "CNN Business",
     "title": "Russian oil firm Lukoil\u2019s overseas assets sold to investors led by US billionaire Todd Boehly"
@@ -78,9 +78,9 @@
   },
   "yield": {
    "name": "10-year",
-   "price": 4.832,
-   "chg_bps": -7.2,
-   "move": "10-year is 4.83%, down 7.2 bp."
+   "price": 4.834,
+   "chg_bps": -7.0,
+   "move": "10-year is 4.83%, down 7.0 bp."
   }
  },
  "curve": [
@@ -230,9 +230,9 @@
   }
  ],
  "session": true,
- "next_check": "2:00 PM",
+ "next_check": "2:05 PM",
  "mode": "paper",
- "updated": "2026-11-25T13:55:28-05:00",
+ "updated": "2026-11-25T14:00:29-05:00",
  "date": "Wed \u00b7 Nov 25",
  "day": {
   "pills": [
@@ -307,7 +307,8 @@
      "13:35",
      "13:40",
      "13:45",
-     "13:50"
+     "13:50",
+     "13:55"
     ],
     "closes": [
      699.82,
@@ -362,7 +363,8 @@
      714.44,
      715.9,
      717.84,
-     717.31
+     717.31,
+     715.53
     ],
     "box": {
      "hi": 703.7,
@@ -798,11 +800,11 @@
      },
      {
       "t": "13:40",
-      "o": 714.55,
+      "o": 714.47,
       "h": 716.13,
-      "l": 713.96,
+      "l": 713.95,
       "c": 715.9,
-      "v": 224055.0
+      "v": 447042.0
      },
      {
       "t": "13:45",
@@ -819,6 +821,14 @@
       "l": 716.69,
       "c": 717.31,
       "v": 247731.0
+     },
+     {
+      "t": "13:55",
+      "o": 717.45,
+      "h": 717.45,
+      "l": 715.51,
+      "c": 715.53,
+      "v": 232107.0
      }
     ],
     "opens": [
@@ -872,9 +882,10 @@
      714.64,
      715.02,
      713.79,
-     714.55,
+     714.47,
      715.91,
-     717.72
+     717.72,
+     717.45
     ],
     "highs": [
      703.7,
@@ -929,7 +940,8 @@
      715.46,
      716.13,
      717.97,
-     718.18
+     718.18,
+     717.45
     ],
     "lows": [
      699.79,
@@ -982,9 +994,10 @@
      714.2,
      712.73,
      713.56,
-     713.96,
+     713.95,
      715.91,
-     716.69
+     716.69,
+     715.51
     ],
     "volumes": [
      2049773.0,
@@ -1037,9 +1050,10 @@
      705966.16,
      643385.0,
      499060.272911,
-     224055.0,
+     447042.0,
      405312.0,
-     247731.0
+     247731.0,
+     232107.0
     ],
     "option": {
      "contract": "SPY 704 call",
@@ -1111,9 +1125,10 @@
      702.958,
      703.1708,
      703.3392,
-     703.4188,
-     703.5827,
-     703.6821
+     703.4969,
+     703.6588,
+     703.7571,
+     703.8396
     ]
    },
    "levels": [
@@ -1246,7 +1261,7 @@
     "option": "calls, paper context only",
     "date": "2026-11-25",
     "planned_exit": "15:30",
-    "last_c": 717.31,
+    "last_c": 715.53,
     "backfilled": true,
     "note": "Added after the fact on 11/25: the engine went live at 13:29, after this signal. No alert went out at the signal time."
    },
@@ -1357,7 +1372,8 @@
      "13:35",
      "13:40",
      "13:45",
-     "13:50"
+     "13:50",
+     "13:55"
     ],
     "closes": [
      612.25,
@@ -1412,7 +1428,8 @@
      628.86,
      630.45,
      632.75,
-     632.16
+     632.16,
+     630.7
     ],
     "box": {
      "hi": 617.74,
@@ -1850,9 +1867,9 @@
       "t": "13:40",
       "o": 628.95,
       "h": 630.73,
-      "l": 628.27,
+      "l": 628.24,
       "c": 630.45,
-      "v": 236510.321846
+      "v": 422866.321846
      },
      {
       "t": "13:45",
@@ -1869,6 +1886,14 @@
       "l": 631.5,
       "c": 632.16,
       "v": 431782.12343
+     },
+     {
+      "t": "13:55",
+      "o": 632.27,
+      "h": 632.36,
+      "l": 630.69,
+      "c": 630.7,
+      "v": 233772.174
      }
     ],
     "opens": [
@@ -1924,7 +1949,8 @@
      627.9,
      628.95,
      630.48,
-     632.68
+     632.68,
+     632.27
     ],
     "highs": [
      617.79,
@@ -1979,7 +2005,8 @@
      629.95,
      630.73,
      632.83,
-     633.33
+     633.33,
+     632.36
     ],
     "lows": [
      612.23,
@@ -2032,9 +2059,10 @@
      628.18,
      626.6,
      627.68,
-     628.27,
+     628.24,
      630.48,
-     631.5
+     631.5,
+     630.69
     ],
     "volumes": [
      2421380.133255,
@@ -2087,9 +2115,10 @@
      507709.99643,
      542550.0,
      593654.0,
-     236510.321846,
+     422866.321846,
      381930.616011,
-     431782.12343
+     431782.12343,
+     233772.174
     ],
     "option": {
      "contract": "QQQ 618 call",
@@ -2161,9 +2190,10 @@
      615.7728,
      615.9268,
      616.103,
-     616.1772,
-     616.3144,
-     616.4697
+     616.235,
+     616.3712,
+     616.5253,
+     616.6019
     ]
    },
    "levels": [
@@ -2296,7 +2326,7 @@
     "option": "calls, paper context only",
     "date": "2026-11-25",
     "planned_exit": "15:30",
-    "last_c": 632.16,
+    "last_c": 630.7,
     "backfilled": true,
     "note": "Added after the fact on 11/25: the engine went live at 13:29, after this signal. No alert went out at the signal time."
    },
