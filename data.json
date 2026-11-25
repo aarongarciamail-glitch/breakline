@@ -39,10 +39,10 @@
  },
  "tape": {
   "ok": true,
-  "asof": "2026-11-25T14:00:30-05:00",
+  "asof": "2026-11-25T14:05:29-05:00",
   "lean": "mixed",
   "label": "Tape split",
-  "strategy": "Calls and puts both stay open. Oil is up 3.8% and the 10-year is down 7.0 bp, so they disagree. The opening-range close picks the side.",
+  "strategy": "Calls and puts both stay open. Oil is up 3.9% and the 10-year is down 6.2 bp, so they disagree. The opening-range close picks the side.",
   "block_calls": false,
   "block_puts": false,
   "vix_small": false,
@@ -54,33 +54,33 @@
   "note": "Context only. Oil 1% and the 10-year 5 bp describe the lean. VIX 35 is a size note. Neither one blocks a call or a put.",
   "vix": {
    "name": "VIX",
-   "price": 28.08,
+   "price": 27.58,
    "prev": 26.36,
-   "chg_pct": 6.5,
-   "move": "Up 6.5% from yesterday's close of 26.4.",
-   "why": "Up 6.5% from yesterday's close of 26.4.",
+   "chg_pct": 4.6,
+   "move": "Up 4.6% from yesterday's close of 26.4.",
+   "why": "Up 4.6% from yesterday's close of 26.4.",
    "headline": null,
-   "means": "Fear picked up and VIX is still under 35, so size stays normal."
+   "means": "VIX is close to yesterday. Size stays normal until it reaches 35."
   },
   "oil": {
    "name": "Crude",
-   "price": 83.82,
+   "price": 83.85,
    "prev": 80.73,
-   "chg_pct": 3.8,
-   "move": "Up 3.8% from yesterday's close of 80.73.",
+   "chg_pct": 3.9,
+   "move": "Up 3.9% from yesterday's close of 80.73.",
    "range": "Inside the last month, 79.07 to 104.99.",
-   "why": "Up 3.8% from yesterday's close of 80.73. CNN Business: Russian oil firm Lukoil\u2019s overseas assets sold to investors led by US billionaire Todd Boehly",
+   "why": "Up 3.9% from yesterday's close of 80.73. GuruFocus.com: ProFrac (ACDC) Stock Is Up 11.8% Today as Oil Rises, Oilfield Peers Gain",
    "headline": {
-    "source": "CNN Business",
-    "title": "Russian oil firm Lukoil\u2019s overseas assets sold to investors led by US billionaire Todd Boehly"
+    "source": "GuruFocus.com",
+    "title": "ProFrac (ACDC) Stock Is Up 11.8% Today as Oil Rises, Oilfield Peers Gain"
    },
    "means": "Oil and yields point different ways. Calls and puts both stay open. The box picks the side."
   },
   "yield": {
    "name": "10-year",
-   "price": 4.834,
-   "chg_bps": -7.0,
-   "move": "10-year is 4.83%, down 7.0 bp."
+   "price": 4.842,
+   "chg_bps": -6.2,
+   "move": "10-year is 4.84%, down 6.2 bp."
   }
  },
  "curve": [
@@ -230,9 +230,9 @@
   }
  ],
  "session": true,
- "next_check": "2:05 PM",
+ "next_check": "2:10 PM",
  "mode": "paper",
- "updated": "2026-11-25T14:00:29-05:00",
+ "updated": "2026-11-25T14:05:28-05:00",
  "date": "Wed \u00b7 Nov 25",
  "day": {
   "pills": [
@@ -308,7 +308,8 @@
      "13:40",
      "13:45",
      "13:50",
-     "13:55"
+     "13:55",
+     "14:00"
     ],
     "closes": [
      699.82,
@@ -364,7 +365,8 @@
      715.9,
      717.84,
      717.31,
-     715.53
+     715.53,
+     717.35
     ],
     "box": {
      "hi": 703.7,
@@ -812,7 +814,7 @@
       "h": 717.97,
       "l": 715.91,
       "c": 717.84,
-      "v": 405312.0
+      "v": 818087.0
      },
      {
       "t": "13:50",
@@ -829,6 +831,14 @@
       "l": 715.51,
       "c": 715.53,
       "v": 232107.0
+     },
+     {
+      "t": "14:00",
+      "o": 715.56,
+      "h": 717.43,
+      "l": 715.27,
+      "c": 717.35,
+      "v": 296206.740642
      }
     ],
     "opens": [
@@ -885,7 +895,8 @@
      714.47,
      715.91,
      717.72,
-     717.45
+     717.45,
+     715.56
     ],
     "highs": [
      703.7,
@@ -941,7 +952,8 @@
      716.13,
      717.97,
      718.18,
-     717.45
+     717.45,
+     717.43
     ],
     "lows": [
      699.79,
@@ -997,7 +1009,8 @@
      713.95,
      715.91,
      716.69,
-     715.51
+     715.51,
+     715.27
     ],
     "volumes": [
      2049773.0,
@@ -1051,9 +1064,10 @@
      643385.0,
      499060.272911,
      447042.0,
-     405312.0,
+     818087.0,
      247731.0,
-     232107.0
+     232107.0,
+     296206.740642
     ],
     "option": {
      "contract": "SPY 704 call",
@@ -1126,9 +1140,10 @@
      703.1708,
      703.3392,
      703.4969,
-     703.6588,
-     703.7571,
-     703.8396
+     703.8199,
+     703.9158,
+     703.9964,
+     704.102
     ]
    },
    "levels": [
@@ -1261,7 +1276,7 @@
     "option": "calls, paper context only",
     "date": "2026-11-25",
     "planned_exit": "15:30",
-    "last_c": 715.53,
+    "last_c": 717.35,
     "backfilled": true,
     "note": "Added after the fact on 11/25: the engine went live at 13:29, after this signal. No alert went out at the signal time."
    },
@@ -1373,7 +1388,8 @@
      "13:40",
      "13:45",
      "13:50",
-     "13:55"
+     "13:55",
+     "14:00"
     ],
     "closes": [
      612.25,
@@ -1429,7 +1445,8 @@
      630.45,
      632.75,
      632.16,
-     630.7
+     630.7,
+     633.1
     ],
     "box": {
      "hi": 617.74,
@@ -1877,7 +1894,7 @@
       "h": 632.83,
       "l": 630.48,
       "c": 632.75,
-      "v": 381930.616011
+      "v": 621419.616011
      },
      {
       "t": "13:50",
@@ -1894,6 +1911,14 @@
       "l": 630.69,
       "c": 630.7,
       "v": 233772.174
+     },
+     {
+      "t": "14:00",
+      "o": 630.72,
+      "h": 633.13,
+      "l": 630.41,
+      "c": 633.1,
+      "v": 359995.037836
      }
     ],
     "opens": [
@@ -1950,7 +1975,8 @@
      628.95,
      630.48,
      632.68,
-     632.27
+     632.27,
+     630.72
     ],
     "highs": [
      617.79,
@@ -2006,7 +2032,8 @@
      630.73,
      632.83,
      633.33,
-     632.36
+     632.36,
+     633.13
     ],
     "lows": [
      612.23,
@@ -2062,7 +2089,8 @@
      628.24,
      630.48,
      631.5,
-     630.69
+     630.69,
+     630.41
     ],
     "volumes": [
      2421380.133255,
@@ -2116,9 +2144,10 @@
      542550.0,
      593654.0,
      422866.321846,
-     381930.616011,
+     621419.616011,
      431782.12343,
-     233772.174
+     233772.174,
+     359995.037836
     ],
     "option": {
      "contract": "QQQ 618 call",
@@ -2191,9 +2220,10 @@
      615.9268,
      616.103,
      616.235,
-     616.3712,
-     616.5253,
-     616.6019
+     616.4553,
+     616.6078,
+     616.6836,
+     616.8063
     ]
    },
    "levels": [
@@ -2326,7 +2356,7 @@
     "option": "calls, paper context only",
     "date": "2026-11-25",
     "planned_exit": "15:30",
-    "last_c": 630.7,
+    "last_c": 633.1,
     "backfilled": true,
     "note": "Added after the fact on 11/25: the engine went live at 13:29, after this signal. No alert went out at the signal time."
    },
