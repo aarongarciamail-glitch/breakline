@@ -1,15 +1,11 @@
 {
  "v": 1,
- "built": "2026-11-25T09:15:02-05:00",
+ "built": "2026-11-25T09:35:05-05:00",
  "for": "2026-11-25",
  "for_label": "Wednesday, Nov 25",
  "title": "Today's plan",
- "phase": "premarket",
+ "phase": "evening",
  "flags": [
-  {
-   "tone": "warn",
-   "text": "Big gap down pre-market: SPY -2.0%, QQQ -3.2%, NVDA -5.5%, TSLA -3.6%, SPCX -6.0%. Expect wide boxes and fast moves. Wait for the 9:45 box, don't chase the open."
-  },
   {
    "tone": "info",
    "text": "Thu Nov 26: market closed (Thanksgiving)."
@@ -20,7 +16,7 @@
   },
   {
    "tone": "warn",
-   "text": "VIX up 20% to 31.5. Bigger swings and pricier options today."
+   "text": "VIX up 20% to 31.7. Bigger swings and pricier options today."
   }
  ],
  "timeline": [
@@ -43,14 +39,14 @@
  ],
  "tape": {
   "label": "Tape split",
-  "strategy": "Calls and puts both stay open. Oil is up 2.2% and the 10-year is down 6.8 bp, so they disagree. The opening-range close picks the side.",
+  "strategy": "Calls and puts both stay open. Oil is up 2.6% and the 10-year is down 6.6 bp, so they disagree. The opening-range close picks the side.",
   "vix": {
    "name": "VIX",
-   "price": 31.52,
+   "price": 31.67,
    "prev": 26.36,
-   "chg_pct": 19.6,
-   "move": "Up 19.6% from yesterday's close of 26.4.",
-   "why": "Up 19.6% from yesterday's close of 26.4. Barrons.com: Market's Fear Gauge Rises",
+   "chg_pct": 20.1,
+   "move": "Up 20.1% from yesterday's close of 26.4.",
+   "why": "Up 20.1% from yesterday's close of 26.4. Barrons.com: Market's Fear Gauge Rises",
    "headline": {
     "source": "Barrons.com",
     "title": "Market's Fear Gauge Rises"
@@ -59,41 +55,26 @@
   },
   "oil": {
    "name": "Crude",
-   "price": 82.54,
+   "price": 82.82,
    "prev": 80.73,
-   "chg_pct": 2.2,
-   "move": "Up 2.2% from yesterday's close of 80.73.",
+   "chg_pct": 2.6,
+   "move": "Up 2.6% from yesterday's close of 80.73.",
    "range": "Inside the last month, 79.07 to 104.99.",
-   "why": "Up 2.2% from yesterday's close of 80.73. The Wall Street Journal: Oil Prices Fall as Traders Weigh Supply Outlook, Renewed Middle East Tensions",
-   "headline": {
-    "source": "The Wall Street Journal",
-    "title": "Oil Prices Fall as Traders Weigh Supply Outlook, Renewed Middle East Tensions"
-   },
+   "why": "Up 2.6% from yesterday's close of 80.73.",
+   "headline": null,
    "means": "Oil and yields point different ways. Calls and puts both stay open. The box picks the side."
   },
   "yield": {
    "name": "10-year",
-   "price": 4.836,
-   "chg_bps": -6.8,
-   "move": "10-year is 4.84%, down 6.8 bp."
+   "price": 4.838,
+   "chg_bps": -6.6,
+   "move": "10-year is 4.84%, down 6.6 bp."
   },
-  "asof": "2026-11-25T09:15:03-05:00"
+  "asof": "2026-11-25T09:35:05-05:00"
  },
  "market_news": [
   {
-   "title": "Instant View: US proposes new tariffs aimed at factory overcapacity",
-   "source": "Reuters",
-   "time": "Wed 9:08 AM",
-   "url": "https://finance.yahoo.com/economy/policy/articles/instant-view-us-proposes-tariffs-134039660.html"
-  },
-  {
-   "title": "Update: Potential New US Tariffs Weigh on US Equity Futures Pre-Bell",
-   "source": "MT Newswires",
-   "time": "Wed 9:05 AM",
-   "url": "https://finance.yahoo.com/economy/policy/articles/potential-us-tariffs-weigh-us-140514300.html"
-  },
-  {
-   "title": "Stock market today: Dow, S&P 500, Nasdaq futures fall on hot inflation, new Trump tariffs",
+   "title": "Stock market today: Dow, S&P 500, Nasdaq futures sink on hot inflation, new Trump tariffs as chip rout continues",
    "source": "Yahoo Finance",
    "time": "Wed 4:14 AM",
    "url": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-25-dow-sp-500-nasdaq-pce-inflation-data-091428237.html"
@@ -101,13 +82,29 @@
   {
    "title": "PCE Inflation Overshoots As Fed Fears Worsen AI-Stock Volatility (Live Coverage)",
    "source": "Investor's Business Daily",
-   "time": "Wed 8:55 AM",
+   "time": "Wed 9:24 AM",
    "url": "https://www.investors.com/news/pce-inflation-oct-federal-reserve-sp-500-ai-nvidia-liquidity-crunch/?src=A00220&yptr=yahoo"
+  },
+  {
+   "title": "Bitcoin trades as a high-beta tech proxy amid a strong downtrend",
+   "source": "Investing.com",
+   "time": "Wed 9:12 AM",
+   "url": "https://finance.yahoo.com/markets/crypto/articles/bitcoin-trades-high-beta-tech-141218301.html"
+  },
+  {
+   "title": "American Home Shield Parent Sneaking Back Into Buy Range. Monitor These Clues.",
+   "source": "Investor's Business Daily",
+   "time": "Wed 9:11 AM",
+   "url": "https://www.investors.com/research/breakout-stocks-technical-analysis/frontdoor-stock-ftdr-american-home-shield-parent-refurbishing-breakout/?src=A00220&yptr=yahoo"
   }
  ],
  "tickers": {
   "SPY": {
-   "last": 704.1,
+   "walls": {
+    "Call wall": 715.0,
+    "Put wall": 700.0
+   },
+   "last": 718.79,
    "pc": 718.79,
    "ph": 720.93,
    "pl": 712.14,
@@ -121,13 +118,13 @@
     "R2": 726.08,
     "R3": 731.22
    },
-   "gap_pct": -2.04,
-   "pmh": 714.24,
-   "pml": 703.46,
+   "gap_pct": null,
+   "pmh": null,
+   "pml": null,
    "typ_box_pct": 0.279,
    "typ_box_usd": 2.01,
-   "trend5": -5.4,
-   "trend_days": 8,
+   "trend5": -2.5,
+   "trend_days": 4,
    "earnings": null,
    "last_result": {
     "date": "2026-11-24",
@@ -135,14 +132,19 @@
     "r": -33.9
    },
    "watch": [
-    "Break up: take 1/3 at S3 704.85, then S2 708.50.",
-    "Break down: no pivot that way, so the stop and the 3:30 exit decide.",
-    "Gapping down 2.0%. Expect a wide box; over 2\u00d7 normal means size down."
+    "Break up: take 1/3 at R1 722.43, then R2 726.08. Prior-day high 720.93 is in the way.",
+    "Break down: take 1/3 at P 717.29, then S1 713.64.",
+    "Options: call wall 715 (5,580 calls open), put wall 700 (11,226 puts open). Most open interest at 700; price often drifts toward or stalls there."
    ],
    "news": []
   },
   "QQQ": {
-   "last": 617.88,
+   "walls": {
+    "Call wall": 625.0,
+    "Put wall": 605.0,
+    "Busiest strike": 610.0
+   },
+   "last": 638.12,
    "pc": 638.12,
    "ph": 648.0,
    "pl": 631.15,
@@ -156,13 +158,13 @@
     "R2": 655.94,
     "R3": 663.88
    },
-   "gap_pct": -3.17,
-   "pmh": 631.06,
-   "pml": 616.69,
+   "gap_pct": null,
+   "pmh": null,
+   "pml": null,
    "typ_box_pct": 0.555,
    "typ_box_usd": 3.54,
-   "trend5": -7.3,
-   "trend_days": 8,
+   "trend5": -4.9,
+   "trend_days": 4,
    "earnings": null,
    "last_result": {
     "date": "2026-11-24",
@@ -170,14 +172,18 @@
     "r": -35.6
    },
    "watch": [
-    "Break up: take 1/3 at S2 622.24, then S1 630.18.",
-    "Break down: take 1/3 at S3 613.33.",
-    "Gapping down 3.2%. Expect a wide box; over 2\u00d7 normal means size down."
+    "Break up: take 1/3 at P 639.09, then R1 647.03.",
+    "Break down: take 1/3 at S1 630.18, then S2 622.24. Prior-day low 631.15 is in the way.",
+    "Options: call wall 625 (410 calls open), put wall 605 (18,790 puts open). Most open interest at 605; price often drifts toward or stalls there."
    ],
    "news": []
   },
   "NVDA": {
-   "last": 146.94,
+   "walls": {
+    "Call wall": 150.0,
+    "Put wall": 140.0
+   },
+   "last": 155.48,
    "pc": 155.48,
    "ph": 159.92,
    "pl": 150.5,
@@ -191,13 +197,13 @@
     "R2": 164.72,
     "R3": 169.52
    },
-   "gap_pct": -5.49,
-   "pmh": 155.77,
-   "pml": 145.15,
+   "gap_pct": null,
+   "pmh": null,
+   "pml": null,
    "typ_box_pct": 1.467,
    "typ_box_usd": 2.28,
-   "trend5": -8.5,
-   "trend_days": 8,
+   "trend5": 1.7,
+   "trend_days": 4,
    "earnings": null,
    "last_result": {
     "date": "2026-11-24",
@@ -205,13 +211,13 @@
     "r": 16.2
    },
    "watch": [
-    "Break up: take 1/3 at S1 150.68, then P 155.30.",
-    "Break down: take 1/3 at S2 145.88, then S3 141.26.",
-    "Gapping down 5.5%. Expect a wide box; over 2\u00d7 normal means size down."
+    "Break up: take 1/3 at R1 160.10, then R2 164.72. Prior-day high 159.92 is in the way.",
+    "Break down: take 1/3 at P 155.30, then S1 150.68.",
+    "Options: call wall 150 (10,637 calls open), put wall 140 (20,691 puts open). Most open interest at 150; price often drifts toward or stalls there."
    ],
    "news": [
     {
-     "title": "Stock market today: Dow, S&P 500, Nasdaq futures fall on hot inflation, new Trump tariffs",
+     "title": "Stock market today: Dow, S&P 500, Nasdaq futures sink on hot inflation, new Trump tariffs as chip rout continues",
      "source": "Yahoo Finance",
      "time": "Wed 4:14 AM",
      "url": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-25-dow-sp-500-nasdaq-pce-inflation-data-091428237.html"
@@ -225,7 +231,13 @@
    ]
   },
   "TSLA": {
-   "last": 370.69,
+   "walls": {
+    "Call wall": 385.0,
+    "Put wall": 360.0,
+    "Magnet": 380.0,
+    "Busiest strike": 365.0
+   },
+   "last": 384.74,
    "pc": 384.74,
    "ph": 390.09,
    "pl": 375.5,
@@ -239,13 +251,13 @@
     "R2": 398.03,
     "R3": 405.98
    },
-   "gap_pct": -3.65,
-   "pmh": 383.72,
-   "pml": 369.35,
+   "gap_pct": null,
+   "pmh": null,
+   "pml": null,
    "typ_box_pct": 1.884,
    "typ_box_usd": 7.25,
-   "trend5": -4.2,
-   "trend_days": 8,
+   "trend5": -1.3,
+   "trend_days": 4,
    "earnings": null,
    "last_result": {
     "date": "2026-11-24",
@@ -253,9 +265,9 @@
     "r": 5.8
    },
    "watch": [
-    "Break up: take 1/3 at S1 376.80, then P 383.44.",
-    "Break down: take 1/3 at S2 368.85, then S3 362.21.",
-    "Gapping down 3.7%. Expect a wide box; over 2\u00d7 normal means size down."
+    "Break up: take 1/3 at R1 391.39, then R2 398.03. Prior-day high 390.09 is in the way.",
+    "Break down: take 1/3 at P 383.44, then S1 376.80.",
+    "Options: call wall 385 (1,995 calls open), put wall 360 (3,171 puts open). Most open interest at 380; price often drifts toward or stalls there."
    ],
    "news": [
     {
@@ -273,7 +285,11 @@
    ]
   },
   "SPCX": {
-   "last": 118.28,
+   "walls": {
+    "Call wall": 120.0,
+    "Put wall": 115.0
+   },
+   "last": 125.87,
    "pc": 125.87,
    "ph": 132.5,
    "pl": 123.52,
@@ -287,13 +303,13 @@
     "R2": 136.28,
     "R3": 140.05
    },
-   "gap_pct": -6.03,
-   "pmh": 125.81,
-   "pml": 115.38,
+   "gap_pct": null,
+   "pmh": null,
+   "pml": null,
    "typ_box_pct": 2.391,
    "typ_box_usd": 3.01,
-   "trend5": -10.2,
-   "trend_days": 8,
+   "trend5": -13.1,
+   "trend_days": 4,
    "earnings": null,
    "last_result": {
     "date": "2026-11-24",
@@ -301,22 +317,22 @@
     "r": 53.9
    },
    "watch": [
-    "Break up: take 1/3 at S2 118.32, then S1 122.09.",
-    "Break down: take 1/3 at S3 113.11.",
-    "Gapping down 6.0%. Expect a wide box; over 2\u00d7 normal means size down."
+    "Break up: take 1/3 at P 127.30, then R1 131.07.",
+    "Break down: take 1/3 at S1 122.09, then S2 118.32. Prior-day low 123.52 is in the way.",
+    "Options: call wall 120 (103 calls open), put wall 115 (2,587 puts open). Most open interest at 120; price often drifts toward or stalls there."
    ],
    "news": [
+    {
+     "title": "Funds With Anthropic Exposure Are Off to a Rough Start",
+     "source": "Barrons.com",
+     "time": "Wed 8:46 AM",
+     "url": "https://www.barrons.com/articles/funds-with-anthropic-exposure-got-off-to-a-rough-start-more-trouble-may-be-on-the-way-efee6ef9?siteid=yhoof2&yptr=yahoo"
+    },
     {
      "title": "Cathie Wood's ARK Buys Anthropic as Ripple CEO Predicts Post-IPO Crypto Rally",
      "source": "CCN",
      "time": "Wed 8:02 AM",
      "url": "https://www.ccn.com/news/crypto/cathie-woods-ark-bitcoin-etf-anthropic-ripple-ceo-crypto-rebound/"
-    },
-    {
-     "title": "3 Warning Signs as the AI Selloff Gets Ugly Again",
-     "source": "Barrons.com",
-     "time": "Wed 7:52 AM",
-     "url": "https://www.barrons.com/articles/stock-market-things-to-know-today-184b375d?siteid=yhoof2&yptr=yahoo"
     }
    ]
   }
