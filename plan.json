@@ -1,6 +1,6 @@
 {
  "v": 1,
- "built": "2026-11-25T07:32:30-05:00",
+ "built": "2026-11-25T07:34:10-05:00",
  "for": "2026-11-25",
  "for_label": "Wednesday, Nov 25",
  "title": "Today's plan",
@@ -20,7 +20,7 @@
   },
   {
    "tone": "warn",
-   "text": "VIX up 17% to 30.8. Bigger swings and pricier options today."
+   "text": "VIX up 17% to 30.9. Bigger swings and pricier options today."
   }
  ],
  "timeline": [
@@ -46,11 +46,11 @@
   "strategy": "Calls and puts both stay open. Oil is up 2.2% and the 10-year is down 1.4 bp, so they disagree. The opening-range close picks the side.",
   "vix": {
    "name": "VIX",
-   "price": 30.81,
+   "price": 30.94,
    "prev": 26.36,
-   "chg_pct": 16.9,
-   "move": "Up 16.9% from yesterday's close of 26.4.",
-   "why": "Up 16.9% from yesterday's close of 26.4. Barrons.com: Market's Fear Gauge Rises",
+   "chg_pct": 17.4,
+   "move": "Up 17.4% from yesterday's close of 26.4.",
+   "why": "Up 17.4% from yesterday's close of 26.4. Barrons.com: Market's Fear Gauge Rises",
    "headline": {
     "source": "Barrons.com",
     "title": "Market's Fear Gauge Rises"
@@ -59,7 +59,7 @@
   },
   "oil": {
    "name": "Crude",
-   "price": 82.48,
+   "price": 82.51,
    "prev": 80.73,
    "chg_pct": 2.2,
    "move": "Up 2.2% from yesterday's close of 80.73.",
@@ -77,20 +77,20 @@
    "chg_bps": -1.4,
    "move": "10-year is 4.90%, down 1.4 bp."
   },
-  "asof": "2026-11-25T07:32:30-05:00"
+  "asof": "2026-11-25T07:34:11-05:00"
  },
  "market_news": [
+  {
+   "title": "Dow Jones Futures Fall, Techs Dive; Trump Says 'Not Too Late' For U.S. To Take Nvidia Stake",
+   "source": "Investor's Business Daily",
+   "time": "Wed 7:28 AM",
+   "url": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-nvidia-anthropic-ai-retreat-fed-inflation-data/?src=A00220&yptr=yahoo"
+  },
   {
    "title": "Stock market today: Dow, S&P 500, Nasdaq futures fall ahead of inflation data",
    "source": "Yahoo Finance",
    "time": "Wed 4:14 AM",
    "url": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-25-dow-sp-500-nasdaq-pce-inflation-data-091428237.html"
-  },
-  {
-   "title": "Dow Jones Futures Fall, Techs Dive; Trump Says 'Not Too Late' For U.S. To Take Nvidia Stake",
-   "source": "Investor's Business Daily",
-   "time": "Wed 7:18 AM",
-   "url": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-nvidia-anthropic-ai-retreat-fed-inflation-data/?src=A00220&yptr=yahoo"
   },
   {
    "title": "Stock market today: Dow rises, S&P 500 and Nasdaq decline as chip sector tumbles, Nvidia stock falls 6%",
