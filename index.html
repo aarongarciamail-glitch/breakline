@@ -357,6 +357,28 @@ ul.nlist .src{display:block;font:400 11.5px/1.3 var(--mono);color:var(--faint);m
  .pgrid{grid-template-columns:minmax(0,1fr)}
  .pflag{font-size:13.5px}
 }
+/* tabs */
+[data-tab]:not(.tabon){display:none!important}
+nav.links a.on{color:var(--text);background:rgba(255,255,255,.07)}
+.tabbar{display:none}
+.sidewrap>summary{display:none}
+@media (max-width:640px){
+ nav.links{display:none}
+ body{padding-bottom:calc(72px + env(safe-area-inset-bottom,0px))}
+ .tabbar{display:grid;grid-template-columns:repeat(4,1fr);position:fixed;left:0;right:0;bottom:0;z-index:20;
+  padding:6px 8px calc(6px + env(safe-area-inset-bottom,0px));background:rgba(6,7,8,.72);border-top:1px solid var(--line);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+ .tabbar a{display:grid;justify-items:center;gap:3px;padding:6px 0;color:var(--faint);text-decoration:none;font:500 11px/1 var(--display);border-radius:10px}
+ .tabbar svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+ .tabbar a.on{color:var(--text)}
+ .tabbar a.on svg{stroke:var(--teal)}
+ .sidewrap>summary{display:flex;align-items:center;justify-content:space-between;cursor:pointer;list-style:none;padding:12px 14px;border:1px solid var(--line);border-radius:14px;background:var(--panel);color:var(--dim);font-size:14px;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+ .sidewrap>summary::-webkit-details-marker{display:none}
+ .sidewrap>summary::after{content:"";width:8px;height:8px;border-right:1.5px solid var(--faint);border-bottom:1.5px solid var(--faint);transform:rotate(45deg)}
+ .sidewrap[open]>summary::after{transform:rotate(-135deg)}
+}
+.planwrap>summary h2::after{content:none!important}
+.planwrap>summary{cursor:default}
 </style>
 </head>
 <body>
@@ -372,21 +394,21 @@ ul.nlist .src{display:block;font:400 11.5px/1.3 var(--mono);color:var(--faint);m
    <span class="word">Breakline</span>
   </a>
   <nav class="links" aria-label="Sections">
-   <a href="#today">Today</a><a href="#record">Record</a><a href="#how">How<span class="long">&nbsp;it works</span></a>
+   <a href="#today" data-go="today">Today</a><a href="#plan" data-go="plan">Plan</a><a href="#record" data-go="record">Record</a><a href="#how" data-go="how">How<span class="long">&nbsp;it works</span></a>
   </nav>
  </header>
 
  <div class="strip">
-  <p class="lede">This is what I'm doing. One box every morning, then the break. Wins, losses, and the days I sit out, plain to see.</p>
+  <p class="lede" data-tab="how">This is what I'm doing. One box every morning, then the break. Wins, losses, and the days I sit out, plain to see.</p>
   <p class="stripmeta"><span id="todayDate"></span><span class="fresh" id="fresh"></span></p>
  </div>
- <div class="kpis" id="kpis" hidden></div>
- <div class="tapestrip" id="tape" hidden></div>
+ <div class="kpis" id="kpis" data-tab="today" hidden></div>
+ <div class="tapestrip" id="tape" data-tab="today plan" hidden></div>
  <div class="sample" id="sample" role="note" hidden>
   <strong>Design preview.</strong> Every number on this page is an example. Real calls replace it once paper trading is on.
  </div>
 
- <section id="gameplan" aria-labelledby="plan-h" hidden>
+ <section id="gameplan" data-tab="plan" aria-labelledby="plan-h" hidden>
   <details class="planwrap" id="planWrap" open>
    <summary class="sh"><h2 id="plan-h">Game plan</h2><span class="meta" id="planMeta"></span></summary>
    <div class="pflags" id="pFlags"></div>
@@ -396,7 +418,7 @@ ul.nlist .src{display:block;font:400 11.5px/1.3 var(--mono);color:var(--faint);m
   </details>
  </section>
 
- <section id="today" aria-labelledby="dayHead">
+ <section id="today" data-tab="today" aria-labelledby="dayHead">
   <div class="daybar">
    <div class="daytitle">
     <div class="callrow" id="pills"></div>
@@ -426,7 +448,8 @@ ul.nlist .src{display:block;font:400 11.5px/1.3 var(--mono);color:var(--faint);m
     <p class="sub" id="sub"></p>
     <p class="sub" id="headline" hidden></p>
    </div>
-   <div class="side">
+   <details class="side sidewrap" id="sideWrap" open>
+    <summary class="sidesum">Details: this stock, levels, plan</summary>
     <div class="panel box"><h3>This stock</h3><dl class="ms" id="measures"></dl></div>
     <div class="panel box"><h3>Levels</h3><dl class="lv" id="levels"></dl></div>
     <div class="panel box" id="planBox"><h3>Plan</h3><ol class="plan" id="plan"></ol></div>
@@ -434,11 +457,11 @@ ul.nlist .src{display:block;font:400 11.5px/1.3 var(--mono);color:var(--faint);m
      <div class="curvehead"><h3 id="miniTitle" style="margin:0">This name</h3><span class="num" id="miniNow"></span></div>
      <svg id="mini" viewBox="0 0 320 96" role="img" aria-label="This ticker on the paper account"></svg>
     </div>
-   </div>
+   </details>
   </div>
  </section>
 
- <section id="road" aria-labelledby="road-h">
+ <section id="road" data-tab="record" aria-labelledby="road-h">
   <div class="sh"><h2 id="road-h">Road to real money</h2><span class="meta">Paper first. Every box must pass.</span></div>
   <div class="panel road">
    <p class="roadhead" id="roadHead"></p>
@@ -447,7 +470,7 @@ ul.nlist .src{display:block;font:400 11.5px/1.3 var(--mono);color:var(--faint);m
   </div>
  </section>
 
- <section id="record" aria-labelledby="record-h">
+ <section id="record" data-tab="record" aria-labelledby="record-h">
   <div class="sh"><h2 id="record-h">Track record</h2><span class="meta">Percent per trade · no dollar amounts</span></div>
   <div class="stats" id="stats"></div>
   <div class="panel bars curvep">
@@ -464,7 +487,7 @@ ul.nlist .src{display:block;font:400 11.5px/1.3 var(--mono);color:var(--faint);m
   </div>
  </section>
 
- <section id="how" aria-labelledby="how-h">
+ <section id="how" data-tab="how" aria-labelledby="how-h">
   <div class="sh"><h2 id="how-h">How it works</h2><span class="meta">Same rules every day</span></div>
   <div class="panel readkey">
    <h3>How to read a call</h3>
@@ -495,7 +518,13 @@ ul.nlist .src{display:block;font:400 11.5px/1.3 var(--mono);color:var(--faint);m
   </div>
  </section>
 
- <footer>
+ <nav class="tabbar" aria-label="Tabs">
+ <a href="#today" data-go="today"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18l5-6 4 3 7-9"/></svg><span>Today</span></a>
+ <a href="#plan" data-go="plan"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h12v16H6z"/><path d="M9 9h6M9 13h6M9 17h3"/></svg><span>Plan</span></a>
+ <a href="#record" data-go="record"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20V10M10 20V4M15 20v-7M20 20v-11"/></svg><span>Record</span></a>
+ <a href="#how" data-go="how"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 11v5M12 8h.01"/></svg><span>How</span></a>
+</nav>
+<footer data-tab="how">
   <span class="nfa">NFA · DYOR</span>
   <p>Not financial advice. I'm showing what I do, not telling you what to do. Same-day options can go to zero in minutes, and I size every trade like it might.</p>
  </footer>
@@ -760,8 +789,9 @@ ul.nlist .src{display:block;font:400 11.5px/1.3 var(--mono);color:var(--faint);m
   svg.setAttribute('viewBox','0 0 '+W+' '+H);
   svg.dataset.mode=ohlc.some(b=>b.real)?'ohlc':'closes';
   if(!ohlc.length){
-   const msg=live?'Chart appears after the first bars.':'No intraday bars saved for this day.';
-   mk('text',{x:W/2,y:priceH/2,fill:T('--faint'),'text-anchor':'middle'},svg,msg);
+   const msg=live?'Chart starts at 9:30.':'No intraday bars saved for this day.';
+   svg.setAttribute('viewBox','0 0 '+W+' 70');
+   mk('text',{x:W/2,y:40,fill:T('--faint'),'text-anchor':'middle'},svg,msg);
    svg.setAttribute('aria-label', sym+' '+msg);
    $('hiPins').innerHTML=''; $('loPins').innerHTML='';
    $('legend').innerHTML=''; $('legendNote').textContent=live?'':'The publisher can add this day under days[].charts without removing today.';
@@ -1145,8 +1175,9 @@ ul.nlist .src{display:block;font:400 11.5px/1.3 var(--mono);color:var(--faint);m
   // the file keeps session=true after the last 3:45 publish, so judge "closed" from the clock too
   const closed=!D.session||!sameDay||hm(n)>=16*60||hm(n)<9*60+30||(hm(w)>=15*60+30&&mins>20);
   const stale=!closed&&mins>25;
+  const pre=sameDay&&hm(n)<9*60+30&&!/Sat|Sun/.test(new Date().toLocaleDateString('en-US',{timeZone:'America/New_York',weekday:'short'}));
   f.className='fresh'+(stale?' stale':closed?' closed':'');
-  f.textContent=closed?'Closed · final '+t+(sameDay?'':' '+w.month+'/'+w.day)
+  f.textContent=pre?'Pre-market \u00b7 opens 9:30':closed?'Closed · final '+t+(sameDay?'':' '+w.month+'/'+w.day)
    :stale?'Last update '+mins+' min ago':'Updated '+t+(D.next_check?' · next '+D.next_check:'');
  }
  function dayChoices(D){
@@ -1314,7 +1345,7 @@ ul.nlist .src{display:block;font:400 11.5px/1.3 var(--mono);color:var(--faint);m
   if(!P||!P.tickers||P.for<todayIso){sec.hidden=true;return}
   sec.hidden=false;
   const live=inSession()&&P.for===todayIso;
-  if(!sec.dataset.touched)$('planWrap').open=!live;
+  $('planWrap').open=true;
   $('plan-h').textContent=live?'This morning\u2019s plan':P.title;
   const b=new Date(P.built);
   $('planMeta').textContent=P.for_label+' \u00b7 updated '+b.toLocaleTimeString('en-US',{timeZone:'America/New_York',hour:'numeric',minute:'2-digit'});
@@ -1350,6 +1381,31 @@ ul.nlist .src{display:block;font:400 11.5px/1.3 var(--mono);color:var(--faint);m
  load();
  setInterval(()=>{if(!document.hidden){load();loadPlan()}},60000);
  loadPlan();
+
+ /* tabs: one page, four views, each with its own address */
+ const TABS=['today','plan','record','how'];
+ function defaultTab(){
+  const n=etParts(new Date()), m=Number(n.hour)*60+Number(n.minute);
+  const wd=new Date().toLocaleDateString('en-US',{timeZone:'America/New_York',weekday:'short'});
+  if(/Sat|Sun/.test(wd))return 'plan';
+  return m<570?'plan':'today';
+ }
+ function showTab(fromHash){
+  let h=(location.hash||'').slice(1), anchor=null;
+  if(h==='road'){anchor='road';h='record'}
+  if(h==='gameplan')h='plan';
+  const tab=TABS.includes(h)?h:defaultTab();
+  document.querySelectorAll('[data-tab]').forEach(el=>el.classList.toggle('tabon',el.dataset.tab.split(' ').includes(tab)));
+  document.querySelectorAll('[data-go]').forEach(a=>{const on=a.dataset.go===tab;a.classList.toggle('on',on);if(on)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
+  if(fromHash){if(anchor){const el=document.getElementById(anchor);if(el)el.scrollIntoView()}else window.scrollTo(0,0)}
+  if(tab==='today'&&LAST)render(LAST);
+ }
+ window.addEventListener('hashchange',()=>showTab(true));
+ showTab(false);
+ const sw=document.getElementById('sideWrap');
+ const fitSide=()=>{if(matchMedia('(min-width:641px)').matches)sw.open=true;else if(!sw.dataset.touched)sw.open=false};
+ sw.querySelector('summary').addEventListener('click',()=>{sw.dataset.touched=1});
+ fitSide(); addEventListener('resize',fitSide);
  fetch('days/index.json',{cache:'no-store'}).then(r=>r.ok?r.json():[]).then(x=>{ARCHIDX=Array.isArray(x)?x:[];if(LAST)render(LAST)}).catch(()=>{});
  document.querySelector('#planWrap>summary').addEventListener('click',()=>{document.getElementById('gameplan').dataset.touched=1});
  document.addEventListener('visibilitychange',()=>{if(!document.hidden)load()});
