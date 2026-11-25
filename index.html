@@ -517,7 +517,8 @@ html[data-skin=ledger]{--wall:#d39a6a}
 .ccard .cc{font:500 13px/1 var(--mono)}
 .ccard .st{margin-left:auto}
 .ccard svg{width:100%;height:auto;display:block}
-.ccard svg text{font:10px var(--mono)}
+.ccard svg text{font:10.5px var(--mono)}
+.spk{touch-action:pan-y;cursor:crosshair}
 .cline{display:grid;grid-template-columns:auto 1fr auto;gap:4px 10px;font-size:13.5px;align-items:baseline}
 .cline dt{color:var(--dim)}.cline dd{margin:0;font:500 13.5px var(--mono);text-align:right}
 .cline .bar{height:1px;background:var(--line);align-self:center}
@@ -525,7 +526,7 @@ html[data-skin=ledger]{--wall:#d39a6a}
 .crule p{margin:0 0 8px;font-size:14px;line-height:1.55;color:var(--dim)}.crule b{color:var(--text)}
 .pill.in{color:var(--win);border-color:color-mix(in srgb,var(--win) 45%,transparent)}
 .pill.out{color:var(--dim)}
-@media (max-width:640px){.ccard svg{max-height:120px}.cgrid{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:640px){.cgrid{grid-template-columns:minmax(0,1fr)}}
 .ci{width:1.1em;height:1.1em;vertical-align:-.18em;margin-right:.35em;flex:none;display:inline-block}
 .tk .s .ci{width:15px;height:15px;vertical-align:-3px;margin-right:5px}
 .cn{display:inline-flex;align-items:center}
@@ -1450,7 +1451,7 @@ html[data-skin=ledger]{--wall:#d39a6a}
   $('plan').innerHTML=plan.map(p=>'<li class="'+(p[2]?'done':'')+'"><b>'+esc(p[0])+'</b><span>'+esc(honestPlan(p[1]))+'</span></li>').join('');
   const isCrypto=CS.includes(SEL);
   $('cryptoDesk').hidden=!isCrypto; $('stockPanel').hidden=isCrypto; $('sideWrap').hidden=isCrypto;
-  if(isCrypto)$('cryptoDesk').innerHTML=coinView(SEL);
+  if(isCrypto){$('cryptoDesk').innerHTML=coinView(SEL);wireSpark()}
 
   const size=(D.size_pct||4)/100;
   const mine=recs.filter(r=>r.symbol===SEL&&r.result!=null).slice().reverse();
@@ -1557,18 +1558,48 @@ html[data-skin=ledger]{--wall:#d39a6a}
  let CRY=null;
  const fmtC=v=>v==null?'—':(Math.abs(v)>=1000?Number(v).toLocaleString('en-US',{maximumFractionDigits:0}):Math.abs(v)>=10?Number(v).toFixed(2):Number(v).toFixed(4));
  const pc=v=>v==null?'—':(v>0?'+':v<0?'−':'')+Math.abs(v).toFixed(1)+'%';
+ const SPK={};
+ function niceTicks(mn,mx,n){const span=mx-mn||1, raw=span/n, mag=Math.pow(10,Math.floor(Math.log10(raw))), st=[1,2,2.5,5,10].map(k=>k*mag).find(k=>k>=raw)||raw;const out=[];for(let v=Math.ceil(mn/st)*st;v<=mx+1e-9;v+=st)out.push(v);return out}
  function spark(c,big){
-  const cl=(c.closes||[]).map(x=>x[1]), hi=(c.hi20||[]).map(x=>x[1]??x), lo=(c.lo10||[]).map(x=>x[1]??x);
+  const dates=(c.closes||[]).map(x=>x[0]), cl=(c.closes||[]).map(x=>x[1]), hi=(c.hi20||[]).map(x=>x[1]??x), lo=(c.lo10||[]).map(x=>x[1]??x);
   if(cl.length<2)return '';
-  const W=big&&innerWidth>640?760:320,H=big&&innerWidth>640?230:110,P=4, all=cl.concat(hi.filter(isFinite),lo.filter(isFinite));
-  const mn=Math.min(...all), mx=Math.max(...all), x=i=>P+i*(W-2*P)/(cl.length-1), y=v=>P+(mx-v)/(mx-mn||1)*(H-2*P);
+  const wide=big&&innerWidth>640;
+  const W=wide?760:340, H=wide?250:170, L=6, R=wide?118:92, T=10, B=22, pw=W-L-R, ph=H-T-B;
+  const all=cl.concat(hi.filter(isFinite),lo.filter(isFinite)); let mn=Math.min(...all), mx=Math.max(...all); const pad=(mx-mn)*.06; mn-=pad; mx+=pad;
+  const x=i=>L+i*pw/(cl.length-1), y=v=>T+(mx-v)/(mx-mn||1)*ph;
   const path=a=>a.map((v,i)=>isFinite(v)?(i&&isFinite(a[i-1])?'L':'M')+x(i).toFixed(1)+' '+y(v).toFixed(1):'').join(' ');
+  let g='';
+  niceTicks(mn,mx,wide?5:4).forEach(v=>{g+='<line x1="'+L+'" x2="'+(L+pw)+'" y1="'+y(v).toFixed(1)+'" y2="'+y(v).toFixed(1)+'" stroke="var(--line)"/><text x="'+(L+3)+'" y="'+(y(v)-3).toFixed(1)+'" fill="var(--faint)" font-size="9.5">'+(v>=1000?(v/1000).toLocaleString('en-US',{maximumFractionDigits:1})+'k':v>=10?v.toFixed(0):fmtC(v))+'</text>'});
+  // month marks along the bottom
+  let lastM='';dates.forEach((d,i)=>{const m=d.slice(0,7);if(m!==lastM){lastM=m;if(i>2&&i<dates.length-4){g+='<line x1="'+x(i).toFixed(1)+'" x2="'+x(i).toFixed(1)+'" y1="'+T+'" y2="'+(T+ph)+'" stroke="var(--line)"/><text x="'+(x(i)+3).toFixed(1)+'" y="'+(H-6)+'" fill="var(--faint)">'+new Date(d+'T12:00:00Z').toLocaleString('en-US',{month:'short'})+'</text>'}}});
+  // right-edge labels: where each line ends today, nudged apart so they never overlap
+  const end=cl.length-1, labs=[['Buy',c.buy_line??hi[end],'var(--win)'],['Now',c.price??cl[end],'var(--text)'],['Sell',c.sell_line??lo[end],'var(--loss)']].filter(r=>isFinite(r[1])).map(r=>({t:r[0]+' '+(r[1]>=1000?Math.round(r[1]).toLocaleString('en-US'):fmtC(r[1])),v:r[1],c:r[2],y:y(r[1])}));
+  labs.sort((p,q)=>p.y-q.y);for(let k=1;k<labs.length;k++)if(labs[k].y-labs[k-1].y<13)labs[k].y=labs[k-1].y+13;
+  const over=labs.length?labs[labs.length-1].y-(T+ph+4):0;if(over>0)labs.forEach(l=>l.y-=over);
+  labs.forEach(l=>{g+='<line x1="'+(L+pw)+'" x2="'+(L+pw+5)+'" y1="'+y(l.v).toFixed(1)+'" y2="'+l.y.toFixed(1)+'" stroke="'+l.c+'" opacity=".6"/><text x="'+(L+pw+8)+'" y="'+(l.y+3.5).toFixed(1)+'" fill="'+l.c+'">'+esc(l.t)+'</text>'});
   let ent='';
-  if(c.status==='in'&&c.entry_date){const i=(c.closes||[]).findIndex(r=>r[0]>=c.entry_date);if(i>=0)ent='<circle cx="'+x(i)+'" cy="'+y(c.entry)+'" r="3.2" fill="var(--win)"/>'}
-  return '<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Last '+cl.length+' days with buy and sell lines">'
-   +'<path d="'+path(hi)+'" fill="none" stroke="var(--win)" stroke-width="1" stroke-dasharray="4 3" opacity=".75"/>'
-   +'<path d="'+path(lo)+'" fill="none" stroke="var(--loss)" stroke-width="1" stroke-dasharray="4 3" opacity=".75"/>'
-   +'<path d="'+path(cl)+'" fill="none" stroke="var(--text)" stroke-width="1.6"/>'+ent+'</svg>';
+  if(c.status==='in'&&c.entry_date){const i=dates.findIndex(d=>d>=c.entry_date);if(i>=0)ent='<circle cx="'+x(i)+'" cy="'+y(c.entry)+'" r="3.4" fill="var(--win)"/><text x="'+(x(i)+6)+'" y="'+(y(c.entry)+12)+'" fill="var(--win)">bought</text>'}
+  const id='spk'+Math.random().toString(36).slice(2,8);
+  SPK[id]={dates,cl,hi,lo,L,pw,W,n:cl.length,x,y,T,ph};
+  return '<svg class="spk" id="'+id+'" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Last '+cl.length+' days: daily close with the buy line and sell line">'+g
+   +'<path d="'+path(hi)+'" fill="none" stroke="var(--win)" stroke-width="1.1" stroke-dasharray="4 3" opacity=".85"/>'
+   +'<path d="'+path(lo)+'" fill="none" stroke="var(--loss)" stroke-width="1.1" stroke-dasharray="4 3" opacity=".85"/>'
+   +'<path d="'+path(cl)+'" fill="none" stroke="var(--text)" stroke-width="1.6"/>'+ent
+   +'<line class="spx" x1="0" x2="0" y1="'+T+'" y2="'+(T+ph)+'" stroke="var(--dim)" stroke-dasharray="2 3" opacity="0"/>'
+   +'<circle class="spd" r="3.2" fill="var(--text)" opacity="0"/></svg>';
+ }
+ function wireSpark(){
+  document.querySelectorAll('svg.spk').forEach(svg=>{
+   if(svg.dataset.wired)return; svg.dataset.wired=1;
+   const D=SPK[svg.id]; if(!D)return;
+   const vl=svg.querySelector('.spx'), dot=svg.querySelector('.spd');
+   const show=ev=>{const q=svgPoint(svg,ev);if(!q)return;let i=Math.round((q.x-D.L)/D.pw*(D.n-1));i=Math.max(0,Math.min(D.n-1,i));
+    const X=D.x(i);vl.setAttribute('x1',X);vl.setAttribute('x2',X);vl.setAttribute('opacity','1');dot.setAttribute('cx',X);dot.setAttribute('cy',D.y(D.cl[i]));dot.setAttribute('opacity','1');
+    const f=v=>isFinite(v)?'$'+(v>=1000?Math.round(v).toLocaleString('en-US'):fmtC(v)):'—';
+    moveTip(ev,tipHTML(new Date(D.dates[i]+'T12:00:00Z').toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}),[['Close',f(D.cl[i])],['Buy line',f(D.hi[i])],['Sell line',f(D.lo[i])]]))};
+   svg.addEventListener('pointermove',show); svg.addEventListener('pointerdown',show);
+   svg.addEventListener('pointerleave',()=>{vl.setAttribute('opacity','0');dot.setAttribute('opacity','0');tip.hidden=true});
+  });
  }
  const COINICON={
   BTC:'<svg class="ci" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#f7931a"/><path fill="#fff" d="M22.3 14.1c.3-2.1-1.3-3.2-3.4-3.9l.7-2.8-1.7-.4-.7 2.7-1.4-.3.7-2.7-1.7-.4-.7 2.8-1.1-.3-2.4-.6-.4 1.8s1.3.3 1.2.3c.7.2.8.6.8 1l-.8 3.2.2.1-.2-.1-1.1 4.5c-.1.2-.3.5-.8.4l-1.2-.3-.8 1.9 2.2.6 1.2.3-.7 2.8 1.7.4.7-2.8 1.4.4-.7 2.8 1.7.4.7-2.8c2.9.5 5.1.3 6-2.3.7-2.1 0-3.3-1.6-4.1 1.1-.3 2-1 2.2-2.6zm-3.9 5.4c-.5 2.1-4 1-5.2.7l.9-3.7c1.2.3 4.8.9 4.3 3zm.5-5.5c-.5 1.9-3.4.9-4.3.7l.9-3.4c1 .2 4 .7 3.4 2.7z"/></svg>',
