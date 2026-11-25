@@ -510,7 +510,7 @@ ul.nlist .src{display:block;font:400 11.5px/1.3 var(--mono);color:var(--faint);m
  const OPEN=9*60+30, CLOSE=16*60;
  const WD=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'], MO=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
  const STATS={waiting:1,up:1,down:1,win:1,loss:1,skip:1,none:1,sitout:1,pending:1,trade:1};
- const pillCls={'Trade day':'go','Paper':'paper'};
+ const pillCls={'Trade day':'go','Paper':'paper','New day':'go'};
  const store={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
  let SEL=null, DAY=null, LAST=null;
  const tip=$('tip');
@@ -583,10 +583,16 @@ ul.nlist .src{display:block;font:400 11.5px/1.3 var(--mono);color:var(--faint);m
   });
   return {symbols:order, stocks:S};
  }
+ const ARCH={}, ARCHMISS={}; let ARCHIDX=[];
+ function fetchDay(d){
+  if(ARCH[d]||ARCHMISS[d])return Promise.resolve();
+  return fetch('days/'+d+'.json',{cache:'no-store'}).then(r=>r.ok?r.json():Promise.reject()).then(j=>{ARCH[d]=j}).catch(()=>{ARCHMISS[d]=1});
+ }
  function stocksFor(D){
   const base=normalize(D);
   if(isLive(D))return {symbols:base.symbols, stocks:base.stocks, live:true, day:null};
-  const day=(D.days||[]).find(d=>d.date===DAY);
+  if(ARCH[DAY]){const a=normalize(ARCH[DAY]);return {symbols:a.symbols, stocks:a.stocks, live:true, arch:ARCH[DAY], day:(D.days||[]).find(d=>d.date===DAY)||{date:DAY}}}
+  const day=(D.days||[]).find(d=>d.date===DAY)||(ARCHIDX.includes(DAY)?{date:DAY}:null);
   if(!day)return {symbols:base.symbols, stocks:base.stocks, live:true, day:null};
   const past=pastStocks(D, day);
   return {symbols:past.symbols, stocks:past.stocks, live:false, day};
@@ -1117,15 +1123,15 @@ ul.nlist .src{display:block;font:400 11.5px/1.3 var(--mono);color:var(--faint);m
   const el=$('kpis'); const days=D.days||[]; const curve=D.curve||[]; const P=D.progress||{};
   if(!days.length&&!curve.length){el.hidden=true;return}
   el.hidden=false;
-  const fd=fileDay(D); const today=days.find(d=>d.date===fd)||days[days.length-1]||null;
+  const fd=fileDay(D); const today=days.find(d=>d.date===fd)||null;
   const acct=curve.length?curve[curve.length-1].acct:0;
   const n=(P.checks||[]).find(c=>/trades/i.test(c.name))||{};
   const ok=(P.checks||[]).filter(c=>c.ok).length, all=(P.checks||[]).length;
   const cls=v=>v>0?'pos':v<0?'neg':'flat';
   const cell=(label,val,sub,extra,href)=>'<a class="kpi" href="'+href+'"><span class="kl">'+label+'</span><span class="kv">'+val+'</span>'+(extra||'')+'<span class="ks">'+sub+'</span></a>';
   const tv=today&&today.acct!=null?'<span class="'+cls(today.acct)+'">'+sgn1(today.acct)+'</span>':'—';
-  const ts=today&&today.n?today.wins+' of '+today.n+' won'+(today.date!==fd?' · '+today.date.slice(5).replace('-','/'):''):'no trades yet';
-  el.innerHTML=cell(today&&today.date===fd?'Today':'Last day',tv,ts,'','#today')
+  const ts=today&&today.n?today.wins+' of '+today.n+' won':'no trades yet';
+  el.innerHTML=cell('Today',tv,ts,'','#today')
    +cell('Paper account','<span class="'+cls(acct)+'">'+sgn1(acct)+'</span>',(D.max_dd!=null?'worst dip '+Number(D.max_dd).toFixed(1)+'%':'since start'),'','#record')
    +cell('Real money',esc((n.value||'').replace(' of ','/'))||'—',ok+' of '+all+' checks pass','<span class="kbar"><i style="width:'+Math.round((n.progress||0)*100)+'%"></i></span>','#road');
  }
@@ -1145,6 +1151,7 @@ ul.nlist .src{display:block;font:400 11.5px/1.3 var(--mono);color:var(--faint);m
  }
  function dayChoices(D){
   const map=new Map();
+  ARCHIDX.forEach(d=>map.set(d,{date:d}));
   (D.days||[]).forEach(d=>map.set(d.date,d));
   const live=fileDay(D);
   if(live&&!map.has(live))map.set(live,{date:live});
@@ -1157,7 +1164,7 @@ ul.nlist .src{display:block;font:400 11.5px/1.3 var(--mono);color:var(--faint);m
    const acct=d.acct==null?'':'<span class="'+(d.acct>0?'pos':d.acct<0?'neg':'')+'">'+sgn1(d.acct)+'</span>';
    return '<button type="button" class="day'+(on?' on':'')+'" role="tab" data-d="'+esc(d.date)+'" aria-selected="'+(on?'true':'false')+'"><span>'+esc(shortDate(d.date))+'</span>'+(d.date===live?'<span class="live">Live</span>':'')+acct+'</button>';
   }).join('');
-  $('days').querySelectorAll('.day').forEach(b=>b.onclick=()=>{DAY=b.dataset.d===fileDay(D)?null:b.dataset.d;render(LAST)});
+  $('days').querySelectorAll('.day').forEach(b=>b.onclick=()=>{DAY=b.dataset.d===fileDay(D)?null:b.dataset.d;render(LAST);if(DAY)fetchDay(DAY).then(()=>render(LAST))});
  }
 
  function render(D){
@@ -1167,9 +1174,14 @@ ul.nlist .src{display:block;font:400 11.5px/1.3 var(--mono);color:var(--faint);m
   renderTape(D); renderFresh(D);renderKpis(D); renderDays(D);
   const view=stocksFor(D);
   const recs=asRows(D);
-  const dayIso=view.live?fileDay(D):(view.day&&view.day.date);
-  $('todayDate').textContent=view.live?(D.date||''):(view.day?niceDate(view.day.date):'');
-  if(view.live){
+  const dayIso=view.arch?DAY:view.live?fileDay(D):(view.day&&view.day.date);
+  $('todayDate').textContent=view.arch?niceDate(DAY):view.live?(D.date||''):(view.day?niceDate(view.day.date):'');
+  if(view.arch){
+   const ad=view.arch.day||{};
+   $('pills').innerHTML='<span class="pill sit">Saved day</span>';
+   $('dayHead').textContent=niceDate(DAY)+(ad.headline?' \u00b7 '+ad.headline.replace(/^No trades yet\..*/,'No trades.'):'');
+   $('daySub').textContent='How the day looked at the close. Tap the newest date to go back to live.';
+  }else if(view.live){
    const day=D.day||D.today||{};
    $('pills').innerHTML=(day.pills||[]).map(p=>'<span class="pill '+(pillCls[p]||'sit')+'">'+esc(p)+'</span>').join('');
    $('dayHead').textContent=day.headline||'';
@@ -1229,7 +1241,7 @@ ul.nlist .src{display:block;font:400 11.5px/1.3 var(--mono);color:var(--faint);m
    return '<dt>'+esc(l[0])+'</dt><dd>'+esc(v)+'</dd>';
   }).join('');
   $('sub').textContent=honestExit(b.sub||'', b.result);
-  try{drawChart(b, SEL, recs, dayIso, view.live)}catch(err){console.error(err);$('legendNote').textContent='Chart failed to draw. The rest of the page is still live.'}
+  try{drawChart(b, SEL, view.arch?asRows(view.arch):recs, dayIso, view.live)}catch(err){console.error(err);$('legendNote').textContent='Chart failed to draw. The rest of the page is still live.'}
 
   const levs=b.chart||b.levels?collectLevels(b):[];
   $('levels').innerHTML=levs.map(l=>'<dt>'+esc(l.name)+'</dt><dd class="'+(l.kind==='pivot'||l.kind==='box'?'key':'')+'">'+pxFmt(l.price)+'</dd>').join('')||'<dt>Levels post with the morning book.</dt><dd></dd>';
@@ -1338,6 +1350,7 @@ ul.nlist .src{display:block;font:400 11.5px/1.3 var(--mono);color:var(--faint);m
  load();
  setInterval(()=>{if(!document.hidden){load();loadPlan()}},60000);
  loadPlan();
+ fetch('days/index.json',{cache:'no-store'}).then(r=>r.ok?r.json():[]).then(x=>{ARCHIDX=Array.isArray(x)?x:[];if(LAST)render(LAST)}).catch(()=>{});
  document.querySelector('#planWrap>summary').addEventListener('click',()=>{document.getElementById('gameplan').dataset.touched=1});
  document.addEventListener('visibilitychange',()=>{if(!document.hidden)load()});
  let rz;addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(()=>{if(LAST)render(LAST)},150)});
