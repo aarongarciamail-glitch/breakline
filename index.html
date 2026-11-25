@@ -507,7 +507,7 @@ html[data-skin=ledger]{--wall:#d39a6a}
 /* crypto tab */
 .cnote{color:var(--dim);margin:0 0 12px}
 #stockPanel[hidden],#sideWrap[hidden],.cdesk[hidden]{display:none!important}.cdesk{display:grid;gap:10px;grid-column:1/-1}
-.ccard.big svg{max-height:260px}
+.ccard.big svg{max-height:none}
 .chead{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline;font-size:13px;color:var(--dim)}
 .cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:10px;margin-bottom:10px;align-items:start}
 .ccard{padding:14px;display:grid;gap:10px}
@@ -1552,10 +1552,10 @@ html[data-skin=ledger]{--wall:#d39a6a}
  let CRY=null;
  const fmtC=v=>v==null?'—':(Math.abs(v)>=1000?Number(v).toLocaleString('en-US',{maximumFractionDigits:0}):Math.abs(v)>=10?Number(v).toFixed(2):Number(v).toFixed(4));
  const pc=v=>v==null?'—':(v>0?'+':v<0?'−':'')+Math.abs(v).toFixed(1)+'%';
- function spark(c){
+ function spark(c,big){
   const cl=(c.closes||[]).map(x=>x[1]), hi=(c.hi20||[]).map(x=>x[1]??x), lo=(c.lo10||[]).map(x=>x[1]??x);
   if(cl.length<2)return '';
-  const W=320,H=110,P=4, all=cl.concat(hi.filter(isFinite),lo.filter(isFinite));
+  const W=big&&innerWidth>640?760:320,H=big&&innerWidth>640?230:110,P=4, all=cl.concat(hi.filter(isFinite),lo.filter(isFinite));
   const mn=Math.min(...all), mx=Math.max(...all), x=i=>P+i*(W-2*P)/(cl.length-1), y=v=>P+(mx-v)/(mx-mn||1)*(H-2*P);
   const path=a=>a.map((v,i)=>isFinite(v)?(i&&isFinite(a[i-1])?'L':'M')+x(i).toFixed(1)+' '+y(v).toFixed(1):'').join(' ');
   let ent='';
@@ -1584,11 +1584,11 @@ html[data-skin=ledger]{--wall:#d39a6a}
   const u=D.updated?new Date(D.updated):null;
   return '<div class="panel ccard big"><div class="top"><span class="cn">'+sym+'</span><span class="cp">$'+fmtC(c.price)+'</span><span class="cc '+((c.chg24h_pct||0)>0?'pos':(c.chg24h_pct||0)<0?'neg':'')+'">'+pc(c.chg24h_pct)+' 24h</span><span class="st pill '+(inn?'in':'out')+'">Swing · '+(inn?'Holding':'Waiting')+'</span></div>'
    +'<div class="act '+(inn?'hold':'wait')+'"><div class="aw">'+word+'</div><dl class="al"><dt>Rule</dt><dd>'+line+'</dd>'+(c.system_in&&!inn?'<dt>Trend</dt><dd>The rule’s trend has been on since '+esc(c.system_since||'?')+', before paper tracking began.</dd>':'')+'</dl></div>'
-   +spark(c)
+   +spark(c,true)
    +'<div class="legend"><span><i class="sw" style="background:var(--text);height:2px"></i>Daily close</span><span><i class="sw" style="background:var(--win);height:2px"></i><span data-g="20-day high">Buy line</span></span><span><i class="sw" style="background:var(--loss);height:2px"></i><span data-g="10-day low">Sell line</span></span></div>'
    +'<dl class="cline">'+rows.map(r=>'<dt>'+esc(r[0])+'</dt><span class="bar"></span><dd>'+esc(r[1])+'</dd>').join('')+'</dl>'
    +'<div class="chead">'+(bt.total_pct!=null?'<span>Backtest '+pc(bt.total_pct)+' vs holding '+pc(bt.hold_total_pct)+', worst drop '+pc(bt.max_dd_pct)+'</span>':'')
-   +'<span>Crypto paper account '+pc(S.account_pct||0)+' · '+(S.n||0)+' trades</span>'+(u?'<span>Checked '+u.toLocaleString('en-US',{timeZone:'America/New_York',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'})+'</span>':'')+'</div>'
+   +'<span>Crypto paper account '+pc(S.account_pct||0)+' · '+(S.n||0)+' trade'+(S.n===1?'':'s')+'</span>'+(u?'<span>Checked '+u.toLocaleString('en-US',{timeZone:'America/New_York',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'})+'</span>':'')+'</div>'
    +(T.length?'<div class="tablewrap"><table><thead><tr><th>In</th><th>Out</th><th class="r">Days</th><th class="r">Result</th></tr></thead><tbody>'+T.map(t=>'<tr><td class="d">'+esc(t.entry_date)+' @ $'+fmtC(t.entry)+'</td><td class="d">'+esc(t.exit_date)+' @ $'+fmtC(t.exit)+'</td><td class="r">'+esc(t.days)+'</td><td class="r '+(t.result_pct>0?'pos':'neg')+'">'+pc(t.result_pct)+'</td></tr>').join('')+'</tbody></table></div>':'')
    +'</div>'+RULE;
  }
