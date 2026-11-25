@@ -1570,9 +1570,9 @@ html[data-skin=ledger]{--wall:#d39a6a}
  let CRY=null;
  const fmtC=v=>v==null?'—':(Math.abs(v)>=1000?Number(v).toLocaleString('en-US',{maximumFractionDigits:0}):Math.abs(v)>=10?Number(v).toFixed(2):Number(v).toFixed(4));
  const pc=v=>v==null?'—':(v>0?'+':v<0?'−':'')+Math.abs(v).toFixed(1)+'%';
- const SPK={};
+ const SPK={}, SPKSIG={};
  function niceTicks(mn,mx,n){const span=mx-mn||1, raw=span/n, mag=Math.pow(10,Math.floor(Math.log10(raw))), st=[1,2,2.5,5,10].map(k=>k*mag).find(k=>k>=raw)||raw;const out=[];for(let v=Math.ceil(mn/st)*st;v<=mx+1e-9;v+=st)out.push(v);return out}
- function spark(c,big){
+ function spark(c,big,sym){
   const dates=(c.closes||[]).map(x=>x[0]), cl=(c.closes||[]).map(x=>x[1]), hi=(c.hi20||[]).map(x=>x[1]??x), lo=(c.lo10||[]).map(x=>x[1]??x);
   if(cl.length<2)return '';
   const wide=big&&innerWidth>640;
@@ -1589,14 +1589,29 @@ html[data-skin=ledger]{--wall:#d39a6a}
   labs.sort((p,q)=>p.y-q.y);for(let k=1;k<labs.length;k++)if(labs[k].y-labs[k-1].y<13)labs[k].y=labs[k-1].y+13;
   const over=labs.length?labs[labs.length-1].y-(T+ph+4):0;if(over>0)labs.forEach(l=>l.y-=over);
   labs.forEach(l=>{g+='<line x1="'+(L+pw)+'" x2="'+(L+pw+5)+'" y1="'+y(l.v).toFixed(1)+'" y2="'+l.y.toFixed(1)+'" stroke="'+l.c+'" opacity=".6"/><text x="'+(L+pw+8)+'" y="'+(l.y+3.5).toFixed(1)+'" fill="'+l.c+'">'+esc(l.t)+'</text>'});
+  // BUY/SELL markers: the breakout rule replayed over the days shown (filled), and the value
+  // track's "very cheap" entries (outlined Potential BUY). Same rules as crypto.py / value.py.
+  const sig=[]; let holdx=false;
+  for(let i=0;i<cl.length;i++){
+   if(!holdx&&isFinite(hi[i])&&cl[i]>hi[i]){holdx=true;sig.push({i,k:'buy',t:'BUY'})}
+   else if(holdx&&isFinite(lo[i])&&cl[i]<lo[i]){holdx=false;sig.push({i,k:'sell',t:'SELL'})}
+  }
+  const vh=(VAL&&VAL.coins&&VAL.coins[sym]&&VAL.coins[sym].mayer_hist)||[], vm=new Map(vh);
+  let armed=false; dates.forEach((d,i)=>{const m=vm.get(d); if(m==null)return; if(m>=0.9)armed=true; else if(armed&&m<0.8){armed=false;sig.push({i,k:'pbuy',t:'Potential BUY'})}});   // once per dip; re-arms after Mayer recovers to 0.9
+  let mk2='';
+  sig.forEach(s2=>{const X=x(s2.i), Y=y(cl[s2.i]), up=s2.k!=='sell', col=s2.k==='sell'?'var(--loss)':'var(--win)';
+   const tri=up?`M${X} ${Y+5} l5 9 h-10 z`:`M${X} ${Y-5} l5 -9 h-10 z`;
+   mk2+='<path d="'+tri+'" '+(s2.k==='pbuy'?'fill="none" stroke="'+col+'" stroke-width="1.5"':'fill="'+col+'"')+'/>'
+    +(X>L+pw*0.72?'<text x="'+(X-7)+'" text-anchor="end" y="'+(up?Y+16:Y-8)+'" fill="'+col+'" font-size="10">'+s2.t+'</text>':'<text x="'+(X+7)+'" y="'+(up?Y+16:Y-8)+'" fill="'+col+'" font-size="10">'+s2.t+'</text>')});
+  SPKSIG[sym||'']=sig;
   let ent='';
   if(c.status==='in'&&c.entry_date){const i=dates.findIndex(d=>d>=c.entry_date);if(i>=0)ent='<circle cx="'+x(i)+'" cy="'+y(c.entry)+'" r="3.4" fill="var(--win)"/><text x="'+(x(i)+6)+'" y="'+(y(c.entry)+12)+'" fill="var(--win)">bought</text>'}
   const id='spk'+Math.random().toString(36).slice(2,8);
-  SPK[id]={dates,cl,hi,lo,L,pw,W,n:cl.length,x,y,T,ph};
+  SPK[id]={dates,cl,hi,lo,L,pw,W,n:cl.length,x,y,T,ph,sym};
   return '<svg class="spk" id="'+id+'" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Last '+cl.length+' days: daily close with the buy line and sell line">'+g
    +'<path d="'+path(hi)+'" fill="none" stroke="var(--win)" stroke-width="1.1" stroke-dasharray="4 3" opacity=".85"/>'
    +'<path d="'+path(lo)+'" fill="none" stroke="var(--loss)" stroke-width="1.1" stroke-dasharray="4 3" opacity=".85"/>'
-   +'<path d="'+path(cl)+'" fill="none" stroke="var(--text)" stroke-width="1.6"/>'+ent
+   +'<path d="'+path(cl)+'" fill="none" stroke="var(--text)" stroke-width="1.6"/>'+ent+mk2
    +'<line class="spx" x1="0" x2="0" y1="'+T+'" y2="'+(T+ph)+'" stroke="var(--dim)" stroke-dasharray="2 3" opacity="0"/>'
    +'<circle class="spd" r="3.2" fill="var(--text)" opacity="0"/></svg>';
  }
@@ -1608,7 +1623,7 @@ html[data-skin=ledger]{--wall:#d39a6a}
    const show=ev=>{const q=svgPoint(svg,ev);if(!q)return;let i=Math.round((q.x-D.L)/D.pw*(D.n-1));i=Math.max(0,Math.min(D.n-1,i));
     const X=D.x(i);vl.setAttribute('x1',X);vl.setAttribute('x2',X);vl.setAttribute('opacity','1');dot.setAttribute('cx',X);dot.setAttribute('cy',D.y(D.cl[i]));dot.setAttribute('opacity','1');
     const f=v=>isFinite(v)?'$'+(v>=1000?Math.round(v).toLocaleString('en-US'):fmtC(v)):'—';
-    moveTip(ev,tipHTML(new Date(D.dates[i]+'T12:00:00Z').toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}),[['Close',f(D.cl[i])],['Buy line',f(D.hi[i])],['Sell line',f(D.lo[i])]]))};
+    const sg=(SPKSIG[D.sym]||[]).find(z=>z.i===i);moveTip(ev,tipHTML(new Date(D.dates[i]+'T12:00:00Z').toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}),[['Close',f(D.cl[i])],['Buy line',f(D.hi[i])],['Sell line',f(D.lo[i])]].concat(sg?[['Signal',sg.k==='pbuy'?'Potential BUY: entered the very cheap zone (Mayer under 0.8)':sg.k==='buy'?'BUY: closed above the 20-day high':'SELL: closed below the 10-day low']]:[])))};
    svg.addEventListener('pointermove',show); svg.addEventListener('pointerdown',show);
    svg.addEventListener('pointerleave',()=>{vl.setAttribute('opacity','0');dot.setAttribute('opacity','0');tip.hidden=true});
   });
@@ -1673,8 +1688,8 @@ html[data-skin=ledger]{--wall:#d39a6a}
   const u=D.updated?new Date(D.updated):null;
   return valueView(sym)+'<div class="panel ccard big"><div class="top"><span class="cn">'+coinName(sym)+'</span><span class="cp">$'+fmtC(c.price)+'</span><span class="cc '+((c.chg24h_pct||0)>0?'pos':(c.chg24h_pct||0)<0?'neg':'')+'">'+pc(c.chg24h_pct)+' 24h</span><span class="st pill '+(inn?'in':'out')+'">Swing · '+(inn?'Holding':'Waiting')+'</span></div>'
    +'<div class="act '+(inn?'hold':'wait')+'"><div class="aw">'+word+'</div><dl class="al"><dt>Rule</dt><dd>'+line+'</dd>'+(c.system_in&&!inn?'<dt>Trend</dt><dd>The rule’s trend has been on since '+esc(c.system_since||'?')+', before paper tracking began.</dd>':'')+'</dl></div>'
-   +spark(c,true)
-   +'<div class="legend"><span><i class="sw" style="background:var(--text);height:2px"></i>Daily close</span><span><i class="sw" style="background:var(--win);height:2px"></i><span data-g="20-day high">Buy line</span></span><span><i class="sw" style="background:var(--loss);height:2px"></i><span data-g="10-day low">Sell line</span></span></div>'
+   +spark(c,true,sym)
+   +'<div class="legend"><span><i class="sw" style="background:var(--text);height:2px"></i>Daily close</span><span><i class="sw" style="background:var(--win);height:2px"></i><span data-g="20-day high">Buy line</span></span><span><i class="sw" style="background:var(--loss);height:2px"></i><span data-g="10-day low">Sell line</span></span><span>\u25b2 BUY / \u25bc SELL = breakout rule</span><span>\u25b3 Potential BUY = entered very cheap</span></div>'
    +'<dl class="cline">'+rows.map(r=>'<dt>'+esc(r[0])+'</dt><span class="bar"></span><dd>'+esc(r[1])+'</dd>').join('')+'</dl>'
    +'<div class="chead">'+(bt.total_pct!=null?'<span>Backtest '+pc(bt.total_pct)+' vs holding '+pc(bt.hold_total_pct)+', worst drop '+pc(bt.max_dd_pct)+'</span>':'')
    +'<span>Crypto paper account '+pc(S.account_pct||0)+' · '+(S.n||0)+' trade'+(S.n===1?'':'s')+'</span>'+(CLIVE_AT?'<span>Live price '+CLIVE_AT.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',second:'2-digit'})+' (Coinbase)</span>':'')+(u?'<span>Rule checked '+u.toLocaleString('en-US',{timeZone:'America/New_York',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'})+'</span>':'')+'</div>'
