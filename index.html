@@ -491,6 +491,19 @@ html[data-skin=ledger] .pill.paper{background:rgba(184,169,101,.1)}
 html[data-skin=ledger]{--wall:#d39a6a}
 .sw.wall{background:var(--wall);height:2px}
 .ladder .wall dt,.ladder .wall dd{color:var(--wall)}
+/* glossary: Learn tab + hover explanations */
+.gsearch{width:100%;max-width:420px;margin:0 0 12px;padding:10px 14px;border-radius:12px;border:1px solid var(--line-2);background:var(--panel);color:var(--text);font:400 14px/1.2 var(--display)}
+.gsearch:focus{outline:none;border-color:var(--teal)}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px;align-items:start}
+.ggroup{padding:12px 14px}
+.ggroup h3{margin:0 0 10px;font:var(--lab);letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
+.ggroup dl{margin:0;display:grid;gap:10px}
+.ggroup dt{font:600 14px/1.3 var(--display);color:var(--text)}
+.ggroup dd{margin:2px 0 0;font-size:13.5px;line-height:1.5;color:var(--dim)}
+[data-g]{text-decoration:underline dotted color-mix(in srgb,var(--faint) 70%,transparent);text-underline-offset:3px;cursor:help}
+.tk [data-g],.day [data-g],button [data-g]{text-decoration:none;cursor:inherit}
+.tip .gx{max-width:300px;font-family:var(--display);font-size:12.5px;line-height:1.5;color:var(--dim);margin-top:4px}
+.tip .gx b{color:var(--text)}
 </style>
 </head>
 <body>
@@ -507,7 +520,7 @@ html[data-skin=ledger]{--wall:#d39a6a}
    <span class="word">Breakline</span>
   </a>
   <nav class="links" aria-label="Sections">
-   <a href="#today" data-go="today">Today</a><a href="#plan" data-go="plan">Plan</a><a href="#record" data-go="record">Record</a><a href="#how" data-go="how">How<span class="long">&nbsp;it works</span></a>
+   <a href="#today" data-go="today">Today</a><a href="#plan" data-go="plan">Plan</a><a href="#record" data-go="record">Record</a><a href="#how" data-go="how">Learn</a>
   </nav>
   <button type="button" class="skinbtn" id="skinBtn" aria-label="Switch look" title="Switch look (Haze / Ledger)">
    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5a8.5 8.5 0 0 1 0 17z" class="half"/></svg>
@@ -604,6 +617,12 @@ html[data-skin=ledger]{--wall:#d39a6a}
   </div>
  </section>
 
+ <section id="learn" data-tab="how" aria-labelledby="learn-h">
+  <div class="sh"><h2 id="learn-h">Learn the words</h2><span class="meta">Every term on this page, in plain English. On a computer, hover a term anywhere to see this.</span></div>
+  <input class="gsearch" id="gSearch" type="search" placeholder="Search a word, like R1 or VWAP" aria-label="Search the glossary">
+  <div class="ggrid" id="gList"></div>
+ </section>
+
  <section id="how" data-tab="how" aria-labelledby="how-h">
   <div class="sh"><h2 id="how-h">How it works</h2><span class="meta">Same rules every day</span></div>
   <div class="panel readkey">
@@ -639,7 +658,7 @@ html[data-skin=ledger]{--wall:#d39a6a}
  <a href="#today" data-go="today"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18l5-6 4 3 7-9"/></svg><span>Today</span></a>
  <a href="#plan" data-go="plan"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h12v16H6z"/><path d="M9 9h6M9 13h6M9 17h3"/></svg><span>Plan</span></a>
  <a href="#record" data-go="record"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20V10M10 20V4M15 20v-7M20 20v-11"/></svg><span>Record</span></a>
- <a href="#how" data-go="how"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 11v5M12 8h.01"/></svg><span>How</span></a>
+ <a href="#how" data-go="how"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 11v5M12 8h.01"/></svg><span>Learn</span></a>
 </nav>
 <footer data-tab="how">
   <span class="nfa">NFA · DYOR</span>
@@ -959,7 +978,7 @@ html[data-skin=ledger]{--wall:#d39a6a}
    const y=yP(lv.price), col=levelColor(lv.kind);
    const dash=lv.kind==='wall'?'7 4':(lv.kind==='pivot'||lv.kind==='pmh'||lv.kind==='pml')?'4 4':null;
    mk('line',{x1:L,x2:plotRight,y1:y,y2:y,stroke:col,'stroke-width':1,'stroke-dasharray':dash,'data-level':lv.name},svg);
-   hits.levels.push({y, html:tipHTML(lv.name, [['Price', pxFmt(lv.price)], ['Kind', lv.kind==='pivot'?'Pivot':lv.name]])});
+   {const g=gloss(lv.name);hits.levels.push({y, html:tipHTML(lv.name, [['Price', pxFmt(lv.price)]])+(g?'<div class="gx">'+esc(g.text)+'</div>':'')})}
   });
   $('hiPins').innerHTML=hiPins.sort((a,b)=>a.price-b.price).map(lv=>'<span class="pin" data-pin="hi">↑ '+esc(lv.name)+' <b>'+pxFmt(lv.price)+'</b></span>').join('');
   $('loPins').innerHTML=loPins.sort((a,b)=>b.price-a.price).map(lv=>'<span class="pin" data-pin="lo">↓ '+esc(lv.name)+' <b>'+pxFmt(lv.price)+'</b></span>').join('');
@@ -1501,6 +1520,91 @@ html[data-skin=ledger]{--wall:#d39a6a}
  load();
  setInterval(()=>{if(!document.hidden){load();loadPlan()}},60000);
  loadPlan();
+
+ /* ---------- glossary: one list powers the Learn tab and hover explanations ---------- */
+ const GLOSS=[
+  ['The trade',[
+   ['Opening range (the box)','The high and low of the first 15 minutes, 9:30 to 9:45. Everything after is measured against it.',['box','opening range','range high','range low','box high','box low']],
+   ['Break','A 5-minute candle that closes outside the box. Above it means calls, below it means puts.',['break','breakout']],
+   ['Calls / Puts','A call gains when the stock goes up; a put gains when it goes down. Breakline buys same-day options (0DTE).',['calls','puts','call','put']],
+   ['0DTE','Zero days to expiration: options that expire at the close today. Cheap and fast, and they can go to zero.',['0dte']],
+   ['Entry','The price where the paper trade was bought.',['entry']],
+   ['Stop','Where the trade gets out to limit the loss: a 5-minute close back inside the box, or the option losing half its value.',['stop','stop-loss']],
+   ['Exit','Where the rest of the trade was sold.',['exit']],
+   ['Trim (sell 1/3)','Selling a third of the position at a target to lock in some profit, while the rest keeps running.',['sell 1/3','trim','1/3']],
+   ['Break-even stop','After the first trim, the stop moves to the entry price, so the rest of the trade should not turn into a loss on the stock move.',['break-even','breakeven','be']],
+   ['Paper','Pretend trades with no real money, used to prove the rules work before risking anything.',['paper']],
+   ['Wide box','The box is more than 2x its normal size. Historically these days were not worse, but moves are bigger.',['wide','wide box']]]],
+  ['Price levels',[
+   ['P (pivot)','The middle point from yesterday: (high + low + close) / 3. Price often reacts around it.',['p','p pivot','pivot p','pivot']],
+   ['R1, R2, R3','Resistance pivots above the price, calculated from yesterday’s high, low and close. They are the take-profit targets for calls.',['r1','r2','r3','r1 pivot','r2 pivot','r3 pivot']],
+   ['S1, S2, S3','Support pivots below the price, from the same math. They are the take-profit targets for puts.',['s1','s2','s3','s1 pivot','s2 pivot','s3 pivot']],
+   ['Prior-day high / low (PDH / PDL)','Yesterday’s highest and lowest price. Breakouts often stall or bounce at these.',['prior-day high','prior-day low','pdh','pdl','prior day']],
+   ['Yesterday’s close','Where the stock ended yesterday. A gap is measured from here.',['yesterday’s close','yesterday\'s close','close']],
+   ['Pre-market high / low (PMH / PML)','The highest and lowest price between 4:00 and 9:30 am, before the market opens.',['pre-market high','pre-market low','pmh','pml','pre-market']],
+   ['Gap','How far the price opens above or below yesterday’s close. Big gaps make wide, fast boxes.',['gap','pre-mkt']],
+   ['VWAP','Volume-weighted average price: the average price paid today, weighted by volume. Price far above or below it tends to snap back.',['vwap']]]],
+  ['Options walls',[
+   ['Call wall (C wall)','The strike above the price with the most call options open. Dealers hedging those calls often make it act like a ceiling.',['call wall','c wall']],
+   ['Put wall (P wall)','The strike below the price with the most put options open. It often acts like a floor.',['put wall','p wall']],
+   ['Magnet','The strike with the most options open overall. Price often drifts toward it or stalls there, especially late in the day.',['magnet']],
+   ['Busiest strike','The strike with the most contracts traded so far today: where the action is right now.',['busiest','busiest strike']],
+   ['Open interest (OI)','How many option contracts are still open at a strike. More open interest means more hedging around that price.',['open interest','oi']]]],
+  ['Market mood',[
+   ['VIX','The market’s fear gauge, from S&P 500 option prices. Higher means bigger swings and pricier options. 35+ means size down.',['vix']],
+   ['CL (crude oil)','Oil futures. Oil up with yields up has leaned toward puts; oil down has leaned toward calls.',['cl','crude','oil']],
+   ['10Y','The 10-year Treasury yield. Rising yields usually pressure stocks, especially tech.',['10y','10-year']],
+   ['Tape','The overall mood from oil, yields and VIX. “Tape split” means they disagree, so the box decides the side.',['tape','tape split','lean']]]],
+  ['Option numbers',[
+   ['IV (implied volatility)','How much movement the option price assumes. When IV is high versus how much the stock really moves, options are expensive.',['iv','option at the break','implied volatility']],
+   ['20-day volatility','How much the stock actually moved over the last 20 days, yearly rate.',['20-day volatility','rv','realized']],
+   ['Rich / elevated','The option costs more than recent moves justify. Small moves against you hurt more.',['rich','elevated']],
+   ['Option spread','The gap between the buy and sell price, as a % of the middle. Breakline skips spreads over 15%.',['option spread','spread']],
+   ['Strike','The price the option is based on. Nearest strike = closest to the current price.',['strike']]]],
+  ['Scorekeeping',[
+   ['Win rate','The share of trades that made money.',['win rate','wins']],
+   ['Average winner / loser','The average gain of winning trades, and the average loss of losing ones.',['average winner','average loser']],
+   ['Profit factor','Total gains divided by total losses. Above 1 makes money; 1.2+ is the bar for real money.',['profit factor','pf']],
+   ['Account (paper account)','The pretend account if each trade used 4% of it. Shown in percent only.',['account','paper account']],
+   ['Worst dip (drawdown)','The biggest drop from a high point in the paper account. Must stay under 12% to go live.',['worst dip','worst drawdown','drawdown','max drawdown']],
+   ['Road to real money','The checks that must all pass before real money: 20+ trades, profit factor 1.2+, average trade above 0, drawdown 12% or less, and a passing backtest.',['real money','road to real money']],
+   ['Backtest','Running the rules on past price data to see how they would have done.',['backtest','backtest, 59 days']],
+   ['Normal box / today’s box','How wide the opening range usually is for this stock (median of 40 days) versus today.',['normal box','today’s box','today\'s box']]]]
+ ];
+ const GMAP=new Map();
+ GLOSS.forEach(([grp,items])=>items.forEach(([term,text,keys])=>{const e={term,text,grp};keys.concat([term]).forEach(k=>GMAP.set(k.toLowerCase().trim(),e))}));
+ function gloss(label){
+  if(!label)return null;
+  let t=String(label).toLowerCase().replace(/\s+/g,' ').replace(/[↑↓:]/g,'').trim();
+  if(GMAP.has(t))return GMAP.get(t);
+  t=t.replace(/\s*[-+−]?\$?\d[\d,.]*%?.*$/,'').trim();   // "R1 pivot 729.09" -> "r1 pivot"
+  if(GMAP.has(t))return GMAP.get(t);
+  const first=t.split(' ')[0];
+  return GMAP.get(first)||null;
+ }
+ function renderGloss(q){
+  q=(q||'').toLowerCase().trim();
+  $('gList').innerHTML=GLOSS.map(([grp,items])=>{
+   const hit=items.filter(([term,text,keys])=>!q||(term+' '+text+' '+keys.join(' ')).toLowerCase().includes(q));
+   if(!hit.length)return '';
+   return '<div class="panel ggroup"><h3>'+esc(grp)+'</h3><dl>'+hit.map(([term,text])=>'<div><dt>'+esc(term)+'</dt><dd>'+esc(text)+'</dd></div>').join('')+'</dl></div>';
+  }).join('')||'<p class="meta">No match. Try another word.</p>';
+ }
+ renderGloss(''); $('gSearch').addEventListener('input',e=>renderGloss(e.target.value));
+ const GSEL='#levels dt,.ladder dt,.pin,dl.ms dt,.kpi .kl,.legend span,.chip .k,.lean,.tline span,dl.al dt,.stat .l,th,.ck li>span:nth-child(2),.tagwide,.gap,.pill,.box h3';
+ function decorate(){
+  document.querySelectorAll(GSEL).forEach(el=>{
+   if(el.closest('#learn'))return;
+   const g=gloss(el.textContent);
+   if(g){el.dataset.g=g.term}else if(el.dataset.g){delete el.dataset.g}
+  });
+ }
+ let decoT=null; new MutationObserver(()=>{clearTimeout(decoT);decoT=setTimeout(decorate,60)}).observe(document.body,{childList:true,subtree:true});
+ const gTip=el=>{const g=GMAP.get(el.dataset.g.toLowerCase());return g?'<div class="th">'+esc(g.term)+'</div><div class="gx">'+esc(g.text)+'</div>':''};
+ document.addEventListener('pointerover',ev=>{const el=ev.target.closest&&ev.target.closest('[data-g]');if(!el||ev.pointerType==='touch')return;moveTip(ev,gTip(el))});
+ document.addEventListener('pointermove',ev=>{const el=ev.target.closest&&ev.target.closest('[data-g]');if(el&&ev.pointerType!=='touch')moveTip(ev,gTip(el))});
+ document.addEventListener('pointerout',ev=>{const el=ev.target.closest&&ev.target.closest('[data-g]');if(el&&ev.pointerType!=='touch'&&!el.contains(ev.relatedTarget))tip.hidden=true});
+ document.addEventListener('click',ev=>{const el=ev.target.closest&&ev.target.closest('[data-g]');if(!el||el.closest('button,a'))return;moveTip(ev,gTip(el));clearTimeout(window.__gt);window.__gt=setTimeout(()=>{tip.hidden=true},4500)});
 
  /* look switch: Haze <-> Ledger, remembered on this device */
  const skinBtn=document.getElementById('skinBtn');
