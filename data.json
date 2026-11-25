@@ -39,10 +39,10 @@
  },
  "tape": {
   "ok": true,
-  "asof": "2026-11-25T15:15:46-05:00",
+  "asof": "2026-11-25T15:20:28-05:00",
   "lean": "mixed",
   "label": "Tape split",
-  "strategy": "Calls and puts both stay open. Oil is up 3.9% and the 10-year is down 5.6 bp, so they disagree. The opening-range close picks the side.",
+  "strategy": "Calls and puts both stay open. Oil is up 3.8% and the 10-year is down 5.6 bp, so they disagree. The opening-range close picks the side.",
   "block_calls": false,
   "block_puts": false,
   "vix_small": false,
@@ -54,22 +54,22 @@
   "note": "Context only. Oil 1% and the 10-year 5 bp describe the lean. VIX 35 is a size note. Neither one blocks a call or a put.",
   "vix": {
    "name": "VIX",
-   "price": 27.91,
+   "price": 27.81,
    "prev": 26.36,
-   "chg_pct": 5.9,
-   "move": "Up 5.9% from yesterday's close of 26.4.",
-   "why": "Up 5.9% from yesterday's close of 26.4.",
+   "chg_pct": 5.5,
+   "move": "Up 5.5% from yesterday's close of 26.4.",
+   "why": "Up 5.5% from yesterday's close of 26.4.",
    "headline": null,
    "means": "Fear picked up and VIX is still under 35, so size stays normal."
   },
   "oil": {
    "name": "Crude",
-   "price": 83.89,
+   "price": 83.83,
    "prev": 80.73,
-   "chg_pct": 3.9,
-   "move": "Up 3.9% from yesterday's close of 80.73.",
+   "chg_pct": 3.8,
+   "move": "Up 3.8% from yesterday's close of 80.73.",
    "range": "Inside the last month, 79.07 to 104.99.",
-   "why": "Up 3.9% from yesterday's close of 80.73. Associated Press: BC-OILS",
+   "why": "Up 3.8% from yesterday's close of 80.73. Associated Press: BC-OILS",
    "headline": {
     "source": "Associated Press",
     "title": "BC-OILS"
@@ -230,9 +230,9 @@
   }
  ],
  "session": true,
- "next_check": "3:20 PM",
+ "next_check": "3:25 PM",
  "mode": "paper",
- "updated": "2026-11-25T15:15:45-05:00",
+ "updated": "2026-11-25T15:20:28-05:00",
  "date": "Wed \u00b7 Nov 25",
  "day": {
   "pills": [
@@ -323,7 +323,8 @@
      "14:55",
      "15:00",
      "15:05",
-     "15:10"
+     "15:10",
+     "15:15"
     ],
     "closes": [
      699.82,
@@ -392,9 +393,10 @@
      715.73,
      717.6,
      715.48,
-     716.27,
+     716.34,
      716.01,
-     716.0
+     716.0,
+     715.94
     ],
     "box": {
      "hi": 703.7,
@@ -958,11 +960,11 @@
      },
      {
       "t": "15:00",
-      "o": 715.6,
+      "o": 715.57,
       "h": 716.65,
-      "l": 715.59,
-      "c": 716.27,
-      "v": 117923.0
+      "l": 715.57,
+      "c": 716.34,
+      "v": 255989.0
      },
      {
       "t": "15:05",
@@ -979,6 +981,14 @@
       "l": 715.42,
       "c": 716.0,
       "v": 230696.0
+     },
+     {
+      "t": "15:15",
+      "o": 715.94,
+      "h": 716.42,
+      "l": 715.63,
+      "c": 715.94,
+      "v": 207743.29287
      }
     ],
     "opens": [
@@ -1048,9 +1058,10 @@
      715.8,
      715.73,
      717.59,
-     715.6,
+     715.57,
      716.3,
-     716.12
+     716.12,
+     715.94
     ],
     "highs": [
      703.7,
@@ -1121,7 +1132,8 @@
      717.74,
      716.65,
      716.89,
-     716.65
+     716.65,
+     716.42
     ],
     "lows": [
      699.79,
@@ -1190,9 +1202,10 @@
      714.95,
      715.3,
      715.42,
-     715.59,
+     715.57,
      715.61,
-     715.42
+     715.42,
+     715.63
     ],
     "volumes": [
      2049773.0,
@@ -1261,9 +1274,10 @@
      489920.0,
      426207.0,
      437744.566013,
-     117923.0,
+     255989.0,
      152802.001299,
-     230696.0
+     230696.0,
+     207743.29287
     ],
     "option": {
      "contract": "SPY 704 call",
@@ -1351,9 +1365,10 @@
      705.5305,
      705.6498,
      705.7627,
-     705.7926,
-     705.8311,
-     705.8878
+     705.8275,
+     705.8657,
+     705.9221,
+     705.9722
     ]
    },
    "levels": [
@@ -1486,7 +1501,7 @@
     "option": "calls, paper context only",
     "date": "2026-11-25",
     "planned_exit": "15:30",
-    "last_c": 715.91,
+    "last_c": 715.94,
     "backfilled": true,
     "note": "Added after the fact on 11/25: the engine went live at 13:29, after this signal. No alert went out at the signal time."
    },
@@ -1613,7 +1628,8 @@
      "14:55",
      "15:00",
      "15:05",
-     "15:10"
+     "15:10",
+     "15:15"
     ],
     "closes": [
      612.25,
@@ -1682,9 +1698,10 @@
      631.7,
      634.2,
      631.77,
-     632.74,
+     632.78,
      632.09,
-     632.01
+     632.01,
+     632.02
     ],
     "box": {
      "hi": 617.74,
@@ -2251,8 +2268,8 @@
       "o": 631.78,
       "h": 633.24,
       "l": 631.78,
-      "c": 632.74,
-      "v": 236400.5
+      "c": 632.78,
+      "v": 366611.5
      },
      {
       "t": "15:05",
@@ -2269,6 +2286,14 @@
       "l": 631.47,
       "c": 632.01,
       "v": 195127.16084
+     },
+     {
+      "t": "15:15",
+      "o": 632.0,
+      "h": 632.61,
+      "l": 631.67,
+      "c": 632.02,
+      "v": 162047.654787
      }
     ],
     "opens": [
@@ -2340,7 +2365,8 @@
      634.17,
      631.78,
      632.78,
-     632.09
+     632.09,
+     632.0
     ],
     "highs": [
      617.79,
@@ -2411,7 +2437,8 @@
      634.53,
      633.24,
      633.45,
-     632.92
+     632.92,
+     632.61
     ],
     "lows": [
      612.23,
@@ -2482,7 +2509,8 @@
      631.77,
      631.78,
      631.64,
-     631.47
+     631.47,
+     631.67
     ],
     "volumes": [
      2421380.133255,
@@ -2551,9 +2579,10 @@
      666287.862578,
      459787.64644,
      354636.5,
-     236400.5,
+     366611.5,
      180587.35919,
-     195127.16084
+     195127.16084,
+     162047.654787
     ],
     "option": {
      "contract": "QQQ 618 call",
@@ -2641,9 +2670,10 @@
      618.4583,
      618.591,
      618.6879,
-     618.7513,
-     618.7987,
-     618.8485
+     618.7861,
+     618.8332,
+     618.8828,
+     618.9236
     ]
    },
    "levels": [
@@ -2776,7 +2806,7 @@
     "option": "calls, paper context only",
     "date": "2026-11-25",
     "planned_exit": "15:30",
-    "last_c": 632.01,
+    "last_c": 632.02,
     "backfilled": true,
     "note": "Added after the fact on 11/25: the engine went live at 13:29, after this signal. No alert went out at the signal time."
    },
