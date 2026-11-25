@@ -10,9 +10,16 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Breakline">
 <link rel="apple-touch-icon" href="icon-180.png">
+<meta name="description" content="One box every morning, then the break. Paper trading, plain to see.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Breakline">
+<meta property="og:description" content="One box every morning, then the break. Wins, losses and the days I sit out, plain to see.">
+<meta property="og:image" content="https://aarongarciamail-glitch.github.io/breakline/og.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="manifest" href="manifest.webmanifest">
 <title>Breakline</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='3.5' y='13.5' width='17' height='13' rx='3.5' fill='none' stroke='%238e98a4' stroke-width='1.8'/%3E%3Cpath d='M6.5 22.5 L11 18.5 L14.5 20.5 L27.5 5.5' fill='none' stroke='%23e9edf1' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='27.5' cy='5.5' r='2.3' fill='%233aa9b8'/%3E%3C/svg%3E">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500;600&display=swap">
@@ -42,7 +49,8 @@
  color-scheme:dark;
 }
 *{box-sizing:border-box}
-html{background:var(--ink);overflow-x:clip}
+html,body{overflow-x:clip}
+html{background:var(--ink)}
 body{margin:0;color:var(--text);font:400 15px/1.5 var(--display);-webkit-font-smoothing:antialiased;
  background:var(--ink);
  padding-left:max(14px,env(safe-area-inset-left,0px));
@@ -66,7 +74,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .page{position:relative;z-index:1;max-width:1180px;margin:0 auto}
 header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:6;display:flex;align-items:center;gap:14px;min-height:52px;
  border-bottom:1px solid var(--line);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
-header.top::before{content:"";position:absolute;inset:0 -50vw;background:rgba(6,7,8,.55);z-index:-1}
+header.top::before{content:"";position:absolute;top:0;bottom:0;left:50%;width:100vw;transform:translateX(-50%);background:rgba(6,7,8,.55);z-index:-1}
 .brand{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--text)}
 .brand svg{width:26px;height:26px;flex:none}
 .word{font:500 18px/1 var(--display);letter-spacing:-.03em;background:linear-gradient(100deg,var(--silver-hi) 10%,var(--silver-lo) 90%);-webkit-background-clip:text;background-clip:text;color:transparent}
@@ -75,7 +83,6 @@ nav.links a{color:var(--dim);text-decoration:none;font-size:13.5px;padding:8px 1
 nav.links a:hover{color:var(--text);background:rgba(255,255,255,.05)}
 .strip{display:flex;justify-content:space-between;gap:16px;align-items:baseline;padding:12px 0 4px;min-width:0;max-width:100%}
 .lede{margin:0;color:var(--dim);font-size:14px;line-height:1.45;max-width:68ch;min-width:0}
-.page{overflow-x:clip}
 .stripmeta{margin:0;display:flex;flex-wrap:wrap;gap:8px 12px;justify-content:flex-end;font:400 12px/1.4 var(--mono);color:var(--faint);white-space:nowrap}
 .fresh.stale{color:var(--warn)}
 .kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:6px 0 10px}
@@ -379,6 +386,69 @@ nav.links a.on{color:var(--text);background:rgba(255,255,255,.07)}
 }
 .planwrap>summary h2::after{content:none!important}
 .planwrap>summary{cursor:default}
+/* ---------- polish pass: one type system ----------
+   Geist for every word, Geist Mono only for numbers (prices, %, times). Labels: 11px, 600, wide tracking.
+   Scale: 11 label · 12.5 caption · 14 body · 16 lead · 20 title · 24 section · 28 hero number */
+:root{--lab:600 11px/1.2 var(--display)}
+header.top{min-height:58px;gap:18px;border-bottom:0}
+header.top::after{content:"";position:absolute;left:50%;bottom:0;width:100vw;transform:translateX(-50%);border-bottom:1px solid var(--line);pointer-events:none}
+header.top::before{background:linear-gradient(180deg,rgba(6,7,8,.86),rgba(6,7,8,.7))}
+.brand{gap:10px}
+.brand svg{width:30px;height:30px;filter:drop-shadow(0 0 10px rgba(58,169,184,.18))}
+.word{font:600 18px/1 var(--display);letter-spacing:-.035em}
+nav.links{gap:2px;padding:3px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.025)}
+nav.links a{min-height:34px;padding:6px 14px;font:500 13.5px/1 var(--display);color:var(--dim)}
+nav.links a.on{color:var(--ink);background:linear-gradient(180deg,#f6f8fa,#c9d0d7);box-shadow:0 1px 0 rgba(255,255,255,.4) inset}
+nav.links a:not(.on):hover{color:var(--text);background:rgba(255,255,255,.06)}
+/* labels: sans, small caps-style */
+.kpi .kl,.box h3,.readkey h3,th,.chip .k,.lean,.pill,.tagwide,.step .t,footer .nfa,.day .live{font:var(--lab);letter-spacing:.08em;text-transform:uppercase}
+.pill{padding:6px 10px}
+.chip .k{border:0;padding:0;color:var(--faint)}
+.tagwide{font-size:9.5px;padding:3px 6px}
+/* captions and meta lines: sans, not mono */
+.meta,.stripmeta,.asofbig,.distbig,.legend,td.d,.pin,ul.nlist .src,.tip{font-family:var(--display)}
+.meta{font-size:12.5px;letter-spacing:0}
+.stripmeta{font-size:12.5px;gap:6px 10px}
+.stripmeta #todayDate{color:var(--dim)}
+.fresh{color:var(--dim)}
+.asofbig,.distbig{font-size:13px;color:var(--dim)}
+.legend{font-size:12px}
+td.d{font-size:13px}
+.pin{font-size:12px;padding:3px 9px}
+.pin b{font-family:var(--mono);font-weight:500}
+/* section titles all the same */
+h2,.sh h2{font:500 22px/1.2 var(--display);letter-spacing:-.03em}
+#dayHead{font:500 22px/1.25 var(--display);letter-spacing:-.025em}
+.headline,.roadhead{font-family:var(--display)}
+/* ticker symbols: sans 600; prices stay mono */
+.sym,.tk .s,.bytick td:first-child{font-family:var(--display);font-weight:600;letter-spacing:-.01em}
+.sym{font-size:20px}
+.tk .s{font-size:14px}
+.tk .px,.pxbig{font-weight:500;letter-spacing:-.02em}
+/* day chips: date in sans, % in mono */
+.day{font:500 12.5px/1 var(--display);padding:7px 11px}
+.day .pos,.day .neg{font-family:var(--mono);font-size:12px}
+/* summary numbers */
+.kpi .kv{font:400 28px/1.05 var(--display);letter-spacing:-.035em}
+.stat .n{font-weight:400}
+.aw{font:600 22px/1 var(--display);letter-spacing:-.02em}
+/* plan cards */
+.tline b{font:600 15px/1 var(--display);letter-spacing:-.01em}
+.pch .sym{font-size:18px}
+.gap{font:500 12px/1 var(--display)}
+.gap span{font-family:var(--mono)}
+.pflag{font-size:14px;line-height:1.45}
+@media (max-width:640px){
+ header.top{min-height:54px}
+ .brand svg{width:28px;height:28px}
+ .word{font-size:17px}
+ h2,.sh h2,#dayHead{font-size:19px}
+ .kpi .kv{font-size:21px}
+ .sym{font-size:18px}
+ .tk .s{font-size:12.5px}
+ .tk .ls{font:500 12.5px/1 var(--display);font-variant-numeric:tabular-nums}
+ .pflag{font-size:13.5px}
+}
 </style>
 </head>
 <body>
@@ -387,9 +457,10 @@ nav.links a.on{color:var(--text);background:rgba(255,255,255,.07)}
  <header class="top">
   <a class="brand" href="#today" aria-label="Breakline home">
    <svg viewBox="0 0 32 32" aria-hidden="true">
-    <rect x="3.5" y="13.5" width="17" height="13" rx="3.5" fill="none" stroke="#8e98a4" stroke-width="1.6"/>
-    <path d="M6.5 22.5 L11 18.5 L14.5 20.5 L27.5 5.5" fill="none" stroke="#e9edf1" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-    <circle cx="27.5" cy="5.5" r="2.1" fill="#3aa9b8"/>
+    <defs><linearGradient id="lgS" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#8e98a4"/><stop offset=".65" stop-color="#f6f8fa"/><stop offset="1" stop-color="#bfe9ef"/></linearGradient></defs>
+    <rect x="3.8" y="14.8" width="16.4" height="11.4" rx="3" fill="rgba(142,152,164,.14)" stroke="#8e98a4" stroke-width="1.5"/>
+    <path d="M6.6 23.2 L10.4 19.6 L13.6 21.6 L26.4 6.6" fill="none" stroke="url(#lgS)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="26.4" cy="6.6" r="4.2" fill="rgba(58,169,184,.22)"/><circle cx="26.4" cy="6.6" r="2.3" fill="#3aa9b8"/>
    </svg>
    <span class="word">Breakline</span>
   </a>
@@ -791,7 +862,7 @@ nav.links a.on{color:var(--text);background:rgba(255,255,255,.07)}
   if(!ohlc.length){
    const msg=live?'Chart starts at 9:30.':'No intraday bars saved for this day.';
    svg.setAttribute('viewBox','0 0 '+W+' 70');
-   mk('text',{x:W/2,y:40,fill:T('--faint'),'text-anchor':'middle'},svg,msg);
+   mk('text',{x:W/2,y:40,fill:T('--faint'),'text-anchor':'middle',style:'font-family:var(--display);font-size:13px'},svg,msg);
    svg.setAttribute('aria-label', sym+' '+msg);
    $('hiPins').innerHTML=''; $('loPins').innerHTML='';
    $('legend').innerHTML=''; $('legendNote').textContent=live?'':'The publisher can add this day under days[].charts without removing today.';
@@ -1162,7 +1233,7 @@ nav.links a.on{color:var(--text);background:rgba(255,255,255,.07)}
   const tv=today&&today.acct!=null?'<span class="'+cls(today.acct)+'">'+sgn1(today.acct)+'</span>':'—';
   const ts=today&&today.n?today.wins+' of '+today.n+' won':'no trades yet';
   el.innerHTML=cell('Today',tv,ts,'','#today')
-   +cell('Paper account','<span class="'+cls(acct)+'">'+sgn1(acct)+'</span>',(D.max_dd!=null?'worst dip '+Number(D.max_dd).toFixed(1)+'%':'since start'),'','#record')
+   +cell('Account','<span class="'+cls(acct)+'">'+sgn1(acct)+'</span>',(D.max_dd!=null?'worst dip '+Number(D.max_dd).toFixed(1)+'%':'since start'),'','#record')
    +cell('Real money',esc((n.value||'').replace(' of ','/'))||'—',ok+' of '+all+' checks pass','<span class="kbar"><i style="width:'+Math.round((n.progress||0)*100)+'%"></i></span>','#road');
  }
  function renderFresh(D){
@@ -1238,7 +1309,7 @@ nav.links a.on{color:var(--text);background:rgba(255,255,255,.07)}
    const price=view.live&&last
     ?'<span class="num px">'+pxFmt(last.c)+'</span><span class="asof">'+fmtHM(last.t1)+'</span>'
     :'<span class="num px '+(res>0?'pos':res<0?'neg':'')+'">'+(res==null?'—':sgn(res))+'</span>';
-   const dist=view.live&&last?distText(last.c, b.chart&&b.chart.box):(b.sub||'');
+   const dist=view.live&&last?distText(last.c, b.chart&&b.chart.box):(view.live?'Waiting for 9:30':(b.sub||''));
    const chip=wide&&/very wide|wider than usual/i.test(wide.note)?'<span class="tagwide">Wide</span>':'';
    return '<button type="button" class="tk" role="tab" data-s="'+esc(sym)+'" aria-selected="'+(sym===SEL?'true':'false')+'" aria-controls="stockPanel"><span class="t1"><span class="s">'+esc(sym)+'</span>'+chip+'<span class="dot '+statCls(b.status||'')+'"></span></span><span class="pxline">'+price+'</span><span class="dist">'+esc(dist)+'</span><span class="l '+(res>0?'pos':res<0?'neg':'')+'">'+esc(view.live?tileStatus(b):(b.label||''))+'</span><span class="ls '+(res>0?'pos':res<0?'neg':'')+'">'+esc(shortStatus(b))+'</span></button>';
   }).join('');
