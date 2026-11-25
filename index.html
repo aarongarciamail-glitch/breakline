@@ -1088,11 +1088,13 @@ html[data-skin=ledger]{--wall:#d39a6a}
    // times[i] is the bar open. The fill is the close, five minutes later, so a 9:50 buy is not drawn on 9:45.
    const x=xAt(b.t1), y=yP(b.c);
    const partial=/1\/3|third/i.test(m.label||'');
-   const col=m.kind==='buy'?T('--win'):m.kind==='sell'?(partial?T('--warn'):(stock.result>0?T('--win'):T('--loss'))):T('--faint');
+   const isMove=m.kind==='move'||m.kind==='moveexit';
+   const col=m.kind==='buy'?T('--win'):m.kind==='sell'?(partial?T('--warn'):(stock.result>0?T('--win'):T('--loss'))):isMove?T('--teal'):T('--faint');
    const text=m.kind==='buy'?'BUY':m.kind==='sell'?(partial?'1/3':('EXIT '+(stock.result==null?'':sgn(stock.result)))):(m.label||'');
    const g=mk('g',{'data-mark':m.kind,'data-t':fmtHM(b.t1)},svg);
    if(m.kind==='buy')mk('path',{d:`M${x} ${y+5} l6 10 h-12 z`,fill:col},g);
    else if(m.kind==='sell')mk('path',{d:`M${x} ${y-5} l6 -10 h-12 z`,fill:col},g);
+   else if(m.kind==='move')mk('path',{d:/↓/.test(m.label||'')?`M${x} ${y-5} l5 -9 h-10 z`:`M${x} ${y+5} l5 9 h-10 z`,fill:'none',stroke:col,'stroke-width':1.5},g);
    else mk('circle',{cx:x,cy:y,r:4,fill:T('--ink'),stroke:col,'stroke-width':1.4},g);
    markLabs.push({x, y, text, fill:col, g, wickTop:yP(b.h), wickBot:yP(b.l)});
    const why=honestExit(trade.why, stock.result);
@@ -1100,6 +1102,7 @@ html[data-skin=ledger]{--wall:#d39a6a}
    if(m.kind==='sell'&&!partial)rows.push(['What it did', why||m.label||'Exit']);
    if(partial)rows.push(['Partial', 'First third. Stop moves to the stock entry, not flat on the option.']);
    if(m.kind==='buy'&&story.contract)rows.push(['Option', story.contract]);
+   if(isMove)rows.push(['What it is', m.kind==='move'?'After-11 MOVE watch: a new high or low of the day. Paper only, not a rule trade. Held to 3:30 unless the safety stop hits.':'Where the MOVE watch ended (stock %, paper).']);
    hits.marks.push({x, y, r:16, html:tipHTML(text||m.kind, rows)});
   });
   const taken=[];
@@ -1650,6 +1653,7 @@ html[data-skin=ledger]{--wall:#d39a6a}
    ['Exit','Where the rest of the trade was sold.',['exit']],
    ['Trim (sell 1/3)','Selling a third of the position at a target to lock in some profit, while the rest keeps running.',['sell 1/3','trim','1/3']],
    ['Break-even stop','After the first trim, the stop moves to the entry price, so the rest of the trade should not turn into a loss on the stock move.',['break-even','breakeven','be']],
+   ['MOVE (after 11)','A new high or low of the day between 11:00 and 2:30. Not a rule trade: a heads-up, tracked on paper and held to 3:30 with a safety stop, to learn whether late moves are worth trading.',['move','move ↑','move ↓','after-11']],
    ['Paper','Pretend trades with no real money, used to prove the rules work before risking anything.',['paper']],
    ['Wide box','The box is more than 2x its normal size. Historically these days were not worse, but moves are bigger.',['wide','wide box']]]],
   ['Price levels',[
