@@ -39,10 +39,10 @@
  },
  "tape": {
   "ok": true,
-  "asof": "2026-11-25T11:50:29-05:00",
+  "asof": "2026-11-25T11:55:28-05:00",
   "lean": "mixed",
   "label": "Tape split",
-  "strategy": "Calls and puts both stay open. Oil is up 3.1% and the 10-year is down 8.4 bp, so they disagree. The opening-range close picks the side.",
+  "strategy": "Calls and puts both stay open. Oil is up 3.0% and the 10-year is down 8.8 bp, so they disagree. The opening-range close picks the side.",
   "block_calls": false,
   "block_puts": false,
   "vix_small": false,
@@ -54,22 +54,22 @@
   "note": "Context only. Oil 1% and the 10-year 5 bp describe the lean. VIX 35 is a size note. Neither one blocks a call or a put.",
   "vix": {
    "name": "VIX",
-   "price": 33.71,
+   "price": 33.55,
    "prev": 26.36,
-   "chg_pct": 27.9,
-   "move": "Up 27.9% from yesterday's close of 26.4.",
-   "why": "Up 27.9% from yesterday's close of 26.4.",
+   "chg_pct": 27.3,
+   "move": "Up 27.3% from yesterday's close of 26.4.",
+   "why": "Up 27.3% from yesterday's close of 26.4.",
    "headline": null,
    "means": "Fear picked up and VIX is still under 35, so size stays normal."
   },
   "oil": {
    "name": "Crude",
-   "price": 83.27,
+   "price": 83.17,
    "prev": 80.73,
-   "chg_pct": 3.1,
-   "move": "Up 3.1% from yesterday's close of 80.73.",
+   "chg_pct": 3.0,
+   "move": "Up 3.0% from yesterday's close of 80.73.",
    "range": "Inside the last month, 79.07 to 104.99.",
-   "why": "Up 3.1% from yesterday's close of 80.73. Oilprice.com: Oil Inventories Continue to Rise in the US",
+   "why": "Up 3.0% from yesterday's close of 80.73. Oilprice.com: Oil Inventories Continue to Rise in the US",
    "headline": {
     "source": "Oilprice.com",
     "title": "Oil Inventories Continue to Rise in the US"
@@ -78,9 +78,9 @@
   },
   "yield": {
    "name": "10-year",
-   "price": 4.82,
-   "chg_bps": -8.4,
-   "move": "10-year is 4.82%, down 8.4 bp."
+   "price": 4.816,
+   "chg_bps": -8.8,
+   "move": "10-year is 4.82%, down 8.8 bp."
   }
  },
  "curve": [
@@ -230,9 +230,9 @@
   }
  ],
  "session": true,
- "next_check": "11:55 AM",
+ "next_check": "12:00 PM",
  "mode": "paper",
- "updated": "2026-11-25T11:50:28-05:00",
+ "updated": "2026-11-25T11:55:28-05:00",
  "date": "Wed \u00b7 Nov 25",
  "day": {
   "pills": [
@@ -282,7 +282,8 @@
      "11:30",
      "11:35",
      "11:40",
-     "11:45"
+     "11:45",
+     "11:50"
     ],
     "closes": [
      699.82,
@@ -310,9 +311,10 @@
      700.28,
      699.74,
      698.59,
-     698.89,
+     698.88,
      698.16,
-     698.94
+     698.94,
+     700.0
     ],
     "box": {
      "hi": 703.7,
@@ -545,9 +547,9 @@
       "t": "11:35",
       "o": 698.5,
       "h": 698.94,
-      "l": 697.75,
-      "c": 698.89,
-      "v": 249124.0
+      "l": 697.74,
+      "c": 698.88,
+      "v": 457972.0
      },
      {
       "t": "11:40",
@@ -564,6 +566,14 @@
       "l": 697.83,
       "c": 698.94,
       "v": 199854.122621
+     },
+     {
+      "t": "11:50",
+      "o": 698.91,
+      "h": 700.41,
+      "l": 698.5,
+      "c": 700.0,
+      "v": 156856.9163
      }
     ],
     "opens": [
@@ -594,7 +604,8 @@
      699.74,
      698.5,
      698.82,
-     698.01
+     698.01,
+     698.91
     ],
     "highs": [
      703.7,
@@ -624,7 +635,8 @@
      700.11,
      698.94,
      699.46,
-     699.79
+     699.79,
+     700.41
     ],
     "lows": [
      699.79,
@@ -652,9 +664,10 @@
      697.73,
      699.5,
      698.57,
-     697.75,
+     697.74,
      697.69,
-     697.83
+     697.83,
+     698.5
     ],
     "volumes": [
      2049773.0,
@@ -682,9 +695,10 @@
      555312.112701,
      601585.318537,
      515412.610907,
-     249124.0,
+     457972.0,
      238713.239855,
-     199854.122621
+     199854.122621,
+     156856.9163
     ],
     "option": {
      "contract": "SPY 704 call",
@@ -731,9 +745,10 @@
      700.115,
      700.1176,
      700.0917,
-     700.0728,
-     700.0542,
-     700.0428
+     700.0572,
+     700.0389,
+     700.0278,
+     700.025
     ]
    },
    "levels": [
@@ -934,7 +949,8 @@
      "11:30",
      "11:35",
      "11:40",
-     "11:45"
+     "11:45",
+     "11:50"
     ],
     "closes": [
      612.25,
@@ -964,7 +980,8 @@
      610.09,
      610.69,
      609.38,
-     610.44
+     610.44,
+     611.85
     ],
     "box": {
      "hi": 617.74,
@@ -1195,11 +1212,11 @@
      },
      {
       "t": "11:35",
-      "o": 610.06,
+      "o": 610.08,
       "h": 610.71,
-      "l": 609.37,
+      "l": 609.36,
       "c": 610.69,
-      "v": 288682.708515
+      "v": 475569.708515
      },
      {
       "t": "11:40",
@@ -1216,6 +1233,14 @@
       "l": 609.06,
       "c": 610.44,
       "v": 286851.287132
+     },
+     {
+      "t": "11:50",
+      "o": 610.43,
+      "h": 612.41,
+      "l": 610.13,
+      "c": 611.85,
+      "v": 325110.029457
      }
     ],
     "opens": [
@@ -1244,9 +1269,10 @@
      609.4,
      611.73,
      611.3,
-     610.06,
+     610.08,
      610.58,
-     609.21
+     609.21,
+     610.43
     ],
     "highs": [
      617.79,
@@ -1276,7 +1302,8 @@
      611.75,
      610.71,
      611.21,
-     611.36
+     611.36,
+     612.41
     ],
     "lows": [
      612.23,
@@ -1304,9 +1331,10 @@
      609.08,
      610.9,
      610.06,
-     609.37,
+     609.36,
      608.91,
-     609.06
+     609.06,
+     610.13
     ],
     "volumes": [
      2421380.133255,
@@ -1334,9 +1362,10 @@
      565587.391949,
      890086.952903,
      559663.159124,
-     288682.708515,
+     475569.708515,
      296523.68152,
-     286851.287132
+     286851.287132,
+     325110.029457
     ],
     "option": {
      "contract": "QQQ 618 call",
@@ -1383,9 +1412,10 @@
      612.5758,
      612.5434,
      612.501,
-     612.4756,
-     612.4453,
-     612.4215
+     612.4594,
+     612.4295,
+     612.4061,
+     612.3946
     ]
    },
    "levels": [
