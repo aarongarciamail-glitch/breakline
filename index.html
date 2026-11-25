@@ -373,7 +373,7 @@ nav.links a.on{color:var(--text);background:rgba(255,255,255,.07)}
 @media (max-width:640px){
  nav.links{display:none}
  body{padding-bottom:calc(72px + env(safe-area-inset-bottom,0px))}
- .tabbar{display:grid;grid-template-columns:repeat(5,1fr);position:fixed;left:0;right:0;bottom:0;z-index:20;
+ .tabbar{display:grid;grid-template-columns:repeat(4,1fr);position:fixed;left:0;right:0;bottom:0;z-index:20;
   padding:6px 8px calc(6px + env(safe-area-inset-bottom,0px));background:rgba(6,7,8,.72);border-top:1px solid var(--line);
   backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
  .tabbar a{display:grid;justify-items:center;gap:3px;padding:6px 0;color:var(--faint);text-decoration:none;font:500 11px/1 var(--display);border-radius:10px}
@@ -506,6 +506,9 @@ html[data-skin=ledger]{--wall:#d39a6a}
 .tip .gx b{color:var(--text)}
 /* crypto tab */
 .cnote{color:var(--dim);margin:0 0 12px}
+#stockPanel[hidden],#sideWrap[hidden],.cdesk[hidden]{display:none!important}.cdesk{display:grid;gap:10px;grid-column:1/-1}
+.ccard.big svg{max-height:260px}
+.chead{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline;font-size:13px;color:var(--dim)}
 .cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:10px;margin-bottom:10px;align-items:start}
 .ccard{padding:14px;display:grid;gap:10px}
 .ccard .top{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
@@ -539,7 +542,7 @@ html[data-skin=ledger]{--wall:#d39a6a}
    <span class="word">Breakline</span>
   </a>
   <nav class="links" aria-label="Sections">
-   <a href="#today" data-go="today">Today</a><a href="#plan" data-go="plan">Plan</a><a href="#record" data-go="record">Record</a><a href="#crypto" data-go="crypto">Crypto</a><a href="#how" data-go="how">Learn</a>
+   <a href="#today" data-go="today">Today</a><a href="#plan" data-go="plan">Plan</a><a href="#record" data-go="record">Record</a><a href="#how" data-go="how">Learn</a>
   </nav>
   <button type="button" class="skinbtn" id="skinBtn" aria-label="Switch look" title="Switch look (Haze / Ledger)">
    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5a8.5 8.5 0 0 1 0 17z" class="half"/></svg>
@@ -578,6 +581,7 @@ html[data-skin=ledger]{--wall:#d39a6a}
   <p class="hint" id="daySub"></p>
   <div class="tickers" id="tickers" role="tablist" aria-label="Tickers"></div>
   <div class="desk">
+   <div class="cdesk" id="cryptoDesk" hidden></div>
    <div class="panel chartp" role="tabpanel" id="stockPanel">
     <div class="stockhead">
      <span class="sym" id="sym">—</span>
@@ -636,19 +640,6 @@ html[data-skin=ledger]{--wall:#d39a6a}
   </div>
  </section>
 
- <section id="crypto" data-tab="crypto" aria-labelledby="crypto-h">
-  <div class="sh"><h2 id="crypto-h">Crypto swing</h2><span class="meta" id="cMeta">Paper · checks once a day after the daily close</span></div>
-  <p class="cnote" id="cEmpty">Crypto tracking starts tonight at 7:10 pm ET.</p>
-  <div class="kpis" id="cKpis" hidden></div>
-  <div class="cgrid" id="cCoins"></div>
-  <div class="panel box crule">
-   <h3>The rule</h3>
-   <p><b>Buy</b> when a coin closes a day above its <span data-g="20-day high">20-day high</span> (the buy line). <b>Sell</b> when it closes below its <span data-g="10-day low">10-day low</span> (the sell line). Long only, held days to weeks. Checked once each evening after the daily candle closes (7 pm ET). Alerts go to Telegram.</p>
-   <p class="meta">Backtest 2018–2025 (SOL from 2020), 1% cost per trade: beat holding on all three with smaller drops, but drops were still large. About 40% wins; the big trends pay for the small losses.</p>
-  </div>
-  <div class="panel tablewrap" id="cTradesBox" hidden><table><thead><tr><th>Coin</th><th>In</th><th>Out</th><th class="r">Days</th><th class="r">Result</th></tr></thead><tbody id="cTrades"></tbody></table></div>
- </section>
-
  <section id="learn" data-tab="how" aria-labelledby="learn-h">
   <div class="sh"><h2 id="learn-h">Learn the words</h2><span class="meta">Every term on this page, in plain English. On a computer, hover a term anywhere to see this.</span></div>
   <input class="gsearch" id="gSearch" type="search" placeholder="Search a word, like R1 or VWAP" aria-label="Search the glossary">
@@ -690,7 +681,6 @@ html[data-skin=ledger]{--wall:#d39a6a}
  <a href="#today" data-go="today"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18l5-6 4 3 7-9"/></svg><span>Today</span></a>
  <a href="#plan" data-go="plan"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h12v16H6z"/><path d="M9 9h6M9 13h6M9 17h3"/></svg><span>Plan</span></a>
  <a href="#record" data-go="record"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20V10M10 20V4M15 20v-7M20 20v-11"/></svg><span>Record</span></a>
- <a href="#crypto" data-go="crypto"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M10 7.5v9M10 8h3.2a2 2 0 0 1 0 4H10m0 0h3.6a2.2 2.2 0 0 1 0 4.4H10M11.5 6v2M11.5 16v2"/></svg><span>Crypto</span></a>
  <a href="#how" data-go="how"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 11v5M12 8h.01"/></svg><span>Learn</span></a>
 </nav>
 <footer data-tab="how">
@@ -1395,12 +1385,13 @@ html[data-skin=ledger]{--wall:#d39a6a}
    $('daySub').textContent=d.acct==null?'Reviewing a saved day.':'That day on the paper account: '+sgn1(d.acct)+'. Intraday bars are kept for the latest session.';
   }
   const S=view.stocks, syms=view.symbols||[];
-  if(!SEL||!S[SEL]){
+  const CS=CSYMS(), isC=CS.includes(SEL);
+  if(!SEL||(!S[SEL]&&!isC)){
    const saved=store.get('bl.sym');
    SEL=(saved&&S[saved])?saved:(syms.find(x=>S[x]&&(S[x].status==='up'||S[x].status==='down'))||syms.find(x=>S[x]&&(S[x].status==='win'||S[x].status==='loss'))||syms[0]);
   }
   const focusSym=document.activeElement&&document.activeElement.classList&&document.activeElement.classList.contains('tk')?document.activeElement.dataset.s:null;
-  $('tickers').style.setProperty('--ntk',Math.max(1,syms.length));
+  $('tickers').style.setProperty('--ntk',Math.max(1,syms.length+CS.length));
   $('tickers').innerHTML=syms.map(sym=>{
    const b=S[sym]||{};
    const ohlc=barsFrom(b.chart);
@@ -1413,7 +1404,7 @@ html[data-skin=ledger]{--wall:#d39a6a}
    const dist=view.live&&last?distText(last.c, b.chart&&b.chart.box):(view.live?'Waiting for 9:30':(b.sub||''));
    const chip=wide&&/very wide|wider than usual/i.test(wide.note)?'<span class="tagwide">Wide</span>':'';
    return '<button type="button" class="tk" role="tab" data-s="'+esc(sym)+'" aria-selected="'+(sym===SEL?'true':'false')+'" aria-controls="stockPanel"><span class="t1"><span class="s">'+esc(sym)+'</span>'+chip+'<span class="dot '+statCls(b.status||'')+'"></span></span><span class="pxline">'+price+'</span><span class="dist">'+esc(dist)+'</span><span class="l '+(res>0?'pos':res<0?'neg':'')+'">'+esc(view.live?tileStatus(b):(b.label||''))+'</span><span class="ls '+(res>0?'pos':res<0?'neg':'')+'">'+esc(shortStatus(b))+'</span></button>';
-  }).join('');
+  }).join('')+CS.map(cryptoTile).join('');
   document.querySelectorAll('.tk').forEach(t=>t.onclick=()=>{SEL=t.dataset.s;store.set('bl.sym',SEL);render(LAST)});
   if(focusSym){const again=document.querySelector('.tk[data-s="'+focusSym+'"]');if(again)again.focus()}
 
@@ -1452,6 +1443,9 @@ html[data-skin=ledger]{--wall:#d39a6a}
   const plan=b.plan||[];
   $('planBox').hidden=!plan.length;
   $('plan').innerHTML=plan.map(p=>'<li class="'+(p[2]?'done':'')+'"><b>'+esc(p[0])+'</b><span>'+esc(honestPlan(p[1]))+'</span></li>').join('');
+  const isCrypto=CS.includes(SEL);
+  $('cryptoDesk').hidden=!isCrypto; $('stockPanel').hidden=isCrypto; $('sideWrap').hidden=isCrypto;
+  if(isCrypto)$('cryptoDesk').innerHTML=coinView(SEL);
 
   const size=(D.size_pct||4)/100;
   const mine=recs.filter(r=>r.symbol===SEL&&r.result!=null).slice().reverse();
@@ -1571,35 +1565,35 @@ html[data-skin=ledger]{--wall:#d39a6a}
    +'<path d="'+path(lo)+'" fill="none" stroke="var(--loss)" stroke-width="1" stroke-dasharray="4 3" opacity=".75"/>'
    +'<path d="'+path(cl)+'" fill="none" stroke="var(--text)" stroke-width="1.6"/>'+ent+'</svg>';
  }
- function renderCrypto(){
-  const D=CRY; if(!D||!D.coins){$('cEmpty').hidden=false;return}
-  $('cEmpty').hidden=true;
-  const S=D.summary||{}, open=Object.values(D.coins).filter(c=>c.status==='in').length;
-  const k=$('cKpis'); k.hidden=false;
-  const cell=(l,v,sub)=>'<div class="kpi"><span class="kl">'+l+'</span><span class="kv">'+v+'</span><span class="ks">'+sub+'</span></div>';
-  k.innerHTML=cell('Account','<span class="'+((S.account_pct||0)>0?'pos':(S.account_pct||0)<0?'neg':'')+'">'+pc(S.account_pct||0)+'</span>',(D.size_pct||20)+'% per trade')
-   +cell('Trades',String(S.n||0),S.n?Math.round((S.win_rate||0)*(S.win_rate>1?1:100))+'% won':'none closed yet')
-   +cell('Holding',open+' of '+Object.keys(D.coins).length,(D.asof_candle?'as of '+D.asof_candle.slice(5).replace('-','/'):'daily'));
-  const u=D.updated?new Date(D.updated):null;
-  $('cMeta').textContent='Paper · checked once a day after the daily close'+(u?' · last '+u.toLocaleString('en-US',{timeZone:'America/New_York',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'}):'');
-  $('cCoins').innerHTML=Object.entries(D.coins).map(([sym,c])=>{
-   const bt=(D.backtest||{})[sym]||{};
-   const inn=c.status==='in';
-   const rows=inn
-    ?[['Bought','$'+fmtC(c.entry)+(c.entry_date?' on '+c.entry_date.slice(5).replace('-','/'):'')],['Now',pc(c.open_pct)],['Sell line (10-day low)','$'+fmtC(c.sell_line)+' · '+pc(c.to_sell_pct)+' away']]
-    :[['Buy line (20-day high)','$'+fmtC(c.buy_line)+' · '+pc(c.to_buy_pct)+' away'],['Sell line (10-day low)','$'+fmtC(c.sell_line)]];
-   const sys=c.system_in?'The rule’s trend has been on since '+(c.system_since||'?')+' (before paper tracking started).':'';
-   return '<div class="panel ccard"><div class="top"><span class="cn">'+esc(sym)+'</span><span class="cp">$'+fmtC(c.price)+'</span><span class="cc '+((c.chg24h_pct||0)>0?'pos':(c.chg24h_pct||0)<0?'neg':'')+'">'+pc(c.chg24h_pct)+' 24h</span><span class="st pill '+(inn?'in':'out')+'">'+(inn?'Holding':'Waiting')+'</span></div>'
-    +spark(c)
-    +'<dl class="cline">'+rows.map(r=>'<dt>'+esc(r[0])+'</dt><span class="bar"></span><dd>'+esc(r[1])+'</dd>').join('')+'</dl>'
-    +(sys?'<div class="cstat">'+esc(sys)+'</div>':'')
-    +(bt.total_pct!=null?'<div class="cstat">Backtest: '+pc(bt.total_pct)+' vs holding '+pc(bt.hold_total_pct)+' · worst drop '+pc(bt.max_dd_pct)+'</div>':'')+'</div>';
-  }).join('');
-  const T=(D.trades||[]).slice().reverse();
-  $('cTradesBox').hidden=!T.length;
-  $('cTrades').innerHTML=T.map(t=>'<tr><td>'+esc(t.coin)+'</td><td class="d">'+esc(t.entry_date)+' @ $'+fmtC(t.entry)+'</td><td class="d">'+esc(t.exit_date)+' @ $'+fmtC(t.exit)+'</td><td class="r">'+esc(t.days)+'</td><td class="r '+(t.result_pct>0?'pos':'neg')+'">'+pc(t.result_pct)+'</td></tr>').join('');
+ const CSYMS=()=>CRY&&CRY.coins?Object.keys(CRY.coins):['BTC','SOL','XRP'];
+ function cryptoTile(sym){
+  const c=CRY&&CRY.coins&&CRY.coins[sym];
+  if(!c)return '<button type="button" class="tk" role="tab" data-s="'+sym+'" aria-selected="'+(sym===SEL?'true':'false')+'"><span class="t1"><span class="s">'+sym+'</span><span class="dot pending"></span></span><span class="pxline"><span class="num px">—</span><span class="asof">swing</span></span><span class="dist">Starts 7:10 pm ET</span><span class="l">Swing</span><span class="ls">Swing</span></button>';
+  const inn=c.status==='in', st=inn?'Holding '+pc(c.open_pct):'Waiting · buy '+pc(c.to_buy_pct);
+  return '<button type="button" class="tk" role="tab" data-s="'+sym+'" aria-selected="'+(sym===SEL?'true':'false')+'"><span class="t1"><span class="s">'+sym+'</span><span class="tagwide" style="color:var(--dim);border-color:var(--line-2)">Swing</span><span class="dot '+(inn?'up':'pending')+'"></span></span><span class="pxline"><span class="num px">$'+fmtC(c.price)+'</span><span class="asof '+((c.chg24h_pct||0)>0?'pos':(c.chg24h_pct||0)<0?'neg':'')+'">'+pc(c.chg24h_pct)+'</span></span><span class="dist">'+(inn?'Sell line $'+fmtC(c.sell_line):'Buy line $'+fmtC(c.buy_line))+'</span><span class="l '+(inn&&c.open_pct>0?'pos':inn&&c.open_pct<0?'neg':'')+'">'+st+'</span><span class="ls '+(inn&&c.open_pct>0?'pos':inn&&c.open_pct<0?'neg':'')+'">'+(inn?pc(c.open_pct):'Wait')+'</span></button>';
  }
- const loadCrypto=()=>fetch('crypto.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(d=>{CRY=d;renderCrypto()}).catch(()=>renderCrypto());
+ function coinView(sym){
+  const D=CRY, c=D&&D.coins&&D.coins[sym];
+  if(!c)return '<div class="panel ccard big"><div class="top"><span class="cn">'+sym+'</span><span class="st pill out">Swing</span></div><p class="cnote">Crypto is a swing trade, not same-day: it’s checked once each evening after the daily close. Tracking starts tonight at 7:10 pm ET.</p></div>'+RULE;
+  const S=D.summary||{}, bt=(D.backtest||{})[sym]||{}, inn=c.status==='in';
+  const rows=inn
+   ?[['Bought','$'+fmtC(c.entry)+(c.entry_date?' on '+c.entry_date.slice(5).replace('-','/'):'')],['Now',pc(c.open_pct)],['Sell line (10-day low)','$'+fmtC(c.sell_line)+' · '+pc(c.to_sell_pct)+' away']]
+   :[['Buy line (20-day high)','$'+fmtC(c.buy_line)+' · '+pc(c.to_buy_pct)+' away'],['Sell line (10-day low)','$'+fmtC(c.sell_line)]];
+  const word=inn?'HOLD':'WAIT', line=inn?'Holding a swing position. Sell only on a daily close below the sell line.':'No position. Buy only on a daily close above the buy line.';
+  const T=(D.trades||[]).filter(t=>t.coin===sym).slice().reverse();
+  const u=D.updated?new Date(D.updated):null;
+  return '<div class="panel ccard big"><div class="top"><span class="cn">'+sym+'</span><span class="cp">$'+fmtC(c.price)+'</span><span class="cc '+((c.chg24h_pct||0)>0?'pos':(c.chg24h_pct||0)<0?'neg':'')+'">'+pc(c.chg24h_pct)+' 24h</span><span class="st pill '+(inn?'in':'out')+'">Swing · '+(inn?'Holding':'Waiting')+'</span></div>'
+   +'<div class="act '+(inn?'hold':'wait')+'"><div class="aw">'+word+'</div><dl class="al"><dt>Rule</dt><dd>'+line+'</dd>'+(c.system_in&&!inn?'<dt>Trend</dt><dd>The rule’s trend has been on since '+esc(c.system_since||'?')+', before paper tracking began.</dd>':'')+'</dl></div>'
+   +spark(c)
+   +'<div class="legend"><span><i class="sw" style="background:var(--text);height:2px"></i>Daily close</span><span><i class="sw" style="background:var(--win);height:2px"></i><span data-g="20-day high">Buy line</span></span><span><i class="sw" style="background:var(--loss);height:2px"></i><span data-g="10-day low">Sell line</span></span></div>'
+   +'<dl class="cline">'+rows.map(r=>'<dt>'+esc(r[0])+'</dt><span class="bar"></span><dd>'+esc(r[1])+'</dd>').join('')+'</dl>'
+   +'<div class="chead">'+(bt.total_pct!=null?'<span>Backtest '+pc(bt.total_pct)+' vs holding '+pc(bt.hold_total_pct)+', worst drop '+pc(bt.max_dd_pct)+'</span>':'')
+   +'<span>Crypto paper account '+pc(S.account_pct||0)+' · '+(S.n||0)+' trades</span>'+(u?'<span>Checked '+u.toLocaleString('en-US',{timeZone:'America/New_York',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'})+'</span>':'')+'</div>'
+   +(T.length?'<div class="tablewrap"><table><thead><tr><th>In</th><th>Out</th><th class="r">Days</th><th class="r">Result</th></tr></thead><tbody>'+T.map(t=>'<tr><td class="d">'+esc(t.entry_date)+' @ $'+fmtC(t.entry)+'</td><td class="d">'+esc(t.exit_date)+' @ $'+fmtC(t.exit)+'</td><td class="r">'+esc(t.days)+'</td><td class="r '+(t.result_pct>0?'pos':'neg')+'">'+pc(t.result_pct)+'</td></tr>').join('')+'</tbody></table></div>':'')
+   +'</div>'+RULE;
+ }
+ const RULE='<div class="panel box crule"><h3>The crypto rule</h3><p><b>Buy</b> when a coin closes a day above its <span data-g="20-day high">20-day high</span>. <b>Sell</b> when it closes below its <span data-g="10-day low">10-day low</span>. Long only, held days to weeks, checked once each evening after the daily candle closes (7 pm ET). Alerts go to Telegram.</p><p class="meta">Backtest 2018–2025 (SOL from 2020), 1% cost per trade: beat holding on all three with smaller drops, but drops were still large. About 40% wins.</p></div>';
+ const loadCrypto=()=>fetch('crypto.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(d=>{CRY=d;if(LAST)render(LAST)}).catch(()=>{});
  loadCrypto(); setInterval(()=>{if(!document.hidden)loadCrypto()},300000);
 
  /* ---------- glossary: one list powers the Learn tab and hover explanations ---------- */
@@ -1701,7 +1695,7 @@ html[data-skin=ledger]{--wall:#d39a6a}
  paintSkin();
 
  /* tabs: one page, four views, each with its own address */
- const TABS=['today','plan','record','crypto','how'];
+ const TABS=['today','plan','record','how'];
  function defaultTab(){
   const n=etParts(new Date()), m=Number(n.hour)*60+Number(n.minute);
   const wd=new Date().toLocaleDateString('en-US',{timeZone:'America/New_York',weekday:'short'});
