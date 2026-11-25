@@ -39,10 +39,10 @@
  },
  "tape": {
   "ok": true,
-  "asof": "2026-11-25T15:00:32-05:00",
+  "asof": "2026-11-25T15:05:29-05:00",
   "lean": "mixed",
   "label": "Tape split",
-  "strategy": "Calls and puts both stay open. Oil is up 3.5% and the 10-year is down 6.0 bp, so they disagree. The opening-range close picks the side.",
+  "strategy": "Calls and puts both stay open. Oil is up 3.7% and the 10-year is down 6.0 bp, so they disagree. The opening-range close picks the side.",
   "block_calls": false,
   "block_puts": false,
   "vix_small": false,
@@ -54,22 +54,22 @@
   "note": "Context only. Oil 1% and the 10-year 5 bp describe the lean. VIX 35 is a size note. Neither one blocks a call or a put.",
   "vix": {
    "name": "VIX",
-   "price": 28.24,
+   "price": 28.28,
    "prev": 26.36,
-   "chg_pct": 7.1,
-   "move": "Up 7.1% from yesterday's close of 26.4.",
-   "why": "Up 7.1% from yesterday's close of 26.4.",
+   "chg_pct": 7.3,
+   "move": "Up 7.3% from yesterday's close of 26.4.",
+   "why": "Up 7.3% from yesterday's close of 26.4.",
    "headline": null,
    "means": "Fear picked up and VIX is still under 35, so size stays normal."
   },
   "oil": {
    "name": "Crude",
-   "price": 83.58,
+   "price": 83.74,
    "prev": 80.73,
-   "chg_pct": 3.5,
-   "move": "Up 3.5% from yesterday's close of 80.73.",
+   "chg_pct": 3.7,
+   "move": "Up 3.7% from yesterday's close of 80.73.",
    "range": "Inside the last month, 79.07 to 104.99.",
-   "why": "Up 3.5% from yesterday's close of 80.73. GuruFocus.com: ProFrac (ACDC) Stock Is Up 11.8% Today as Oil Rises, Oilfield Peers Gain",
+   "why": "Up 3.7% from yesterday's close of 80.73. GuruFocus.com: ProFrac (ACDC) Stock Is Up 11.8% Today as Oil Rises, Oilfield Peers Gain",
    "headline": {
     "source": "GuruFocus.com",
     "title": "ProFrac (ACDC) Stock Is Up 11.8% Today as Oil Rises, Oilfield Peers Gain"
@@ -230,9 +230,9 @@
   }
  ],
  "session": true,
- "next_check": "3:05 PM",
+ "next_check": "3:10 PM",
  "mode": "paper",
- "updated": "2026-11-25T15:00:28-05:00",
+ "updated": "2026-11-25T15:05:28-05:00",
  "date": "Wed \u00b7 Nov 25",
  "day": {
   "pills": [
@@ -320,7 +320,8 @@
      "14:40",
      "14:45",
      "14:50",
-     "14:55"
+     "14:55",
+     "15:00"
     ],
     "closes": [
      699.82,
@@ -388,7 +389,8 @@
      715.81,
      715.73,
      717.6,
-     715.48
+     715.48,
+     716.27
     ],
     "box": {
      "hi": 703.7,
@@ -932,7 +934,7 @@
       "h": 716.23,
       "l": 714.95,
       "c": 715.73,
-      "v": 277932.0
+      "v": 489920.0
      },
      {
       "t": "14:50",
@@ -949,6 +951,14 @@
       "l": 715.43,
       "c": 715.48,
       "v": 231985.566013
+     },
+     {
+      "t": "15:00",
+      "o": 715.6,
+      "h": 716.65,
+      "l": 715.59,
+      "c": 716.27,
+      "v": 117923.0
      }
     ],
     "opens": [
@@ -1017,7 +1027,8 @@
      717.5,
      715.8,
      715.68,
-     717.6
+     717.6,
+     715.6
     ],
     "highs": [
      703.7,
@@ -1085,7 +1096,8 @@
      718.05,
      716.23,
      717.7,
-     717.74
+     717.74,
+     716.65
     ],
     "lows": [
      699.79,
@@ -1153,7 +1165,8 @@
      715.71,
      714.95,
      715.3,
-     715.43
+     715.43,
+     715.59
     ],
     "volumes": [
      2049773.0,
@@ -1219,9 +1232,10 @@
      405688.980037,
      413948.96304,
      455055.558762,
-     277932.0,
+     489920.0,
      236998.0,
-     231985.566013
+     231985.566013,
+     117923.0
     ],
     "option": {
      "contract": "SPY 704 call",
@@ -1306,9 +1320,10 @@
      705.1487,
      705.2761,
      705.4054,
-     705.4768,
-     705.5441,
-     705.6055
+     705.5305,
+     705.5971,
+     705.6579,
+     705.6884
     ]
    },
    "levels": [
@@ -1441,7 +1456,7 @@
     "option": "calls, paper context only",
     "date": "2026-11-25",
     "planned_exit": "15:30",
-    "last_c": 715.48,
+    "last_c": 716.27,
     "backfilled": true,
     "note": "Added after the fact on 11/25: the engine went live at 13:29, after this signal. No alert went out at the signal time."
    },
@@ -1565,7 +1580,8 @@
      "14:40",
      "14:45",
      "14:50",
-     "14:55"
+     "14:55",
+     "15:00"
     ],
     "closes": [
      612.25,
@@ -1633,7 +1649,8 @@
      632.02,
      631.7,
      634.16,
-     631.84
+     631.84,
+     632.74
     ],
     "box": {
      "hi": 617.74,
@@ -2173,11 +2190,11 @@
      },
      {
       "t": "14:45",
-      "o": 632.03,
+      "o": 632.02,
       "h": 632.46,
-      "l": 630.78,
+      "l": 630.77,
       "c": 631.7,
-      "v": 446930.862578
+      "v": 666287.862578
      },
      {
       "t": "14:50",
@@ -2194,6 +2211,14 @@
       "l": 631.83,
       "c": 631.84,
       "v": 214038.5
+     },
+     {
+      "t": "15:00",
+      "o": 631.78,
+      "h": 633.24,
+      "l": 631.78,
+      "c": 632.74,
+      "v": 236400.5
      }
     ],
     "opens": [
@@ -2260,9 +2285,10 @@
      634.04,
      633.03,
      633.92,
-     632.03,
+     632.02,
      631.7,
-     634.17
+     634.17,
+     631.78
     ],
     "highs": [
      617.79,
@@ -2330,7 +2356,8 @@
      634.78,
      632.46,
      634.34,
-     634.53
+     634.53,
+     633.24
     ],
     "lows": [
      612.23,
@@ -2396,9 +2423,10 @@
      632.73,
      632.61,
      631.91,
-     630.78,
+     630.77,
      631.16,
-     631.83
+     631.83,
+     631.78
     ],
     "volumes": [
      2421380.133255,
@@ -2464,9 +2492,10 @@
      452836.0,
      357917.963085,
      431567.0,
-     446930.862578,
+     666287.862578,
      289337.64644,
-     214038.5
+     214038.5,
+     236400.5
     ],
     "option": {
      "contract": "QQQ 618 call",
@@ -2551,9 +2580,10 @@
      618.0438,
      618.156,
      618.283,
-     618.4012,
-     618.4855,
-     618.5452
+     618.4583,
+     618.542,
+     618.6012,
+     618.6654
     ]
    },
    "levels": [
@@ -2686,7 +2716,7 @@
     "option": "calls, paper context only",
     "date": "2026-11-25",
     "planned_exit": "15:30",
-    "last_c": 631.84,
+    "last_c": 632.74,
     "backfilled": true,
     "note": "Added after the fact on 11/25: the engine went live at 13:29, after this signal. No alert went out at the signal time."
    },
