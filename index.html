@@ -78,6 +78,18 @@ nav.links a:hover{color:var(--text);background:rgba(255,255,255,.05)}
 .page{overflow-x:clip}
 .stripmeta{margin:0;display:flex;flex-wrap:wrap;gap:8px 12px;justify-content:flex-end;font:400 12px/1.4 var(--mono);color:var(--faint);white-space:nowrap}
 .fresh.stale{color:var(--warn)}
+.kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:6px 0 10px}
+.kpis[hidden]{display:none}
+.kpi{display:grid;gap:4px;padding:10px 14px;border:1px solid var(--line);border-radius:14px;background:var(--panel);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);text-decoration:none;color:var(--text);min-width:0}
+.kpi .kl{font:500 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+.kpi .kv{font:300 26px/1.05 var(--display);letter-spacing:-.03em;font-variant-numeric:tabular-nums;white-space:nowrap}
+.kpi .ks{font-size:12.5px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kpi .kbar{height:4px;border-radius:2px;background:var(--line);overflow:hidden}
+.kpi .kbar i{display:block;height:100%;background:linear-gradient(90deg,var(--silver-lo),var(--teal))}
+.fresh.closed{color:var(--dim)}
+.tk .ls{display:none}
+.strat-m{display:none}
+
 .tapestrip{display:grid;grid-template-columns:minmax(0,1fr);gap:6px;padding:4px 0 8px;min-width:0}
 .tapestrip[hidden]{display:none}
 .chips{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
@@ -266,6 +278,34 @@ footer p{margin:0;max-width:70ch}
  dl.al dd{margin-bottom:4px}
  .readkey li{grid-template-columns:76px 1fr}
 }
+@media (max-width:640px){
+ .lede{display:none}
+ .strip{padding-top:8px}
+ .kpis{gap:6px;margin:4px 0 8px}
+ .kpi{padding:8px 10px;border-radius:12px;gap:3px}
+ .kpi .kl{font-size:9.5px;letter-spacing:.06em}
+ .kpi .kv{font-size:20px}
+ .kpi .ks{font-size:11px}
+ .tapestrip{gap:4px;padding:0 0 6px}
+ .tapestrip .strat{display:none}
+ .strat-m{display:block;color:var(--text)}
+ .chip{padding:5px 9px}
+ .tickers{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;margin-inline:0;padding-inline:0;overflow:visible}
+ .tk{flex:none;padding:8px 4px;gap:4px;text-align:center;justify-items:center;border-radius:10px}
+ .tk .t1{gap:5px;justify-content:center}
+ .tk .s{font-size:12.5px}
+ .tk .dot{margin-left:0;width:7px;height:7px}
+ .tk .pxline,.tk .dist,.tk .l,.tk .tagwide{display:none}
+ .tk .ls{display:block;font:500 12.5px/1 var(--mono);color:var(--dim)}
+ .tk .ls.pos{color:var(--win)}.tk .ls.neg{color:var(--loss)}
+ .chartp{display:flex;flex-direction:column}
+ .chartp .stockhead{order:-2}
+ .chartp .act{order:-1;margin:2px 0 10px}
+ .act{padding:10px 12px}
+ dl.al{grid-template-columns:auto 1fr;gap:4px 12px;font-size:13.5px}
+ dl.al dd{margin-bottom:0}
+ .daybar{margin-bottom:6px}
+}
 </style>
 </head>
 <body>
@@ -289,6 +329,7 @@ footer p{margin:0;max-width:70ch}
   <p class="lede">This is what I'm doing. One box every morning, then the break. Wins, losses, and the days I sit out, plain to see.</p>
   <p class="stripmeta"><span id="todayDate"></span><span class="fresh" id="fresh"></span></p>
  </div>
+ <div class="kpis" id="kpis" hidden></div>
  <div class="tapestrip" id="tape" hidden></div>
  <div class="sample" id="sample" role="note" hidden>
   <strong>Design preview.</strong> Every number on this page is an example. Real calls replace it once paper trading is on.
@@ -607,6 +648,10 @@ footer p{margin:0;max-width:70ch}
   return 'in box  ↑'+(box.hi-px).toFixed(2)+'  ↓'+(px-box.lo).toFixed(2);
  }
  function boxNote(stock){const m=(stock.measures||[]).find(x=>/today'?s box/i.test(x[0]));return m?{value:m[1], note:m[2]||''}:null}
+ function shortStatus(b){
+  if(b.result!=null)return sgn(b.result);
+  return ({up:'Open',down:'Open',skip:'Pass',waiting:'Wait',pending:'Wait',sitout:'Out',none:'—'})[b.status]||'—';
+ }
  function tileStatus(stock){
   if(stock.result==null)return stock.label||stock.headline||'';
   if(/sold/i.test(stock.label||'')||stock.status==='win'||stock.status==='loss')return 'Sold '+sgn(stock.result);
@@ -1004,14 +1049,38 @@ footer p{margin:0;max-width:70ch}
   el.innerHTML='<div class="chips">'+chips.join('')+'</div>'
    +(t.strategy?'<p class="strat">'+esc(t.strategy)+'</p>':'')
    +(news?'<p class="news">'+esc(news)+'</p>':'')
-   +(more.length?'<details class="tapenote"><summary>Context</summary>'+more.map(s=>'<p>'+esc(s)+'</p>').join('')+'</details>':'');
+   +((more.length||t.strategy)?'<details class="tapenote"><summary>Context</summary>'+(t.strategy?'<p class="strat-m">'+esc(t.strategy)+'</p>':'')+more.map(s=>'<p>'+esc(s)+'</p>').join('')+'</details>':'');
+ }
+
+ function renderKpis(D){
+  const el=$('kpis'); const days=D.days||[]; const curve=D.curve||[]; const P=D.progress||{};
+  if(!days.length&&!curve.length){el.hidden=true;return}
+  el.hidden=false;
+  const fd=fileDay(D); const today=days.find(d=>d.date===fd)||days[days.length-1]||null;
+  const acct=curve.length?curve[curve.length-1].acct:0;
+  const n=(P.checks||[]).find(c=>/trades/i.test(c.name))||{};
+  const ok=(P.checks||[]).filter(c=>c.ok).length, all=(P.checks||[]).length;
+  const cls=v=>v>0?'pos':v<0?'neg':'flat';
+  const cell=(label,val,sub,extra,href)=>'<a class="kpi" href="'+href+'"><span class="kl">'+label+'</span><span class="kv">'+val+'</span>'+(extra||'')+'<span class="ks">'+sub+'</span></a>';
+  const tv=today&&today.acct!=null?'<span class="'+cls(today.acct)+'">'+sgn1(today.acct)+'</span>':'—';
+  const ts=today&&today.n?today.wins+' of '+today.n+' won'+(today.date!==fd?' · '+today.date.slice(5).replace('-','/'):''):'no trades yet';
+  el.innerHTML=cell(today&&today.date===fd?'Today':'Last day',tv,ts,'','#today')
+   +cell('Paper account','<span class="'+cls(acct)+'">'+sgn1(acct)+'</span>',(D.max_dd!=null?'worst dip '+Number(D.max_dd).toFixed(1)+'%':'since start'),'','#record')
+   +cell('Real money',esc((n.value||'').replace(' of ','/'))||'—',ok+' of '+all+' checks pass','<span class="kbar"><i style="width:'+Math.round((n.progress||0)*100)+'%"></i></span>','#road');
  }
  function renderFresh(D){
   const f=$('fresh'); if(!D.updated){f.textContent='';return}
   const u=new Date(D.updated), mins=Math.round((Date.now()-u)/60000);
   const t=u.toLocaleTimeString('en-US',{timeZone:'America/New_York',hour:'numeric',minute:'2-digit'});
-  const stale=D.session&&mins>25; f.className='fresh'+(stale?' stale':'');
-  f.textContent=(stale?'Last update '+mins+' min ago':'Updated '+t)+(D.session&&D.next_check&&!stale?' · next '+D.next_check:'')+(!D.session?' · market closed':'');
+  const et=o=>Object.fromEntries(new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',hour:'2-digit',minute:'2-digit',hourCycle:'h23',year:'numeric',month:'2-digit',day:'2-digit',weekday:'short'}).formatToParts(o).map(p=>[p.type,p.value]));
+  const n=et(new Date()), w=et(u), hm=x=>Number(x.hour)*60+Number(x.minute);
+  const sameDay=n.year+n.month+n.day===w.year+w.month+w.day;
+  // the file keeps session=true after the last 3:45 publish, so judge "closed" from the clock too
+  const closed=!D.session||!sameDay||hm(n)>=16*60||hm(n)<9*60+30||(hm(w)>=15*60+30&&mins>20);
+  const stale=!closed&&mins>25;
+  f.className='fresh'+(stale?' stale':closed?' closed':'');
+  f.textContent=closed?'Closed · final '+t+(sameDay?'':' '+w.month+'/'+w.day)
+   :stale?'Last update '+mins+' min ago':'Updated '+t+(D.next_check?' · next '+D.next_check:'');
  }
  function dayChoices(D){
   const map=new Map();
@@ -1034,7 +1103,7 @@ footer p{margin:0;max-width:70ch}
   if(!D)return;
   LAST=D;
   $('sample').hidden=!D.sample;
-  renderTape(D); renderFresh(D); renderDays(D);
+  renderTape(D); renderFresh(D);renderKpis(D); renderDays(D);
   const view=stocksFor(D);
   const recs=asRows(D);
   const dayIso=view.live?fileDay(D):(view.day&&view.day.date);
@@ -1067,7 +1136,7 @@ footer p{margin:0;max-width:70ch}
     :'<span class="num px '+(res>0?'pos':res<0?'neg':'')+'">'+(res==null?'—':sgn(res))+'</span>';
    const dist=view.live&&last?distText(last.c, b.chart&&b.chart.box):(b.sub||'');
    const chip=wide&&/very wide|wider than usual/i.test(wide.note)?'<span class="tagwide">Wide</span>':'';
-   return '<button type="button" class="tk" role="tab" data-s="'+esc(sym)+'" aria-selected="'+(sym===SEL?'true':'false')+'" aria-controls="stockPanel"><span class="t1"><span class="s">'+esc(sym)+'</span>'+chip+'<span class="dot '+statCls(b.status||'')+'"></span></span><span class="pxline">'+price+'</span><span class="dist">'+esc(dist)+'</span><span class="l '+(res>0?'pos':res<0?'neg':'')+'">'+esc(view.live?tileStatus(b):(b.label||''))+'</span></button>';
+   return '<button type="button" class="tk" role="tab" data-s="'+esc(sym)+'" aria-selected="'+(sym===SEL?'true':'false')+'" aria-controls="stockPanel"><span class="t1"><span class="s">'+esc(sym)+'</span>'+chip+'<span class="dot '+statCls(b.status||'')+'"></span></span><span class="pxline">'+price+'</span><span class="dist">'+esc(dist)+'</span><span class="l '+(res>0?'pos':res<0?'neg':'')+'">'+esc(view.live?tileStatus(b):(b.label||''))+'</span><span class="ls '+(res>0?'pos':res<0?'neg':'')+'">'+esc(shortStatus(b))+'</span></button>';
   }).join('');
   document.querySelectorAll('.tk').forEach(t=>t.onclick=()=>{SEL=t.dataset.s;store.set('bl.sym',SEL);render(LAST)});
   if(focusSym){const again=document.querySelector('.tk[data-s="'+focusSym+'"]');if(again)again.focus()}
