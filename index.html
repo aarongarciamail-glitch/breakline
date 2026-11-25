@@ -373,7 +373,7 @@ nav.links a.on{color:var(--text);background:rgba(255,255,255,.07)}
 @media (max-width:640px){
  nav.links{display:none}
  body{padding-bottom:calc(72px + env(safe-area-inset-bottom,0px))}
- .tabbar{display:grid;grid-template-columns:repeat(4,1fr);position:fixed;left:0;right:0;bottom:0;z-index:20;
+ .tabbar{display:grid;grid-template-columns:repeat(5,1fr);position:fixed;left:0;right:0;bottom:0;z-index:20;
   padding:6px 8px calc(6px + env(safe-area-inset-bottom,0px));background:rgba(6,7,8,.72);border-top:1px solid var(--line);
   backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
  .tabbar a{display:grid;justify-items:center;gap:3px;padding:6px 0;color:var(--faint);text-decoration:none;font:500 11px/1 var(--display);border-radius:10px}
@@ -504,6 +504,25 @@ html[data-skin=ledger]{--wall:#d39a6a}
 .tk [data-g],.day [data-g],button [data-g]{text-decoration:none;cursor:inherit}
 .tip .gx{max-width:300px;font-family:var(--display);font-size:12.5px;line-height:1.5;color:var(--dim);margin-top:4px}
 .tip .gx b{color:var(--text)}
+/* crypto tab */
+.cnote{color:var(--dim);margin:0 0 12px}
+.cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:10px;margin-bottom:10px;align-items:start}
+.ccard{padding:14px;display:grid;gap:10px}
+.ccard .top{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.ccard .cn{font:600 20px/1 var(--display);letter-spacing:-.02em}
+.ccard .cp{font:500 20px/1 var(--mono);letter-spacing:-.02em}
+.ccard .cc{font:500 13px/1 var(--mono)}
+.ccard .st{margin-left:auto}
+.ccard svg{width:100%;height:auto;display:block}
+.ccard svg text{font:10px var(--mono)}
+.cline{display:grid;grid-template-columns:auto 1fr auto;gap:4px 10px;font-size:13.5px;align-items:baseline}
+.cline dt{color:var(--dim)}.cline dd{margin:0;font:500 13.5px var(--mono);text-align:right}
+.cline .bar{height:1px;background:var(--line);align-self:center}
+.cstat{font-size:13px;color:var(--dim)}
+.crule p{margin:0 0 8px;font-size:14px;line-height:1.55;color:var(--dim)}.crule b{color:var(--text)}
+.pill.in{color:var(--win);border-color:color-mix(in srgb,var(--win) 45%,transparent)}
+.pill.out{color:var(--dim)}
+@media (max-width:640px){.ccard svg{max-height:120px}.cgrid{grid-template-columns:minmax(0,1fr)}}
 </style>
 </head>
 <body>
@@ -520,7 +539,7 @@ html[data-skin=ledger]{--wall:#d39a6a}
    <span class="word">Breakline</span>
   </a>
   <nav class="links" aria-label="Sections">
-   <a href="#today" data-go="today">Today</a><a href="#plan" data-go="plan">Plan</a><a href="#record" data-go="record">Record</a><a href="#how" data-go="how">Learn</a>
+   <a href="#today" data-go="today">Today</a><a href="#plan" data-go="plan">Plan</a><a href="#record" data-go="record">Record</a><a href="#crypto" data-go="crypto">Crypto</a><a href="#how" data-go="how">Learn</a>
   </nav>
   <button type="button" class="skinbtn" id="skinBtn" aria-label="Switch look" title="Switch look (Haze / Ledger)">
    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5a8.5 8.5 0 0 1 0 17z" class="half"/></svg>
@@ -617,6 +636,19 @@ html[data-skin=ledger]{--wall:#d39a6a}
   </div>
  </section>
 
+ <section id="crypto" data-tab="crypto" aria-labelledby="crypto-h">
+  <div class="sh"><h2 id="crypto-h">Crypto swing</h2><span class="meta" id="cMeta">Paper · checks once a day after the daily close</span></div>
+  <p class="cnote" id="cEmpty">Crypto tracking starts tonight at 7:10 pm ET.</p>
+  <div class="kpis" id="cKpis" hidden></div>
+  <div class="cgrid" id="cCoins"></div>
+  <div class="panel box crule">
+   <h3>The rule</h3>
+   <p><b>Buy</b> when a coin closes a day above its <span data-g="20-day high">20-day high</span> (the buy line). <b>Sell</b> when it closes below its <span data-g="10-day low">10-day low</span> (the sell line). Long only, held days to weeks. Checked once each evening after the daily candle closes (7 pm ET). Alerts go to Telegram.</p>
+   <p class="meta">Backtest 2018–2025 (SOL from 2020), 1% cost per trade: beat holding on all three with smaller drops, but drops were still large. About 40% wins; the big trends pay for the small losses.</p>
+  </div>
+  <div class="panel tablewrap" id="cTradesBox" hidden><table><thead><tr><th>Coin</th><th>In</th><th>Out</th><th class="r">Days</th><th class="r">Result</th></tr></thead><tbody id="cTrades"></tbody></table></div>
+ </section>
+
  <section id="learn" data-tab="how" aria-labelledby="learn-h">
   <div class="sh"><h2 id="learn-h">Learn the words</h2><span class="meta">Every term on this page, in plain English. On a computer, hover a term anywhere to see this.</span></div>
   <input class="gsearch" id="gSearch" type="search" placeholder="Search a word, like R1 or VWAP" aria-label="Search the glossary">
@@ -658,6 +690,7 @@ html[data-skin=ledger]{--wall:#d39a6a}
  <a href="#today" data-go="today"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18l5-6 4 3 7-9"/></svg><span>Today</span></a>
  <a href="#plan" data-go="plan"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h12v16H6z"/><path d="M9 9h6M9 13h6M9 17h3"/></svg><span>Plan</span></a>
  <a href="#record" data-go="record"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20V10M10 20V4M15 20v-7M20 20v-11"/></svg><span>Record</span></a>
+ <a href="#crypto" data-go="crypto"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M10 7.5v9M10 8h3.2a2 2 0 0 1 0 4H10m0 0h3.6a2.2 2.2 0 0 1 0 4.4H10M11.5 6v2M11.5 16v2"/></svg><span>Crypto</span></a>
  <a href="#how" data-go="how"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 11v5M12 8h.01"/></svg><span>Learn</span></a>
 </nav>
 <footer data-tab="how">
@@ -1521,6 +1554,54 @@ html[data-skin=ledger]{--wall:#d39a6a}
  setInterval(()=>{if(!document.hidden){load();loadPlan()}},60000);
  loadPlan();
 
+ /* ---------- crypto swing tab (data: crypto.json, written by crypto.py each evening) ---------- */
+ let CRY=null;
+ const fmtC=v=>v==null?'—':(Math.abs(v)>=1000?Number(v).toLocaleString('en-US',{maximumFractionDigits:0}):Math.abs(v)>=10?Number(v).toFixed(2):Number(v).toFixed(4));
+ const pc=v=>v==null?'—':(v>0?'+':v<0?'−':'')+Math.abs(v).toFixed(1)+'%';
+ function spark(c){
+  const cl=(c.closes||[]).map(x=>x[1]), hi=(c.hi20||[]).map(x=>x[1]??x), lo=(c.lo10||[]).map(x=>x[1]??x);
+  if(cl.length<2)return '';
+  const W=320,H=110,P=4, all=cl.concat(hi.filter(isFinite),lo.filter(isFinite));
+  const mn=Math.min(...all), mx=Math.max(...all), x=i=>P+i*(W-2*P)/(cl.length-1), y=v=>P+(mx-v)/(mx-mn||1)*(H-2*P);
+  const path=a=>a.map((v,i)=>isFinite(v)?(i&&isFinite(a[i-1])?'L':'M')+x(i).toFixed(1)+' '+y(v).toFixed(1):'').join(' ');
+  let ent='';
+  if(c.status==='in'&&c.entry_date){const i=(c.closes||[]).findIndex(r=>r[0]>=c.entry_date);if(i>=0)ent='<circle cx="'+x(i)+'" cy="'+y(c.entry)+'" r="3.2" fill="var(--win)"/>'}
+  return '<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Last '+cl.length+' days with buy and sell lines">'
+   +'<path d="'+path(hi)+'" fill="none" stroke="var(--win)" stroke-width="1" stroke-dasharray="4 3" opacity=".75"/>'
+   +'<path d="'+path(lo)+'" fill="none" stroke="var(--loss)" stroke-width="1" stroke-dasharray="4 3" opacity=".75"/>'
+   +'<path d="'+path(cl)+'" fill="none" stroke="var(--text)" stroke-width="1.6"/>'+ent+'</svg>';
+ }
+ function renderCrypto(){
+  const D=CRY; if(!D||!D.coins){$('cEmpty').hidden=false;return}
+  $('cEmpty').hidden=true;
+  const S=D.summary||{}, open=Object.values(D.coins).filter(c=>c.status==='in').length;
+  const k=$('cKpis'); k.hidden=false;
+  const cell=(l,v,sub)=>'<div class="kpi"><span class="kl">'+l+'</span><span class="kv">'+v+'</span><span class="ks">'+sub+'</span></div>';
+  k.innerHTML=cell('Account','<span class="'+((S.account_pct||0)>0?'pos':(S.account_pct||0)<0?'neg':'')+'">'+pc(S.account_pct||0)+'</span>',(D.size_pct||20)+'% per trade')
+   +cell('Trades',String(S.n||0),S.n?Math.round((S.win_rate||0)*(S.win_rate>1?1:100))+'% won':'none closed yet')
+   +cell('Holding',open+' of '+Object.keys(D.coins).length,(D.asof_candle?'as of '+D.asof_candle.slice(5).replace('-','/'):'daily'));
+  const u=D.updated?new Date(D.updated):null;
+  $('cMeta').textContent='Paper · checked once a day after the daily close'+(u?' · last '+u.toLocaleString('en-US',{timeZone:'America/New_York',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'}):'');
+  $('cCoins').innerHTML=Object.entries(D.coins).map(([sym,c])=>{
+   const bt=(D.backtest||{})[sym]||{};
+   const inn=c.status==='in';
+   const rows=inn
+    ?[['Bought','$'+fmtC(c.entry)+(c.entry_date?' on '+c.entry_date.slice(5).replace('-','/'):'')],['Now',pc(c.open_pct)],['Sell line (10-day low)','$'+fmtC(c.sell_line)+' · '+pc(c.to_sell_pct)+' away']]
+    :[['Buy line (20-day high)','$'+fmtC(c.buy_line)+' · '+pc(c.to_buy_pct)+' away'],['Sell line (10-day low)','$'+fmtC(c.sell_line)]];
+   const sys=c.system_in?'The rule’s trend has been on since '+(c.system_since||'?')+' (before paper tracking started).':'';
+   return '<div class="panel ccard"><div class="top"><span class="cn">'+esc(sym)+'</span><span class="cp">$'+fmtC(c.price)+'</span><span class="cc '+((c.chg24h_pct||0)>0?'pos':(c.chg24h_pct||0)<0?'neg':'')+'">'+pc(c.chg24h_pct)+' 24h</span><span class="st pill '+(inn?'in':'out')+'">'+(inn?'Holding':'Waiting')+'</span></div>'
+    +spark(c)
+    +'<dl class="cline">'+rows.map(r=>'<dt>'+esc(r[0])+'</dt><span class="bar"></span><dd>'+esc(r[1])+'</dd>').join('')+'</dl>'
+    +(sys?'<div class="cstat">'+esc(sys)+'</div>':'')
+    +(bt.total_pct!=null?'<div class="cstat">Backtest: '+pc(bt.total_pct)+' vs holding '+pc(bt.hold_total_pct)+' · worst drop '+pc(bt.max_dd_pct)+'</div>':'')+'</div>';
+  }).join('');
+  const T=(D.trades||[]).slice().reverse();
+  $('cTradesBox').hidden=!T.length;
+  $('cTrades').innerHTML=T.map(t=>'<tr><td>'+esc(t.coin)+'</td><td class="d">'+esc(t.entry_date)+' @ $'+fmtC(t.entry)+'</td><td class="d">'+esc(t.exit_date)+' @ $'+fmtC(t.exit)+'</td><td class="r">'+esc(t.days)+'</td><td class="r '+(t.result_pct>0?'pos':'neg')+'">'+pc(t.result_pct)+'</td></tr>').join('');
+ }
+ const loadCrypto=()=>fetch('crypto.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(d=>{CRY=d;renderCrypto()}).catch(()=>renderCrypto());
+ loadCrypto(); setInterval(()=>{if(!document.hidden)loadCrypto()},300000);
+
  /* ---------- glossary: one list powers the Learn tab and hover explanations ---------- */
  const GLOSS=[
   ['The trade',[
@@ -1561,6 +1642,11 @@ html[data-skin=ledger]{--wall:#d39a6a}
    ['Rich / elevated','The option costs more than recent moves justify. Small moves against you hurt more.',['rich','elevated']],
    ['Option spread','The gap between the buy and sell price, as a % of the middle. Breakline skips spreads over 15%.',['option spread','spread']],
    ['Strike','The price the option is based on. Nearest strike = closest to the current price.',['strike']]]],
+  ['Crypto swing',[
+   ['Swing trade','A trade held for days or weeks instead of minutes. Breakline’s crypto rule is a swing rule.',['swing','swing trade']],
+   ['20-day high (buy line)','The highest price of the last 20 days. A daily close above it is the crypto buy signal: a breakout.',['20-day high','buy line','buy line (20-day high)']],
+   ['10-day low (sell line)','The lowest price of the last 10 days. A daily close below it is the crypto sell signal.',['10-day low','sell line','sell line (10-day low)']],
+   ['Daily close (crypto)','Crypto trades 24/7, so the day ends at midnight UTC (7 pm ET in winter). Signals use that close.',['daily close']]]],
   ['Scorekeeping',[
    ['Win rate','The share of trades that made money.',['win rate','wins']],
    ['Average winner / loser','The average gain of winning trades, and the average loss of losing ones.',['average winner','average loser']],
@@ -1615,7 +1701,7 @@ html[data-skin=ledger]{--wall:#d39a6a}
  paintSkin();
 
  /* tabs: one page, four views, each with its own address */
- const TABS=['today','plan','record','how'];
+ const TABS=['today','plan','record','crypto','how'];
  function defaultTab(){
   const n=etParts(new Date()), m=Number(n.hour)*60+Number(n.minute);
   const wd=new Date().toLocaleDateString('en-US',{timeZone:'America/New_York',weekday:'short'});
