@@ -540,6 +540,7 @@ html[data-skin=ledger]{--wall:#d39a6a}
 .zt.vcheap,.zt.cheap{color:var(--win)}.zt.pricey,.zt.exp{color:var(--loss)}
 .mchart{width:100%;height:auto;display:block}.mchart text{font:10px var(--mono)}
 @media (max-width:640px){.vcard .cline{grid-template-columns:auto 1fr}.vcard .cline .bar{display:none}.vcard .cline dd{text-align:right}.vcard .vnote{display:block;margin:0}}
+.side .mini[hidden]{display:none!important}   /* per-ticker account mini chart removed (Aaron, 11/25): redundant */
 </style>
 </head>
 <body>
@@ -620,7 +621,7 @@ html[data-skin=ledger]{--wall:#d39a6a}
     <div class="panel box"><h3>This stock</h3><dl class="ms" id="measures"></dl></div>
     <div class="panel box"><h3>Levels</h3><dl class="lv" id="levels"></dl></div>
     <div class="panel box" id="planBox"><h3>Plan</h3><ol class="plan" id="plan"></ol></div>
-    <div class="panel box mini">
+    <div class="panel box mini" hidden>
      <div class="curvehead"><h3 id="miniTitle" style="margin:0">This name</h3><span class="num" id="miniNow"></span></div>
      <svg id="mini" viewBox="0 0 320 96" role="img" aria-label="This ticker on the paper account"></svg>
     </div>
