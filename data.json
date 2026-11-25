@@ -39,10 +39,10 @@
  },
  "tape": {
   "ok": true,
-  "asof": "2026-11-25T10:15:34-05:00",
+  "asof": "2026-11-25T10:24:06-05:00",
   "lean": "mixed",
   "label": "Tape split",
-  "strategy": "Calls and puts both stay open. Oil is up 3.5% and the 10-year is down 7.6 bp, so they disagree. The opening-range close picks the side.",
+  "strategy": "Calls and puts both stay open. Oil is up 3.3% and the 10-year is down 7.4 bp, so they disagree. The opening-range close picks the side.",
   "block_calls": false,
   "block_puts": false,
   "vix_small": false,
@@ -54,11 +54,11 @@
   "note": "Context only. Oil 1% and the 10-year 5 bp describe the lean. VIX 35 is a size note. Neither one blocks a call or a put.",
   "vix": {
    "name": "VIX",
-   "price": 32.54,
+   "price": 31.96,
    "prev": 26.36,
-   "chg_pct": 23.4,
-   "move": "Up 23.4% from yesterday's close of 26.4.",
-   "why": "Up 23.4% from yesterday's close of 26.4. Barrons.com: Market's Fear Gauge Rises",
+   "chg_pct": 21.2,
+   "move": "Up 21.2% from yesterday's close of 26.4.",
+   "why": "Up 21.2% from yesterday's close of 26.4. Barrons.com: Market's Fear Gauge Rises",
    "headline": {
     "source": "Barrons.com",
     "title": "Market's Fear Gauge Rises"
@@ -67,12 +67,12 @@
   },
   "oil": {
    "name": "Crude",
-   "price": 83.58,
+   "price": 83.36,
    "prev": 80.73,
-   "chg_pct": 3.5,
-   "move": "Up 3.5% from yesterday's close of 80.73.",
+   "chg_pct": 3.3,
+   "move": "Up 3.3% from yesterday's close of 80.73.",
    "range": "Inside the last month, 79.07 to 104.99.",
-   "why": "Up 3.5% from yesterday's close of 80.73. Associated Press: BC-Crude Oil Futures",
+   "why": "Up 3.3% from yesterday's close of 80.73. Associated Press: BC-Crude Oil Futures",
    "headline": {
     "source": "Associated Press",
     "title": "BC-Crude Oil Futures"
@@ -81,9 +81,9 @@
   },
   "yield": {
    "name": "10-year",
-   "price": 4.828,
-   "chg_bps": -7.6,
-   "move": "10-year is 4.83%, down 7.6 bp."
+   "price": 4.83,
+   "chg_bps": -7.4,
+   "move": "10-year is 4.83%, down 7.4 bp."
   }
  },
  "curve": [
@@ -233,23 +233,20 @@
   }
  ],
  "session": true,
- "next_check": "10:20 AM",
+ "next_check": "10:25 AM",
  "mode": "paper",
- "updated": "2026-11-25T10:15:31-05:00",
+ "updated": "2026-11-25T10:24:05-05:00",
  "date": "Wed \u00b7 Nov 25",
  "day": {
   "pills": [
    "Paper"
   ],
-  "headline": "3 trades: 3 lost.",
+  "headline": "2 trades: 2 lost.",
   "sub": "Tap a ticker to see its box, levels and numbers."
  },
  "symbols": [
   "SPY",
-  "QQQ",
-  "NVDA",
-  "TSLA",
-  "SPCX"
+  "QQQ"
  ],
  "stocks": {
   "SPY": {
@@ -269,7 +266,8 @@
      "9:55",
      "10:00",
      "10:05",
-     "10:10"
+     "10:10",
+     "10:15"
     ],
     "closes": [
      699.82,
@@ -280,7 +278,8 @@
      703.53,
      704.2,
      702.7,
-     702.43
+     702.43,
+     699.12
     ],
     "box": {
      "hi": 703.7,
@@ -363,7 +362,7 @@
       "h": 704.62,
       "l": 701.95,
       "c": 704.2,
-      "v": 659092.533175
+      "v": 1241139.533175
      },
      {
       "t": "10:05",
@@ -380,6 +379,14 @@
       "l": 701.6,
       "c": 702.43,
       "v": 602659.75427
+     },
+     {
+      "t": "10:15",
+      "o": 702.39,
+      "h": 702.39,
+      "l": 699.0,
+      "c": 699.12,
+      "v": 476878.639881
      }
     ],
     "opens": [
@@ -391,7 +398,8 @@
      699.88,
      703.51,
      704.16,
-     702.71
+     702.71,
+     702.39
     ],
     "highs": [
      703.7,
@@ -402,7 +410,8 @@
      703.81,
      704.62,
      705.05,
-     702.99
+     702.99,
+     702.39
     ],
     "lows": [
      699.79,
@@ -413,7 +422,8 @@
      699.65,
      701.95,
      702.62,
-     701.6
+     701.6,
+     699.0
     ],
     "volumes": [
      2049773.0,
@@ -422,9 +432,10 @@
      991918.0,
      895986.472164,
      993065.0,
-     659092.533175,
+     1241139.533175,
      529625.82683,
-     602659.75427
+     602659.75427,
+     476878.639881
     ],
     "option": {
      "contract": "SPY 704 call",
@@ -452,9 +463,10 @@
      699.123,
      699.1117,
      699.5496,
-     699.8843,
-     700.1073,
-     700.2553
+     700.1369,
+     700.3308,
+     700.456,
+     700.4426
     ]
    },
    "levels": [
@@ -631,7 +643,8 @@
      "9:55",
      "10:00",
      "10:05",
-     "10:10"
+     "10:10",
+     "10:15"
     ],
     "closes": [
      612.25,
@@ -642,7 +655,8 @@
      618.24,
      618.28,
      615.46,
-     615.25
+     615.25,
+     611.32
     ],
     "box": {
      "hi": 617.74,
@@ -721,11 +735,11 @@
      },
      {
       "t": "10:00",
-      "o": 618.06,
-      "h": 619.38,
+      "o": 618.08,
+      "h": 619.39,
       "l": 616.11,
       "c": 618.28,
-      "v": 782717.984528
+      "v": 1488062.984528
      },
      {
       "t": "10:05",
@@ -742,6 +756,14 @@
       "l": 614.53,
       "c": 615.25,
       "v": 483941.0
+     },
+     {
+      "t": "10:15",
+      "o": 615.18,
+      "h": 615.18,
+      "l": 611.17,
+      "c": 611.32,
+      "v": 507905.461086
      }
     ],
     "opens": [
@@ -751,9 +773,10 @@
      608.62,
      610.36,
      613.26,
-     618.06,
+     618.08,
      618.24,
-     615.46
+     615.46,
+     615.18
     ],
     "highs": [
      617.79,
@@ -762,9 +785,10 @@
      612.33,
      613.86,
      618.57,
-     619.38,
+     619.39,
      618.45,
-     616.15
+     616.15,
+     615.18
     ],
     "lows": [
      612.23,
@@ -775,7 +799,8 @@
      612.88,
      616.11,
      615.41,
-     614.53
+     614.53,
+     611.17
     ],
     "volumes": [
      2421380.133255,
@@ -784,9 +809,10 @@
      1851556.916269,
      1471902.03708,
      1555736.492727,
-     782717.984528,
+     1488062.984528,
      556608.07491,
-     483941.0
+     483941.0,
+     507905.461086
     ],
     "option": {
      "contract": "QQQ 618 call",
@@ -814,9 +840,10 @@
      611.7317,
      611.8147,
      612.518,
-     612.8928,
-     613.0595,
-     613.1479
+     613.1891,
+     613.3333,
+     613.4067,
+     613.3748
     ]
    },
    "levels": [
@@ -978,988 +1005,6 @@
     "busiest": {
      "strike": 610.0,
      "vol": 92782
-    }
-   }
-  },
-  "NVDA": {
-   "status": "loss",
-   "label": "Sold -35%",
-   "result": -35,
-   "headline": "NVDA broke up at 10:00. Closed -35%.",
-   "sub": "Calls from the 10:00 close at 145.62. Paper result on the option, whole trade.",
-   "chart": {
-    "symbol": "NVDA",
-    "times": [
-     "9:30",
-     "9:35",
-     "9:40",
-     "9:45",
-     "9:50",
-     "9:55",
-     "10:00",
-     "10:05",
-     "10:10"
-    ],
-    "closes": [
-     142.13,
-     142.44,
-     141.66,
-     142.57,
-     143.77,
-     145.62,
-     145.44,
-     143.7,
-     144.55
-    ],
-    "box": {
-     "hi": 145.03,
-     "lo": 141.22
-    },
-    "lines": [
-     {
-      "name": "S2",
-      "price": 145.88
-     },
-     {
-      "name": "S1",
-      "price": 150.68
-     }
-    ],
-    "marks": [
-     {
-      "i": 5,
-      "kind": "buy",
-      "label": "BUY"
-     },
-     {
-      "i": 6,
-      "kind": "sell",
-      "label": "SELL 1/3"
-     },
-     {
-      "i": 7,
-      "kind": "sell",
-      "label": "SELL"
-     }
-    ],
-    "bars": [
-     {
-      "t": "9:30",
-      "o": 144.0,
-      "h": 145.04,
-      "l": 141.5,
-      "c": 142.13,
-      "v": 19190873.155695
-     },
-     {
-      "t": "9:35",
-      "o": 142.13,
-      "h": 143.0,
-      "l": 141.58,
-      "c": 142.44,
-      "v": 6867898.192938
-     },
-     {
-      "t": "9:40",
-      "o": 142.45,
-      "h": 142.84,
-      "l": 141.22,
-      "c": 141.66,
-      "v": 6156732.503047
-     },
-     {
-      "t": "9:45",
-      "o": 141.63,
-      "h": 143.38,
-      "l": 141.17,
-      "c": 142.57,
-      "v": 6007699.693657
-     },
-     {
-      "t": "9:50",
-      "o": 142.56,
-      "h": 144.01,
-      "l": 141.93,
-      "c": 143.77,
-      "v": 5071753.719626
-     },
-     {
-      "t": "9:55",
-      "o": 143.78,
-      "h": 145.88,
-      "l": 143.58,
-      "c": 145.62,
-      "v": 6000754.752288
-     },
-     {
-      "t": "10:00",
-      "o": 145.64,
-      "h": 145.98,
-      "l": 144.91,
-      "c": 145.44,
-      "v": 3635033.66622
-     },
-     {
-      "t": "10:05",
-      "o": 145.4,
-      "h": 145.41,
-      "l": 143.61,
-      "c": 143.7,
-      "v": 3414538.752256
-     },
-     {
-      "t": "10:10",
-      "o": 143.69,
-      "h": 144.79,
-      "l": 143.4,
-      "c": 144.55,
-      "v": 3244032.177863
-     }
-    ],
-    "opens": [
-     144.0,
-     142.13,
-     142.45,
-     141.63,
-     142.56,
-     143.78,
-     145.64,
-     145.4,
-     143.69
-    ],
-    "highs": [
-     145.04,
-     143.0,
-     142.84,
-     143.38,
-     144.01,
-     145.88,
-     145.98,
-     145.41,
-     144.79
-    ],
-    "lows": [
-     141.5,
-     141.58,
-     141.22,
-     141.17,
-     141.93,
-     143.58,
-     144.91,
-     143.61,
-     143.4
-    ],
-    "volumes": [
-     19190873.155695,
-     6867898.192938,
-     6156732.503047,
-     6007699.693657,
-     5071753.719626,
-     6000754.752288,
-     3635033.66622,
-     3414538.752256,
-     3244032.177863
-    ],
-    "option": {
-     "contract": "NVDA 146 call",
-     "points": [
-      {
-       "t": "10:00",
-       "px": 2.03,
-       "label": "Buy"
-      },
-      {
-       "t": "10:05",
-       "px": 1.7,
-       "label": "1/3"
-      },
-      {
-       "t": "10:10",
-       "px": 1.14,
-       "label": "Exit"
-      }
-     ],
-     "best_pct": 0.0,
-     "trade_pct": -34.6
-    },
-    "shadows": [],
-    "strategy_b": [],
-    "vwap": [
-     142.89,
-     142.745,
-     142.5848,
-     142.5516,
-     142.6318,
-     142.9234,
-     143.0964,
-     143.1657,
-     143.2246
-    ]
-   },
-   "levels": [
-    [
-     "R1 pivot",
-     160.09999999999997,
-     true
-    ],
-    [
-     "Prior-day high",
-     159.92,
-     false
-    ],
-    [
-     "Pre-market high",
-     155.77,
-     false
-    ],
-    [
-     "Call wall",
-     152.5,
-     false
-    ],
-    [
-     "S1 pivot",
-     150.67999999999998,
-     true
-    ],
-    [
-     "Prior-day low",
-     150.5,
-     false
-    ],
-    [
-     "Magnet",
-     150.0,
-     false
-    ],
-    [
-     "Range high",
-     145.03,
-     true
-    ],
-    [
-     "Pre-market low",
-     142.74,
-     false
-    ],
-    [
-     "Range low",
-     141.22,
-     true
-    ],
-    [
-     "Put wall",
-     140.0,
-     false
-    ]
-   ],
-   "plan": [
-    [
-     "Entry",
-     "NVDA 146 calls at the 10:00 close",
-     true
-    ],
-    [
-     "Stop",
-     "A 5-min close back under 145.03, or -50%",
-     false
-    ],
-    [
-     "S2",
-     "Sell a third at 145.88. Stop to break-even",
-     true
-    ],
-    [
-     "S1",
-     "Sell a third at 150.68",
-     false
-    ]
-   ],
-   "measures": [
-    [
-     "Today's box",
-     "2.70%",
-     "1.8x its normal \u00b7 wider than usual"
-    ],
-    [
-     "Normal box",
-     "1.47%",
-     "median of the last 40 sessions"
-    ],
-    [
-     "20-day volatility",
-     "127%",
-     "annualized, from daily closes"
-    ],
-    [
-     "Earnings",
-     "Nov 17",
-     "6 trading days ago"
-    ],
-    [
-     "Option at the break",
-     "IV 151%",
-     "vs 127% realized \u00b7 elevated"
-    ],
-    [
-     "Option spread",
-     "0%",
-     "of mid at entry (max 15%)"
-    ],
-    [
-     "Paper record",
-     "3 trades",
-     "33% win \u00b7 avg -15% \u00b7 best +16%"
-    ],
-    [
-     "Backtest, 59 days",
-     "weak",
-     "44 trades \u00b7 profit factor 0.66 on the stock \u00b7 options est. -21%/trade"
-    ]
-   ],
-   "action": {
-    "word": "SOLD -35%",
-    "tone": "loss",
-    "tile": "Sold -35%",
-    "lines": [
-     [
-      "Bought",
-      "NVDA 146 call at $2.03 (10:00)"
-     ],
-     [
-      "Sold",
-      "1/3 at $1.70 (10:05); the rest at $1.14 (10:10)"
-     ],
-     [
-      "Why it ended",
-      "NVDA came back to the buy price 145.62"
-     ],
-     [
-      "Result",
-      "-35% on the whole trade (paper)"
-     ]
-    ]
-   },
-   "walls": {
-    "expiration": "2026-11-25",
-    "price": 145.44,
-    "at": "2026-11-25T10:05:38-05:00",
-    "call_wall": {
-     "strike": 152.5,
-     "oi": 15975
-    },
-    "put_wall": {
-     "strike": 140.0,
-     "oi": 20691
-    },
-    "magnet": {
-     "strike": 150.0,
-     "oi": 35105,
-     "share": 23
-    },
-    "busiest": {
-     "strike": 140.0,
-     "vol": 59045
-    }
-   }
-  },
-  "TSLA": {
-   "status": "waiting",
-   "label": "Wait for a break",
-   "result": null,
-   "headline": "Waiting for a 5-minute close outside the TSLA box.",
-   "sub": "Box $358.64 to $370.23. Entries allowed until 11:00.",
-   "chart": {
-    "symbol": "TSLA",
-    "times": [
-     "9:30",
-     "9:35",
-     "9:40",
-     "9:45",
-     "9:50",
-     "9:55",
-     "10:00",
-     "10:05",
-     "10:10"
-    ],
-    "closes": [
-     363.86,
-     362.25,
-     358.71,
-     359.37,
-     360.55,
-     364.28,
-     364.37,
-     364.12,
-     365.01
-    ],
-    "box": {
-     "hi": 370.23,
-     "lo": 358.64
-    },
-    "lines": [],
-    "marks": [],
-    "bars": [
-     {
-      "t": "9:30",
-      "o": 370.21,
-      "h": 370.51,
-      "l": 361.29,
-      "c": 363.86,
-      "v": 1590752.974891
-     },
-     {
-      "t": "9:35",
-      "o": 363.87,
-      "h": 365.2,
-      "l": 362.17,
-      "c": 362.25,
-      "v": 654499.320457
-     },
-     {
-      "t": "9:40",
-      "o": 362.23,
-      "h": 362.52,
-      "l": 358.64,
-      "c": 358.71,
-      "v": 923827.993028
-     },
-     {
-      "t": "9:45",
-      "o": 358.75,
-      "h": 361.28,
-      "l": 358.05,
-      "c": 359.37,
-      "v": 770562.025405
-     },
-     {
-      "t": "9:50",
-      "o": 359.36,
-      "h": 361.28,
-      "l": 357.64,
-      "c": 360.55,
-      "v": 726074.662224
-     },
-     {
-      "t": "9:55",
-      "o": 360.61,
-      "h": 364.75,
-      "l": 360.23,
-      "c": 364.28,
-      "v": 728523.434
-     },
-     {
-      "t": "10:00",
-      "o": 364.31,
-      "h": 365.42,
-      "l": 362.48,
-      "c": 364.37,
-      "v": 495049.258111
-     },
-     {
-      "t": "10:05",
-      "o": 364.27,
-      "h": 365.62,
-      "l": 363.57,
-      "c": 364.12,
-      "v": 238768.917292
-     },
-     {
-      "t": "10:10",
-      "o": 364.01,
-      "h": 365.7,
-      "l": 363.5,
-      "c": 365.01,
-      "v": 274225.47277
-     }
-    ],
-    "opens": [
-     370.21,
-     363.87,
-     362.23,
-     358.75,
-     359.36,
-     360.61,
-     364.31,
-     364.27,
-     364.01
-    ],
-    "highs": [
-     370.51,
-     365.2,
-     362.52,
-     361.28,
-     361.28,
-     364.75,
-     365.42,
-     365.62,
-     365.7
-    ],
-    "lows": [
-     361.29,
-     362.17,
-     358.64,
-     358.05,
-     357.64,
-     360.23,
-     362.48,
-     363.57,
-     363.5
-    ],
-    "volumes": [
-     1590752.974891,
-     654499.320457,
-     923827.993028,
-     770562.025405,
-     726074.662224,
-     728523.434,
-     495049.258111,
-     238768.917292,
-     274225.47277
-    ],
-    "shadows": [],
-    "strategy_b": [],
-    "vwap": [
-     365.22,
-     364.6331,
-     363.2699,
-     362.5455,
-     362.1219,
-     362.2522,
-     362.4067,
-     362.4858,
-     362.5822
-    ]
-   },
-   "levels": [
-    [
-     "R1 pivot",
-     391.38666666666666,
-     true
-    ],
-    [
-     "Prior-day high",
-     390.09,
-     false
-    ],
-    [
-     "Call wall",
-     385.0,
-     false
-    ],
-    [
-     "Pre-market high",
-     383.72,
-     false
-    ],
-    [
-     "Magnet",
-     380.0,
-     false
-    ],
-    [
-     "S1 pivot",
-     376.7966666666667,
-     true
-    ],
-    [
-     "Prior-day low",
-     375.5,
-     false
-    ],
-    [
-     "Range high",
-     370.23,
-     true
-    ],
-    [
-     "Pre-market low",
-     369.34,
-     false
-    ],
-    [
-     "Put wall",
-     360.0,
-     false
-    ],
-    [
-     "Range low",
-     358.64,
-     true
-    ]
-   ],
-   "plan": [],
-   "measures": [
-    [
-     "Today's box",
-     "3.23%",
-     "1.7x its normal \u00b7 wider than usual"
-    ],
-    [
-     "Normal box",
-     "1.88%",
-     "median of the last 40 sessions"
-    ],
-    [
-     "20-day volatility",
-     "73%",
-     "annualized, from daily closes"
-    ],
-    [
-     "Earnings",
-     "Jan 27",
-     "in 45 trading days"
-    ],
-    [
-     "Paper record",
-     "2 trades",
-     "50% win \u00b7 avg -23% \u00b7 best +6%"
-    ],
-    [
-     "Backtest, 59 days",
-     "weak",
-     "40 trades \u00b7 profit factor 1.40 on the stock \u00b7 options est. -20%/trade"
-    ]
-   ],
-   "action": {
-    "word": "WAIT",
-    "tone": "wait",
-    "tile": "Wait for a break",
-    "lines": [
-     [
-      "Buy calls if",
-      "a 5-minute candle closes above 370.23"
-     ],
-     [
-      "Buy puts if",
-      "a 5-minute candle closes below 358.64"
-     ],
-     [
-      "Until",
-      "11:00. No break by then means no trade today."
-     ]
-    ]
-   },
-   "walls": {
-    "expiration": "2026-11-25",
-    "price": 364.37,
-    "at": "2026-11-25T10:05:40-05:00",
-    "call_wall": {
-     "strike": 385.0,
-     "oi": 1995
-    },
-    "put_wall": {
-     "strike": 360.0,
-     "oi": 3171
-    },
-    "magnet": {
-     "strike": 380.0,
-     "oi": 4571,
-     "share": 11
-    },
-    "busiest": {
-     "strike": 360.0,
-     "vol": 29859
-    }
-   }
-  },
-  "SPCX": {
-   "status": "waiting",
-   "label": "Wait for a break",
-   "result": null,
-   "headline": "Waiting for a 5-minute close outside the SPCX box.",
-   "sub": "Box $113.93 to $118.77. Entries allowed until 11:00.",
-   "chart": {
-    "symbol": "SPCX",
-    "times": [
-     "9:30",
-     "9:35",
-     "9:40",
-     "9:45",
-     "9:50",
-     "9:55",
-     "10:00",
-     "10:05",
-     "10:10"
-    ],
-    "closes": [
-     114.94,
-     115.04,
-     114.61,
-     115.94,
-     116.27,
-     118.19,
-     117.79,
-     116.27,
-     116.06
-    ],
-    "box": {
-     "hi": 118.77,
-     "lo": 113.93
-    },
-    "lines": [],
-    "marks": [],
-    "bars": [
-     {
-      "t": "9:30",
-      "o": 118.38,
-      "h": 118.77,
-      "l": 114.77,
-      "c": 114.94,
-      "v": 9211054.779229
-     },
-     {
-      "t": "9:35",
-      "o": 114.94,
-      "h": 115.2,
-      "l": 113.93,
-      "c": 115.04,
-      "v": 3923739.067594
-     },
-     {
-      "t": "9:40",
-      "o": 115.04,
-      "h": 115.45,
-      "l": 114.24,
-      "c": 114.61,
-      "v": 2718958.832636
-     },
-     {
-      "t": "9:45",
-      "o": 114.62,
-      "h": 116.72,
-      "l": 114.24,
-      "c": 115.94,
-      "v": 2945537.576352
-     },
-     {
-      "t": "9:50",
-      "o": 115.94,
-      "h": 116.63,
-      "l": 115.1,
-      "c": 116.27,
-      "v": 2349099.676532
-     },
-     {
-      "t": "9:55",
-      "o": 116.27,
-      "h": 118.26,
-      "l": 116.08,
-      "c": 118.19,
-      "v": 2230677.190957
-     },
-     {
-      "t": "10:00",
-      "o": 118.17,
-      "h": 118.32,
-      "l": 117.29,
-      "c": 117.79,
-      "v": 1594823.540585
-     },
-     {
-      "t": "10:05",
-      "o": 117.76,
-      "h": 117.78,
-      "l": 116.22,
-      "c": 116.27,
-      "v": 1258699.231341
-     },
-     {
-      "t": "10:10",
-      "o": 116.25,
-      "h": 116.68,
-      "l": 115.75,
-      "c": 116.06,
-      "v": 1170665.70184
-     }
-    ],
-    "opens": [
-     118.38,
-     114.94,
-     115.04,
-     114.62,
-     115.94,
-     116.27,
-     118.17,
-     117.76,
-     116.25
-    ],
-    "highs": [
-     118.77,
-     115.2,
-     115.45,
-     116.72,
-     116.63,
-     118.26,
-     118.32,
-     117.78,
-     116.68
-    ],
-    "lows": [
-     114.77,
-     113.93,
-     114.24,
-     114.24,
-     115.1,
-     116.08,
-     117.29,
-     116.22,
-     115.75
-    ],
-    "volumes": [
-     9211054.779229,
-     3923739.067594,
-     2718958.832636,
-     2945537.576352,
-     2349099.676532,
-     2230677.190957,
-     1594823.540585,
-     1258699.231341,
-     1170665.70184
-    ],
-    "shadows": [],
-    "strategy_b": [],
-    "vwap": [
-     116.16,
-     115.7308,
-     115.5655,
-     115.5761,
-     115.6232,
-     115.8032,
-     115.9307,
-     115.9704,
-     115.9786
-    ]
-   },
-   "levels": [
-    [
-     "Prior-day high",
-     132.5,
-     false
-    ],
-    [
-     "R1 pivot",
-     131.07333333333332,
-     true
-    ],
-    [
-     "Pre-market high",
-     125.81,
-     false
-    ],
-    [
-     "Call wall",
-     124.0,
-     false
-    ],
-    [
-     "Prior-day low",
-     123.52,
-     false
-    ],
-    [
-     "S1 pivot",
-     122.09333333333333,
-     true
-    ],
-    [
-     "Magnet",
-     120.0,
-     false
-    ],
-    [
-     "Range high",
-     118.77,
-     true
-    ],
-    [
-     "Pre-market low",
-     115.38,
-     false
-    ],
-    [
-     "Put wall",
-     115.0,
-     false
-    ],
-    [
-     "Range low",
-     113.93,
-     true
-    ]
-   ],
-   "plan": [],
-   "measures": [
-    [
-     "Today's box",
-     "4.25%",
-     "1.8x its normal \u00b7 wider than usual"
-    ],
-    [
-     "Normal box",
-     "2.39%",
-     "median of the last 40 sessions"
-    ],
-    [
-     "20-day volatility",
-     "73%",
-     "annualized, from daily closes"
-    ],
-    [
-     "Earnings",
-     "Feb 09",
-     "in 54 trading days"
-    ],
-    [
-     "Paper record",
-     "2 trades",
-     "100% win \u00b7 avg +42% \u00b7 best +54%"
-    ],
-    [
-     "Backtest, 59 days",
-     "weak",
-     "44 trades \u00b7 profit factor 0.70 on the stock \u00b7 options est. -18%/trade"
-    ]
-   ],
-   "action": {
-    "word": "WAIT",
-    "tone": "wait",
-    "tile": "Wait for a break",
-    "lines": [
-     [
-      "Buy calls if",
-      "a 5-minute candle closes above 118.77"
-     ],
-     [
-      "Buy puts if",
-      "a 5-minute candle closes below 113.93"
-     ],
-     [
-      "Until",
-      "11:00. No break by then means no trade today."
-     ]
-    ]
-   },
-   "walls": {
-    "expiration": "2026-11-25",
-    "price": 117.79,
-    "at": "2026-11-25T10:05:41-05:00",
-    "call_wall": {
-     "strike": 124.0,
-     "oi": 671
-    },
-    "put_wall": {
-     "strike": 115.0,
-     "oi": 2587
-    },
-    "magnet": {
-     "strike": 120.0,
-     "oi": 3594,
-     "share": 21
-    },
-    "busiest": {
-     "strike": 115.0,
-     "vol": 13428
     }
    }
   }
