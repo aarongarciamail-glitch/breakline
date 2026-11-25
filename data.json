@@ -39,7 +39,7 @@
  },
  "tape": {
   "ok": true,
-  "asof": "2026-11-25T13:40:28-05:00",
+  "asof": "2026-11-25T13:41:04-05:00",
   "lean": "mixed",
   "label": "Tape split",
   "strategy": "Calls and puts both stay open. Oil is up 3.4% and the 10-year is down 6.8 bp, so they disagree. The opening-range close picks the side.",
@@ -54,17 +54,17 @@
   "note": "Context only. Oil 1% and the 10-year 5 bp describe the lean. VIX 35 is a size note. Neither one blocks a call or a put.",
   "vix": {
    "name": "VIX",
-   "price": 28.57,
+   "price": 28.5,
    "prev": 26.36,
-   "chg_pct": 8.4,
-   "move": "Up 8.4% from yesterday's close of 26.4.",
-   "why": "Up 8.4% from yesterday's close of 26.4.",
+   "chg_pct": 8.1,
+   "move": "Up 8.1% from yesterday's close of 26.4.",
+   "why": "Up 8.1% from yesterday's close of 26.4.",
    "headline": null,
    "means": "Fear picked up and VIX is still under 35, so size stays normal."
   },
   "oil": {
    "name": "Crude",
-   "price": 83.45,
+   "price": 83.47,
    "prev": 80.73,
    "chg_pct": 3.4,
    "move": "Up 3.4% from yesterday's close of 80.73.",
@@ -229,7 +229,7 @@
  "session": true,
  "next_check": "1:45 PM",
  "mode": "paper",
- "updated": "2026-11-25T13:40:27-05:00",
+ "updated": "2026-11-25T13:41:03-05:00",
  "date": "Wed \u00b7 Nov 25",
  "day": {
   "pills": [
@@ -379,6 +379,11 @@
       "i": 7,
       "kind": "sell",
       "label": "SELL"
+     },
+     {
+      "i": 31,
+      "kind": "move",
+      "label": "MOVE \u2191"
      }
     ],
     "bars": [
@@ -1174,7 +1179,24 @@
      "54 trades \u00b7 profit factor 1.23 on the stock \u00b7 options est. -10%/trade"
     ]
    ],
-   "late": null,
+   "late": {
+    "signal_time": "12:10",
+    "side": 1,
+    "level": 705.05,
+    "entry": 706.47,
+    "stop": 701.2,
+    "status": "open",
+    "exit_time": null,
+    "exit": null,
+    "result": null,
+    "reason": null,
+    "option": "calls, paper context only",
+    "date": "2026-11-25",
+    "planned_exit": "15:30",
+    "last_c": 714.55,
+    "backfilled": true,
+    "note": "Added after the fact on 11/25: the engine went live at 13:29, after this signal. No alert went out at the signal time."
+   },
    "action": {
     "word": "SOLD -24%",
     "tone": "loss",
@@ -1357,6 +1379,11 @@
       "i": 7,
       "kind": "sell",
       "label": "SELL"
+     },
+     {
+      "i": 32,
+      "kind": "move",
+      "label": "MOVE \u2191"
      }
     ],
     "bars": [
@@ -2162,7 +2189,24 @@
      "50 trades \u00b7 profit factor 1.82 on the stock \u00b7 options est. -9%/trade"
     ]
    ],
-   "late": null,
+   "late": {
+    "signal_time": "12:15",
+    "side": 1,
+    "level": 620.0,
+    "entry": 620.02,
+    "stop": 615.4,
+    "status": "open",
+    "exit_time": null,
+    "exit": null,
+    "result": null,
+    "reason": null,
+    "option": "calls, paper context only",
+    "date": "2026-11-25",
+    "planned_exit": "15:30",
+    "last_c": 629.04,
+    "backfilled": true,
+    "note": "Added after the fact on 11/25: the engine went live at 13:29, after this signal. No alert went out at the signal time."
+   },
    "action": {
     "word": "SOLD -30%",
     "tone": "loss",
