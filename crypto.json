@@ -1,20 +1,20 @@
 {
  "v": 1,
- "updated": "2026-11-25T10:42:46-05:00",
+ "updated": "2026-11-25T10:45:17-05:00",
  "asof_candle": "2026-11-24",
  "size_pct": 20,
  "coins": {
   "BTC": {
-   "price": 58260.109375,
-   "chg24h_pct": -2.49,
+   "price": 58001.41015625,
+   "chg24h_pct": -2.92,
    "buy_line": 80833.6171875,
    "sell_line": 55149.56640625,
    "status": "out",
    "entry": null,
    "entry_date": null,
    "open_pct": null,
-   "to_buy_pct": 38.75,
-   "to_sell_pct": -5.34,
+   "to_buy_pct": 39.36,
+   "to_sell_pct": -4.92,
    "system_since": null,
    "system_in": false,
    "closes": [
@@ -1465,16 +1465,16 @@
    ]
   },
   "SOL": {
-   "price": 67.26000214,
-   "chg24h_pct": -3.41,
+   "price": 66.98999786,
+   "chg24h_pct": -3.8,
    "buy_line": 96.92881012,
    "sell_line": 65.20313263,
    "status": "out",
    "entry": null,
    "entry_date": null,
    "open_pct": null,
-   "to_buy_pct": 44.11,
-   "to_sell_pct": -3.06,
+   "to_buy_pct": 44.69,
+   "to_sell_pct": -2.67,
    "system_since": null,
    "system_in": false,
    "closes": [
@@ -2925,16 +2925,16 @@
    ]
   },
   "XRP": {
-   "price": 0.89929998,
-   "chg24h_pct": -2.71,
+   "price": 0.89630002,
+   "chg24h_pct": -3.04,
    "buy_line": 1.32519603,
    "sell_line": 0.86637402,
    "status": "out",
    "entry": null,
    "entry_date": null,
    "open_pct": null,
-   "to_buy_pct": 47.36,
-   "to_sell_pct": -3.66,
+   "to_buy_pct": 47.85,
+   "to_sell_pct": -3.34,
    "system_since": null,
    "system_in": false,
    "closes": [
@@ -4401,14 +4401,14 @@
    "max_dd_pct": -45,
    "pf": 3.02,
    "n": 47,
-   "hold_total_pct": 352
+   "hold_total_pct": 350
   },
   "SOL": {
    "total_pct": 15910,
    "max_dd_pct": -68,
    "pf": 6.94,
    "n": 35,
-   "hold_total_pct": 8904
+   "hold_total_pct": 8866
   },
   "XRP": {
    "total_pct": 140,
