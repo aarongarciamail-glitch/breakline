@@ -532,6 +532,14 @@ html[data-skin=ledger]{--wall:#d39a6a}
 .cn{display:inline-flex;align-items:center}
 .cn .ci{width:22px;height:22px;margin-right:8px}
 @media (max-width:640px){.tk .s .ci{width:13px;height:13px;margin-right:3px}}
+.vcard .vnote{font-family:var(--display);font-weight:400;color:var(--dim);font-size:12.5px;margin-left:6px}
+.vz.vcheap .aw,.vz.cheap .aw{color:var(--win)}.vz.vcheap{border-color:color-mix(in srgb,var(--win) 45%,transparent)}
+.vz.pricey .aw,.vz.exp .aw{color:var(--loss)}.vz.exp{border-color:color-mix(in srgb,var(--loss) 45%,transparent)}
+.pill.zone.vcheap,.pill.zone.cheap{color:var(--win);border-color:color-mix(in srgb,var(--win) 45%,transparent)}
+.pill.zone.pricey,.pill.zone.exp{color:var(--loss);border-color:color-mix(in srgb,var(--loss) 45%,transparent)}
+.zt.vcheap,.zt.cheap{color:var(--win)}.zt.pricey,.zt.exp{color:var(--loss)}
+.mchart{width:100%;height:auto;display:block}.mchart text{font:10px var(--mono)}
+@media (max-width:640px){.vcard .cline{grid-template-columns:auto 1fr}.vcard .cline .bar{display:none}.vcard .cline dd{text-align:right}.vcard .vnote{display:block;margin:0}}
 </style>
 </head>
 <body>
@@ -1610,12 +1618,47 @@ html[data-skin=ledger]{--wall:#d39a6a}
   XRP:'<svg class="ci" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#23292f"/><path fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" d="M9 9.5l4.2 4.1a4 4 0 0 0 5.6 0L23 9.5M9 22.5l4.2-4.1a4 4 0 0 1 5.6 0L23 22.5"/></svg>'
  };
  const coinName=sym=>(COINICON[sym]||'')+sym;
+
+ /* ---------- crypto Value track (value.json, nightly, no AI) ---------- */
+ let VAL=null;
+ const loadValue=()=>fetch('value.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(d=>{VAL=d;if(LAST)render(LAST)}).catch(()=>{});
+ loadValue(); setInterval(()=>{if(!document.hidden)loadValue()},600000);
+ const zoneCls=z=>/very cheap/i.test(z)?'vcheap':/cheap/i.test(z)?'cheap':/fair/i.test(z)?'fair':/pricey/i.test(z)?'pricey':'exp';
+ function mayerChart(v){
+  const h=(v.mayer_hist||[]); if(h.length<2)return '';
+  const wide=innerWidth>640, W=wide?760:340, H=wide?150:120, L=6, R=wide?96:72, T=8, B=18, pw=W-L-R, ph=H-T-B;
+  const vals=h.map(x=>x[1]); let mn=Math.min(0.6,...vals), mx=Math.max(1.6,...vals);
+  const x=i=>L+i*pw/(h.length-1), y=val=>T+(mx-val)/(mx-mn)*ph;
+  let g='';
+  [[0,0.8,'var(--win)',.16],[0.8,1,'var(--win)',.08],[1.5,2.4,'var(--loss)',.07],[2.4,9,'var(--loss)',.14]].forEach(([a,b,c,o])=>{const y1=y(Math.min(b,mx)),y2=y(Math.max(a,mn));if(y2>y1)g+='<rect x="'+L+'" y="'+y1+'" width="'+pw+'" height="'+(y2-y1)+'" fill="'+c+'" opacity="'+o+'"/>'});
+  [[0.8,'0.8 cheap','var(--win)'],[1,'1.0 avg','var(--dim)'],[1.5,'1.5 pricey','var(--loss)']].forEach(([val,t,c])=>{if(val>mn&&val<mx)g+='<line x1="'+L+'" x2="'+(L+pw)+'" y1="'+y(val)+'" y2="'+y(val)+'" stroke="'+c+'" stroke-dasharray="3 3" opacity=".7"/><text x="'+(L+pw+6)+'" y="'+(y(val)+3)+'" fill="'+c+'">'+t+'</text>'});
+  let lastM='';h.forEach((d,i)=>{const m=d[0].slice(0,7);if(m!==lastM){lastM=m;if(i>3&&i<h.length-6&&new Date(d[0]).getUTCMonth()%2===0)g+='<text x="'+(x(i)+2)+'" y="'+(H-5)+'" fill="var(--faint)">'+new Date(d[0]+'T12:00:00Z').toLocaleString('en-US',{month:'short'})+'</text>'}});
+  const path=h.map((d,i)=>(i?'L':'M')+x(i).toFixed(1)+' '+y(d[1]).toFixed(1)).join(' ');
+  const lv=vals[vals.length-1];
+  return '<svg class="mchart" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Mayer Multiple over the last year">'+g+'<path d="'+path+'" fill="none" stroke="var(--text)" stroke-width="1.5"/><circle cx="'+x(h.length-1)+'" cy="'+y(lv)+'" r="3.2" fill="var(--text)"/></svg>';
+ }
+ function valueView(sym){
+  const v=VAL&&VAL.coins&&VAL.coins[sym]; if(!v)return '';
+  const base=VAL.base_usd||100, led=(VAL.ledger||{})[sym]||{};
+  const rows=[];
+  if(v.mvrv!=null)rows.push(['MVRV',v.mvrv.toFixed(2),v.mvrv<1?'below the average holder\u2019s cost':v.mvrv<2?'near fair value':v.mvrv<3?'getting rich':'historically expensive']);
+  rows.push(['Mayer Multiple',v.mayer.toFixed(2),v.mayer<0.8?'very cheap vs its 200-day average':v.mayer<1?'below its 200-day average':v.mayer<1.5?'normal':'stretched above its average']);
+  if(v.w200!=null)rows.push(['200-week average',v.w200.toFixed(2)+'\u00d7',v.w200<1?'below its long-term floor (rare)':'above its long-term floor']);
+  rows.push(['Fear & Greed',String(VAL.fng),VAL.fng_word+' (whole crypto market; context only)']);
+  const ledTxt=led.weeks?'<div class="chead"><span>Paper, '+led.weeks+' week'+(led.weeks===1?'':'s')+': smart $'+Math.round(led.smart_in).toLocaleString('en-US')+' \u2192 $'+Math.round(led.smart_value).toLocaleString('en-US')+' ('+led.smart_per_usd.toFixed(2)+'\u00d7)</span><span>plain $'+Math.round(led.plain_in).toLocaleString('en-US')+' \u2192 $'+Math.round(led.plain_value).toLocaleString('en-US')+' ('+led.plain_per_usd.toFixed(2)+'\u00d7)</span></div>':'<div class="chead"><span>Paper smart-buying starts Sunday: each week $'+base+' \u00d7 the multiplier vs a plain $'+base+'.</span></div>';
+  return '<div class="panel ccard vcard"><div class="top"><span class="cn">'+coinName(sym)+' value</span><span class="st pill zone '+zoneCls(v.zone)+'">'+esc(v.zone)+'</span></div>'
+   +'<div class="act vz '+zoneCls(v.zone)+'"><div class="aw">'+esc(v.zone.toUpperCase())+'</div><dl class="al"><dt>Smart buy</dt><dd>'+v.mult+'\u00d7 this week ($'+Math.round(base*v.mult)+' on a $'+base+' base). Uses <span data-g="'+esc(v.gauge)+'">'+esc(v.gauge)+'</span>, the gauge that tested best for '+esc(sym)+'.</dd></dl></div>'
+   +'<dl class="cline">'+rows.map(r=>'<dt><span data-g="'+esc(r[0])+'">'+esc(r[0])+'</span></dt><span class="bar"></span><dd>'+esc(r[1])+' <span class="vnote">'+esc(r[2])+'</span></dd>').join('')+'</dl>'
+   +mayerChart(v)
+   +'<div class="legend"><span><i class="sw" style="background:var(--text);height:2px"></i><span data-g="Mayer Multiple">Mayer Multiple</span>, last 12 months</span><span><i class="sw" style="background:var(--win);opacity:.5"></i>cheap zone</span><span><i class="sw" style="background:var(--loss);opacity:.5"></i>pricey zone</span></div>'
+   +ledTxt+'</div>';
+ }
  const CSYMS=()=>CRY&&CRY.coins?Object.keys(CRY.coins):['BTC','SOL','XRP'];
  function cryptoTile(sym){
   const c=CRY&&CRY.coins&&CRY.coins[sym];
   if(!c)return '<button type="button" class="tk" role="tab" data-s="'+sym+'" aria-selected="'+(sym===SEL?'true':'false')+'"><span class="t1"><span class="s">'+coinName(sym)+'</span><span class="dot pending"></span></span><span class="pxline"><span class="num px">—</span><span class="asof">swing</span></span><span class="dist">Starts 8:10 pm ET</span><span class="l">Swing</span><span class="ls">Swing</span></button>';
   const inn=c.status==='in', st=inn?'Holding '+pc(c.open_pct):'Waiting · buy '+pc(c.to_buy_pct);
-  return '<button type="button" class="tk" role="tab" data-s="'+sym+'" aria-selected="'+(sym===SEL?'true':'false')+'"><span class="t1"><span class="s">'+coinName(sym)+'</span><span class="tagwide" style="color:var(--dim);border-color:var(--line-2)">Swing</span><span class="dot '+(inn?'up':'pending')+'"></span></span><span class="pxline"><span class="num px">$'+fmtC(c.price)+'</span><span class="asof '+((c.chg24h_pct||0)>0?'pos':(c.chg24h_pct||0)<0?'neg':'')+'">'+pc(c.chg24h_pct)+'</span></span><span class="dist">'+(inn?'Sell line $'+fmtC(c.sell_line):'Buy line $'+fmtC(c.buy_line))+'</span><span class="l '+(inn&&c.open_pct>0?'pos':inn&&c.open_pct<0?'neg':'')+'">'+st+'</span><span class="ls '+(inn&&c.open_pct>0?'pos':inn&&c.open_pct<0?'neg':'')+'">'+(inn?pc(c.open_pct):'Wait')+'</span></button>';
+  return '<button type="button" class="tk" role="tab" data-s="'+sym+'" aria-selected="'+(sym===SEL?'true':'false')+'"><span class="t1"><span class="s">'+coinName(sym)+'</span><span class="tagwide" style="color:var(--dim);border-color:var(--line-2)">Swing</span><span class="dot '+(inn?'up':'pending')+'"></span></span><span class="pxline"><span class="num px">$'+fmtC(c.price)+'</span><span class="asof '+((c.chg24h_pct||0)>0?'pos':(c.chg24h_pct||0)<0?'neg':'')+'">'+pc(c.chg24h_pct)+'</span></span><span class="dist">'+(VAL&&VAL.coins&&VAL.coins[sym]?'<span class="zt '+zoneCls(VAL.coins[sym].zone)+'">'+VAL.coins[sym].zone+' \u00b7 buy '+VAL.coins[sym].mult+'\u00d7</span>':(inn?'Sell line $'+fmtC(c.sell_line):'Buy line $'+fmtC(c.buy_line)))+'</span><span class="l '+(inn&&c.open_pct>0?'pos':inn&&c.open_pct<0?'neg':'')+'">'+st+'</span><span class="ls '+(inn&&c.open_pct>0?'pos':inn&&c.open_pct<0?'neg':'')+'">'+(VAL&&VAL.coins&&VAL.coins[sym]?VAL.coins[sym].zone.replace('Very cheap','V. cheap'):(inn?pc(c.open_pct):'Wait'))+'</span></button>';
  }
  function coinView(sym){
   const D=CRY, c=D&&D.coins&&D.coins[sym];
@@ -1627,7 +1670,7 @@ html[data-skin=ledger]{--wall:#d39a6a}
   const word=inn?'HOLD':'WAIT', line=inn?'Holding a swing position. Sell only on a daily close below the sell line.':'No position. Buy only on a daily close above the buy line.';
   const T=(D.trades||[]).filter(t=>t.coin===sym).slice().reverse();
   const u=D.updated?new Date(D.updated):null;
-  return '<div class="panel ccard big"><div class="top"><span class="cn">'+coinName(sym)+'</span><span class="cp">$'+fmtC(c.price)+'</span><span class="cc '+((c.chg24h_pct||0)>0?'pos':(c.chg24h_pct||0)<0?'neg':'')+'">'+pc(c.chg24h_pct)+' 24h</span><span class="st pill '+(inn?'in':'out')+'">Swing · '+(inn?'Holding':'Waiting')+'</span></div>'
+  return valueView(sym)+'<div class="panel ccard big"><div class="top"><span class="cn">'+coinName(sym)+'</span><span class="cp">$'+fmtC(c.price)+'</span><span class="cc '+((c.chg24h_pct||0)>0?'pos':(c.chg24h_pct||0)<0?'neg':'')+'">'+pc(c.chg24h_pct)+' 24h</span><span class="st pill '+(inn?'in':'out')+'">Swing · '+(inn?'Holding':'Waiting')+'</span></div>'
    +'<div class="act '+(inn?'hold':'wait')+'"><div class="aw">'+word+'</div><dl class="al"><dt>Rule</dt><dd>'+line+'</dd>'+(c.system_in&&!inn?'<dt>Trend</dt><dd>The rule’s trend has been on since '+esc(c.system_since||'?')+', before paper tracking began.</dd>':'')+'</dl></div>'
    +spark(c,true)
    +'<div class="legend"><span><i class="sw" style="background:var(--text);height:2px"></i>Daily close</span><span><i class="sw" style="background:var(--win);height:2px"></i><span data-g="20-day high">Buy line</span></span><span><i class="sw" style="background:var(--loss);height:2px"></i><span data-g="10-day low">Sell line</span></span></div>'
@@ -1703,6 +1746,12 @@ html[data-skin=ledger]{--wall:#d39a6a}
    ['Rich / elevated','The option costs more than recent moves justify. Small moves against you hurt more.',['rich','elevated']],
    ['Option spread','The gap between the buy and sell price, as a % of the middle. Breakline skips spreads over 15%.',['option spread','spread']],
    ['Strike','The price the option is based on. Nearest strike = closest to the current price.',['strike']]]],
+  ['Crypto value (buy low)',[
+   ['Mayer Multiple','Price divided by its 200-day average. Under 0.8 has historically been very cheap; above 2.4 very expensive. Works for any coin.',['mayer multiple','mayer']],
+   ['MVRV','Market value divided by realized value (what holders paid on average). Under 1 means the price is below the average holder\u2019s cost, historically a strong buy zone. Free data for BTC and XRP.',['mvrv']],
+   ['200-week average','Bitcoin\u2019s long-term floor. Trading below it has been rare and has marked good long-term entries.',['200-week average','200-week']],
+   ['Fear & Greed','A 0\u2013100 mood score for the whole crypto market. Extreme fear often comes near lows, but it tested poorly for SOL, so it is context only.',['fear & greed','fear and greed','fng']],
+   ['Smart buy (multiplier)','A weekly buy that grows when the coin is cheap and shrinks when it is pricey: 3\u00d7 very cheap, 1\u00d7 fair, 0\u00d7 expensive. In the 2018\u20132025 test it beat plain weekly buying on all three coins.',['smart buy','multiplier','very cheap','cheap','fair','pricey','expensive']]]],
   ['Crypto swing',[
    ['Swing trade','A trade held for days or weeks instead of minutes. Breakline’s crypto rule is a swing rule.',['swing','swing trade']],
    ['20-day high (buy line)','The highest price of the last 20 days. A daily close above it is the crypto buy signal: a breakout.',['20-day high','buy line','buy line (20-day high)']],
