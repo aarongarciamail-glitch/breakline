@@ -541,6 +541,14 @@ html[data-skin=ledger]{--wall:#d39a6a}
 .mchart{width:100%;height:auto;display:block}.mchart text{font:10px var(--mono)}
 @media (max-width:640px){.vcard .cline{grid-template-columns:auto 1fr}.vcard .cline .bar{display:none}.vcard .cline dd{text-align:right}.vcard .vnote{display:block;margin:0}}
 .side .mini[hidden]{display:none!important}   /* per-ticker account mini chart removed (Aaron, 11/25): redundant */
+@media (max-width:640px){
+ #legendNote,#sub{display:none}
+ .legend{font-size:11px;gap:2px 10px}
+ .chart text{font-size:11.5px}
+ [data-g]{text-decoration:none}
+ .stockhead{gap:4px 10px}
+}
+@media (pointer:coarse){[data-g]{text-decoration:none}}
 </style>
 </head>
 <body>
@@ -959,7 +967,7 @@ html[data-skin=ledger]{--wall:#d39a6a}
   const ohlc=barsFrom(c);
   const story=optionOf(stock, sym, recs, dayIso);
   const showOpt=false;   // option-price strip removed (Aaron, 11/25): the action card already shows the option and result
-  const priceH=phone?210:290, optH=showOpt?(phone?124:142):0, axisH=22;
+  const priceH=phone?300:290, optH=showOpt?(phone?124:142):0, axisH=22;
   const H=priceH+optH+axisH+(showOpt?6:0);
   svg.setAttribute('viewBox','0 0 '+W+' '+H);
   svg.dataset.mode=ohlc.some(b=>b.real)?'ohlc':'closes';
@@ -973,10 +981,16 @@ html[data-skin=ledger]{--wall:#d39a6a}
    return {real:false, vol:false, vwap:false, pd:false, pm:false, shadow:false, b:false};
   }
   const trade=tradeOf(stock, ohlc);
-  const levs=collectLevels(stock);
+  const levsAll=collectLevels(stock);
+  // Phone: fewer lines. Keep the 2 nearest levels above and below the last price, so the chart reads at a glance.
+  const lastPx=ohlc[ohlc.length-1].c;
+  const levs=phone?[...levsAll.filter(l=>l.kind!=='box'&&l.price>lastPx).sort((p,q)=>p.price-q.price).slice(0,2),...levsAll.filter(l=>l.kind!=='box'&&l.price<=lastPx).sort((p,q)=>q.price-p.price).slice(0,2),...levsAll.filter(l=>l.kind==='box')]:levsAll;
+  // Phone, live day: the x-axis ends 30 min after the last candle instead of 4:00, so candles are wider.
+  const lastT=ohlc[ohlc.length-1].t1;
+  const END=(phone&&live&&lastT!=null&&lastT<CLOSE-45)?Math.min(CLOSE,Math.ceil((lastT+30)/30)*30):CLOSE;
   const hasVol=ohlc.some(b=>b.v>0);
   const vwap=vwapOf(c, ohlc);
-  const L=8, R=phone?86:104, plotRight=W-R, plotW=plotRight-L;
+  const L=8, R=phone?100:104, plotRight=W-R, plotW=plotRight-L;
   const volH=hasVol?Math.round(priceH*0.16):0;
   const plotTop=14, plotBottom=priceH-volH-(volH?8:6);
   const pts=[];
@@ -986,19 +1000,19 @@ html[data-skin=ledger]{--wall:#d39a6a}
   let lo=Math.min(...pts), hi=Math.max(...pts);
   const pad=Math.max((hi-lo)*0.12, 0.05);
   if(hi===lo){lo-=1;hi+=1}else{lo-=pad;hi+=pad}
-  const xAt=m=>L+(m-OPEN)/(CLOSE-OPEN)*plotW;
+  const xAt=m=>L+(m-OPEN)/(END-OPEN)*plotW;
   const yP=p=>plotTop+(hi-p)/(hi-lo)*(plotBottom-plotTop);
   const inScale=p=>p>=lo&&p<=hi;
   const hits={marks:[], levels:[], bars:[]};
 
-  [OPEN,10*60,11*60,12*60,13*60,14*60,15*60,CLOSE].forEach(m=>{
+  [OPEN,10*60,11*60,12*60,13*60,14*60,15*60,CLOSE].filter(m=>m<=END).forEach(m=>{
    const x=xAt(m);
    mk('line',{x1:x,x2:x,y1:plotTop,y2:plotBottom,stroke:T('--line'),'stroke-width':1},svg);
   });
   for(let k=0;k<=3;k++){const y=plotTop+(plotBottom-plotTop)*k/3;mk('line',{x1:L,x2:plotRight,y1:y,y2:y,stroke:T('--line'),'stroke-width':1},svg)}
   if(live){
    const ahead=sessionNow(dayIso);
-   if(ahead!=null)mk('rect',{x:xAt(ahead),y:plotTop,width:Math.max(0,xAt(CLOSE)-xAt(ahead)),height:plotBottom-plotTop,fill:'rgba(255,255,255,.03)'},svg);
+   if(ahead!=null)mk('rect',{x:xAt(ahead),y:plotTop,width:Math.max(0,xAt(END)-xAt(Math.min(ahead,END))),height:plotBottom-plotTop,fill:'rgba(255,255,255,.03)'},svg);
   }
 
   if(c.box&&isFinite(+c.box.hi)&&isFinite(+c.box.lo)){
@@ -1216,7 +1230,7 @@ html[data-skin=ledger]{--wall:#d39a6a}
    });
   }
 
-  const ticks=phone?[OPEN,12*60,CLOSE]:[OPEN,10*60,11*60,12*60,13*60,14*60,15*60,CLOSE];
+  const ticks=(phone?[OPEN,11*60,13*60,15*60,CLOSE]:[OPEN,10*60,11*60,12*60,13*60,14*60,15*60,CLOSE]).filter(m=>m<=END);
   ticks.forEach((m,i)=>{
    const x=xAt(m);
    mk('text',{x,y:H-6,fill:T('--faint'),'text-anchor':i===0?'start':(i===ticks.length-1?'end':'middle')},svg,fmtHM(m));
