@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
-<meta name="theme-color" content="#08090b">
+<meta name="theme-color" content="#060708">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -12,51 +12,64 @@
 <link rel="apple-touch-icon" href="icon-180.png">
 <link rel="manifest" href="manifest.webmanifest">
 <title>Breakline</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='3.5' y='13.5' width='17' height='13' rx='3.5' fill='none' stroke='%238e98a4' stroke-width='1.8'/%3E%3Cpath d='M6.5 22.5 L11 18.5 L14.5 20.5 L27.5 5.5' fill='none' stroke='%23e9edf1' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='27.5' cy='5.5' r='2.3' fill='%233dd68c'/%3E%3C/svg%3E">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='3.5' y='13.5' width='17' height='13' rx='3.5' fill='none' stroke='%238e98a4' stroke-width='1.8'/%3E%3Cpath d='M6.5 22.5 L11 18.5 L14.5 20.5 L27.5 5.5' fill='none' stroke='%23e9edf1' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='27.5' cy='5.5' r='2.3' fill='%233aa9b8'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500;600&display=swap">
 <!-- Page source. publish.py should commit data.json only. Chart reads closes, and OHLCV when chart_payload.py adds it. -->
 <style>
 :root{
- --ink:#08090b;
- --panel:#12151a;
- --panel-2:#181c22;
- --line:rgba(232,236,241,.08);
- --line-2:rgba(232,236,241,.16);
- --text:#e8eaed;
- --dim:#9aa3ad;
- --faint:#6d7682;
- --win:#3dd68c;
- --loss:#ff5c6c;
+ --ink:#060708;
+ --panel:rgba(16,18,21,.62);      /* frosted glass over the haze */
+ --panel-2:rgba(26,30,35,.72);
+ --line:rgba(214,222,230,.12);
+ --line-2:rgba(214,222,230,.22);
+ --text:#eef1f4;
+ --dim:#a3abb5;
+ --faint:#6f7883;
+ --silver-hi:#f6f8fa;
+ --silver-lo:#8e98a4;
+ --teal:#3aa9b8;
+ --win:#6fd8b4;
+ --loss:#f08a8f;
  --warn:#e6b450;
  --info:#8eb6ff;
  --pm:#c4b5fd;
  --vwap:#f0d48a;
  --paper:#3aa9b8;
- --display:"IBM Plex Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
- --mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+ --display:"Geist",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+ --mono:"Geist Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
  color-scheme:dark;
 }
 *{box-sizing:border-box}
 html{background:var(--ink);overflow-x:clip}
 body{margin:0;color:var(--text);font:400 15px/1.5 var(--display);-webkit-font-smoothing:antialiased;
- background:
-  radial-gradient(900px 420px at 0% -10%, rgba(142,152,164,.14), transparent 55%),
-  radial-gradient(800px 480px at 100% -20%, rgba(58,169,184,.10), transparent 50%),
-  var(--ink);
+ background:var(--ink);
  padding-left:max(14px,env(safe-area-inset-left,0px));
  padding-right:max(14px,env(safe-area-inset-right,0px))}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:8;background:var(--ink)}
+/* the haze: slow, grainy silver-and-teal (restored from the original look) */
+.sky{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;background:var(--ink)}
+.sky i{position:absolute;border-radius:50%;filter:blur(70px);will-change:transform}
+.sky .s1{width:80vmax;height:60vmax;left:-28vmax;top:-30vmax;background:radial-gradient(closest-side,rgba(226,231,236,.62),rgba(150,160,170,.22) 55%,transparent);animation:d1 38s ease-in-out infinite alternate}
+.sky .s2{width:85vmax;height:70vmax;right:-34vmax;bottom:-38vmax;background:radial-gradient(closest-side,rgba(58,169,184,.62),rgba(24,90,104,.28) 55%,transparent);animation:d2 46s ease-in-out infinite alternate}
+.sky .s3{width:55vmax;height:30vmax;left:20vmax;top:30vh;background:radial-gradient(closest-side,rgba(0,0,0,.85),transparent);transform:rotate(-18deg);animation:d3 52s ease-in-out infinite alternate}
+.sky::after{content:"";position:absolute;inset:-50%;opacity:.16;mix-blend-mode:overlay;
+ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+@keyframes d1{to{transform:translate(14vmax,10vmax) scale(1.12)}}
+@keyframes d2{to{transform:translate(-12vmax,-8vmax) scale(1.08)}}
+@keyframes d3{to{transform:rotate(-8deg) translate(-10vmax,6vmax)}}
+@media (prefers-reduced-motion:reduce){.sky i{animation:none}}
+.panel,.tk,.stat,.chip,.day{backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
 .num{font-family:var(--mono);font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
 .pos{color:var(--win)}.neg{color:var(--loss)}.flat{color:var(--dim)}
 .page{position:relative;z-index:1;max-width:1180px;margin:0 auto}
 header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:6;display:flex;align-items:center;gap:14px;min-height:52px;
- border-bottom:1px solid var(--line);background:rgba(8,9,11,.9);backdrop-filter:blur(10px)}
-header.top::before{content:"";position:absolute;inset:0 -50vw;background:rgba(8,9,11,.9);z-index:-1}
+ border-bottom:1px solid var(--line);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+header.top::before{content:"";position:absolute;inset:0 -50vw;background:rgba(6,7,8,.55);z-index:-1}
 .brand{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--text)}
 .brand svg{width:26px;height:26px;flex:none}
-.word{font:600 16px/1 var(--display);letter-spacing:-.03em}
+.word{font:500 18px/1 var(--display);letter-spacing:-.03em;background:linear-gradient(100deg,var(--silver-hi) 10%,var(--silver-lo) 90%);-webkit-background-clip:text;background-clip:text;color:transparent}
 nav.links{display:flex;gap:2px;margin-left:auto}
 nav.links a{color:var(--dim);text-decoration:none;font-size:13.5px;padding:8px 10px;border-radius:999px;min-height:40px;display:inline-flex;align-items:center}
 nav.links a:hover{color:var(--text);background:rgba(255,255,255,.05)}
@@ -84,7 +97,7 @@ section{padding-block:8px 22px;scroll-margin-top:64px}
 .daybar{display:flex;justify-content:space-between;gap:12px;align-items:flex-end;flex-wrap:wrap;margin:6px 0 8px}
 .daytitle{display:grid;gap:4px;min-width:0}
 .callrow{display:flex;gap:6px;flex-wrap:wrap}
-h2{margin:0;font:500 22px/1.2 var(--display);letter-spacing:-.03em}
+h2{margin:0;font:400 24px/1.2 var(--display);letter-spacing:-.035em}
 .hint{margin:0 0 8px;color:var(--faint);font-size:13px}
 .pill{display:inline-flex;align-items:center;font:500 11px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:5px 8px;border-radius:999px;border:1px solid var(--line-2);color:var(--dim)}
 .pill.paper{color:var(--paper);border-color:color-mix(in srgb,var(--paper) 45%,transparent);background:rgba(58,169,184,.1)}
@@ -171,12 +184,12 @@ ol.plan b{font:500 11px/1.4 var(--mono);color:var(--text)}
 .ck .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--faint),var(--paper))}
 .roadnote{margin:10px 0 0;font-size:13px;color:var(--dim)}
 .curvehead{display:flex;justify-content:space-between;gap:8px;align-items:baseline;flex-wrap:wrap;margin-bottom:4px}
-.curvehead #acctNow,.curvehead #miniNow{font:500 20px/1.1 var(--display);letter-spacing:-.02em}
+.curvehead #acctNow,.curvehead #miniNow{font:400 20px/1.1 var(--display);letter-spacing:-.02em}
 .curvep svg,.bars svg{width:100%;height:auto;display:block}
 .curvep text,.bars text{font-family:var(--mono);font-size:10px}
 .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-bottom:10px}
 .stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
-.stat .n{font:500 28px/1.1 var(--display);letter-spacing:-.03em}
+.stat .n{font:300 30px/1.1 var(--display);letter-spacing:-.03em}
 .stat .l{margin-top:4px;font-size:12.5px;color:var(--dim)}
 .tablewrap{overflow-x:auto}
 table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:520px}
@@ -212,7 +225,7 @@ td.note{color:var(--dim)}
 footer{padding:18px 0 40px;border-top:1px solid var(--line);display:grid;gap:8px;color:var(--dim);font-size:13.5px}
 footer .nfa{font:500 12px/1 var(--mono);letter-spacing:.1em;color:var(--text)}
 footer p{margin:0;max-width:70ch}
-.tip{position:fixed;z-index:30;background:#1c2128;border:1px solid var(--line-2);border-radius:10px;padding:8px 10px;max-width:280px;
+.tip{position:fixed;z-index:30;background:rgba(16,18,21,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line-2);border-radius:10px;padding:8px 10px;max-width:280px;
  box-shadow:0 12px 32px rgba(0,0,0,.45);font:12px/1.45 var(--mono);color:var(--text);pointer-events:none}
 .tip[hidden]{display:none}
 .tip .th{font-weight:600;margin-bottom:4px}
@@ -256,13 +269,14 @@ footer p{margin:0;max-width:70ch}
 </style>
 </head>
 <body>
+<div class="sky" aria-hidden="true"><i class="s1"></i><i class="s2"></i><i class="s3"></i></div>
 <div class="page">
  <header class="top">
   <a class="brand" href="#today" aria-label="Breakline home">
    <svg viewBox="0 0 32 32" aria-hidden="true">
     <rect x="3.5" y="13.5" width="17" height="13" rx="3.5" fill="none" stroke="#8e98a4" stroke-width="1.6"/>
-    <path d="M6.5 22.5 L11 18.5 L14.5 20.5 L27.5 5.5" fill="none" stroke="#e8eaed" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-    <circle cx="27.5" cy="5.5" r="2.1" fill="#3dd68c"/>
+    <path d="M6.5 22.5 L11 18.5 L14.5 20.5 L27.5 5.5" fill="none" stroke="#e9edf1" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="27.5" cy="5.5" r="2.1" fill="#3aa9b8"/>
    </svg>
    <span class="word">Breakline</span>
   </a>
@@ -850,11 +864,11 @@ footer p{margin:0;max-width:70ch}
    const opad=(oHi-oLo)*0.18; oLo-=opad; oHi+=opad;
    const yO=p=> (oTop+18) + (oHi-p)/(oHi-oLo) * (oBot-(oTop+18));
    mk('line',{x1:L,x2:plotRight,y1:yO(0),y2:yO(0),stroke:T('--line-2')},svg);
-   mk('text',{x:plotRight+8,y:yO(0)+3,fill:T('--faint')},svg,'0%');
    const optLabs=[];
    function optLine(pct, text, color){if(pct==null)return;mk('line',{x1:L,x2:plotRight,y1:yO(pct),y2:yO(pct),stroke:color,'stroke-width':1,'stroke-dasharray':'4 3'},svg);optLabs.push({y:yO(pct), trueY:yO(pct), text, color})}
    optLine(story.best, 'best '+sgn(story.best), T('--win'));
    optLine(story.floor, 'floor '+sgn(story.floor), T('--warn'));
+   if(!optLabs.some(l=>Math.abs(l.y-yO(0))<12))mk('text',{x:plotRight+8,y:yO(0)+3,fill:T('--faint')},svg,'0%');
    const seq=story.points.filter(p=>p.pct!=null&&p.t!=null).slice().sort((a,b)=>a.t-b.t);
    if(seq.length){
     mk('path',{d:seq.map((p,i)=>(i?'L':'M')+xAt(p.t).toFixed(1)+' '+yO(p.pct).toFixed(1)).join(' '),fill:'none',stroke:'#d5dbe3','stroke-width':1.6},svg);
