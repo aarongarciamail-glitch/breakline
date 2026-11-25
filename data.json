@@ -39,10 +39,10 @@
  },
  "tape": {
   "ok": true,
-  "asof": "2026-11-25T09:20:33-05:00",
+  "asof": "2026-11-25T09:30:32-05:00",
   "lean": "mixed",
   "label": "Tape split",
-  "strategy": "Calls and puts both stay open. Oil is up 2.2% and the 10-year is down 7.0 bp, so they disagree. The opening-range close picks the side.",
+  "strategy": "Calls and puts both stay open. Oil is up 2.5% and the 10-year is down 6.6 bp, so they disagree. The opening-range close picks the side.",
   "block_calls": false,
   "block_puts": false,
   "vix_small": false,
@@ -54,11 +54,11 @@
   "note": "Context only. Oil 1% and the 10-year 5 bp describe the lean. VIX 35 is a size note. Neither one blocks a call or a put.",
   "vix": {
    "name": "VIX",
-   "price": 31.56,
+   "price": 31.62,
    "prev": 26.36,
-   "chg_pct": 19.7,
-   "move": "Up 19.7% from yesterday's close of 26.4.",
-   "why": "Up 19.7% from yesterday's close of 26.4. Barrons.com: Market's Fear Gauge Rises",
+   "chg_pct": 20.0,
+   "move": "Up 20.0% from yesterday's close of 26.4.",
+   "why": "Up 20.0% from yesterday's close of 26.4. Barrons.com: Market's Fear Gauge Rises",
    "headline": {
     "source": "Barrons.com",
     "title": "Market's Fear Gauge Rises"
@@ -67,20 +67,20 @@
   },
   "oil": {
    "name": "Crude",
-   "price": 82.52,
+   "price": 82.75,
    "prev": 80.73,
-   "chg_pct": 2.2,
-   "move": "Up 2.2% from yesterday's close of 80.73.",
+   "chg_pct": 2.5,
+   "move": "Up 2.5% from yesterday's close of 80.73.",
    "range": "Inside the last month, 79.07 to 104.99.",
-   "why": "Up 2.2% from yesterday's close of 80.73.",
+   "why": "Up 2.5% from yesterday's close of 80.73.",
    "headline": null,
    "means": "Oil and yields point different ways. Calls and puts both stay open. The box picks the side."
   },
   "yield": {
    "name": "10-year",
-   "price": 4.834,
-   "chg_bps": -7.0,
-   "move": "10-year is 4.83%, down 7.0 bp."
+   "price": 4.838,
+   "chg_bps": -6.6,
+   "move": "10-year is 4.84%, down 6.6 bp."
   }
  },
  "curve": [
@@ -195,9 +195,9 @@
   }
  ],
  "session": true,
- "next_check": "9:25 AM",
+ "next_check": "9:35 AM",
  "mode": "paper",
- "updated": "2026-11-25T09:20:33-05:00",
+ "updated": "2026-11-25T09:30:32-05:00",
  "date": "Wed \u00b7 Nov 25",
  "day": {
   "pills": [
@@ -249,7 +249,7 @@
     ],
     [
      "Pre-market low",
-     703.46,
+     703.06,
      false
     ]
    ],
@@ -397,7 +397,7 @@
     ],
     [
      "Pre-market low",
-     145.15,
+     142.74,
      false
     ]
    ],
