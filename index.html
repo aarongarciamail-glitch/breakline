@@ -526,6 +526,11 @@ html[data-skin=ledger]{--wall:#d39a6a}
 .pill.in{color:var(--win);border-color:color-mix(in srgb,var(--win) 45%,transparent)}
 .pill.out{color:var(--dim)}
 @media (max-width:640px){.ccard svg{max-height:120px}.cgrid{grid-template-columns:minmax(0,1fr)}}
+.ci{width:1.1em;height:1.1em;vertical-align:-.18em;margin-right:.35em;flex:none;display:inline-block}
+.tk .s .ci{width:15px;height:15px;vertical-align:-3px;margin-right:5px}
+.cn{display:inline-flex;align-items:center}
+.cn .ci{width:22px;height:22px;margin-right:8px}
+@media (max-width:640px){.tk .s .ci{width:13px;height:13px;margin-right:3px}}
 </style>
 </head>
 <body>
@@ -1565,16 +1570,22 @@ html[data-skin=ledger]{--wall:#d39a6a}
    +'<path d="'+path(lo)+'" fill="none" stroke="var(--loss)" stroke-width="1" stroke-dasharray="4 3" opacity=".75"/>'
    +'<path d="'+path(cl)+'" fill="none" stroke="var(--text)" stroke-width="1.6"/>'+ent+'</svg>';
  }
+ const COINICON={
+  BTC:'<svg class="ci" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#f7931a"/><path fill="#fff" d="M22.3 14.1c.3-2.1-1.3-3.2-3.4-3.9l.7-2.8-1.7-.4-.7 2.7-1.4-.3.7-2.7-1.7-.4-.7 2.8-1.1-.3-2.4-.6-.4 1.8s1.3.3 1.2.3c.7.2.8.6.8 1l-.8 3.2.2.1-.2-.1-1.1 4.5c-.1.2-.3.5-.8.4l-1.2-.3-.8 1.9 2.2.6 1.2.3-.7 2.8 1.7.4.7-2.8 1.4.4-.7 2.8 1.7.4.7-2.8c2.9.5 5.1.3 6-2.3.7-2.1 0-3.3-1.6-4.1 1.1-.3 2-1 2.2-2.6zm-3.9 5.4c-.5 2.1-4 1-5.2.7l.9-3.7c1.2.3 4.8.9 4.3 3zm.5-5.5c-.5 1.9-3.4.9-4.3.7l.9-3.4c1 .2 4 .7 3.4 2.7z"/></svg>',
+  SOL:'<svg class="ci" viewBox="0 0 32 32" aria-hidden="true"><defs><linearGradient id="solg" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#9945ff"/><stop offset="1" stop-color="#14f195"/></linearGradient></defs><circle cx="16" cy="16" r="16" fill="#0f0f17"/><path fill="url(#solg)" d="M10.4 19.6c.1-.1.3-.2.5-.2h12.3c.3 0 .5.4.2.6l-2.4 2.4c-.1.1-.3.2-.5.2H8.2c-.3 0-.5-.4-.2-.6zm0-9.2c.1-.1.3-.2.5-.2h12.3c.3 0 .5.4.2.6l-2.4 2.4c-.1.1-.3.2-.5.2H8.2c-.3 0-.5-.4-.2-.6zm11 4.6c-.1-.1-.3-.2-.5-.2H8.6c-.3 0-.5.4-.2.6l2.4 2.4c.1.1.3.2.5.2h12.3c.3 0 .5-.4.2-.6z"/></svg>',
+  XRP:'<svg class="ci" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="16" fill="#23292f"/><path fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" d="M9 9.5l4.2 4.1a4 4 0 0 0 5.6 0L23 9.5M9 22.5l4.2-4.1a4 4 0 0 1 5.6 0L23 22.5"/></svg>'
+ };
+ const coinName=sym=>(COINICON[sym]||'')+sym;
  const CSYMS=()=>CRY&&CRY.coins?Object.keys(CRY.coins):['BTC','SOL','XRP'];
  function cryptoTile(sym){
   const c=CRY&&CRY.coins&&CRY.coins[sym];
-  if(!c)return '<button type="button" class="tk" role="tab" data-s="'+sym+'" aria-selected="'+(sym===SEL?'true':'false')+'"><span class="t1"><span class="s">'+sym+'</span><span class="dot pending"></span></span><span class="pxline"><span class="num px">—</span><span class="asof">swing</span></span><span class="dist">Starts 7:10 pm ET</span><span class="l">Swing</span><span class="ls">Swing</span></button>';
+  if(!c)return '<button type="button" class="tk" role="tab" data-s="'+sym+'" aria-selected="'+(sym===SEL?'true':'false')+'"><span class="t1"><span class="s">'+coinName(sym)+'</span><span class="dot pending"></span></span><span class="pxline"><span class="num px">—</span><span class="asof">swing</span></span><span class="dist">Starts 7:10 pm ET</span><span class="l">Swing</span><span class="ls">Swing</span></button>';
   const inn=c.status==='in', st=inn?'Holding '+pc(c.open_pct):'Waiting · buy '+pc(c.to_buy_pct);
-  return '<button type="button" class="tk" role="tab" data-s="'+sym+'" aria-selected="'+(sym===SEL?'true':'false')+'"><span class="t1"><span class="s">'+sym+'</span><span class="tagwide" style="color:var(--dim);border-color:var(--line-2)">Swing</span><span class="dot '+(inn?'up':'pending')+'"></span></span><span class="pxline"><span class="num px">$'+fmtC(c.price)+'</span><span class="asof '+((c.chg24h_pct||0)>0?'pos':(c.chg24h_pct||0)<0?'neg':'')+'">'+pc(c.chg24h_pct)+'</span></span><span class="dist">'+(inn?'Sell line $'+fmtC(c.sell_line):'Buy line $'+fmtC(c.buy_line))+'</span><span class="l '+(inn&&c.open_pct>0?'pos':inn&&c.open_pct<0?'neg':'')+'">'+st+'</span><span class="ls '+(inn&&c.open_pct>0?'pos':inn&&c.open_pct<0?'neg':'')+'">'+(inn?pc(c.open_pct):'Wait')+'</span></button>';
+  return '<button type="button" class="tk" role="tab" data-s="'+sym+'" aria-selected="'+(sym===SEL?'true':'false')+'"><span class="t1"><span class="s">'+coinName(sym)+'</span><span class="tagwide" style="color:var(--dim);border-color:var(--line-2)">Swing</span><span class="dot '+(inn?'up':'pending')+'"></span></span><span class="pxline"><span class="num px">$'+fmtC(c.price)+'</span><span class="asof '+((c.chg24h_pct||0)>0?'pos':(c.chg24h_pct||0)<0?'neg':'')+'">'+pc(c.chg24h_pct)+'</span></span><span class="dist">'+(inn?'Sell line $'+fmtC(c.sell_line):'Buy line $'+fmtC(c.buy_line))+'</span><span class="l '+(inn&&c.open_pct>0?'pos':inn&&c.open_pct<0?'neg':'')+'">'+st+'</span><span class="ls '+(inn&&c.open_pct>0?'pos':inn&&c.open_pct<0?'neg':'')+'">'+(inn?pc(c.open_pct):'Wait')+'</span></button>';
  }
  function coinView(sym){
   const D=CRY, c=D&&D.coins&&D.coins[sym];
-  if(!c)return '<div class="panel ccard big"><div class="top"><span class="cn">'+sym+'</span><span class="st pill out">Swing</span></div><p class="cnote">Crypto is a swing trade, not same-day: it’s checked once each evening after the daily close. Tracking starts tonight at 7:10 pm ET.</p></div>'+RULE;
+  if(!c)return '<div class="panel ccard big"><div class="top"><span class="cn">'+coinName(sym)+'</span><span class="st pill out">Swing</span></div><p class="cnote">Crypto is a swing trade, not same-day: it’s checked once each evening after the daily close. Tracking starts tonight at 7:10 pm ET.</p></div>'+RULE;
   const S=D.summary||{}, bt=(D.backtest||{})[sym]||{}, inn=c.status==='in';
   const rows=inn
    ?[['Bought','$'+fmtC(c.entry)+(c.entry_date?' on '+c.entry_date.slice(5).replace('-','/'):'')],['Now',pc(c.open_pct)],['Sell line (10-day low)','$'+fmtC(c.sell_line)+' · '+pc(c.to_sell_pct)+' away']]
@@ -1582,14 +1593,14 @@ html[data-skin=ledger]{--wall:#d39a6a}
   const word=inn?'HOLD':'WAIT', line=inn?'Holding a swing position. Sell only on a daily close below the sell line.':'No position. Buy only on a daily close above the buy line.';
   const T=(D.trades||[]).filter(t=>t.coin===sym).slice().reverse();
   const u=D.updated?new Date(D.updated):null;
-  return '<div class="panel ccard big"><div class="top"><span class="cn">'+sym+'</span><span class="cp">$'+fmtC(c.price)+'</span><span class="cc '+((c.chg24h_pct||0)>0?'pos':(c.chg24h_pct||0)<0?'neg':'')+'">'+pc(c.chg24h_pct)+' 24h</span><span class="st pill '+(inn?'in':'out')+'">Swing · '+(inn?'Holding':'Waiting')+'</span></div>'
+  return '<div class="panel ccard big"><div class="top"><span class="cn">'+coinName(sym)+'</span><span class="cp">$'+fmtC(c.price)+'</span><span class="cc '+((c.chg24h_pct||0)>0?'pos':(c.chg24h_pct||0)<0?'neg':'')+'">'+pc(c.chg24h_pct)+' 24h</span><span class="st pill '+(inn?'in':'out')+'">Swing · '+(inn?'Holding':'Waiting')+'</span></div>'
    +'<div class="act '+(inn?'hold':'wait')+'"><div class="aw">'+word+'</div><dl class="al"><dt>Rule</dt><dd>'+line+'</dd>'+(c.system_in&&!inn?'<dt>Trend</dt><dd>The rule’s trend has been on since '+esc(c.system_since||'?')+', before paper tracking began.</dd>':'')+'</dl></div>'
    +spark(c,true)
    +'<div class="legend"><span><i class="sw" style="background:var(--text);height:2px"></i>Daily close</span><span><i class="sw" style="background:var(--win);height:2px"></i><span data-g="20-day high">Buy line</span></span><span><i class="sw" style="background:var(--loss);height:2px"></i><span data-g="10-day low">Sell line</span></span></div>'
    +'<dl class="cline">'+rows.map(r=>'<dt>'+esc(r[0])+'</dt><span class="bar"></span><dd>'+esc(r[1])+'</dd>').join('')+'</dl>'
    +'<div class="chead">'+(bt.total_pct!=null?'<span>Backtest '+pc(bt.total_pct)+' vs holding '+pc(bt.hold_total_pct)+', worst drop '+pc(bt.max_dd_pct)+'</span>':'')
    +'<span>Crypto paper account '+pc(S.account_pct||0)+' · '+(S.n||0)+' trade'+(S.n===1?'':'s')+'</span>'+(u?'<span>Checked '+u.toLocaleString('en-US',{timeZone:'America/New_York',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'})+'</span>':'')+'</div>'
-   +(T.length?'<div class="tablewrap"><table><thead><tr><th>In</th><th>Out</th><th class="r">Days</th><th class="r">Result</th></tr></thead><tbody>'+T.map(t=>'<tr><td class="d">'+esc(t.entry_date)+' @ $'+fmtC(t.entry)+'</td><td class="d">'+esc(t.exit_date)+' @ $'+fmtC(t.exit)+'</td><td class="r">'+esc(t.days)+'</td><td class="r '+(t.result_pct>0?'pos':'neg')+'">'+pc(t.result_pct)+'</td></tr>').join('')+'</tbody></table></div>':'')
+   +(T.length?'<div class="tablewrap bytick"><table><thead><tr><th>In</th><th>Out</th><th class="r">Days</th><th class="r">Result</th></tr></thead><tbody>'+T.map(t=>'<tr><td class="d">'+esc(t.entry_date)+' @ $'+fmtC(t.entry)+'</td><td class="d">'+esc(t.exit_date)+' @ $'+fmtC(t.exit)+'</td><td class="r">'+esc(t.days)+'</td><td class="r '+(t.result_pct>0?'pos':'neg')+'">'+pc(t.result_pct)+'</td></tr>').join('')+'</tbody></table></div>':'')
    +'</div>'+RULE;
  }
  const RULE='<div class="panel box crule"><h3>The crypto rule</h3><p><b>Buy</b> when a coin closes a day above its <span data-g="20-day high">20-day high</span>. <b>Sell</b> when it closes below its <span data-g="10-day low">10-day low</span>. Long only, held days to weeks, checked once each evening after the daily candle closes (7 pm ET). Alerts go to Telegram.</p><p class="meta">Backtest 2018–2025 (SOL from 2020), 1% cost per trade: beat holding on all three with smaller drops, but drops were still large. About 40% wins.</p></div>';
