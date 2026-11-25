@@ -7,25 +7,25 @@
   "checks": [
    {
     "name": "Paper trades",
-    "value": "10 of 20",
+    "value": "13 of 20",
     "ok": false,
-    "progress": 0.5
+    "progress": 0.65
    },
    {
     "name": "Profit factor",
-    "value": "0.59",
+    "value": "0.39",
     "need": "\u2265 1.2",
     "ok": false
    },
    {
     "name": "Average trade",
-    "value": "-7%",
+    "value": "-13%",
     "need": "> 0%",
     "ok": false
    },
    {
     "name": "Worst drawdown",
-    "value": "5.9%",
+    "value": "6.4%",
     "need": "\u2264 12%",
     "ok": true
    },
@@ -39,10 +39,10 @@
  },
  "tape": {
   "ok": true,
-  "asof": "2026-11-25T10:05:41-05:00",
+  "asof": "2026-11-25T10:10:37-05:00",
   "lean": "mixed",
   "label": "Tape split",
-  "strategy": "Calls and puts both stay open. Oil is up 3.0% and the 10-year is down 8.2 bp, so they disagree. The opening-range close picks the side.",
+  "strategy": "Calls and puts both stay open. Oil is up 3.2% and the 10-year is down 8.2 bp, so they disagree. The opening-range close picks the side.",
   "block_calls": false,
   "block_puts": false,
   "vix_small": false,
@@ -54,11 +54,11 @@
   "note": "Context only. Oil 1% and the 10-year 5 bp describe the lean. VIX 35 is a size note. Neither one blocks a call or a put.",
   "vix": {
    "name": "VIX",
-   "price": 34.34,
+   "price": 33.91,
    "prev": 26.36,
-   "chg_pct": 30.3,
-   "move": "Up 30.3% from yesterday's close of 26.4.",
-   "why": "Up 30.3% from yesterday's close of 26.4. Barrons.com: Market's Fear Gauge Rises",
+   "chg_pct": 28.6,
+   "move": "Up 28.6% from yesterday's close of 26.4.",
+   "why": "Up 28.6% from yesterday's close of 26.4. Barrons.com: Market's Fear Gauge Rises",
    "headline": {
     "source": "Barrons.com",
     "title": "Market's Fear Gauge Rises"
@@ -67,15 +67,15 @@
   },
   "oil": {
    "name": "Crude",
-   "price": 83.16,
+   "price": 83.31,
    "prev": 80.73,
-   "chg_pct": 3.0,
-   "move": "Up 3.0% from yesterday's close of 80.73.",
+   "chg_pct": 3.2,
+   "move": "Up 3.2% from yesterday's close of 80.73.",
    "range": "Inside the last month, 79.07 to 104.99.",
-   "why": "Up 3.0% from yesterday's close of 80.73. MT Newswires: Canada Commodities: Oil Prices Climb as Saudi Oil Refinery Attacked",
+   "why": "Up 3.2% from yesterday's close of 80.73. Associated Press: BC-Crude Oil Futures",
    "headline": {
-    "source": "MT Newswires",
-    "title": "Canada Commodities: Oil Prices Climb as Saudi Oil Refinery Attacked"
+    "source": "Associated Press",
+    "title": "BC-Crude Oil Futures"
    },
    "means": "Oil and yields point different ways. Calls and puts both stay open. The box picks the side."
   },
@@ -126,10 +126,45 @@
   {
    "date": "2026-11-24",
    "acct": -3.01
+  },
+  {
+   "date": "2026-11-25",
+   "acct": -4.2
+  },
+  {
+   "date": "2026-11-25",
+   "acct": -5.52
+  },
+  {
+   "date": "2026-11-25",
+   "acct": -6.44
   }
  ],
- "max_dd": 5.89,
+ "max_dd": 6.44,
  "days": [
+  {
+   "date": "2026-11-25",
+   "n": 3,
+   "wins": 0,
+   "acct": -3.53,
+   "items": [
+    {
+     "symbol": "SPY",
+     "dir": "calls",
+     "result": -24
+    },
+    {
+     "symbol": "QQQ",
+     "dir": "calls",
+     "result": -30
+    },
+    {
+     "symbol": "NVDA",
+     "dir": "calls",
+     "result": -35
+    }
+   ]
+  },
   {
    "date": "2026-11-24",
    "n": 5,
@@ -198,15 +233,15 @@
   }
  ],
  "session": true,
- "next_check": "10:10 AM",
+ "next_check": "10:15 AM",
  "mode": "paper",
- "updated": "2026-11-25T10:05:34-05:00",
+ "updated": "2026-11-25T10:10:33-05:00",
  "date": "Wed \u00b7 Nov 25",
  "day": {
   "pills": [
    "Paper"
   ],
-  "headline": "3 trades: 3 open.",
+  "headline": "3 trades: 3 lost.",
   "sub": "Tap a ticker to see its box, levels and numbers."
  },
  "symbols": [
@@ -218,11 +253,11 @@
  ],
  "stocks": {
   "SPY": {
-   "status": "up",
-   "label": "Holding calls",
-   "result": null,
-   "headline": "SPY broke up at 10:05. Calls.",
-   "sub": "5-minute close 704.20 above the box (703.70). Paper trade is open.",
+   "status": "loss",
+   "label": "Sold -24%",
+   "result": -24,
+   "headline": "SPY broke up at 10:05. Closed -24%.",
+   "sub": "Calls from the 10:05 close at 704.20. Paper result on the option, whole trade.",
    "chart": {
     "symbol": "SPY",
     "times": [
@@ -232,16 +267,18 @@
      "9:45",
      "9:50",
      "9:55",
-     "10:00"
+     "10:00",
+     "10:05"
     ],
     "closes": [
      699.82,
      698.68,
      696.27,
      697.6,
-     699.95,
+     699.92,
      703.57,
-     704.2
+     704.2,
+     702.7
     ],
     "box": {
      "hi": 703.7,
@@ -262,6 +299,11 @@
       "i": 6,
       "kind": "buy",
       "label": "BUY"
+     },
+     {
+      "i": 7,
+      "kind": "sell",
+      "label": "SELL"
      }
     ],
     "bars": [
@@ -299,11 +341,11 @@
      },
      {
       "t": "9:50",
-      "o": 697.55,
+      "o": 697.54,
       "h": 700.34,
       "l": 696.87,
-      "c": 699.95,
-      "v": 485275.472164
+      "c": 699.92,
+      "v": 895986.472164
      },
      {
       "t": "9:55",
@@ -320,6 +362,14 @@
       "l": 701.95,
       "c": 704.2,
       "v": 659092.533175
+     },
+     {
+      "t": "10:05",
+      "o": 704.16,
+      "h": 705.05,
+      "l": 702.62,
+      "c": 702.7,
+      "v": 529625.82683
      }
     ],
     "opens": [
@@ -327,9 +377,10 @@
      699.84,
      698.67,
      696.27,
-     697.55,
+     697.54,
      699.88,
-     703.51
+     703.51,
+     704.16
     ],
     "highs": [
      703.7,
@@ -338,7 +389,8 @@
      699.02,
      700.34,
      703.81,
-     704.62
+     704.62,
+     705.05
     ],
     "lows": [
      699.79,
@@ -347,16 +399,18 @@
      695.45,
      696.87,
      699.65,
-     701.95
+     701.95,
+     702.62
     ],
     "volumes": [
      2049773.0,
      1203919.54189,
      1162753.932789,
      991918.0,
-     485275.472164,
+     895986.472164,
      510644.0,
-     659092.533175
+     659092.533175,
+     529625.82683
     ],
     "option": {
      "contract": "SPY 704 call",
@@ -365,9 +419,15 @@
        "t": "10:05",
        "px": 3.85,
        "label": "Buy"
+      },
+      {
+       "t": "10:10",
+       "px": 2.92,
+       "label": "Exit"
       }
      ],
-     "best_pct": 0.0
+     "best_pct": 0.0,
+     "trade_pct": -24.2
     },
     "shadows": [],
     "strategy_b": [],
@@ -376,9 +436,10 @@
      700.3547,
      699.5197,
      699.123,
-     699.1173,
-     699.3745,
-     699.7679
+     699.1117,
+     699.3538,
+     699.7274,
+     699.9742
     ]
    },
    "levels": [
@@ -442,7 +503,7 @@
     [
      "Stop",
      "A 5-min close back under 703.70, or -50%",
-     false
+     true
     ],
     [
      "S3",
@@ -483,8 +544,8 @@
     ],
     [
      "Paper record",
-     "2 trades",
-     "0% win \u00b7 avg -34% \u00b7 best -33%"
+     "3 trades",
+     "0% win \u00b7 avg -30% \u00b7 best -24%"
     ],
     [
      "Backtest, 59 days",
@@ -493,28 +554,32 @@
     ]
    ],
    "action": {
-    "word": "HOLD CALLS",
-    "tone": "hold",
-    "tile": "Holding calls",
+    "word": "SOLD -24%",
+    "tone": "loss",
+    "tile": "Sold -24%",
     "lines": [
      [
       "Bought",
       "SPY 704 call at $3.85 (10:05)"
      ],
      [
-      "Take profit",
-      "1/3 at 704.85, 1/3 at 708.50"
+      "Sold",
+      "the rest at $2.92 (10:10)"
      ],
      [
-      "Sell all if",
-      "a 5-minute candle closes back under 703.70, or the option drops to $1.93"
+      "Why it ended",
+      "SPY fell back inside its opening range (702.70)"
+     ],
+     [
+      "Result",
+      "-24% on the whole trade (paper)"
      ]
     ]
    },
    "walls": {
     "expiration": "2026-11-25",
-    "price": 701.0,
-    "at": "2026-11-25T09:35:36-05:00",
+    "price": 702.7,
+    "at": "2026-11-25T10:10:35-05:00",
     "call_wall": {
      "strike": 715.0,
      "oi": 5580
@@ -530,16 +595,16 @@
     },
     "busiest": {
      "strike": 700.0,
-     "vol": 33168
+     "vol": 124409
     }
    }
   },
   "QQQ": {
-   "status": "up",
-   "label": "Holding calls",
-   "result": null,
-   "headline": "QQQ broke up at 10:00. Calls.",
-   "sub": "5-minute close 618.24 above the box (617.74). Paper trade is open.",
+   "status": "loss",
+   "label": "Sold -30%",
+   "result": -30,
+   "headline": "QQQ broke up at 10:00. Closed -30%.",
+   "sub": "Calls from the 10:00 close at 618.24. Paper result on the option, whole trade.",
    "chart": {
     "symbol": "QQQ",
     "times": [
@@ -549,7 +614,8 @@
      "9:45",
      "9:50",
      "9:55",
-     "10:00"
+     "10:00",
+     "10:05"
     ],
     "closes": [
      612.25,
@@ -558,7 +624,8 @@
      610.43,
      613.33,
      618.24,
-     618.28
+     618.28,
+     615.46
     ],
     "box": {
      "hi": 617.74,
@@ -579,6 +646,11 @@
       "i": 5,
       "kind": "buy",
       "label": "BUY"
+     },
+     {
+      "i": 7,
+      "kind": "sell",
+      "label": "SELL"
      }
     ],
     "bars": [
@@ -588,7 +660,7 @@
       "h": 617.79,
       "l": 612.23,
       "c": 612.25,
-      "v": 2421440.133255
+      "v": 2421380.133255
      },
      {
       "t": "9:35",
@@ -618,9 +690,9 @@
       "t": "9:50",
       "o": 610.36,
       "h": 613.86,
-      "l": 609.53,
+      "l": 609.52,
       "c": 613.33,
-      "v": 857707.03708
+      "v": 1471902.03708
      },
      {
       "t": "9:55",
@@ -637,6 +709,14 @@
       "l": 616.11,
       "c": 618.28,
       "v": 782717.984528
+     },
+     {
+      "t": "10:05",
+      "o": 618.24,
+      "h": 618.45,
+      "l": 615.41,
+      "c": 615.46,
+      "v": 556608.07491
      }
     ],
     "opens": [
@@ -646,7 +726,8 @@
      608.62,
      610.36,
      613.26,
-     618.06
+     618.06,
+     618.24
     ],
     "highs": [
      617.79,
@@ -655,25 +736,28 @@
      612.33,
      613.86,
      618.57,
-     619.38
+     619.38,
+     618.45
     ],
     "lows": [
      612.23,
      611.02,
      608.53,
      607.74,
-     609.53,
+     609.52,
      612.93,
-     616.11
+     616.11,
+     615.41
     ],
     "volumes": [
-     2421440.133255,
+     2421380.133255,
      1616618.245885,
      1587523.368464,
      1851556.916269,
-     857707.03708,
+     1471902.03708,
      855149.492727,
-     782717.984528
+     782717.984528,
+     556608.07491
     ],
     "option": {
      "contract": "QQQ 618 call",
@@ -682,9 +766,15 @@
        "t": "10:00",
        "px": 4.29,
        "label": "Buy"
+      },
+      {
+       "t": "10:10",
+       "px": 2.98,
+       "label": "Exit"
       }
      ],
-     "best_pct": 0.9
+     "best_pct": 0.9,
+     "trade_pct": -30.5
     },
     "shadows": [],
     "strategy_b": [],
@@ -693,9 +783,10 @@
      613.1812,
      612.2468,
      611.7317,
-     611.784,
-     612.2303,
-     612.6771
+     611.8147,
+     612.2304,
+     612.6513,
+     612.8405
     ]
    },
    "levels": [
@@ -764,7 +855,7 @@
     [
      "Stop",
      "A 5-min close back under 617.74, or -50%",
-     false
+     true
     ],
     [
      "S2",
@@ -805,8 +896,8 @@
     ],
     [
      "Paper record",
-     "2 trades",
-     "0% win \u00b7 avg -18% \u00b7 best -1%"
+     "3 trades",
+     "0% win \u00b7 avg -22% \u00b7 best -1%"
     ],
     [
      "Backtest, 59 days",
@@ -815,21 +906,25 @@
     ]
    ],
    "action": {
-    "word": "HOLD CALLS",
-    "tone": "hold",
-    "tile": "Holding calls",
+    "word": "SOLD -30%",
+    "tone": "loss",
+    "tile": "Sold -30%",
     "lines": [
      [
       "Bought",
       "QQQ 618 call at $4.29 (10:00)"
      ],
      [
-      "Take profit",
-      "1/3 at 622.24, 1/3 at 630.18"
+      "Sold",
+      "the rest at $2.98 (10:10)"
      ],
      [
-      "Sell all if",
-      "a 5-minute candle closes back under 617.74, or the option drops to $2.15"
+      "Why it ended",
+      "QQQ fell back inside its opening range (615.46)"
+     ],
+     [
+      "Result",
+      "-30% on the whole trade (paper)"
      ]
     ]
    },
@@ -857,11 +952,11 @@
    }
   },
   "NVDA": {
-   "status": "up",
-   "label": "Holding calls",
-   "result": null,
-   "headline": "NVDA broke up at 10:00. Calls.",
-   "sub": "5-minute close 145.62 above the box (145.03). Paper trade is open.",
+   "status": "loss",
+   "label": "Sold -35%",
+   "result": -35,
+   "headline": "NVDA broke up at 10:00. Closed -35%.",
+   "sub": "Calls from the 10:00 close at 145.62. Paper result on the option, whole trade.",
    "chart": {
     "symbol": "NVDA",
     "times": [
@@ -871,7 +966,8 @@
      "9:45",
      "9:50",
      "9:55",
-     "10:00"
+     "10:00",
+     "10:05"
     ],
     "closes": [
      142.13,
@@ -880,7 +976,8 @@
      142.57,
      143.77,
      145.62,
-     145.44
+     145.44,
+     143.7
     ],
     "box": {
      "hi": 145.03,
@@ -906,6 +1003,11 @@
       "i": 6,
       "kind": "sell",
       "label": "SELL 1/3"
+     },
+     {
+      "i": 7,
+      "kind": "sell",
+      "label": "SELL"
      }
     ],
     "bars": [
@@ -943,11 +1045,11 @@
      },
      {
       "t": "9:50",
-      "o": 142.55,
+      "o": 142.56,
       "h": 144.01,
       "l": 141.93,
       "c": 143.77,
-      "v": 3498555.719626
+      "v": 5071753.719626
      },
      {
       "t": "9:55",
@@ -964,6 +1066,14 @@
       "l": 144.91,
       "c": 145.44,
       "v": 3635033.66622
+     },
+     {
+      "t": "10:05",
+      "o": 145.4,
+      "h": 145.41,
+      "l": 143.61,
+      "c": 143.7,
+      "v": 3414538.752256
      }
     ],
     "opens": [
@@ -971,9 +1081,10 @@
      142.13,
      142.45,
      141.63,
-     142.55,
+     142.56,
      143.78,
-     145.64
+     145.64,
+     145.4
     ],
     "highs": [
      145.04,
@@ -982,7 +1093,8 @@
      143.38,
      144.01,
      145.88,
-     145.98
+     145.98,
+     145.41
     ],
     "lows": [
      141.5,
@@ -991,16 +1103,18 @@
      141.17,
      141.93,
      143.58,
-     144.91
+     144.91,
+     143.61
     ],
     "volumes": [
      19190873.155695,
      6867898.192938,
      6156732.503047,
      6007699.693657,
-     3498555.719626,
+     5071753.719626,
      4262885.752288,
-     3635033.66622
+     3635033.66622,
+     3414538.752256
     ],
     "option": {
      "contract": "NVDA 146 call",
@@ -1014,9 +1128,15 @@
        "t": "10:05",
        "px": 1.7,
        "label": "1/3"
+      },
+      {
+       "t": "10:10",
+       "px": 1.14,
+       "label": "Exit"
       }
      ],
-     "best_pct": 0.0
+     "best_pct": 0.0,
+     "trade_pct": -34.6
     },
     "shadows": [],
     "strategy_b": [],
@@ -1025,9 +1145,10 @@
      142.745,
      142.5848,
      142.5516,
-     142.609,
-     142.8331,
-     143.0244
+     142.6318,
+     142.8465,
+     143.0309,
+     143.1065
     ]
    },
    "levels": [
@@ -1142,8 +1263,8 @@
     ],
     [
      "Paper record",
-     "2 trades",
-     "50% win \u00b7 avg -5% \u00b7 best +16%"
+     "3 trades",
+     "33% win \u00b7 avg -15% \u00b7 best +16%"
     ],
     [
      "Backtest, 59 days",
@@ -1152,21 +1273,25 @@
     ]
    ],
    "action": {
-    "word": "HOLD CALLS",
-    "tone": "hold",
-    "tile": "Holding calls",
+    "word": "SOLD -35%",
+    "tone": "loss",
+    "tile": "Sold -35%",
     "lines": [
      [
       "Bought",
       "NVDA 146 call at $2.03 (10:00)"
      ],
      [
-      "Take profit",
-      "1/3 at 145.88 \u2713 done, 1/3 at 150.68"
+      "Sold",
+      "1/3 at $1.70 (10:05); the rest at $1.14 (10:10)"
      ],
      [
-      "Sell all if",
-      "NVDA gets back to 145.62 (the buy price)"
+      "Why it ended",
+      "NVDA came back to the buy price 145.62"
+     ],
+     [
+      "Result",
+      "-35% on the whole trade (paper)"
      ]
     ]
    },
@@ -1208,16 +1333,18 @@
      "9:45",
      "9:50",
      "9:55",
-     "10:00"
+     "10:00",
+     "10:05"
     ],
     "closes": [
      363.86,
      362.25,
      358.71,
      359.37,
-     360.6,
+     360.55,
      364.28,
-     364.37
+     364.37,
+     364.12
     ],
     "box": {
      "hi": 370.23,
@@ -1263,8 +1390,8 @@
       "o": 359.36,
       "h": 361.28,
       "l": 357.64,
-      "c": 360.6,
-      "v": 515238.662224
+      "c": 360.55,
+      "v": 726074.662224
      },
      {
       "t": "9:55",
@@ -1281,6 +1408,14 @@
       "l": 362.48,
       "c": 364.37,
       "v": 495049.258111
+     },
+     {
+      "t": "10:05",
+      "o": 364.27,
+      "h": 365.62,
+      "l": 363.57,
+      "c": 364.12,
+      "v": 238768.917292
      }
     ],
     "opens": [
@@ -1290,7 +1425,8 @@
      358.75,
      359.36,
      360.61,
-     364.31
+     364.31,
+     364.27
     ],
     "highs": [
      370.51,
@@ -1299,7 +1435,8 @@
      361.28,
      361.28,
      364.75,
-     365.42
+     365.42,
+     365.62
     ],
     "lows": [
      361.29,
@@ -1308,16 +1445,18 @@
      358.05,
      357.64,
      360.23,
-     362.48
+     362.48,
+     363.57
     ],
     "volumes": [
      1590752.974891,
      654499.320457,
      923827.993028,
      770562.025405,
-     515238.662224,
+     726074.662224,
      522701.434,
-     495049.258111
+     495049.258111,
+     238768.917292
     ],
     "shadows": [],
     "strategy_b": [],
@@ -1326,9 +1465,10 @@
      364.6331,
      363.2699,
      362.5455,
-     362.2326,
-     362.3223,
-     362.4822
+     362.1219,
+     362.2191,
+     362.3821,
+     362.4649
     ]
    },
    "levels": [
@@ -1478,7 +1618,8 @@
      "9:45",
      "9:50",
      "9:55",
-     "10:00"
+     "10:00",
+     "10:05"
     ],
     "closes": [
      114.94,
@@ -1487,7 +1628,8 @@
      115.94,
      116.27,
      118.19,
-     117.79
+     117.79,
+     116.27
     ],
     "box": {
      "hi": 118.77,
@@ -1502,7 +1644,7 @@
       "h": 118.77,
       "l": 114.77,
       "c": 114.94,
-      "v": 9211386.779229
+      "v": 9211054.779229
      },
      {
       "t": "9:35",
@@ -1534,7 +1676,7 @@
       "h": 116.63,
       "l": 115.1,
       "c": 116.27,
-      "v": 1783955.676532
+      "v": 2349099.676532
      },
      {
       "t": "9:55",
@@ -1551,6 +1693,14 @@
       "l": 117.29,
       "c": 117.79,
       "v": 1594823.540585
+     },
+     {
+      "t": "10:05",
+      "o": 117.76,
+      "h": 117.78,
+      "l": 116.22,
+      "c": 116.27,
+      "v": 1258699.231341
      }
     ],
     "opens": [
@@ -1560,7 +1710,8 @@
      114.62,
      115.94,
      116.27,
-     118.17
+     118.17,
+     117.76
     ],
     "highs": [
      118.77,
@@ -1569,7 +1720,8 @@
      116.72,
      116.63,
      118.26,
-     118.32
+     118.32,
+     117.78
     ],
     "lows": [
      114.77,
@@ -1578,16 +1730,18 @@
      114.24,
      115.1,
      116.08,
-     117.29
+     117.29,
+     116.22
     ],
     "volumes": [
-     9211386.779229,
+     9211054.779229,
      3923739.067594,
      2718958.832636,
      2945537.576352,
-     1783955.676532,
+     2349099.676532,
      1769207.190957,
-     1594823.540585
+     1594823.540585,
+     1258699.231341
     ],
     "shadows": [],
     "strategy_b": [],
@@ -1596,9 +1750,10 @@
      115.7308,
      115.5655,
      115.5761,
-     115.6129,
-     115.763,
-     115.8987
+     115.6232,
+     115.7688,
+     115.901,
+     115.9428
     ]
    },
    "levels": [
@@ -1735,6 +1890,30 @@
   }
  },
  "record": [
+  {
+   "date": "2026-11-25",
+   "symbol": "SPY",
+   "call": "SPY calls",
+   "result": -24,
+   "note": "5-min close 702.70 back inside the box.",
+   "tag": ""
+  },
+  {
+   "date": "2026-11-25",
+   "symbol": "QQQ",
+   "call": "QQQ calls",
+   "result": -30,
+   "note": "5-min close 615.46 back inside the box.",
+   "tag": ""
+  },
+  {
+   "date": "2026-11-25",
+   "symbol": "NVDA",
+   "call": "NVDA calls",
+   "result": -35,
+   "note": "Stock back at 145.62. The stop is the stock entry, not break-even on the option. Option \u221234.6%.",
+   "tag": ""
+  },
   {
    "date": "2026-11-24",
    "symbol": "QQQ",
