@@ -957,7 +957,7 @@ html[data-skin=ledger]{--wall:#d39a6a}
   const c=stock.chart;
   const ohlc=barsFrom(c);
   const story=optionOf(stock, sym, recs, dayIso);
-  const showOpt=story.points.length||story.best!=null||story.floor!=null;
+  const showOpt=false;   // option-price strip removed (Aaron, 11/25): the action card already shows the option and result
   const priceH=phone?210:290, optH=showOpt?(phone?124:142):0, axisH=22;
   const H=priceH+optH+axisH+(showOpt?6:0);
   svg.setAttribute('viewBox','0 0 '+W+' '+H);
