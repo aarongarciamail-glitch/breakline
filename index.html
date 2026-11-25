@@ -1633,13 +1633,34 @@ html[data-skin=ledger]{--wall:#d39a6a}
    +'<div class="legend"><span><i class="sw" style="background:var(--text);height:2px"></i>Daily close</span><span><i class="sw" style="background:var(--win);height:2px"></i><span data-g="20-day high">Buy line</span></span><span><i class="sw" style="background:var(--loss);height:2px"></i><span data-g="10-day low">Sell line</span></span></div>'
    +'<dl class="cline">'+rows.map(r=>'<dt>'+esc(r[0])+'</dt><span class="bar"></span><dd>'+esc(r[1])+'</dd>').join('')+'</dl>'
    +'<div class="chead">'+(bt.total_pct!=null?'<span>Backtest '+pc(bt.total_pct)+' vs holding '+pc(bt.hold_total_pct)+', worst drop '+pc(bt.max_dd_pct)+'</span>':'')
-   +'<span>Crypto paper account '+pc(S.account_pct||0)+' · '+(S.n||0)+' trade'+(S.n===1?'':'s')+'</span>'+(u?'<span>Checked '+u.toLocaleString('en-US',{timeZone:'America/New_York',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'})+'</span>':'')+'</div>'
+   +'<span>Crypto paper account '+pc(S.account_pct||0)+' · '+(S.n||0)+' trade'+(S.n===1?'':'s')+'</span>'+(CLIVE_AT?'<span>Live price '+CLIVE_AT.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',second:'2-digit'})+' (Coinbase)</span>':'')+(u?'<span>Rule checked '+u.toLocaleString('en-US',{timeZone:'America/New_York',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'})+'</span>':'')+'</div>'
    +(T.length?'<div class="tablewrap bytick"><table><thead><tr><th>In</th><th>Out</th><th class="r">Days</th><th class="r">Result</th></tr></thead><tbody>'+T.map(t=>'<tr><td class="d">'+esc(t.entry_date)+' @ $'+fmtC(t.entry)+'</td><td class="d">'+esc(t.exit_date)+' @ $'+fmtC(t.exit)+'</td><td class="r">'+esc(t.days)+'</td><td class="r '+(t.result_pct>0?'pos':'neg')+'">'+pc(t.result_pct)+'</td></tr>').join('')+'</tbody></table></div>':'')
    +'</div>'+RULE;
  }
  const RULE='<div class="panel box crule"><h3>The crypto rule</h3><p><b>Buy</b> when a coin closes a day above its <span data-g="20-day high">20-day high</span>. <b>Sell</b> when it closes below its <span data-g="10-day low">10-day low</span>. Long only, held days to weeks, checked once each evening after the daily candle closes (7 pm ET). Alerts go to Telegram.</p><p class="meta">Backtest 2018–2025 (SOL from 2020), 1% cost per trade: beat holding on all three with smaller drops, but drops were still large. About 40% wins.</p></div>';
- const loadCrypto=()=>fetch('crypto.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(d=>{CRY=d;if(LAST)render(LAST)}).catch(()=>{});
+ const loadCrypto=()=>fetch('crypto.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(d=>{CRY=d;if(LAST)render(LAST);liveCrypto()}).catch(()=>{});
  loadCrypto(); setInterval(()=>{if(!document.hidden)loadCrypto()},300000);
+ /* live crypto prices in the browser (Coinbase public feed, no key, no server, no tokens).
+    The buy/sell rule still uses the 7 pm daily close; this only refreshes price, 24h change and distances. */
+ let CLIVE_AT=null;
+ async function liveCrypto(){
+  if(!CRY||!CRY.coins||document.hidden)return;
+  const syms=Object.keys(CRY.coins); let ok=0;
+  await Promise.all(syms.map(async sym=>{
+   try{
+    const r=await fetch('https://api.exchange.coinbase.com/products/'+sym+'-USD/stats',{cache:'no-store'}); if(!r.ok)return;
+    const j=await r.json(), last=+j.last, open=+j.open; if(!isFinite(last)||last<=0)return;
+    const c=CRY.coins[sym]; c.price=last; if(isFinite(open)&&open>0)c.chg24h_pct=(last/open-1)*100;
+    if(c.buy_line)c.to_buy_pct=(c.buy_line/last-1)*100;
+    if(c.sell_line)c.to_sell_pct=(c.sell_line/last-1)*100;
+    if(c.status==='in'&&c.entry)c.open_pct=(last/c.entry-1)*100;
+    ok++;
+   }catch(e){}
+  }));
+  if(ok){CLIVE_AT=new Date(); if(LAST&&!document.querySelector('.tip:not([hidden])'))render(LAST)}
+ }
+ setInterval(liveCrypto,30000);
+
 
  /* ---------- glossary: one list powers the Learn tab and hover explanations ---------- */
  const GLOSS=[
