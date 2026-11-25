@@ -1613,13 +1613,13 @@ html[data-skin=ledger]{--wall:#d39a6a}
  const CSYMS=()=>CRY&&CRY.coins?Object.keys(CRY.coins):['BTC','SOL','XRP'];
  function cryptoTile(sym){
   const c=CRY&&CRY.coins&&CRY.coins[sym];
-  if(!c)return '<button type="button" class="tk" role="tab" data-s="'+sym+'" aria-selected="'+(sym===SEL?'true':'false')+'"><span class="t1"><span class="s">'+coinName(sym)+'</span><span class="dot pending"></span></span><span class="pxline"><span class="num px">—</span><span class="asof">swing</span></span><span class="dist">Starts 7:10 pm ET</span><span class="l">Swing</span><span class="ls">Swing</span></button>';
+  if(!c)return '<button type="button" class="tk" role="tab" data-s="'+sym+'" aria-selected="'+(sym===SEL?'true':'false')+'"><span class="t1"><span class="s">'+coinName(sym)+'</span><span class="dot pending"></span></span><span class="pxline"><span class="num px">—</span><span class="asof">swing</span></span><span class="dist">Starts 8:10 pm ET</span><span class="l">Swing</span><span class="ls">Swing</span></button>';
   const inn=c.status==='in', st=inn?'Holding '+pc(c.open_pct):'Waiting · buy '+pc(c.to_buy_pct);
   return '<button type="button" class="tk" role="tab" data-s="'+sym+'" aria-selected="'+(sym===SEL?'true':'false')+'"><span class="t1"><span class="s">'+coinName(sym)+'</span><span class="tagwide" style="color:var(--dim);border-color:var(--line-2)">Swing</span><span class="dot '+(inn?'up':'pending')+'"></span></span><span class="pxline"><span class="num px">$'+fmtC(c.price)+'</span><span class="asof '+((c.chg24h_pct||0)>0?'pos':(c.chg24h_pct||0)<0?'neg':'')+'">'+pc(c.chg24h_pct)+'</span></span><span class="dist">'+(inn?'Sell line $'+fmtC(c.sell_line):'Buy line $'+fmtC(c.buy_line))+'</span><span class="l '+(inn&&c.open_pct>0?'pos':inn&&c.open_pct<0?'neg':'')+'">'+st+'</span><span class="ls '+(inn&&c.open_pct>0?'pos':inn&&c.open_pct<0?'neg':'')+'">'+(inn?pc(c.open_pct):'Wait')+'</span></button>';
  }
  function coinView(sym){
   const D=CRY, c=D&&D.coins&&D.coins[sym];
-  if(!c)return '<div class="panel ccard big"><div class="top"><span class="cn">'+coinName(sym)+'</span><span class="st pill out">Swing</span></div><p class="cnote">Crypto is a swing trade, not same-day: it’s checked once each evening after the daily close. Tracking starts tonight at 7:10 pm ET.</p></div>'+RULE;
+  if(!c)return '<div class="panel ccard big"><div class="top"><span class="cn">'+coinName(sym)+'</span><span class="st pill out">Swing</span></div><p class="cnote">Crypto is a swing trade, not same-day: it’s checked once each evening after the daily close. Tracking starts tonight at 8:10 pm ET.</p></div>'+RULE;
   const S=D.summary||{}, bt=(D.backtest||{})[sym]||{}, inn=c.status==='in';
   const rows=inn
    ?[['Bought','$'+fmtC(c.entry)+(c.entry_date?' on '+c.entry_date.slice(5).replace('-','/'):'')],['Now',pc(c.open_pct)],['Sell line (10-day low)','$'+fmtC(c.sell_line)+' · '+pc(c.to_sell_pct)+' away']]
@@ -1637,7 +1637,7 @@ html[data-skin=ledger]{--wall:#d39a6a}
    +(T.length?'<div class="tablewrap bytick"><table><thead><tr><th>In</th><th>Out</th><th class="r">Days</th><th class="r">Result</th></tr></thead><tbody>'+T.map(t=>'<tr><td class="d">'+esc(t.entry_date)+' @ $'+fmtC(t.entry)+'</td><td class="d">'+esc(t.exit_date)+' @ $'+fmtC(t.exit)+'</td><td class="r">'+esc(t.days)+'</td><td class="r '+(t.result_pct>0?'pos':'neg')+'">'+pc(t.result_pct)+'</td></tr>').join('')+'</tbody></table></div>':'')
    +'</div>'+RULE;
  }
- const RULE='<div class="panel box crule"><h3>The crypto rule</h3><p><b>Buy</b> when a coin closes a day above its <span data-g="20-day high">20-day high</span>. <b>Sell</b> when it closes below its <span data-g="10-day low">10-day low</span>. Long only, held days to weeks, checked once each evening after the daily candle closes (7 pm ET). Alerts go to Telegram.</p><p class="meta">Backtest 2018–2025 (SOL from 2020), 1% cost per trade: beat holding on all three with smaller drops, but drops were still large. About 40% wins.</p></div>';
+ const RULE='<div class="panel box crule"><h3>The crypto rule</h3><p><b>Buy</b> when a coin closes a day above its <span data-g="20-day high">20-day high</span>. <b>Sell</b> when it closes below its <span data-g="10-day low">10-day low</span>. Long only, held days to weeks, checked each evening at 8:10 pm ET, after the daily candle closes (midnight UTC). Alerts go to Telegram.</p><p class="meta">Backtest 2018–2025 (SOL from 2020), 1% cost per trade: beat holding on all three with smaller drops, but drops were still large. About 40% wins.</p></div>';
  const loadCrypto=()=>fetch('crypto.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(d=>{CRY=d;if(LAST)render(LAST);liveCrypto()}).catch(()=>{});
  loadCrypto(); setInterval(()=>{if(!document.hidden)loadCrypto()},300000);
  /* live crypto prices in the browser (Coinbase public feed, no key, no server, no tokens).
