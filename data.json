@@ -39,10 +39,10 @@
  },
  "tape": {
   "ok": true,
-  "asof": "2026-11-25T13:45:29-05:00",
+  "asof": "2026-11-25T13:50:31-05:00",
   "lean": "mixed",
   "label": "Tape split",
-  "strategy": "Calls and puts both stay open. Oil is up 3.2% and the 10-year is down 7.0 bp, so they disagree. The opening-range close picks the side.",
+  "strategy": "Calls and puts both stay open. Oil is up 3.5% and the 10-year is down 7.4 bp, so they disagree. The opening-range close picks the side.",
   "block_calls": false,
   "block_puts": false,
   "vix_small": false,
@@ -54,30 +54,30 @@
   "note": "Context only. Oil 1% and the 10-year 5 bp describe the lean. VIX 35 is a size note. Neither one blocks a call or a put.",
   "vix": {
    "name": "VIX",
-   "price": 28.47,
+   "price": 28.66,
    "prev": 26.36,
-   "chg_pct": 8.0,
-   "move": "Up 8.0% from yesterday's close of 26.4.",
-   "why": "Up 8.0% from yesterday's close of 26.4.",
+   "chg_pct": 8.7,
+   "move": "Up 8.7% from yesterday's close of 26.4.",
+   "why": "Up 8.7% from yesterday's close of 26.4.",
    "headline": null,
    "means": "Fear picked up and VIX is still under 35, so size stays normal."
   },
   "oil": {
    "name": "Crude",
-   "price": 83.31,
+   "price": 83.56,
    "prev": 80.73,
-   "chg_pct": 3.2,
-   "move": "Up 3.2% from yesterday's close of 80.73.",
+   "chg_pct": 3.5,
+   "move": "Up 3.5% from yesterday's close of 80.73.",
    "range": "Inside the last month, 79.07 to 104.99.",
-   "why": "Up 3.2% from yesterday's close of 80.73.",
+   "why": "Up 3.5% from yesterday's close of 80.73.",
    "headline": null,
    "means": "Oil and yields point different ways. Calls and puts both stay open. The box picks the side."
   },
   "yield": {
    "name": "10-year",
-   "price": 4.834,
-   "chg_bps": -7.0,
-   "move": "10-year is 4.83%, down 7.0 bp."
+   "price": 4.83,
+   "chg_bps": -7.4,
+   "move": "10-year is 4.83%, down 7.4 bp."
   }
  },
  "curve": [
@@ -227,9 +227,9 @@
   }
  ],
  "session": true,
- "next_check": "1:50 PM",
+ "next_check": "1:55 PM",
  "mode": "paper",
- "updated": "2026-11-25T13:45:28-05:00",
+ "updated": "2026-11-25T13:50:28-05:00",
  "date": "Wed \u00b7 Nov 25",
  "day": {
   "pills": [
@@ -302,7 +302,8 @@
      "13:25",
      "13:30",
      "13:35",
-     "13:40"
+     "13:40",
+     "13:45"
     ],
     "closes": [
      699.82,
@@ -355,7 +356,8 @@
      715.02,
      713.82,
      714.44,
-     715.9
+     715.9,
+     717.84
     ],
     "box": {
      "hi": 703.7,
@@ -775,11 +777,11 @@
      },
      {
       "t": "13:30",
-      "o": 714.93,
+      "o": 715.02,
       "h": 715.12,
       "l": 712.73,
       "c": 713.82,
-      "v": 330696.0
+      "v": 643385.0
      },
      {
       "t": "13:35",
@@ -796,6 +798,14 @@
       "l": 713.96,
       "c": 715.9,
       "v": 224055.0
+     },
+     {
+      "t": "13:45",
+      "o": 715.91,
+      "h": 717.97,
+      "l": 715.91,
+      "c": 717.84,
+      "v": 405312.0
      }
     ],
     "opens": [
@@ -847,9 +857,10 @@
      711.39,
      714.0,
      714.64,
-     714.93,
+     715.02,
      713.64,
-     714.55
+     714.55,
+     715.91
     ],
     "highs": [
      703.7,
@@ -902,7 +913,8 @@
      715.25,
      715.12,
      715.46,
-     716.13
+     716.13,
+     717.97
     ],
     "lows": [
      699.79,
@@ -955,7 +967,8 @@
      714.2,
      712.73,
      713.57,
-     713.96
+     713.96,
+     715.91
     ],
     "volumes": [
      2049773.0,
@@ -1006,9 +1019,10 @@
      571519.872399,
      508868.0,
      705966.16,
-     330696.0,
+     643385.0,
      261427.272911,
-     224055.0
+     224055.0,
+     405312.0
     ],
     "option": {
      "contract": "SPY 704 call",
@@ -1078,12 +1092,18 @@
      702.5042,
      702.6937,
      702.958,
-     703.0684,
-     703.1589,
-     703.241
+     703.1708,
+     703.2597,
+     703.3404,
+     703.5064
     ]
    },
    "levels": [
+    [
+     "Call wall",
+     730.0,
+     false
+    ],
     [
      "R1 pivot",
      722.433333333333,
@@ -1095,8 +1115,8 @@
      false
     ],
     [
-     "Call wall",
-     720.0,
+     "Put wall",
+     715.0,
      false
     ],
     [
@@ -1115,6 +1135,11 @@
      false
     ],
     [
+     "Busiest strike",
+     710.0,
+     false
+    ],
+    [
      "Range high",
      703.7,
      true
@@ -1122,11 +1147,6 @@
     [
      "Pre-market low",
      703.06,
-     false
-    ],
-    [
-     "Put wall",
-     700.0,
      false
     ],
     [
@@ -1208,7 +1228,7 @@
     "option": "calls, paper context only",
     "date": "2026-11-25",
     "planned_exit": "15:30",
-    "last_c": 715.9,
+    "last_c": 717.84,
     "backfilled": true,
     "note": "Added after the fact on 11/25: the engine went live at 13:29, after this signal. No alert went out at the signal time."
    },
@@ -1237,24 +1257,24 @@
    },
    "walls": {
     "expiration": "2026-11-25",
-    "price": 711.39,
-    "at": "2026-11-25T13:15:30-05:00",
+    "price": 717.84,
+    "at": "2026-11-25T13:50:30-05:00",
     "call_wall": {
-     "strike": 720.0,
-     "oi": 9620
+     "strike": 730.0,
+     "oi": 21038
     },
     "put_wall": {
-     "strike": 700.0,
-     "oi": 11226
+     "strike": 715.0,
+     "oi": 7689
     },
     "magnet": {
-     "strike": 700.0,
-     "oi": 15771,
-     "share": 9
+     "strike": 730.0,
+     "oi": 22017,
+     "share": 11
     },
     "busiest": {
-     "strike": 700.0,
-     "vol": 506774
+     "strike": 710.0,
+     "vol": 413018
     }
    }
   },
@@ -1317,7 +1337,8 @@
      "13:25",
      "13:30",
      "13:35",
-     "13:40"
+     "13:40",
+     "13:45"
     ],
     "closes": [
      612.25,
@@ -1368,9 +1389,10 @@
      627.93,
      628.63,
      629.15,
-     627.97,
+     628.0,
      628.88,
-     630.45
+     630.45,
+     632.75
     ],
     "box": {
      "hi": 617.74,
@@ -1792,9 +1814,9 @@
       "t": "13:30",
       "o": 629.12,
       "h": 629.24,
-      "l": 626.62,
-      "c": 627.97,
-      "v": 330681.0
+      "l": 626.6,
+      "c": 628.0,
+      "v": 542550.0
      },
      {
       "t": "13:35",
@@ -1811,6 +1833,14 @@
       "l": 628.27,
       "c": 630.45,
       "v": 236510.321846
+     },
+     {
+      "t": "13:45",
+      "o": 630.48,
+      "h": 632.83,
+      "l": 630.48,
+      "c": 632.75,
+      "v": 381930.616011
      }
     ],
     "opens": [
@@ -1864,7 +1894,8 @@
      628.64,
      629.12,
      627.79,
-     628.95
+     628.95,
+     630.48
     ],
     "highs": [
      617.79,
@@ -1917,7 +1948,8 @@
      629.43,
      629.24,
      629.94,
-     630.73
+     630.73,
+     632.83
     ],
     "lows": [
      612.23,
@@ -1968,9 +2000,10 @@
      624.56,
      626.99,
      628.18,
-     626.62,
+     626.6,
      627.69,
-     628.27
+     628.27,
+     630.48
     ],
     "volumes": [
      2421380.133255,
@@ -2021,9 +2054,10 @@
      783229.94674,
      707586.089821,
      507709.99643,
-     330681.0,
+     542550.0,
      330254.0,
-     236510.321846
+     236510.321846,
+     381930.616011
     ],
     "option": {
      "contract": "QQQ 618 call",
@@ -2093,9 +2127,10 @@
      615.3958,
      615.6132,
      615.7728,
-     615.8671,
-     615.9667,
-     616.0425
+     615.9268,
+     616.0255,
+     616.1006,
+     616.2393
     ]
    },
    "levels": [
@@ -2111,7 +2146,7 @@
     ],
     [
      "Call wall",
-     638.0,
+     645.0,
      false
     ],
     [
@@ -2130,8 +2165,8 @@
      true
     ],
     [
-     "Magnet",
-     630.0,
+     "Busiest strike",
+     620.0,
      false
     ],
     [
@@ -2147,11 +2182,6 @@
     [
      "Pre-market low",
      616.69,
-     false
-    ],
-    [
-     "Busiest strike",
-     610.0,
      false
     ],
     [
@@ -2233,7 +2263,7 @@
     "option": "calls, paper context only",
     "date": "2026-11-25",
     "planned_exit": "15:30",
-    "last_c": 630.45,
+    "last_c": 632.75,
     "backfilled": true,
     "note": "Added after the fact on 11/25: the engine went live at 13:29, after this signal. No alert went out at the signal time."
    },
@@ -2262,24 +2292,24 @@
    },
    "walls": {
     "expiration": "2026-11-25",
-    "price": 624.76,
-    "at": "2026-11-25T13:15:32-05:00",
+    "price": 632.75,
+    "at": "2026-11-25T13:50:31-05:00",
     "call_wall": {
-     "strike": 638.0,
-     "oi": 4981
+     "strike": 645.0,
+     "oi": 7185
     },
     "put_wall": {
      "strike": 619.0,
      "oi": 6180
     },
     "magnet": {
-     "strike": 630.0,
-     "oi": 7318,
+     "strike": 645.0,
+     "oi": 8162,
      "share": 8
     },
     "busiest": {
-     "strike": 610.0,
-     "vol": 376054
+     "strike": 620.0,
+     "vol": 351970
     }
    }
   }
