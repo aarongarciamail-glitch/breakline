@@ -306,6 +306,57 @@ footer p{margin:0;max-width:70ch}
  dl.al dd{margin-bottom:0}
  .daybar{margin-bottom:6px}
 }
+/* game plan (pre-market and after the close) */
+#gameplan[hidden]{display:none}
+#gameplan{scroll-margin-top:64px}
+.planwrap>summary{list-style:none;cursor:pointer}
+.planwrap>summary::-webkit-details-marker{display:none}
+.planwrap>summary h2::after{content:" ▾";font-size:.6em;color:var(--faint)}
+.planwrap:not([open])>summary h2::after{content:" ▸"}
+.pflags{display:grid;gap:6px;margin-bottom:10px}
+.pflags:empty{display:none}
+.pflag{padding:9px 12px;border-radius:12px;border:1px solid var(--line-2);background:var(--panel);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);font-size:14px}
+.pflag.warn{border-color:color-mix(in srgb,var(--warn) 45%,transparent);color:color-mix(in srgb,var(--warn) 80%,var(--text))}
+.pflag.stop{border-color:color-mix(in srgb,var(--loss) 50%,transparent);color:var(--loss)}
+.pflag.info{color:var(--dim)}
+.tline{list-style:none;margin:0 0 12px;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.tline li{padding:10px 12px;border-left:2px solid color-mix(in srgb,var(--teal) 55%,transparent);background:linear-gradient(90deg,rgba(58,169,184,.08),transparent);border-radius:0 10px 10px 0;display:grid;gap:3px}
+.tline b{font:500 15px/1 var(--mono);color:var(--text)}
+.tline span{font-size:12.5px;color:var(--dim);line-height:1.35}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px;margin-bottom:10px}
+.pcard{padding:12px 14px;display:grid;gap:10px;align-content:start}
+.pch{display:flex;align-items:baseline;gap:8px 12px;flex-wrap:wrap}
+.pch .sym{font-size:18px}
+.pch .pxbig{font-size:18px}
+.gap{font:500 12px/1 var(--mono);padding:4px 7px;border-radius:999px;border:1px solid var(--line-2)}
+.gap.pos{border-color:color-mix(in srgb,var(--win) 45%,transparent)}.gap.neg{border-color:color-mix(in srgb,var(--loss) 45%,transparent)}
+.pch .meta{margin-left:auto}
+summary.pch{list-style:none;cursor:pointer}
+summary.pch::-webkit-details-marker{display:none}
+.pch .chev{margin-left:auto;width:8px;height:8px;border-right:1.5px solid var(--faint);border-bottom:1.5px solid var(--faint);transform:rotate(45deg);transition:transform .2s}
+details[open]>.pch .chev{transform:rotate(-135deg)}
+details.pcard[open]{gap:10px}
+details.pcard:not([open]){gap:0}
+.ladder{margin:0;display:grid;grid-template-columns:auto 1fr auto;gap:2px 10px;font-size:13px;align-items:center}
+.ladder dt{color:var(--dim)}
+.ladder dd{margin:0;font:500 13px/1.5 var(--mono);text-align:right;font-variant-numeric:tabular-nums}
+.ladder .bar{height:1px;background:var(--line)}
+.ladder .now dt,.ladder .now dd{color:var(--teal)}
+.ladder .now .bar{background:color-mix(in srgb,var(--teal) 60%,transparent)}
+.ladder .tp dt{color:var(--text)}
+ul.watch{margin:0;padding-left:1.1em;display:grid;gap:5px;font-size:13.5px;color:var(--dim)}
+ul.watch li::marker{color:var(--teal)}
+.pnote{font-size:12.5px;color:var(--dim);display:flex;gap:6px 14px;flex-wrap:wrap}
+.pnote .warnx{color:var(--warn)}
+ul.nlist{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+ul.nlist a{color:var(--text);text-decoration:none;font-size:13.5px;line-height:1.4}
+ul.nlist a:hover{text-decoration:underline}
+ul.nlist .src{display:block;font:400 11.5px/1.3 var(--mono);color:var(--faint);margin-top:2px}
+@media (max-width:640px){
+ .tline{grid-template-columns:1fr 1fr}
+ .pgrid{grid-template-columns:minmax(0,1fr)}
+ .pflag{font-size:13.5px}
+}
 </style>
 </head>
 <body>
@@ -334,6 +385,16 @@ footer p{margin:0;max-width:70ch}
  <div class="sample" id="sample" role="note" hidden>
   <strong>Design preview.</strong> Every number on this page is an example. Real calls replace it once paper trading is on.
  </div>
+
+ <section id="gameplan" aria-labelledby="plan-h" hidden>
+  <details class="planwrap" id="planWrap" open>
+   <summary class="sh"><h2 id="plan-h">Game plan</h2><span class="meta" id="planMeta"></span></summary>
+   <div class="pflags" id="pFlags"></div>
+   <ol class="tline" id="pTime"></ol>
+   <div class="pgrid" id="pTick"></div>
+   <div class="panel box pnews" id="pNewsBox"><h3>Market headlines</h3><ul class="nlist" id="pNews"></ul></div>
+  </details>
+ </section>
 
  <section id="today" aria-labelledby="dayHead">
   <div class="daybar">
@@ -1231,9 +1292,53 @@ footer p{margin:0;max-width:70ch}
   });
  }
 
+
+ let PLAN=null;
+ function etParts(o){return Object.fromEntries(new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',hour:'2-digit',minute:'2-digit',hourCycle:'h23',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(o).map(p=>[p.type,p.value]))}
+ function inSession(){const n=etParts(new Date());const m=Number(n.hour)*60+Number(n.minute);const wd=new Date().toLocaleDateString('en-US',{timeZone:'America/New_York',weekday:'short'});return !/Sat|Sun/.test(wd)&&m>=570&&m<960&&!(LAST&&LAST.session===false)}
+ function renderPlan(){
+  const P=PLAN, sec=$('gameplan');
+  const n=etParts(new Date()), todayIso=n.year+'-'+n.month+'-'+n.day;
+  if(!P||!P.tickers||P.for<todayIso){sec.hidden=true;return}
+  sec.hidden=false;
+  const live=inSession()&&P.for===todayIso;
+  if(!sec.dataset.touched)$('planWrap').open=!live;
+  $('plan-h').textContent=live?'This morning\u2019s plan':P.title;
+  const b=new Date(P.built);
+  $('planMeta').textContent=P.for_label+' \u00b7 updated '+b.toLocaleTimeString('en-US',{timeZone:'America/New_York',hour:'numeric',minute:'2-digit'});
+  $('pFlags').innerHTML=(P.flags||[]).map(f=>'<div class="pflag '+esc(f.tone)+'">'+esc(f.text)+'</div>').join('');
+  $('pTime').innerHTML=(P.timeline||[]).map(t=>'<li><b>'+esc(t[0])+'</b><span>'+esc(t[1])+'</span></li>').join('');
+  const f2=v=>v==null?'\u2014':Number(v).toFixed(2);
+  const wide=matchMedia('(min-width:641px)').matches;
+  $('pTick').innerHTML=Object.entries(P.tickers).map(([sym,t],i)=>{
+   const pv=Object.entries(t.piv||{}), upv=pv.filter(x=>x[1]>t.last).sort((a,b)=>a[1]-b[1]).slice(0,2), dnv=pv.filter(x=>x[1]<t.last).sort((a,b)=>b[1]-a[1]).slice(0,2);
+   const rows=[...upv,...dnv].map(x=>[x[0]==='P'?'Pivot P':x[0],x[1],'tp']).concat([['Prior-day high',t.ph],['Pre-market high',t.pmh],['Yesterday\u2019s close',t.pc],['Pre-market low',t.pml],['Prior-day low',t.pl]]).filter(r=>r[1]!=null);
+   if(t.gap_pct!=null)rows.push(['Now',t.last,'now']);
+   rows.sort((a,b)=>b[1]-a[1]);
+   const lad=rows.map(r=>'<div class="'+(r[2]||'')+'" style="display:contents"><dt>'+esc(r[0])+'</dt><span class="bar"></span><dd>'+f2(r[1])+'</dd></div>').join('');
+   const gap=t.gap_pct!=null?'<span class="gap '+(t.gap_pct>0?'pos':t.gap_pct<0?'neg':'')+'"><span class="'+(t.gap_pct>0?'pos':t.gap_pct<0?'neg':'')+'">'+(t.gap_pct>0?'+':t.gap_pct<0?'\u2212':'')+Math.abs(t.gap_pct).toFixed(1)+'%</span> pre-mkt</span>':'';
+   const notes=[];
+   if(t.typ_box_pct)notes.push('Normal box '+t.typ_box_pct.toFixed(2)+'% (~$'+Number(t.typ_box_usd).toFixed(2)+')');
+   if(t.trend5!=null)notes.push(t.trend_days+'-day move <span class="'+(t.trend5>0?'pos':t.trend5<0?'neg':'')+'">'+(t.trend5>0?'+':t.trend5<0?'\u2212':'')+Math.abs(t.trend5).toFixed(1)+'%</span>');
+   if(t.last_result)notes.push('Last paper trade <span class="'+(t.last_result.r>0?'pos':'neg')+'">'+esc(t.last_result.dir)+' '+sgn(t.last_result.r)+'</span>');
+   if(t.earnings)notes.push('<span class="warnx">'+esc(t.earnings)+'</span>');
+   const nw=(t.news||[]).map(x=>'<li><a href="'+esc(x.url)+'" target="_blank" rel="noopener">'+esc(x.title)+'</a><span class="src">'+esc(x.source)+' \u00b7 '+esc(x.time)+'</span></li>').join('');
+   return '<details class="panel pcard"'+(wide||i===0?' open':'')+'><summary class="pch"><span class="sym">'+esc(sym)+'</span><span class="num pxbig">'+f2(t.last)+'</span>'+gap+'<span class="chev" aria-hidden="true"></span></summary>'
+    +'<dl class="ladder">'+lad+'</dl>'
+    +'<ul class="watch">'+(t.watch||[]).map(w=>'<li>'+esc(w)+'</li>').join('')+'</ul>'
+    +'<div class="pnote">'+notes.map(x=>'<span>'+x+'</span>').join('')+'</div>'
+    +(nw?'<ul class="nlist">'+nw+'</ul>':'')+'</details>';
+  }).join('');
+  const mn=P.market_news||[];
+  $('pNewsBox').hidden=!mn.length;
+  $('pNews').innerHTML=mn.map(x=>'<li><a href="'+esc(x.url)+'" target="_blank" rel="noopener">'+esc(x.title)+'</a><span class="src">'+esc(x.source)+' \u00b7 '+esc(x.time)+'</span></li>').join('');
+ }
+ const loadPlan=()=>fetch('plan.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(p=>{PLAN=p;renderPlan()}).catch(()=>{});
  const load=()=>fetch('data.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.json()).then(d=>{LAST=d;render(d)}).catch(()=>{if(!LAST){$('dayHead').textContent='Couldn’t load today’s data.';$('daySub').textContent='Refresh in a minute.'}});
  load();
- setInterval(()=>{if(!document.hidden)load()},60000);
+ setInterval(()=>{if(!document.hidden){load();loadPlan()}},60000);
+ loadPlan();
+ document.querySelector('#planWrap>summary').addEventListener('click',()=>{document.getElementById('gameplan').dataset.touched=1});
  document.addEventListener('visibilitychange',()=>{if(!document.hidden)load()});
  let rz;addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(()=>{if(LAST)render(LAST)},150)});
  addEventListener('scroll',()=>{tip.hidden=true},{passive:true});
