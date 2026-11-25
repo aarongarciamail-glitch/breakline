@@ -1,6 +1,6 @@
 {
  "v": 1,
- "built": "2026-11-25T07:45:03-05:00",
+ "built": "2026-11-25T08:00:02-05:00",
  "for": "2026-11-25",
  "for_label": "Wednesday, Nov 25",
  "title": "Today's plan",
@@ -8,7 +8,7 @@
  "flags": [
   {
    "tone": "warn",
-   "text": "Big gap down pre-market: SPY -1.9%, QQQ -2.8%, NVDA -5.4%, TSLA -2.6%, SPCX -3.1%. Expect wide boxes and fast moves. Wait for the 9:45 box, don't chase the open."
+   "text": "Big gap down pre-market: SPY -1.9%, QQQ -2.8%, NVDA -5.7%, TSLA -2.7%, SPCX -3.3%. Expect wide boxes and fast moves. Wait for the 9:45 box, don't chase the open."
   },
   {
    "tone": "info",
@@ -20,7 +20,7 @@
   },
   {
    "tone": "warn",
-   "text": "VIX up 17% to 30.8. Bigger swings and pricier options today."
+   "text": "VIX up 17% to 30.7. Bigger swings and pricier options today."
   }
  ],
  "timeline": [
@@ -43,14 +43,14 @@
  ],
  "tape": {
   "label": "Tape split",
-  "strategy": "Calls and puts both stay open. Oil is up 2.1% and the 10-year is down 1.4 bp, so they disagree. The opening-range close picks the side.",
+  "strategy": "Calls and puts both stay open. Oil is up 1.9% and the 10-year is down 1.4 bp, so they disagree. The opening-range close picks the side.",
   "vix": {
    "name": "VIX",
-   "price": 30.79,
+   "price": 30.73,
    "prev": 26.36,
-   "chg_pct": 16.8,
-   "move": "Up 16.8% from yesterday's close of 26.4.",
-   "why": "Up 16.8% from yesterday's close of 26.4. Barrons.com: Market's Fear Gauge Rises",
+   "chg_pct": 16.6,
+   "move": "Up 16.6% from yesterday's close of 26.4.",
+   "why": "Up 16.6% from yesterday's close of 26.4. Barrons.com: Market's Fear Gauge Rises",
    "headline": {
     "source": "Barrons.com",
     "title": "Market's Fear Gauge Rises"
@@ -59,12 +59,12 @@
   },
   "oil": {
    "name": "Crude",
-   "price": 82.39,
+   "price": 82.29,
    "prev": 80.73,
-   "chg_pct": 2.1,
-   "move": "Up 2.1% from yesterday's close of 80.73.",
+   "chg_pct": 1.9,
+   "move": "Up 1.9% from yesterday's close of 80.73.",
    "range": "Inside the last month, 79.07 to 104.99.",
-   "why": "Up 2.1% from yesterday's close of 80.73. The Wall Street Journal: Oil Prices Fall as Traders Weigh Supply Outlook, Renewed Middle East Tensions",
+   "why": "Up 1.9% from yesterday's close of 80.73. The Wall Street Journal: Oil Prices Fall as Traders Weigh Supply Outlook, Renewed Middle East Tensions",
    "headline": {
     "source": "The Wall Street Journal",
     "title": "Oil Prices Fall as Traders Weigh Supply Outlook, Renewed Middle East Tensions"
@@ -77,14 +77,20 @@
    "chg_bps": -1.4,
    "move": "10-year is 4.90%, down 1.4 bp."
   },
-  "asof": "2026-11-25T07:45:03-05:00"
+  "asof": "2026-11-25T08:00:03-05:00"
  },
  "market_news": [
   {
    "title": "Dow Jones Futures Fall, Techs Dive; Trump Says 'Not Too Late' For U.S. To Take Nvidia Stake",
    "source": "Investor's Business Daily",
-   "time": "Wed 7:39 AM",
+   "time": "Wed 7:49 AM",
    "url": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-nvidia-anthropic-ai-retreat-fed-inflation-data/?src=A00220&yptr=yahoo"
+  },
+  {
+   "title": "Stock Futures Fall as Traders Await Key Inflation Data, Parse Fresh US Tariff Reports",
+   "source": "MT Newswires",
+   "time": "Wed 7:41 AM",
+   "url": "https://finance.yahoo.com/economy/policy/articles/stock-futures-fall-traders-await-124139973.html"
   },
   {
    "title": "Stock market today: Dow, S&P 500, Nasdaq futures fall ahead of inflation data",
@@ -97,17 +103,11 @@
    "source": "Yahoo Finance",
    "time": "Tue 4:06 AM",
    "url": "https://finance.yahoo.com/markets/live/stock-market-today-tuesday-november-24-dow-sp-500-nasdaq-chip-stocks-nvidia-140629923.html"
-  },
-  {
-   "title": "Stock Insomnia: What Investors Need To Know As Big Exchanges Launch 23-Hour Trading",
-   "source": "Investor's Business Daily",
-   "time": "Wed 7:37 AM",
-   "url": "https://www.investors.com/news/stock-trading-23-5-access-nyse-nasdaq-us-exchanges/?src=A00220&yptr=yahoo"
   }
  ],
  "tickers": {
   "SPY": {
-   "last": 705.12,
+   "last": 705.42,
    "pc": 718.79,
    "ph": 720.93,
    "pl": 712.14,
@@ -121,7 +121,7 @@
     "R2": 726.08,
     "R3": 731.22
    },
-   "gap_pct": -1.9,
+   "gap_pct": -1.86,
    "pmh": 714.24,
    "pml": 703.9,
    "typ_box_pct": 0.279,
@@ -142,7 +142,7 @@
    "news": []
   },
   "QQQ": {
-   "last": 619.99,
+   "last": 620.2,
    "pc": 638.12,
    "ph": 648.0,
    "pl": 631.15,
@@ -156,7 +156,7 @@
     "R2": 655.94,
     "R3": 663.88
    },
-   "gap_pct": -2.84,
+   "gap_pct": -2.81,
    "pmh": 631.06,
    "pml": 618.43,
    "typ_box_pct": 0.555,
@@ -177,7 +177,7 @@
    "news": []
   },
   "NVDA": {
-   "last": 147.09,
+   "last": 146.55,
    "pc": 155.48,
    "ph": 159.92,
    "pl": 150.5,
@@ -191,9 +191,9 @@
     "R2": 164.72,
     "R3": 169.52
    },
-   "gap_pct": -5.4,
+   "gap_pct": -5.74,
    "pmh": 152.5,
-   "pml": 146.31,
+   "pml": 146.2,
    "typ_box_pct": 1.467,
    "typ_box_usd": 2.28,
    "trend5": -8.5,
@@ -207,7 +207,7 @@
    "watch": [
     "Break up: take 1/3 at S1 150.68, then P 155.30.",
     "Break down: take 1/3 at S2 145.88, then S3 141.26.",
-    "Gapping down 5.4%. Expect a wide box; over 2\u00d7 normal means size down."
+    "Gapping down 5.7%. Expect a wide box; over 2\u00d7 normal means size down."
    ],
    "news": [
     {
@@ -225,7 +225,7 @@
    ]
   },
   "TSLA": {
-   "last": 374.8,
+   "last": 374.41,
    "pc": 384.74,
    "ph": 390.09,
    "pl": 375.5,
@@ -239,7 +239,7 @@
     "R2": 398.03,
     "R3": 405.98
    },
-   "gap_pct": -2.58,
+   "gap_pct": -2.68,
    "pmh": 381.84,
    "pml": 372.36,
    "typ_box_pct": 1.884,
@@ -255,25 +255,25 @@
    "watch": [
     "Break up: take 1/3 at S1 376.80, then P 383.44.",
     "Break down: take 1/3 at S2 368.85, then S3 362.21.",
-    "Gapping down 2.6%. Expect a wide box; over 2\u00d7 normal means size down."
+    "Gapping down 2.7%. Expect a wide box; over 2\u00d7 normal means size down."
    ],
    "news": [
+    {
+     "title": "3 Warning Signs as the AI Selloff Gets Ugly Again",
+     "source": "Barrons.com",
+     "time": "Wed 7:52 AM",
+     "url": "https://www.barrons.com/articles/stock-market-things-to-know-today-184b375d?siteid=yhoof2&yptr=yahoo"
+    },
     {
      "title": "Elon Musk sees \u2018a hundred million humanoid robots\u2019 consuming jobs in 5 years. Can you afford the machine age?",
      "source": "Moneywise",
      "time": "Wed 7:15 AM",
      "url": "https://finance.yahoo.com/technology/ai/articles/elon-musk-sees-hundred-million-121500775.html"
-    },
-    {
-     "title": "BYD plans car production in France to boost its push into the European market",
-     "source": "Euronews",
-     "time": "Wed 6:46 AM",
-     "url": "https://www.euronews.com/2026/11/25/byd-plans-car-production-in-france-to-boost-its-push-into-the-european-market"
     }
    ]
   },
   "SPCX": {
-   "last": 121.94,
+   "last": 121.74,
    "pc": 125.87,
    "ph": 132.5,
    "pl": 123.52,
@@ -287,9 +287,9 @@
     "R2": 136.28,
     "R3": 140.05
    },
-   "gap_pct": -3.12,
+   "gap_pct": -3.28,
    "pmh": 124.6,
-   "pml": 121.87,
+   "pml": 121.2,
    "typ_box_pct": 2.391,
    "typ_box_usd": 3.01,
    "trend5": -10.2,
@@ -303,20 +303,20 @@
    "watch": [
     "Break up: take 1/3 at S1 122.09, then P 127.30.",
     "Break down: take 1/3 at S2 118.32, then S3 113.11.",
-    "Gapping down 3.1%. Expect a wide box; over 2\u00d7 normal means size down."
+    "Gapping down 3.3%. Expect a wide box; over 2\u00d7 normal means size down."
    ],
    "news": [
+    {
+     "title": "3 Warning Signs as the AI Selloff Gets Ugly Again",
+     "source": "Barrons.com",
+     "time": "Wed 7:52 AM",
+     "url": "https://www.barrons.com/articles/stock-market-things-to-know-today-184b375d?siteid=yhoof2&yptr=yahoo"
+    },
     {
      "title": "Musk: Starlink Has a \u201cGood Chance\u201d of Carrying \u201cAbout Half of Global Traffic\u201d",
      "source": "TIKR",
      "time": "Wed 6:09 AM",
      "url": "https://www.tikr.com/blog/musk-starlink-has-a-good-chance-of-carrying-about-half-of-global-traffic?ref=yahoofinance&tlnk=yf-261125-27pjcxp8"
-    },
-    {
-     "title": "SpaceX Stock Has an Anthropic Problem",
-     "source": "Barrons.com",
-     "time": "Wed 5:37 AM",
-     "url": "https://www.barrons.com/articles/spacex-stock-price-anthropic-ipo-ai-a63c92d3?siteid=yhoof2&yptr=yahoo"
     }
    ]
   }
