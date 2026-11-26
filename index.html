@@ -631,7 +631,7 @@ html[data-skin=ledger]{--wall:#d39a6a}
     </div>
     <div class="legend" id="legend"></div>
     <div class="ptape" id="ptapeBox" hidden>
-     <div class="pth"><span class="kl">Pattern tape</span><span class="ptrend" id="ptTrend"></span><span class="meta">Swipe for earlier · tap a tag to learn it</span></div>
+     <div class="pth"><span class="kl">Pattern tape</span><span class="ptrend" id="ptTrend"></span><span class="meta">Whole session on one scale · swipe · tap a label</span></div>
      <div class="ptscroll" id="ptScroll"><svg id="ptape" role="img" aria-label="Recent candles with candle patterns labeled"></svg></div>
      <div class="ptinfo" id="ptInfo">Tap any label (Hammer, HH, Double top…) and its meaning shows here.</div>
     </div>
@@ -1793,9 +1793,9 @@ html[data-skin=ledger]{--wall:#d39a6a}
   const keep=sc0.dataset.sym===SEL&&sc0.scrollWidth>0&&sc0.scrollLeft<sc0.scrollWidth-sc0.clientWidth-30, oldLeft=sc0.scrollLeft;
   const all=ohlc.filter(b=>b.real&&isFinite(b.o)&&isFinite(b.h));
   if(all.length<3){box.hidden=true;return}
-  const start=Math.max(0,all.length-36), o=all.slice(start);
+  const start=0, o=all;   // whole session, one scale, so big moves look big
   box.hidden=false; svg.textContent='';
-  const phone=innerWidth<641, cw=phone?24:18, H=phone?200:190, TP=34, PH=H-88, W=o.length*cw+12;
+  const phone=innerWidth<641, cw=phone?24:18, H=phone?260:240, TP=34, PH=H-88, W=o.length*cw+12;
   const vis=$('ptScroll').clientWidth||600;
   svg.setAttribute('viewBox','0 0 '+W+' '+H); svg.setAttribute('width',Math.max(W,vis)); svg.setAttribute('height',H);
   const lo=Math.min(...o.map(b=>b.l)), hi=Math.max(...o.map(b=>b.h)), y=p=>TP+(hi-p)/(hi-lo||1)*PH;
@@ -1808,6 +1808,19 @@ html[data-skin=ledger]{--wall:#d39a6a}
   const zz=swingsOf(all), zv=zz.filter(z2=>z2.i>=start).map(z2=>({...z2,i:z2.i-start}));
   const cx=i=>6+i*cw+cw/2;
   if(zv.length>1)mk('path',{d:zv.map((z2,k)=>(k?'L':'M')+cx(z2.i)+' '+y(z2.p)).join(' '),fill:'none',stroke:T('--dim'),'stroke-width':1,'stroke-dasharray':'3 3',opacity:.7},svg);
+  let big=null;
+  for(let k=1;k<zv.length;k++){const A=zv[k-1],B=zv[k],pct=(B.p/A.p-1)*100;if(!big||Math.abs(pct)>Math.abs(big.pct))big={A,B,pct}}
+  for(let k=1;k<zv.length;k++){
+   const A=zv[k-1],B=zv[k],pct=(B.p/A.p-1)*100,mins=(o[B.i].t1-o[A.i].t1);
+   if(Math.abs(pct)<0.15)continue;                       // label only moves worth noticing
+   const isBig=big&&A===big.A, col=pct>0?T('--win'):T('--loss');
+   if(isBig)mk('line',{x1:cx(A.i),y1:y(A.p),x2:cx(B.i),y2:y(B.p),stroke:col,'stroke-width':3,opacity:.35},svg);
+   const mx=(cx(A.i)+cx(B.i))/2, my=(y(A.p)+y(B.p))/2;
+   const g4=mk('g',{class:'tg'},svg);
+   mk('text',{x:mx+(pct>0?-6:6),y:my,fill:col,'text-anchor':pct>0?'end':'start','font-size':isBig?'12':'10.5','font-weight':isBig?'800':'600'},g4,(pct>0?'+':'\u2212')+Math.abs(pct).toFixed(2)+'% \u00b7 '+mins+'m'+(isBig?' \u2605':''));
+   const html=tipHTML((pct>0?'Rip':'Dip')+' \u00b7 '+fmtHM(o[A.i].t1)+'\u2013'+fmtHM(o[B.i].t1),[['Move',(pct>0?'+':'\u2212')+Math.abs(pct).toFixed(2)+'%'],['Price',pxFmt(A.p)+' \u2192 '+pxFmt(B.p)],['Time',mins+' min']])+(isBig?'<div class="gx">\u2605 The biggest swing of the session so far.</div>':'');
+   g4.addEventListener('pointerenter',ev=>{if(ev.pointerType!=='touch')moveTip(ev,html)}); g4.addEventListener('pointerdown',ev=>{ptInfo(html)}); g4.addEventListener('pointerleave',ev=>{if(ev.pointerType!=='touch')tip.hidden=true});
+  }
   zv.forEach(z2=>{const up=z2.lab==='HH'||z2.lab==='HL', dn=z2.lab==='LL'||z2.lab==='LH';
    const g2=mk('g',{class:'tg'},svg);
    mk('text',{x:cx(z2.i),y:z2.t==='H'?y(z2.p)-6:y(z2.p)+(phone?28:26),fill:up?T('--win'):dn?T('--loss'):T('--dim'),'text-anchor':'middle','font-size':'10','font-weight':'700'},g2,z2.lab);
@@ -1816,7 +1829,10 @@ html[data-skin=ledger]{--wall:#d39a6a}
    g2.addEventListener('pointerenter',ev=>{if(ev.pointerType!=='touch')moveTip(ev,html)}); g2.addEventListener('pointerdown',ev=>{ptInfo(html)}); g2.addEventListener('pointerleave',ev=>{if(ev.pointerType!=='touch')tip.hidden=true});
   });
   const tr=trendOf(zz);
-  const pt=$('ptTrend'); pt.textContent=(tr.k==='up'?'\u2197 ':tr.k==='dn'?'\u2198 ':'\u2194 ')+'Recent swings: '+tr.w; pt.className='ptrend '+tr.k;
+  const pt=$('ptTrend'); pt.textContent=(tr.k==='up'?'\u2197 ':tr.k==='dn'?'\u2198 ':'\u2194 ')+'Latest swings: '+tr.w; pt.className='ptrend '+tr.k;
+  { let li=0,hi2=0; o.forEach((b,i)=>{if(b.l<o[li].l)li=i;if(b.h>o[hi2].h)hi2=i});
+    const lowFirst=li<hi2, A=lowFirst?o[li].l:o[hi2].h, B=lowFirst?o[hi2].h:o[li].l, pct=(B/A-1)*100;
+    pt.textContent+=' \u2014 Day: '+(lowFirst?'low ':'high ')+pxFmt(A)+' at '+fmtHM(lowFirst?o[li].t1:o[hi2].t1)+' \u2192 '+(lowFirst?'high ':'low ')+pxFmt(B)+' at '+fmtHM(lowFirst?o[hi2].t1:o[li].t1)+' ('+(pct>0?'+':'\u2212')+Math.abs(pct).toFixed(2)+'%)'; }
   bigPatterns(all,zz).filter(p=>p.i1>=start).forEach((p,n)=>{
    const P=BIG[p.k], x0=cx(Math.max(0,p.i0-start)), x1=cx(Math.min(o.length-1,p.i1-start)), yy=26+(n%2)*0, col=P.dir>0?T('--win'):T('--loss');
    const g3=mk('g',{class:'tg'},svg);
