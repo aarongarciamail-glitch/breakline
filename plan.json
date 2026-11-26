@@ -1,6 +1,6 @@
 {
  "v": 1,
- "built": "2026-11-26T09:15:02-05:00",
+ "built": "2026-11-26T09:30:02-05:00",
  "for": "2026-11-27",
  "for_label": "Friday, Nov 27",
  "title": "Tomorrow's plan",
@@ -43,25 +43,25 @@
  ],
  "tape": {
   "label": "Tape split",
-  "strategy": "Calls and puts both stay open. Oil is up 4.7% and the 10-year is down 5.6 bp, so they disagree. The opening-range close picks the side.",
+  "strategy": "Calls and puts both stay open. Oil is up 5.0% and the 10-year is down 5.6 bp, so they disagree. The opening-range close picks the side.",
   "vix": {
    "name": "VIX",
-   "price": 27.04,
+   "price": 27.07,
    "prev": 28.32,
-   "chg_pct": -4.5,
-   "move": "Down 4.5% from yesterday's close of 28.3.",
-   "why": "Down 4.5% from yesterday's close of 28.3.",
+   "chg_pct": -4.4,
+   "move": "Down 4.4% from yesterday's close of 28.3.",
+   "why": "Down 4.4% from yesterday's close of 28.3.",
    "headline": null,
    "means": "VIX is close to yesterday. Size stays normal until it reaches 35."
   },
   "oil": {
    "name": "Crude",
-   "price": 84.52,
+   "price": 84.76,
    "prev": 80.73,
-   "chg_pct": 4.7,
-   "move": "Up 4.7% from yesterday's close of 80.73.",
+   "chg_pct": 5.0,
+   "move": "Up 5.0% from yesterday's close of 80.73.",
    "range": "Inside the last month, 79.07 to 104.99.",
-   "why": "Up 4.7% from yesterday's close of 80.73. MT Newswires: Saskatchewan's Path to Budget Balance Remains Dependent on Oil Prices, Scotiabank Says",
+   "why": "Up 5.0% from yesterday's close of 80.73. MT Newswires: Saskatchewan's Path to Budget Balance Remains Dependent on Oil Prices, Scotiabank Says",
    "headline": {
     "source": "MT Newswires",
     "title": "Saskatchewan's Path to Budget Balance Remains Dependent on Oil Prices, Scotiabank Says"
@@ -74,7 +74,7 @@
    "chg_bps": -5.6,
    "move": "10-year is 4.85%, down 5.6 bp."
   },
-  "asof": "2026-11-26T09:15:03-05:00"
+  "asof": "2026-11-26T09:30:03-05:00"
  },
  "market_news": [
   {
@@ -90,16 +90,16 @@
    "url": "https://www.investors.com/news/stock-market-hours-thanksgiving-black-friday-sp-500-nasdaq-dow-jones-nvidia/?src=A00220&yptr=yahoo"
   },
   {
+   "title": "U.S. Stock Futures Higher as AI Trade Steadies for Thanksgiving Break",
+   "source": "The Wall Street Journal",
+   "time": "Thu 8:01 AM",
+   "url": "https://www.wsj.com/finance/stocks/u-s-stock-futures-higher-as-ai-trade-steadies-for-thanksgiving-break-8f712d82?siteid=yhoof2&yptr=yahoo"
+  },
+  {
    "title": "DeFi Revenue Surges But Valuations Drop, Drawing Parallels With Nasdaq\u2019s Post-Dot-Com Recovery",
    "source": "CCN",
    "time": "Thu 6:32 AM",
    "url": "https://www.ccn.com/news/crypto/defi-revenue-growth-valuation-decline-nasdaq-recovery/"
-  },
-  {
-   "title": "Crypto Market Faces 3 Critical Risks Heading Into December 2026",
-   "source": "BeInCrypto",
-   "time": "Thu 6:26 AM",
-   "url": "https://beincrypto.com/crypto-market-outlook-december-2026-three-risks/"
   }
  ],
  "tickers": {
@@ -128,8 +128,8 @@
    "pml": null,
    "typ_box_pct": 0.281,
    "typ_box_usd": 2.01,
-   "trend5": -4.4,
-   "trend_days": 8,
+   "trend5": -2.8,
+   "trend_days": 5,
    "earnings": null,
    "last_result": {
     "date": "2026-11-25",
@@ -168,7 +168,7 @@
    "typ_box_pct": 0.565,
    "typ_box_usd": 3.58,
    "trend5": -5.5,
-   "trend_days": 8,
+   "trend_days": 5,
    "earnings": null,
    "last_result": {
     "date": "2026-11-25",
