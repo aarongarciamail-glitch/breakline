@@ -549,6 +549,14 @@ html[data-skin=ledger]{--wall:#d39a6a}
  .stockhead{gap:4px 10px}
 }
 @media (pointer:coarse){[data-g]{text-decoration:none}}
+/* pattern tape: same candles, big, with candle-pattern tags */
+.ptape[hidden]{display:none}
+.ptape{margin-top:10px;border-top:1px solid var(--line);padding-top:8px}
+.pth{display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:4px}
+.ptscroll{overflow-x:auto;scrollbar-width:thin;-webkit-overflow-scrolling:touch}
+#ptape{display:block;height:auto}
+#ptape text{font:11px var(--display)}
+#ptape .tg{cursor:pointer}
 </style>
 </head>
 <body>
@@ -619,6 +627,10 @@ html[data-skin=ledger]{--wall:#d39a6a}
      <div class="pins" id="loPins"></div>
     </div>
     <div class="legend" id="legend"></div>
+    <div class="ptape" id="ptapeBox" hidden>
+     <div class="pth"><span class="kl">Pattern tape</span><span class="meta">Swipe for earlier candles · tap a tag to learn it</span></div>
+     <div class="ptscroll" id="ptScroll"><svg id="ptape" role="img" aria-label="Recent candles with candle patterns labeled"></svg></div>
+    </div>
     <p class="note" id="legendNote"></p>
     <div class="act" id="act"><div class="aw" id="actWord"></div><dl class="al" id="actLines"></dl></div>
     <p class="sub" id="sub"></p>
@@ -1230,7 +1242,7 @@ html[data-skin=ledger]{--wall:#d39a6a}
    });
   }
 
-  const ticks=(phone?[OPEN,11*60,13*60,15*60,CLOSE]:[OPEN,10*60,11*60,12*60,13*60,14*60,15*60,CLOSE]).filter(m=>m<=END);
+  const ticks=(phone?(END<CLOSE?[OPEN,11*60,13*60,15*60]:[OPEN,11*60,13*60,CLOSE]):[OPEN,10*60,11*60,12*60,13*60,14*60,15*60,CLOSE]).filter(m=>m<=END);
   ticks.forEach((m,i)=>{
    const x=xAt(m);
    mk('text',{x,y:H-6,fill:T('--faint'),'text-anchor':i===0?'start':(i===ticks.length-1?'end':'middle')},svg,fmtHM(m));
@@ -1468,6 +1480,7 @@ html[data-skin=ledger]{--wall:#d39a6a}
   }).join('');
   $('sub').textContent=honestExit(b.sub||'', b.result);
   try{drawChart(b, SEL, view.arch?asRows(view.arch):recs, dayIso, view.live)}catch(err){console.error(err);$('legendNote').textContent='Chart failed to draw. The rest of the page is still live.'}
+  try{drawTape(barsFrom(b.chart))}catch(err){console.error(err);$('ptapeBox').hidden=true}
 
   const levs=b.chart||b.levels?collectLevels(b):[];
   $('levels').innerHTML=levs.map(l=>'<dt>'+esc(l.name)+'</dt><dd class="'+(l.kind==='pivot'||l.kind==='box'?'key':'')+'">'+pxFmt(l.price)+'</dd>').join('')||'<dt>Levels post with the morning book.</dt><dd></dd>';
@@ -1683,6 +1696,70 @@ html[data-skin=ledger]{--wall:#d39a6a}
    +'<div class="legend"><span><i class="sw" style="background:var(--text);height:2px"></i><span data-g="Mayer Multiple">Mayer Multiple</span>, last 12 months</span><span><i class="sw" style="background:var(--win);opacity:.5"></i>cheap zone</span><span><i class="sw" style="background:var(--loss);opacity:.5"></i>pricey zone</span></div>'
    +ledTxt+'</div>';
  }
+
+ /* ---------- pattern tape ---------- */
+ const PAT={
+  hammer:{n:'Hammer',dir:1,t:'Long lower wick, small body near the top. Sellers pushed price down, buyers shoved it all the way back. A rejection of lower prices: often a bottoming sign, best after a drop or at a level.'},
+  star:{n:'Shooting star',dir:-1,t:'Long upper wick, small body near the bottom. Buyers pushed up, sellers slammed it back. A rejection of higher prices: often a topping sign, best after a run-up or at a level.'},
+  doji:{n:'Doji',dir:0,t:'Open and close almost equal: a tie. Neither side won those 5 minutes. Indecision; the next candle usually decides.'},
+  bulleng:{n:'Bullish engulfing',dir:1,t:'A green candle whose body swallows the previous red body. Buyers overpowered the sellers in one bar: a reversal-up signal, strongest after a dip.'},
+  beareng:{n:'Bearish engulfing',dir:-1,t:'A red candle whose body swallows the previous green body. Sellers took over in one bar: a reversal-down signal, strongest after a run.'},
+  inside:{n:'Inside bar',dir:0,t:'High and low both inside the previous candle. The market is pausing and coiling; a break of this candle’s high or low often starts the next move.'},
+  strongup:{n:'Strong buyers',dir:1,t:'A big green candle that closed near its high with little wick. Buyers were in full control the whole 5 minutes: momentum.'},
+  strongdn:{n:'Strong sellers',dir:-1,t:'A big red candle that closed near its low with little wick. Sellers were in full control: momentum down.'}
+ };
+ function findPatterns(o){
+  const out=[], rng=o.map(b=>b.h-b.l), avg=i=>{const a=rng.slice(Math.max(0,i-12),i);return a.length?a.reduce((x,y)=>x+y,0)/a.length:rng[i]};
+  for(let i=0;i<o.length;i++){
+   const b=o[i], r=b.h-b.l; if(!(r>0))continue;
+   const body=Math.abs(b.c-b.o), up=b.h-Math.max(b.o,b.c), dn=Math.min(b.o,b.c)-b.l, p=o[i-1];
+   let k=null;
+   if(p&&p.c<p.o&&b.c>b.o&&b.c>=p.o&&b.o<=p.c&&body>Math.abs(p.o-p.c))k='bulleng';
+   else if(p&&p.c>p.o&&b.c<b.o&&b.o>=p.c&&b.c<=p.o&&body>Math.abs(p.o-p.c))k='beareng';
+   else if(r>=avg(i)*0.6&&dn>=2*body&&up<=0.25*r)k='hammer';
+   else if(r>=avg(i)*0.6&&up>=2*body&&dn<=0.25*r)k='star';
+   else if(body>=0.8*r&&r>=1.6*avg(i))k=b.c>b.o?'strongup':'strongdn';
+   else if(body<=0.08*r&&r>=avg(i)*0.5)k='doji';
+   else if(p&&b.h<p.h&&b.l>p.l&&i>3)k='inside';
+   if(!k)continue;
+   const j=Math.min(o.length-1,i+3), nxt=j>i?(o[j].c/b.c-1)*100:null, d=PAT[k].dir;
+   out.push({i,k,nxt,ok:nxt==null||d===0?null:(d>0?nxt>0.02:nxt<-0.02)});
+  }
+  return out;
+ }
+ function drawTape(ohlc){
+  const box=$('ptapeBox'), svg=$('ptape');
+  const all=ohlc.filter(b=>b.real&&isFinite(b.o)&&isFinite(b.h));
+  if(all.length<3){box.hidden=true;return}
+  const start=Math.max(0,all.length-36), o=all.slice(start);
+  box.hidden=false; svg.textContent='';
+  const phone=innerWidth<641, cw=phone?24:18, H=phone?175:165, TP=8, PH=H-62, W=o.length*cw+12;
+  const vis=$('ptScroll').clientWidth||600;
+  svg.setAttribute('viewBox','0 0 '+W+' '+H); svg.setAttribute('width',Math.max(W,vis)); svg.setAttribute('height',H);
+  const lo=Math.min(...o.map(b=>b.l)), hi=Math.max(...o.map(b=>b.h)), y=p=>TP+(hi-p)/(hi-lo||1)*PH;
+  o.forEach((b,i)=>{
+   const x=6+i*cw+cw/2, up=b.c>=b.o, col=up?T('--win'):T('--loss');
+   mk('line',{x1:x,x2:x,y1:y(b.h),y2:y(b.l),stroke:col,'stroke-width':1.2},svg);
+   mk('rect',{x:x-cw*0.32,y:y(Math.max(b.o,b.c)),width:cw*0.64,height:Math.max(1.2,Math.abs(y(b.o)-y(b.c))),fill:col,rx:1},svg);
+   if(b.t0%30===0)mk('text',{x:x,y:H-4,fill:T('--faint'),'text-anchor':'middle','font-size':'10'},svg,fmtHM(b.t0));
+  });
+  const pats=findPatterns(all).filter(p=>p.i>=start).map(p=>({...p,i:p.i-start})), lanes={last:null};
+  pats.forEach(pt=>{
+   const b=o[pt.i], x=6+pt.i*cw+cw/2, P=PAT[pt.k], col=P.dir>0?T('--win'):P.dir<0?T('--loss'):T('--dim');
+   // tag sits just under its own candle; nudged down only if it would collide with the previous tag
+   let ty=y(b.l)+15; const prev=lanes.last; if(prev&&x-prev.x<74&&Math.abs(ty-prev.y)<13)ty=prev.y+13; lanes.last={x,y:ty};
+   ty=Math.min(ty,TP+PH+36);
+   const g=mk('g',{class:'tg'},svg);
+   const short={hammer:'Hammer',star:'Star',doji:'Doji',bulleng:'Engulf ↑',beareng:'Engulf ↓',inside:'Inside',strongup:'Strong ↑',strongdn:'Strong ↓'}[pt.k];
+   mk('text',{x:Math.max(x,30),y:ty,fill:col,'text-anchor':'middle','font-weight':'600'},g,short+(pt.ok===true?' ✓':pt.ok===false?' ✗':''));
+   const res=pt.nxt==null?'Too new: the next 3 candles haven’t closed yet.':'Next 3 candles: '+(pt.nxt>=0?'+':'−')+Math.abs(pt.nxt).toFixed(2)+'%'+(pt.ok===true?' → it worked.':pt.ok===false?' → it didn’t work this time.':'.');
+   const html=tipHTML(P.n+' · '+fmtHM(b.t1),[])+'<div class="gx">'+esc(P.t)+'</div><div class="gx"><b>'+esc(res)+'</b></div>';
+   const show=ev=>moveTip(ev,html);
+   g.addEventListener('pointerenter',show); g.addEventListener('pointerdown',ev=>{show(ev);clearTimeout(window.__pt);window.__pt=setTimeout(()=>{tip.hidden=true},6000)});
+   g.addEventListener('pointerleave',ev=>{if(ev.pointerType!=='touch')tip.hidden=true});
+  });
+  const sc=$('ptScroll'); sc.scrollLeft=sc.scrollWidth;
+ }
  const CSYMS=()=>CRY&&CRY.coins?Object.keys(CRY.coins):['BTC','SOL','XRP'];
  function cryptoTile(sym){
   const c=CRY&&CRY.coins&&CRY.coins[sym];
@@ -1750,6 +1827,14 @@ html[data-skin=ledger]{--wall:#d39a6a}
    ['Potential BUY / SELL','An outlined arrow: price made a new high (potential buy) or low (potential sell) of the day after 11:00. The rules still apply, so it is a heads-up about an opportunity, not a rule trade. Tracked on paper to learn if late moves are worth trading.',['potential buy','potential sell','buy signal','sell signal','move','after-11']],
    ['Paper','Pretend trades with no real money, used to prove the rules work before risking anything.',['paper']],
    ['Wide box','The box is more than 2x its normal size. Historically these days were not worse, but moves are bigger.',['wide','wide box']]]],
+  ['Candle patterns',[
+   ['Wick','The thin line above or below a candle body: a price that was reached and then rejected. A long wick is a failed push.',['wick']],
+   ['Hammer','Long lower wick, small body near the top: lower prices were rejected. Often a bottoming sign after a drop.',['hammer']],
+   ['Shooting star','Long upper wick, small body near the bottom: higher prices were rejected. Often a topping sign after a run.',['shooting star','star']],
+   ['Doji','Open and close nearly equal: a tie between buyers and sellers. Indecision.',['doji']],
+   ['Engulfing','A candle whose body swallows the previous opposite-colored body: one side overpowered the other in a single bar.',['engulfing','bullish engulfing','bearish engulfing','engulf']],
+   ['Inside bar','A candle entirely inside the previous one: a pause or coil before the next move.',['inside bar','inside']],
+   ['Pattern tape','The strip under the chart: the same candles drawn bigger, tagged when they form a pattern. ✓ means the next 3 candles went the pattern’s way, ✗ means they didn’t.',['pattern tape']]]],
   ['Price levels',[
    ['P (pivot)','The middle point from yesterday: (high + low + close) / 3. Price often reacts around it.',['p','p pivot','pivot p','pivot']],
    ['R1, R2, R3','Resistance pivots above the price, calculated from yesterday’s high, low and close. They are the take-profit targets for calls.',['r1','r2','r3','r1 pivot','r2 pivot','r3 pivot']],
