@@ -1,6 +1,6 @@
 {
  "v": 1,
- "built": "2026-11-26T08:15:02-05:00",
+ "built": "2026-11-26T08:30:02-05:00",
  "for": "2026-11-27",
  "for_label": "Friday, Nov 27",
  "title": "Tomorrow's plan",
@@ -43,25 +43,25 @@
  ],
  "tape": {
   "label": "Tape split",
-  "strategy": "Calls and puts both stay open. Oil is up 5.3% and the 10-year is down 5.6 bp, so they disagree. The opening-range close picks the side.",
+  "strategy": "Calls and puts both stay open. Oil is up 4.8% and the 10-year is down 5.6 bp, so they disagree. The opening-range close picks the side.",
   "vix": {
    "name": "VIX",
-   "price": 26.93,
+   "price": 26.84,
    "prev": 28.32,
-   "chg_pct": -4.9,
-   "move": "Down 4.9% from yesterday's close of 28.3.",
-   "why": "Down 4.9% from yesterday's close of 28.3.",
+   "chg_pct": -5.2,
+   "move": "Down 5.2% from yesterday's close of 28.3.",
+   "why": "Down 5.2% from yesterday's close of 28.3.",
    "headline": null,
-   "means": "VIX is close to yesterday. Size stays normal until it reaches 35."
+   "means": "Fear eased. I shrink size at 35 or higher, and this print is under that, so size stays normal."
   },
   "oil": {
    "name": "Crude",
-   "price": 85.02,
+   "price": 84.57,
    "prev": 80.73,
-   "chg_pct": 5.3,
-   "move": "Up 5.3% from yesterday's close of 80.73.",
+   "chg_pct": 4.8,
+   "move": "Up 4.8% from yesterday's close of 80.73.",
    "range": "Inside the last month, 79.07 to 104.99.",
-   "why": "Up 5.3% from yesterday's close of 80.73. MT Newswires: Saskatchewan's Path to Budget Balance Remains Dependent on Oil Prices, Scotiabank Says",
+   "why": "Up 4.8% from yesterday's close of 80.73. MT Newswires: Saskatchewan's Path to Budget Balance Remains Dependent on Oil Prices, Scotiabank Says",
    "headline": {
     "source": "MT Newswires",
     "title": "Saskatchewan's Path to Budget Balance Remains Dependent on Oil Prices, Scotiabank Says"
@@ -74,32 +74,32 @@
    "chg_bps": -5.6,
    "move": "10-year is 4.85%, down 5.6 bp."
   },
-  "asof": "2026-11-26T08:15:03-05:00"
+  "asof": "2026-11-26T08:30:03-05:00"
  },
  "market_news": [
   {
-   "title": "Stock market flaws and why they matter to long-term investors",
-   "source": "Financial Post",
-   "time": "Thu 6:00 AM",
-   "url": "https://financialpost.com/investing/stock-market-flaws-matter-long-term-investors/"
+   "title": "Dow Jones Futures Rise After Nasdaq Slashes Losses In Wild Market Ride",
+   "source": "Investor's Business Daily",
+   "time": "Thu 8:22 AM",
+   "url": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-market-wild-ride-nasdaq-nvidia-slash-losses-anthropic-higher/?src=A00220&yptr=yahoo"
   },
   {
-   "title": "There\u2019s one proven way not to lose during a market downturn. Ignore it and risk blowing up your entire financial future",
-   "source": "Moneywise",
-   "time": "Thu 5:30 AM",
-   "url": "https://finance.yahoo.com/news/one-proven-way-not-lose-103000392.html"
+   "title": "DeFi Revenue Surges But Valuations Drop, Drawing Parallels With Nasdaq\u2019s Post-Dot-Com Recovery",
+   "source": "CCN",
+   "time": "Thu 6:32 AM",
+   "url": "https://www.ccn.com/news/crypto/defi-revenue-growth-valuation-decline-nasdaq-recovery/"
   },
   {
-   "title": "Global markets rebound as tech shares recover and tariff fears ease",
-   "source": "Euronews",
-   "time": "Thu 5:07 AM",
-   "url": "https://www.euronews.com/2026/11/26/anxiety-over-the-ai-boom-and-inflation-drags-wall-street-lower"
+   "title": "Crypto Market Faces 3 Critical Risks Heading Into December 2026",
+   "source": "BeInCrypto",
+   "time": "Thu 6:26 AM",
+   "url": "https://beincrypto.com/crypto-market-outlook-december-2026-three-risks/"
   },
   {
-   "title": "Stock market today: Dow erases losses to end positive, S&P 500 and Nasdaq recover ground amid AI sell-off",
-   "source": "Yahoo Finance",
-   "time": "Wed 4:14 AM",
-   "url": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-25-dow-sp-500-nasdaq-pce-inflation-data-091428237.html"
+   "title": "U.S. Stock Futures Higher as AI Trade Steadies for Thanksgiving Break",
+   "source": "The Wall Street Journal",
+   "time": "Thu 4:47 AM",
+   "url": "https://www.wsj.com/finance/stocks/u-s-stock-futures-higher-as-ai-trade-steadies-for-thanksgiving-break-8f712d82?siteid=yhoof2&yptr=yahoo"
   }
  ],
  "tickers": {
