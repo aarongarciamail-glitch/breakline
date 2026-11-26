@@ -554,6 +554,9 @@ html[data-skin=ledger]{--wall:#d39a6a}
 .ptape{margin-top:10px;border-top:1px solid var(--line);padding-top:8px}
 .ptinfo{margin-top:8px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;font-size:13.5px;line-height:1.5;color:var(--dim);min-height:44px}
 .ptinfo .th{color:var(--text);font-weight:600;margin-bottom:2px}.ptinfo .gx{color:var(--dim)}
+.ptlayers{display:flex;gap:6px;flex-wrap:wrap;margin:4px 0 2px}
+.ptlayers button{font:500 12.5px/1 var(--display);padding:7px 11px;border-radius:999px;border:1px solid var(--line-2);background:transparent;color:var(--faint);cursor:pointer}
+.ptlayers button.on{color:var(--text);border-color:var(--text);background:rgba(255,255,255,.06)}
 .ptnow{font:500 13px/1.3 var(--display);color:var(--dim);width:100%}
 .ptrend{font:600 13px/1.3 var(--display);color:var(--dim)}.ptrend.up{color:var(--win)}.ptrend.dn{color:var(--loss)}
 .pth{display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:4px}
@@ -633,6 +636,7 @@ html[data-skin=ledger]{--wall:#d39a6a}
     <div class="legend" id="legend"></div>
     <div class="ptape" id="ptapeBox" hidden>
      <div class="pth"><span class="kl">Pattern tape</span><span class="ptrend" id="ptTrend"></span><span class="ptnow" id="ptNow"></span><span class="meta">Whole session on one scale · swipe · tap a label</span></div>
+     <div class="ptlayers" id="ptLayers"><button type="button" data-l="moves">Moves</button><button type="button" data-l="patterns">Patterns</button><button type="button" data-l="swings">Swings</button><button type="button" data-l="candles">Candles</button></div>
      <div class="ptscroll" id="ptScroll"><svg id="ptape" role="img" aria-label="Recent candles with candle patterns labeled"></svg></div>
      <div class="ptinfo" id="ptInfo">Tap any label (Hammer, HH, Double top…) and its meaning shows here.</div>
     </div>
@@ -1789,14 +1793,18 @@ html[data-skin=ledger]{--wall:#d39a6a}
   return keep;
  }
  function ptInfo(html){const el=$('ptInfo');el.innerHTML=html;tip.hidden=true}
+ let TAPE_LAST=null;
+ function tapeLayers(){let v=null;try{v=JSON.parse(localStorage.getItem('bl.layers')||'null')}catch(e){}return v||{moves:true,patterns:true,swings:false,candles:false}}
+ document.addEventListener('click',ev=>{const bt=ev.target.closest&&ev.target.closest('#ptLayers button');if(!bt)return;const v=tapeLayers();v[bt.dataset.l]=!v[bt.dataset.l];try{localStorage.setItem('bl.layers',JSON.stringify(v))}catch(e){}if(TAPE_LAST)drawTape(TAPE_LAST)});
  function drawTape(ohlc){
+  TAPE_LAST=ohlc; const LY=tapeLayers(); document.querySelectorAll('#ptLayers button').forEach(bt=>bt.classList.toggle('on',!!LY[bt.dataset.l]));
   const box=$('ptapeBox'), svg=$('ptape'), sc0=$('ptScroll');
   const keep=sc0.dataset.sym===SEL&&sc0.scrollWidth>0&&sc0.scrollLeft<sc0.scrollWidth-sc0.clientWidth-30, oldLeft=sc0.scrollLeft;
   const all=ohlc.filter(b=>b.real&&isFinite(b.o)&&isFinite(b.h));
   if(all.length<3){box.hidden=true;return}
   const start=0, o=all;   // whole session, one scale, so big moves look big
   box.hidden=false; svg.textContent='';
-  const phone=innerWidth<641, cw=phone?24:18, H=phone?260:240, TP=34, PH=H-88, W=o.length*cw+12;
+  const phone=innerWidth<641, cw=phone?24:18, H=phone?270:250, TP=48, PH=H-100, W=o.length*cw+12;
   const vis=$('ptScroll').clientWidth||600;
   svg.setAttribute('viewBox','0 0 '+W+' '+H); svg.setAttribute('width',Math.max(W,vis)); svg.setAttribute('height',H);
   const lo=Math.min(...o.map(b=>b.l)), hi=Math.max(...o.map(b=>b.h)), y=p=>TP+(hi-p)/(hi-lo||1)*PH;
@@ -1813,7 +1821,7 @@ html[data-skin=ledger]{--wall:#d39a6a}
   for(let k=1;k<zv.length;k++){const A=zv[k-1],B=zv[k],pct=(B.p/A.p-1)*100;if(!big||Math.abs(pct)>Math.abs(big.pct))big={A,B,pct}}
   for(let k=1;k<zv.length;k++){
    const A=zv[k-1],B=zv[k],pct=(B.p/A.p-1)*100,mins=(o[B.i].t1-o[A.i].t1);
-   if(Math.abs(pct)<0.15)continue;                       // label only moves worth noticing
+   if(!LY.moves||(Math.abs(pct)<0.5&&!(big&&A===big.A)))continue;   // Moves layer: only legs of 0.5%+ and the biggest
    const isBig=big&&A===big.A, col=pct>0?T('--win'):T('--loss');
    if(isBig)mk('line',{x1:cx(A.i),y1:y(A.p),x2:cx(B.i),y2:y(B.p),stroke:col,'stroke-width':3,opacity:.35},svg);
    const mx=(cx(A.i)+cx(B.i))/2, my=(y(A.p)+y(B.p))/2;
@@ -1822,7 +1830,7 @@ html[data-skin=ledger]{--wall:#d39a6a}
    const html=tipHTML((pct>0?'Rip':'Dip')+' \u00b7 '+fmtHM(o[A.i].t1)+'\u2013'+fmtHM(o[B.i].t1),[['Move',(pct>0?'+':'\u2212')+Math.abs(pct).toFixed(2)+'%'],['Price',pxFmt(A.p)+' \u2192 '+pxFmt(B.p)],['Time',mins+' min']])+(isBig?'<div class="gx">\u2605 The biggest swing of the session so far.</div>':'');
    g4.addEventListener('pointerenter',ev=>{if(ev.pointerType!=='touch')moveTip(ev,html)}); g4.addEventListener('pointerdown',ev=>{ptInfo(html)}); g4.addEventListener('pointerleave',ev=>{if(ev.pointerType!=='touch')tip.hidden=true});
   }
-  zv.forEach(z2=>{const up=z2.lab==='HH'||z2.lab==='HL', dn=z2.lab==='LL'||z2.lab==='LH';
+  if(LY.swings)zv.forEach(z2=>{const up=z2.lab==='HH'||z2.lab==='HL', dn=z2.lab==='LL'||z2.lab==='LH';
    const g2=mk('g',{class:'tg'},svg);
    mk('text',{x:cx(z2.i),y:z2.t==='H'?y(z2.p)-6:y(z2.p)+(phone?28:26),fill:up?T('--win'):dn?T('--loss'):T('--dim'),'text-anchor':'middle','font-size':'10','font-weight':'700'},g2,z2.lab);
    const ex={HH:'Higher high: buyers pushed past the last peak.',HL:'Higher low: the dip stopped above the last dip. Buyers stepped in sooner.',LH:'Lower high: the bounce failed below the last peak. Sellers stepped in sooner.',LL:'Lower low: sellers pushed below the last dip.',H:'First swing high in view.',L:'First swing low in view.'}[z2.lab];
@@ -1842,8 +1850,8 @@ html[data-skin=ledger]{--wall:#d39a6a}
     pt.className='ptrend '+day;
     const ptn=$('ptNow'); if(ptn){ptn.textContent='Right now: '+now+'.'}
   }
-  bigPatterns(all,zz).filter(p=>p.i1>=start).forEach((p,n)=>{
-   const P=BIG[p.k], x0=cx(Math.max(0,p.i0-start)), x1=cx(Math.min(o.length-1,p.i1-start)), yy=26+(n%2)*0, col=P.dir>0?T('--win'):T('--loss');
+  if(LY.patterns)bigPatterns(all,zz).filter(p=>p.i1>=start).forEach((p,n)=>{
+   const P=BIG[p.k], x0=cx(Math.max(0,p.i0-start)), x1=cx(Math.min(o.length-1,p.i1-start)), yy=22+(n%2)*16, col=P.dir>0?T('--win'):T('--loss');
    const g3=mk('g',{class:'tg'},svg);
    mk('path',{d:`M${x0} ${yy+6} V${yy} H${x1} V${yy+6}`,fill:'none',stroke:col,'stroke-width':1.3},g3);
    mk('text',{x:x1,y:yy-3,fill:col,'text-anchor':'end','font-size':'10.5','font-weight':'700'},g3,P.n);
@@ -1851,7 +1859,7 @@ html[data-skin=ledger]{--wall:#d39a6a}
    g3.addEventListener('pointerenter',ev=>{if(ev.pointerType!=='touch')moveTip(ev,html)}); g3.addEventListener('pointerdown',ev=>{ptInfo(html)}); g3.addEventListener('pointerleave',ev=>{if(ev.pointerType!=='touch')tip.hidden=true});
   });
   const pats=findPatterns(all).filter(p=>p.i>=start).map(p=>({...p,i:p.i-start})), lanes={last:null};
-  pats.forEach(pt=>{
+  if(LY.candles)pats.forEach(pt=>{
    const b=o[pt.i], x=6+pt.i*cw+cw/2, P=PAT[pt.k], col=P.dir>0?T('--win'):P.dir<0?T('--loss'):T('--dim');
    // tag sits just under its own candle; nudged down only if it would collide with the previous tag
    let ty=y(b.l)+15; const prev=lanes.last; if(prev&&x-prev.x<74&&Math.abs(ty-prev.y)<13)ty=prev.y+13; lanes.last={x,y:ty};
