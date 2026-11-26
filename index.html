@@ -552,6 +552,8 @@ html[data-skin=ledger]{--wall:#d39a6a}
 /* pattern tape: same candles, big, with candle-pattern tags */
 .ptape[hidden]{display:none}
 .ptape{margin-top:10px;border-top:1px solid var(--line);padding-top:8px}
+.ptinfo{margin-top:8px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;font-size:13.5px;line-height:1.5;color:var(--dim);min-height:44px}
+.ptinfo .th{color:var(--text);font-weight:600;margin-bottom:2px}.ptinfo .gx{color:var(--dim)}
 .ptrend{font:600 13px/1.3 var(--display);color:var(--dim)}.ptrend.up{color:var(--win)}.ptrend.dn{color:var(--loss)}
 .pth{display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:4px}
 .ptscroll{overflow-x:auto;scrollbar-width:thin;-webkit-overflow-scrolling:touch}
@@ -631,6 +633,7 @@ html[data-skin=ledger]{--wall:#d39a6a}
     <div class="ptape" id="ptapeBox" hidden>
      <div class="pth"><span class="kl">Pattern tape</span><span class="ptrend" id="ptTrend"></span><span class="meta">Swipe for earlier · tap a tag to learn it</span></div>
      <div class="ptscroll" id="ptScroll"><svg id="ptape" role="img" aria-label="Recent candles with candle patterns labeled"></svg></div>
+     <div class="ptinfo" id="ptInfo">Tap any label (Hammer, HH, Double top…) and its meaning shows here.</div>
     </div>
     <p class="note" id="legendNote"></p>
     <div class="act" id="act"><div class="aw" id="actWord"></div><dl class="al" id="actLines"></dl></div>
@@ -1784,8 +1787,10 @@ html[data-skin=ledger]{--wall:#d39a6a}
   const keep=[];out.forEach(p=>{if(!keep.some(q=>q.k===p.k&&p.i0<=q.i1))keep.push(p)});
   return keep;
  }
+ function ptInfo(html){const el=$('ptInfo');el.innerHTML=html;tip.hidden=true}
  function drawTape(ohlc){
-  const box=$('ptapeBox'), svg=$('ptape');
+  const box=$('ptapeBox'), svg=$('ptape'), sc0=$('ptScroll');
+  const keep=sc0.dataset.sym===SEL&&sc0.scrollWidth>0&&sc0.scrollLeft<sc0.scrollWidth-sc0.clientWidth-30, oldLeft=sc0.scrollLeft;
   const all=ohlc.filter(b=>b.real&&isFinite(b.o)&&isFinite(b.h));
   if(all.length<3){box.hidden=true;return}
   const start=Math.max(0,all.length-36), o=all.slice(start);
@@ -1808,7 +1813,7 @@ html[data-skin=ledger]{--wall:#d39a6a}
    mk('text',{x:cx(z2.i),y:z2.t==='H'?y(z2.p)-6:y(z2.p)+(phone?28:26),fill:up?T('--win'):dn?T('--loss'):T('--dim'),'text-anchor':'middle','font-size':'10','font-weight':'700'},g2,z2.lab);
    const ex={HH:'Higher high: buyers pushed past the last peak.',HL:'Higher low: the dip stopped above the last dip. Buyers stepped in sooner.',LH:'Lower high: the bounce failed below the last peak. Sellers stepped in sooner.',LL:'Lower low: sellers pushed below the last dip.',H:'First swing high in view.',L:'First swing low in view.'}[z2.lab];
    const html=tipHTML(z2.lab+' \u00b7 swing '+(z2.t==='H'?'high':'low')+' '+fmtHM(o[z2.i].t1),[])+'<div class="gx">'+esc(ex)+'</div>';
-   g2.addEventListener('pointerenter',ev=>moveTip(ev,html)); g2.addEventListener('pointerdown',ev=>{moveTip(ev,html);clearTimeout(window.__pt);window.__pt=setTimeout(()=>{tip.hidden=true},6000)}); g2.addEventListener('pointerleave',ev=>{if(ev.pointerType!=='touch')tip.hidden=true});
+   g2.addEventListener('pointerenter',ev=>{if(ev.pointerType!=='touch')moveTip(ev,html)}); g2.addEventListener('pointerdown',ev=>{ptInfo(html)}); g2.addEventListener('pointerleave',ev=>{if(ev.pointerType!=='touch')tip.hidden=true});
   });
   const tr=trendOf(zz);
   const pt=$('ptTrend'); pt.textContent=(tr.k==='up'?'\u2197 ':tr.k==='dn'?'\u2198 ':'\u2194 ')+'Recent swings: '+tr.w; pt.className='ptrend '+tr.k;
@@ -1818,7 +1823,7 @@ html[data-skin=ledger]{--wall:#d39a6a}
    mk('path',{d:`M${x0} ${yy+6} V${yy} H${x1} V${yy+6}`,fill:'none',stroke:col,'stroke-width':1.3},g3);
    mk('text',{x:x1,y:yy-3,fill:col,'text-anchor':'end','font-size':'10.5','font-weight':'700'},g3,P.n);
    const html=tipHTML(P.n,[])+'<div class="gx">'+esc(P.t)+'</div>';
-   g3.addEventListener('pointerenter',ev=>moveTip(ev,html)); g3.addEventListener('pointerdown',ev=>{moveTip(ev,html);clearTimeout(window.__pt);window.__pt=setTimeout(()=>{tip.hidden=true},7000)}); g3.addEventListener('pointerleave',ev=>{if(ev.pointerType!=='touch')tip.hidden=true});
+   g3.addEventListener('pointerenter',ev=>{if(ev.pointerType!=='touch')moveTip(ev,html)}); g3.addEventListener('pointerdown',ev=>{ptInfo(html)}); g3.addEventListener('pointerleave',ev=>{if(ev.pointerType!=='touch')tip.hidden=true});
   });
   const pats=findPatterns(all).filter(p=>p.i>=start).map(p=>({...p,i:p.i-start})), lanes={last:null};
   pats.forEach(pt=>{
@@ -1832,10 +1837,10 @@ html[data-skin=ledger]{--wall:#d39a6a}
    const res=pt.nxt==null?'Too new: the next 3 candles haven’t closed yet.':'Next 3 candles: '+(pt.nxt>=0?'+':'−')+Math.abs(pt.nxt).toFixed(2)+'%'+(pt.ok===true?' → it worked.':pt.ok===false?' → it didn’t work this time.':'.');
    const html=tipHTML(P.n+' · '+fmtHM(b.t1),[])+'<div class="gx">'+esc(P.t)+'</div><div class="gx"><b>'+esc(res)+'</b></div>';
    const show=ev=>moveTip(ev,html);
-   g.addEventListener('pointerenter',show); g.addEventListener('pointerdown',ev=>{show(ev);clearTimeout(window.__pt);window.__pt=setTimeout(()=>{tip.hidden=true},6000)});
+   g.addEventListener('pointerenter',ev=>{if(ev.pointerType!=='touch')show(ev)}); g.addEventListener('pointerdown',ev=>{ptInfo(html)});
    g.addEventListener('pointerleave',ev=>{if(ev.pointerType!=='touch')tip.hidden=true});
   });
-  const sc=$('ptScroll'); sc.scrollLeft=sc.scrollWidth;
+  const sc=$('ptScroll'); sc.scrollLeft=keep?oldLeft:sc.scrollWidth; sc.dataset.sym=SEL;
  }
  const CSYMS=()=>CRY&&CRY.coins?Object.keys(CRY.coins):['BTC','SOL','XRP'];
  function cryptoTile(sym){
