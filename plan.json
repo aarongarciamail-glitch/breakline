@@ -1,6 +1,6 @@
 {
  "v": 1,
- "built": "2026-11-26T09:45:02-05:00",
+ "built": "2026-11-26T16:20:02-05:00",
  "for": "2026-11-27",
  "for_label": "Friday, Nov 27",
  "title": "Tomorrow's plan",
@@ -43,28 +43,28 @@
  ],
  "tape": {
   "label": "Tape split",
-  "strategy": "Calls and puts both stay open. Oil is up 5.0% and the 10-year is down 5.6 bp, so they disagree. The opening-range close picks the side.",
+  "strategy": "Calls and puts both stay open. Oil is up 5.2% and the 10-year is down 5.6 bp, so they disagree. The opening-range close picks the side.",
   "vix": {
    "name": "VIX",
-   "price": 27.05,
+   "price": 26.8,
    "prev": 28.32,
-   "chg_pct": -4.5,
-   "move": "Down 4.5% from yesterday's close of 28.3.",
-   "why": "Down 4.5% from yesterday's close of 28.3.",
+   "chg_pct": -5.4,
+   "move": "Down 5.4% from yesterday's close of 28.3.",
+   "why": "Down 5.4% from yesterday's close of 28.3.",
    "headline": null,
-   "means": "VIX is close to yesterday. Size stays normal until it reaches 35."
+   "means": "Fear eased. I shrink size at 35 or higher, and this print is under that, so size stays normal."
   },
   "oil": {
    "name": "Crude",
-   "price": 84.73,
+   "price": 84.91,
    "prev": 80.73,
-   "chg_pct": 5.0,
-   "move": "Up 5.0% from yesterday's close of 80.73.",
+   "chg_pct": 5.2,
+   "move": "Up 5.2% from yesterday's close of 80.73.",
    "range": "Inside the last month, 79.07 to 104.99.",
-   "why": "Up 5.0% from yesterday's close of 80.73. MT Newswires: Saskatchewan's Path to Budget Balance Remains Dependent on Oil Prices, Scotiabank Says",
+   "why": "Up 5.2% from yesterday's close of 80.73. Reuters: Brent settles higher as mine strikes, refinery attack stoke Middle East supply concerns",
    "headline": {
-    "source": "MT Newswires",
-    "title": "Saskatchewan's Path to Budget Balance Remains Dependent on Oil Prices, Scotiabank Says"
+    "source": "Reuters",
+    "title": "Brent settles higher as mine strikes, refinery attack stoke Middle East supply concerns"
    },
    "means": "Oil and yields point different ways. Calls and puts both stay open. The box picks the side."
   },
@@ -74,32 +74,32 @@
    "chg_bps": -5.6,
    "move": "10-year is 4.85%, down 5.6 bp."
   },
-  "asof": "2026-11-26T09:45:03-05:00"
+  "asof": "2026-11-26T16:20:03-05:00"
  },
  "market_news": [
   {
+   "title": "Jim Cramer sends strong words to stock market investors",
+   "source": "TheStreet",
+   "time": "Thu 4:07 PM",
+   "url": "https://www.thestreet.com/investing/stocks/jim-cramer-sends-strong-words-to-stock-market-investors"
+  },
+  {
+   "title": "Before the Sell-Off, AI Stocks Showed Dot-Com-Level Bubble Signals: Study",
+   "source": "decrypt",
+   "time": "Thu 2:01 PM",
+   "url": "https://decrypt.co/384066/before-the-sell-off-ai-stocks-showed-dot-com-level-bubble-signals-study"
+  },
+  {
+   "title": "Bitcoin Holds Above $60K as Death Cross Clouds Thanksgiving Recovery",
+   "source": "decrypt",
+   "time": "Thu 1:15 PM",
+   "url": "https://decrypt.co/384079/bitcoin-holds-above-60k-as-death-cross-clouds-thanksgiving-recovery"
+  },
+  {
    "title": "Dow Jones Futures Rise With U.S. Markets Shut; Look For This Bullish Signal",
    "source": "Investor's Business Daily",
-   "time": "Thu 9:07 AM",
+   "time": "Thu 1:11 PM",
    "url": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-market-wild-ride-nasdaq-nvidia-slash-losses-anthropic-higher/?src=A00220&yptr=yahoo"
-  },
-  {
-   "title": "Stock Market Trading Hours For Thanksgiving And Black Friday",
-   "source": "Investor's Business Daily",
-   "time": "Thu 9:04 AM",
-   "url": "https://www.investors.com/news/stock-market-hours-thanksgiving-black-friday-sp-500-nasdaq-dow-jones-nvidia/?src=A00220&yptr=yahoo"
-  },
-  {
-   "title": "U.S. Stock Futures Higher as AI Trade Steadies for Thanksgiving Break",
-   "source": "The Wall Street Journal",
-   "time": "Thu 8:01 AM",
-   "url": "https://www.wsj.com/finance/stocks/u-s-stock-futures-higher-as-ai-trade-steadies-for-thanksgiving-break-8f712d82?siteid=yhoof2&yptr=yahoo"
-  },
-  {
-   "title": "DeFi Revenue Surges But Valuations Drop, Drawing Parallels With Nasdaq\u2019s Post-Dot-Com Recovery",
-   "source": "CCN",
-   "time": "Thu 6:32 AM",
-   "url": "https://www.ccn.com/news/crypto/defi-revenue-growth-valuation-decline-nasdaq-recovery/"
   }
  ],
  "tickers": {
