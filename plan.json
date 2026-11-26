@@ -1,6 +1,6 @@
 {
  "v": 1,
- "built": "2026-11-26T09:00:02-05:00",
+ "built": "2026-11-26T09:15:02-05:00",
  "for": "2026-11-27",
  "for_label": "Friday, Nov 27",
  "title": "Tomorrow's plan",
@@ -46,17 +46,17 @@
   "strategy": "Calls and puts both stay open. Oil is up 4.7% and the 10-year is down 5.6 bp, so they disagree. The opening-range close picks the side.",
   "vix": {
    "name": "VIX",
-   "price": 26.91,
+   "price": 27.04,
    "prev": 28.32,
-   "chg_pct": -5.0,
-   "move": "Down 5.0% from yesterday's close of 28.3.",
-   "why": "Down 5.0% from yesterday's close of 28.3.",
+   "chg_pct": -4.5,
+   "move": "Down 4.5% from yesterday's close of 28.3.",
+   "why": "Down 4.5% from yesterday's close of 28.3.",
    "headline": null,
    "means": "VIX is close to yesterday. Size stays normal until it reaches 35."
   },
   "oil": {
    "name": "Crude",
-   "price": 84.5,
+   "price": 84.52,
    "prev": 80.73,
    "chg_pct": 4.7,
    "move": "Up 4.7% from yesterday's close of 80.73.",
@@ -74,14 +74,20 @@
    "chg_bps": -5.6,
    "move": "10-year is 4.85%, down 5.6 bp."
   },
-  "asof": "2026-11-26T09:00:03-05:00"
+  "asof": "2026-11-26T09:15:03-05:00"
  },
  "market_news": [
   {
    "title": "Dow Jones Futures Rise With U.S. Markets Shut; Look For This Bullish Signal",
    "source": "Investor's Business Daily",
-   "time": "Thu 8:56 AM",
+   "time": "Thu 9:07 AM",
    "url": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-market-wild-ride-nasdaq-nvidia-slash-losses-anthropic-higher/?src=A00220&yptr=yahoo"
+  },
+  {
+   "title": "Stock Market Trading Hours For Thanksgiving And Black Friday",
+   "source": "Investor's Business Daily",
+   "time": "Thu 9:04 AM",
+   "url": "https://www.investors.com/news/stock-market-hours-thanksgiving-black-friday-sp-500-nasdaq-dow-jones-nvidia/?src=A00220&yptr=yahoo"
   },
   {
    "title": "DeFi Revenue Surges But Valuations Drop, Drawing Parallels With Nasdaq\u2019s Post-Dot-Com Recovery",
@@ -94,12 +100,6 @@
    "source": "BeInCrypto",
    "time": "Thu 6:26 AM",
    "url": "https://beincrypto.com/crypto-market-outlook-december-2026-three-risks/"
-  },
-  {
-   "title": "U.S. Stock Futures Higher as AI Trade Steadies for Thanksgiving Break",
-   "source": "The Wall Street Journal",
-   "time": "Thu 4:47 AM",
-   "url": "https://www.wsj.com/finance/stocks/u-s-stock-futures-higher-as-ai-trade-steadies-for-thanksgiving-break-8f712d82?siteid=yhoof2&yptr=yahoo"
   }
  ],
  "tickers": {
