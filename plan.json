@@ -1,6 +1,6 @@
 {
  "v": 1,
- "built": "2026-11-26T07:45:02-05:00",
+ "built": "2026-11-26T08:00:02-05:00",
  "for": "2026-11-27",
  "for_label": "Friday, Nov 27",
  "title": "Tomorrow's plan",
@@ -46,17 +46,17 @@
   "strategy": "Calls and puts both stay open. Oil is up 4.8% and the 10-year is down 5.6 bp, so they disagree. The opening-range close picks the side.",
   "vix": {
    "name": "VIX",
-   "price": 26.86,
+   "price": 26.83,
    "prev": 28.32,
-   "chg_pct": -5.2,
-   "move": "Down 5.2% from yesterday's close of 28.3.",
-   "why": "Down 5.2% from yesterday's close of 28.3.",
+   "chg_pct": -5.3,
+   "move": "Down 5.3% from yesterday's close of 28.3.",
+   "why": "Down 5.3% from yesterday's close of 28.3.",
    "headline": null,
    "means": "Fear eased. I shrink size at 35 or higher, and this print is under that, so size stays normal."
   },
   "oil": {
    "name": "Crude",
-   "price": 84.58,
+   "price": 84.61,
    "prev": 80.73,
    "chg_pct": 4.8,
    "move": "Up 4.8% from yesterday's close of 80.73.",
@@ -74,7 +74,7 @@
    "chg_bps": -5.6,
    "move": "10-year is 4.85%, down 5.6 bp."
   },
-  "asof": "2026-11-26T07:45:03-05:00"
+  "asof": "2026-11-26T08:00:03-05:00"
  },
  "market_news": [
   {
@@ -90,10 +90,10 @@
    "url": "https://finance.yahoo.com/news/one-proven-way-not-lose-103000392.html"
   },
   {
-   "title": "Sterling today: Pound steady as dollar holds range on U.S. holiday",
-   "source": "Investing.com",
-   "time": "Thu 5:04 AM",
-   "url": "https://finance.yahoo.com/markets/currencies/articles/sterling-today-pound-steady-dollar-100410482.html"
+   "title": "Global markets rebound as tech shares recover and tariff fears ease",
+   "source": "Euronews",
+   "time": "Thu 5:07 AM",
+   "url": "https://www.euronews.com/2026/11/26/anxiety-over-the-ai-boom-and-inflation-drags-wall-street-lower"
   },
   {
    "title": "Stock market today: Dow erases losses to end positive, S&P 500 and Nasdaq recover ground amid AI sell-off",
