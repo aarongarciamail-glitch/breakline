@@ -552,6 +552,7 @@ html[data-skin=ledger]{--wall:#d39a6a}
 /* pattern tape: same candles, big, with candle-pattern tags */
 .ptape[hidden]{display:none}
 .ptape{margin-top:10px;border-top:1px solid var(--line);padding-top:8px}
+.ptrend{font:600 13px/1.3 var(--display);color:var(--dim)}.ptrend.up{color:var(--win)}.ptrend.dn{color:var(--loss)}
 .pth{display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:4px}
 .ptscroll{overflow-x:auto;scrollbar-width:thin;-webkit-overflow-scrolling:touch}
 #ptape{display:block;height:auto}
@@ -628,7 +629,7 @@ html[data-skin=ledger]{--wall:#d39a6a}
     </div>
     <div class="legend" id="legend"></div>
     <div class="ptape" id="ptapeBox" hidden>
-     <div class="pth"><span class="kl">Pattern tape</span><span class="meta">Swipe for earlier candles · tap a tag to learn it</span></div>
+     <div class="pth"><span class="kl">Pattern tape</span><span class="ptrend" id="ptTrend"></span><span class="meta">Swipe for earlier · tap a tag to learn it</span></div>
      <div class="ptscroll" id="ptScroll"><svg id="ptape" role="img" aria-label="Recent candles with candle patterns labeled"></svg></div>
     </div>
     <p class="note" id="legendNote"></p>
@@ -1727,13 +1728,69 @@ html[data-skin=ledger]{--wall:#d39a6a}
   }
   return out;
  }
+
+ /* ---------- bigger picture: swings, trend, chart patterns (pattern tape) ---------- */
+ const BIG={
+  dtop:{n:'Double top',dir:-1,t:'Price hit about the same high twice and failed both times. Buyers couldn’t break that ceiling. It’s confirmed when price drops below the dip between the two tops.'},
+  dbot:{n:'Double bottom',dir:1,t:'Price hit about the same low twice and held both times. Sellers couldn’t break that floor. Confirmed when price rises above the bounce between the two lows.'},
+  hs:{n:'Head & shoulders',dir:-1,t:'Three peaks: a high (shoulder), a higher high (head), then a lower high (shoulder). Buyers are running out of steam; a break below the neckline (the dips between peaks) is the sell signal.'},
+  ihs:{n:'Inverse head & shoulders',dir:1,t:'Three dips: a low, a lower low (head), then a higher low. Sellers are tiring; a break above the neckline is the buy signal.'},
+  bflag:{n:'Bull flag',dir:1,t:'A sharp rise (the pole), then a short, tight pause drifting sideways or slightly down (the flag). Buyers are resting, not leaving; a break above the flag often continues the move.'},
+  sflag:{n:'Bear flag',dir:-1,t:'A sharp drop (the pole), then a short, tight pause drifting sideways or slightly up. Sellers are resting; a break below the flag often continues the drop.'}
+ };
+ function swingsOf(o){
+  const sw=[];
+  for(let i=2;i<o.length-2;i++){
+   const hs=[o[i-2],o[i-1],o[i+1],o[i+2]];
+   if(hs.every(b=>o[i].h>=b.h))sw.push({i,t:'H',p:o[i].h});
+   else if(hs.every(b=>o[i].l<=b.l))sw.push({i,t:'L',p:o[i].l});
+  }
+  const z=[];                              // alternate highs and lows; keep the more extreme when two in a row
+  sw.forEach(s=>{const last=z[z.length-1];if(last&&last.t===s.t){if((s.t==='H'&&s.p>last.p)||(s.t==='L'&&s.p<last.p))z[z.length-1]=s}else z.push(s)});
+  let pH=null,pL=null;
+  z.forEach(s=>{if(s.t==='H'){s.lab=pH==null?'H':s.p>pH?'HH':'LH';pH=s.p}else{s.lab=pL==null?'L':s.p>pL?'HL':'LL';pL=s.p}});
+  return z;
+ }
+ function trendOf(z){
+  const H=z.filter(s=>s.t==='H').slice(-2), L=z.filter(s=>s.t==='L').slice(-2);
+  if(H.length<2||L.length<2)return {w:'Not enough swings yet',k:'flat'};
+  const hh=H[1].p>H[0].p, hl=L[1].p>L[0].p;
+  if(hh&&hl)return {w:'Uptrend · higher highs and higher lows',k:'up'};
+  if(!hh&&!hl)return {w:'Downtrend · lower highs and lower lows',k:'dn'};
+  return {w:'Choppy · highs and lows disagree (range or turning point)',k:'flat'};
+ }
+ function bigPatterns(o,z){
+  const out=[], rng=o.map(b=>b.h-b.l), avg=rng.reduce((a,b)=>a+b,0)/Math.max(1,rng.length), tol=avg*0.6;
+  for(let k=0;k+2<z.length;k++){
+   const a=z[k],m=z[k+1],c=z[k+2];
+   if(a.t==='H'&&c.t==='H'&&Math.abs(a.p-c.p)<=tol&&a.p-m.p>=avg*1.5)out.push({k:'dtop',i0:a.i,i1:c.i});
+   if(a.t==='L'&&c.t==='L'&&Math.abs(a.p-c.p)<=tol&&m.p-a.p>=avg*1.5)out.push({k:'dbot',i0:a.i,i1:c.i});
+  }
+  for(let k=0;k+4<z.length;k++){
+   const [s1,n1,h,n2,s2]=z.slice(k,k+5);
+   if(s1.t==='H'&&h.p>s1.p+avg&&h.p>s2.p+avg&&Math.abs(s1.p-s2.p)<=tol*1.6)out.push({k:'hs',i0:s1.i,i1:s2.i});
+   if(s1.t==='L'&&h.p<s1.p-avg&&h.p<s2.p-avg&&Math.abs(s1.p-s2.p)<=tol*1.6)out.push({k:'ihs',i0:s1.i,i1:s2.i});
+  }
+  for(let i=6;i<o.length;i++){                       // flags: a 3-6 candle pole, then 4-8 tight candles
+   for(const pole of [3,4,5,6]){
+    const ps=i-pole, move=o[i].c-o[ps].o;
+    if(Math.abs(move)<avg*4)continue;
+    const fl=o.slice(i+1,i+9); if(fl.length<4)continue;
+    const fh=Math.max(...fl.map(b=>b.h)), flo=Math.min(...fl.map(b=>b.l));
+    if(fh-flo<=Math.abs(move)*0.5&&(move>0?flo>o[i].c-Math.abs(move)*0.5:fh<o[i].c+Math.abs(move)*0.5)){out.push({k:move>0?'bflag':'sflag',i0:ps,i1:i+fl.length});i+=fl.length;break}
+   }
+  }
+  out.sort((p,q)=>p.i0-q.i0);
+  const keep=[];out.forEach(p=>{if(!keep.some(q=>q.k===p.k&&p.i0<=q.i1))keep.push(p)});
+  return keep;
+ }
  function drawTape(ohlc){
   const box=$('ptapeBox'), svg=$('ptape');
   const all=ohlc.filter(b=>b.real&&isFinite(b.o)&&isFinite(b.h));
   if(all.length<3){box.hidden=true;return}
   const start=Math.max(0,all.length-36), o=all.slice(start);
   box.hidden=false; svg.textContent='';
-  const phone=innerWidth<641, cw=phone?24:18, H=phone?175:165, TP=8, PH=H-62, W=o.length*cw+12;
+  const phone=innerWidth<641, cw=phone?24:18, H=phone?200:190, TP=34, PH=H-88, W=o.length*cw+12;
   const vis=$('ptScroll').clientWidth||600;
   svg.setAttribute('viewBox','0 0 '+W+' '+H); svg.setAttribute('width',Math.max(W,vis)); svg.setAttribute('height',H);
   const lo=Math.min(...o.map(b=>b.l)), hi=Math.max(...o.map(b=>b.h)), y=p=>TP+(hi-p)/(hi-lo||1)*PH;
@@ -1743,6 +1800,26 @@ html[data-skin=ledger]{--wall:#d39a6a}
    mk('rect',{x:x-cw*0.32,y:y(Math.max(b.o,b.c)),width:cw*0.64,height:Math.max(1.2,Math.abs(y(b.o)-y(b.c))),fill:col,rx:1},svg);
    if(b.t0%30===0)mk('text',{x:x,y:H-4,fill:T('--faint'),'text-anchor':'middle','font-size':'10'},svg,fmtHM(b.t0));
   });
+  const zz=swingsOf(all), zv=zz.filter(z2=>z2.i>=start).map(z2=>({...z2,i:z2.i-start}));
+  const cx=i=>6+i*cw+cw/2;
+  if(zv.length>1)mk('path',{d:zv.map((z2,k)=>(k?'L':'M')+cx(z2.i)+' '+y(z2.p)).join(' '),fill:'none',stroke:T('--dim'),'stroke-width':1,'stroke-dasharray':'3 3',opacity:.7},svg);
+  zv.forEach(z2=>{const up=z2.lab==='HH'||z2.lab==='HL', dn=z2.lab==='LL'||z2.lab==='LH';
+   const g2=mk('g',{class:'tg'},svg);
+   mk('text',{x:cx(z2.i),y:z2.t==='H'?y(z2.p)-6:y(z2.p)+(phone?28:26),fill:up?T('--win'):dn?T('--loss'):T('--dim'),'text-anchor':'middle','font-size':'10','font-weight':'700'},g2,z2.lab);
+   const ex={HH:'Higher high: buyers pushed past the last peak.',HL:'Higher low: the dip stopped above the last dip. Buyers stepped in sooner.',LH:'Lower high: the bounce failed below the last peak. Sellers stepped in sooner.',LL:'Lower low: sellers pushed below the last dip.',H:'First swing high in view.',L:'First swing low in view.'}[z2.lab];
+   const html=tipHTML(z2.lab+' \u00b7 swing '+(z2.t==='H'?'high':'low')+' '+fmtHM(o[z2.i].t1),[])+'<div class="gx">'+esc(ex)+'</div>';
+   g2.addEventListener('pointerenter',ev=>moveTip(ev,html)); g2.addEventListener('pointerdown',ev=>{moveTip(ev,html);clearTimeout(window.__pt);window.__pt=setTimeout(()=>{tip.hidden=true},6000)}); g2.addEventListener('pointerleave',ev=>{if(ev.pointerType!=='touch')tip.hidden=true});
+  });
+  const tr=trendOf(zz);
+  const pt=$('ptTrend'); pt.textContent=(tr.k==='up'?'\u2197 ':tr.k==='dn'?'\u2198 ':'\u2194 ')+'Recent swings: '+tr.w; pt.className='ptrend '+tr.k;
+  bigPatterns(all,zz).filter(p=>p.i1>=start).forEach((p,n)=>{
+   const P=BIG[p.k], x0=cx(Math.max(0,p.i0-start)), x1=cx(Math.min(o.length-1,p.i1-start)), yy=26+(n%2)*0, col=P.dir>0?T('--win'):T('--loss');
+   const g3=mk('g',{class:'tg'},svg);
+   mk('path',{d:`M${x0} ${yy+6} V${yy} H${x1} V${yy+6}`,fill:'none',stroke:col,'stroke-width':1.3},g3);
+   mk('text',{x:x1,y:yy-3,fill:col,'text-anchor':'end','font-size':'10.5','font-weight':'700'},g3,P.n);
+   const html=tipHTML(P.n,[])+'<div class="gx">'+esc(P.t)+'</div>';
+   g3.addEventListener('pointerenter',ev=>moveTip(ev,html)); g3.addEventListener('pointerdown',ev=>{moveTip(ev,html);clearTimeout(window.__pt);window.__pt=setTimeout(()=>{tip.hidden=true},7000)}); g3.addEventListener('pointerleave',ev=>{if(ev.pointerType!=='touch')tip.hidden=true});
+  });
   const pats=findPatterns(all).filter(p=>p.i>=start).map(p=>({...p,i:p.i-start})), lanes={last:null};
   pats.forEach(pt=>{
    const b=o[pt.i], x=6+pt.i*cw+cw/2, P=PAT[pt.k], col=P.dir>0?T('--win'):P.dir<0?T('--loss'):T('--dim');
@@ -1751,7 +1828,7 @@ html[data-skin=ledger]{--wall:#d39a6a}
    ty=Math.min(ty,TP+PH+36);
    const g=mk('g',{class:'tg'},svg);
    const short={hammer:'Hammer',star:'Star',doji:'Doji',bulleng:'Engulf ↑',beareng:'Engulf ↓',inside:'Inside',strongup:'Strong ↑',strongdn:'Strong ↓'}[pt.k];
-   mk('text',{x:Math.max(x,30),y:ty,fill:col,'text-anchor':'middle','font-weight':'600'},g,short+(pt.ok===true?' ✓':pt.ok===false?' ✗':''));
+   mk('text',{x:x,y:ty,fill:col,'text-anchor':'middle','font-weight':'600'},g,short+(pt.ok===true?' ✓':pt.ok===false?' ✗':''));
    const res=pt.nxt==null?'Too new: the next 3 candles haven’t closed yet.':'Next 3 candles: '+(pt.nxt>=0?'+':'−')+Math.abs(pt.nxt).toFixed(2)+'%'+(pt.ok===true?' → it worked.':pt.ok===false?' → it didn’t work this time.':'.');
    const html=tipHTML(P.n+' · '+fmtHM(b.t1),[])+'<div class="gx">'+esc(P.t)+'</div><div class="gx"><b>'+esc(res)+'</b></div>';
    const show=ev=>moveTip(ev,html);
@@ -1834,6 +1911,10 @@ html[data-skin=ledger]{--wall:#d39a6a}
    ['Doji','Open and close nearly equal: a tie between buyers and sellers. Indecision.',['doji']],
    ['Engulfing','A candle whose body swallows the previous opposite-colored body: one side overpowered the other in a single bar.',['engulfing','bullish engulfing','bearish engulfing','engulf']],
    ['Inside bar','A candle entirely inside the previous one: a pause or coil before the next move.',['inside bar','inside']],
+   ['Swing high / low (HH HL LH LL)','The peaks and dips where price turned. Higher highs + higher lows = uptrend; lower highs + lower lows = downtrend; a mix = choppy or turning.',['hh','hl','lh','ll','swing','higher high','higher low','lower high','lower low']],
+   ['Double top / bottom','Price tests the same high (or low) twice and fails. Confirmed when it breaks the dip (or bounce) between the two tests.',['double top','double bottom']],
+   ['Head & shoulders','Three peaks with the middle one highest: buyers tiring. The inverse (three dips, middle lowest) is the bullish version.',['head & shoulders','head and shoulders','inverse head & shoulders']],
+   ['Bull / bear flag','A sharp move (pole) then a short tight pause (flag). The move often continues when the flag breaks.',['bull flag','bear flag','flag']],
    ['Pattern tape','The strip under the chart: the same candles drawn bigger, tagged when they form a pattern. ✓ means the next 3 candles went the pattern’s way, ✗ means they didn’t.',['pattern tape']]]],
   ['Price levels',[
    ['P (pivot)','The middle point from yesterday: (high + low + close) / 3. Price often reacts around it.',['p','p pivot','pivot p','pivot']],
