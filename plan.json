@@ -1,9 +1,9 @@
 {
  "v": 1,
- "built": "2026-11-25T16:20:02-05:00",
+ "built": "2026-11-26T07:00:02-05:00",
  "for": "2026-11-27",
  "for_label": "Friday, Nov 27",
- "title": "Plan for Friday",
+ "title": "Tomorrow's plan",
  "phase": "evening",
  "flags": [
   {
@@ -43,28 +43,28 @@
  ],
  "tape": {
   "label": "Tape split",
-  "strategy": "Calls and puts both stay open. Oil is up 4.4% and the 10-year is down 5.6 bp, so they disagree. The opening-range close picks the side.",
+  "strategy": "Calls and puts both stay open. Oil is up 4.8% and the 10-year is down 5.6 bp, so they disagree. The opening-range close picks the side.",
   "vix": {
    "name": "VIX",
-   "price": 27.9,
-   "prev": 26.36,
-   "chg_pct": 5.8,
-   "move": "Up 5.8% from yesterday's close of 26.4.",
-   "why": "Up 5.8% from yesterday's close of 26.4.",
+   "price": 27.08,
+   "prev": 28.32,
+   "chg_pct": -4.4,
+   "move": "Down 4.4% from yesterday's close of 28.3.",
+   "why": "Down 4.4% from yesterday's close of 28.3.",
    "headline": null,
-   "means": "Fear picked up and VIX is still under 35, so size stays normal."
+   "means": "VIX is close to yesterday. Size stays normal until it reaches 35."
   },
   "oil": {
    "name": "Crude",
-   "price": 84.25,
+   "price": 84.59,
    "prev": 80.73,
-   "chg_pct": 4.4,
-   "move": "Up 4.4% from yesterday's close of 80.73.",
+   "chg_pct": 4.8,
+   "move": "Up 4.8% from yesterday's close of 80.73.",
    "range": "Inside the last month, 79.07 to 104.99.",
-   "why": "Up 4.4% from yesterday's close of 80.73. The Wall Street Journal: Oil Futures Pick Up as Middle East Tensions Persist",
+   "why": "Up 4.8% from yesterday's close of 80.73. MT Newswires: Commerzbank Says Treasury Futures Are Softer, US Equity Futures Higher as Oil Prices Advance",
    "headline": {
-    "source": "The Wall Street Journal",
-    "title": "Oil Futures Pick Up as Middle East Tensions Persist"
+    "source": "MT Newswires",
+    "title": "Commerzbank Says Treasury Futures Are Softer, US Equity Futures Higher as Oil Prices Advance"
    },
    "means": "Oil and yields point different ways. Calls and puts both stay open. The box picks the side."
   },
@@ -74,32 +74,32 @@
    "chg_bps": -5.6,
    "move": "10-year is 4.85%, down 5.6 bp."
   },
-  "asof": "2026-11-25T16:20:03-05:00"
+  "asof": "2026-11-26T07:00:03-05:00"
  },
  "market_news": [
   {
-   "title": "AI spending leads the biggest market risks heading into 2027",
+   "title": "Stock market flaws and why they matter to long-term investors",
+   "source": "Financial Post",
+   "time": "Thu 6:00 AM",
+   "url": "https://financialpost.com/investing/stock-market-flaws-matter-long-term-investors/"
+  },
+  {
+   "title": "There\u2019s one proven way not to lose during a market downturn. Ignore it and risk blowing up your entire financial future",
+   "source": "Moneywise",
+   "time": "Thu 5:30 AM",
+   "url": "https://finance.yahoo.com/news/one-proven-way-not-lose-103000392.html"
+  },
+  {
+   "title": "Sterling today: Pound steady as dollar holds range on U.S. holiday",
    "source": "Investing.com",
-   "time": "Wed 4:07 PM",
-   "url": "https://finance.yahoo.com/technology/ai/articles/ai-spending-leads-biggest-market-210742225.html"
+   "time": "Thu 5:04 AM",
+   "url": "https://finance.yahoo.com/markets/currencies/articles/sterling-today-pound-steady-dollar-100410482.html"
   },
   {
-   "title": "Stock Market Trading Hours For Thanksgiving And Black Friday",
+   "title": "Dow Jones Futures Rise After Nasdaq Slashes Losses In Wild Market Ride",
    "source": "Investor's Business Daily",
-   "time": "Wed 4:01 PM",
-   "url": "https://www.investors.com/news/stock-market-hours-thanksgiving-black-friday-sp-500-nasdaq-dow-jones-nvidia/?src=A00220&yptr=yahoo"
-  },
-  {
-   "title": "American Home Shield Parent Sneaking Back Into Buy Range. Monitor These Clues.",
-   "source": "Investor's Business Daily",
-   "time": "Wed 4:00 PM",
-   "url": "https://www.investors.com/research/breakout-stocks-technical-analysis/frontdoor-stock-ftdr-american-home-shield-parent-refurbishing-breakout/?src=A00220&yptr=yahoo"
-  },
-  {
-   "title": "Nasdaq, S&P 500 end down, but well off lows as investors buy bargains",
-   "source": "Reuters",
-   "time": "Wed 4:00 PM",
-   "url": "https://finance.yahoo.com/markets/stocks/articles/nasdaq-futures-slide-over-2-100822079.html"
+   "time": "Thu 4:55 AM",
+   "url": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-market-wild-ride-nasdaq-nvidia-slash-losses-anthropic-higher/?src=A00220&yptr=yahoo"
   }
  ],
  "tickers": {
@@ -128,8 +128,8 @@
    "pml": null,
    "typ_box_pct": 0.281,
    "typ_box_usd": 2.01,
-   "trend5": -2.8,
-   "trend_days": 5,
+   "trend5": -4.4,
+   "trend_days": 8,
    "earnings": null,
    "last_result": {
     "date": "2026-11-25",
@@ -168,7 +168,7 @@
    "typ_box_pct": 0.565,
    "typ_box_usd": 3.58,
    "trend5": -5.5,
-   "trend_days": 5,
+   "trend_days": 8,
    "earnings": null,
    "last_result": {
     "date": "2026-11-25",
