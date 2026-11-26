@@ -573,6 +573,47 @@ html[data-skin=ledger]{--wall:#d39a6a}
 .ptstory .pc{font:600 14px/1.3 var(--mono)}.ptstory li.up .pc{color:var(--win)}.ptstory li.dn .pc{color:var(--loss)}
 .ptstory .why{grid-column:2/4;font-size:13.5px;line-height:1.45;color:var(--dim)}
 .ptstory li:not(.on) .why{display:none}
+
+/* Status card: one state, said once, detail one tap down */
+.act{display:grid;gap:6px;margin:0 0 12px;padding:14px 16px 12px;border-radius:16px;border:1px solid var(--line-2);background:rgba(255,255,255,.025)}
+.st-top{display:flex;align-items:center;gap:8px;font:500 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+.st-ic{display:inline-flex;width:16px;height:16px}.st-ic svg{width:16px;height:16px}
+.st-meta{margin-left:auto;color:var(--faint);letter-spacing:.02em;text-transform:none}
+.act .aw{font:650 34px/1.02 var(--display);letter-spacing:-.035em;color:var(--text)}
+.st-say{margin:0;font:400 15px/1.45 var(--display);color:var(--dim);max-width:60ch}
+.st-side{margin:2px 0 0;padding-top:8px;border-top:1px solid var(--line);font:400 13px/1.4 var(--display);color:var(--dim)}
+.st-side b{font:600 12px/1 var(--mono);letter-spacing:.04em}
+.st-more summary{cursor:pointer;list-style:none;font:500 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--faint);padding:4px 0}
+.st-more summary::-webkit-details-marker{display:none}
+.st-more summary::after{content:" +"}.st-more[open] summary::after{content:" −"}
+.st-more dl{margin-top:6px}
+.act.t-wait .st-ic,.act.t-wait .st-k{color:var(--dim)}
+.act.t-watch{border-color:color-mix(in srgb,var(--info) 35%,transparent)}.act.t-watch .st-ic,.act.t-watch .st-k,.act.t-watch .aw{color:var(--info)}
+.act.t-in{border-color:color-mix(in srgb,var(--paper) 45%,transparent);background:color-mix(in srgb,var(--paper) 7%,transparent)}.act.t-in .st-ic,.act.t-in .st-k,.act.t-in .aw{color:var(--paper)}
+.act.t-move{border-color:color-mix(in srgb,var(--warn) 40%,transparent);background:color-mix(in srgb,var(--warn) 6%,transparent)}.act.t-move .st-ic,.act.t-move .st-k,.act.t-move .aw{color:var(--warn)}
+.act.t-pos{border-color:color-mix(in srgb,var(--win) 35%,transparent)}.act.t-pos .st-ic,.act.t-pos .st-k,.act.t-pos .aw{color:var(--win)}
+.act.t-neg{border-color:color-mix(in srgb,var(--loss) 38%,transparent)}.act.t-neg .st-ic,.act.t-neg .st-k,.act.t-neg .aw{color:var(--loss)}
+.act.t-out .st-ic,.act.t-out .st-k{color:var(--warn)}
+.act.t-closed .st-ic,.act.t-closed .st-k{color:var(--faint)}
+/* Simple / Full chart switch */
+.seg{margin-left:auto;display:inline-flex;border:1px solid var(--line-2);border-radius:999px;padding:2px;align-self:center}
+.seg button{all:unset;cursor:pointer;font:500 11px/1 var(--mono);letter-spacing:.04em;color:var(--faint);padding:6px 10px;border-radius:999px}
+.seg button[aria-pressed=true]{background:var(--text);color:var(--ink)}
+.seg button:focus-visible{outline:2px solid var(--teal)}
+/* Today's calls list */
+.calls{margin:0 0 12px;padding:4px 16px 10px;border:1px solid var(--line);border-radius:16px;background:var(--panel)}
+.calls ol{list-style:none;margin:0;padding:0}
+.calls li{display:grid;grid-template-columns:8px 44px minmax(0,1fr) auto;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid var(--line)}
+.calls li:last-child{border-bottom:0}
+.calls .cd{width:8px;height:8px;border-radius:50%;background:var(--faint)}
+.calls .ct{font:400 13px/1 var(--mono);color:var(--faint)}
+.calls .cnm{display:block;min-width:0;font:500 15px/1.25 var(--display);color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.calls .cnm small{display:block;white-space:normal;font:400 12px/1.35 var(--mono);color:var(--faint);overflow:hidden;text-overflow:ellipsis}
+.calls .cp{font:600 11px/1 var(--mono);letter-spacing:.05em;text-transform:uppercase;padding:5px 9px;border-radius:999px;border:1px solid currentColor;white-space:nowrap}
+.calls .pos{color:var(--win)}.calls .neg{color:var(--loss)}.calls .in{color:var(--paper)}.calls .mv{color:var(--warn)}
+.calls li .cd.pos{background:var(--win)}.calls li .cd.neg{background:var(--loss)}.calls li .cd.in{background:var(--paper)}.calls li .cd.mv{background:var(--warn)}
+.calls-f{margin:0;padding-top:8px;font:400 11px/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
+@media (max-width:560px){.act .aw{font-size:30px}.calls{padding:2px 14px 8px}.calls li{grid-template-columns:8px 40px minmax(0,1fr) auto;gap:9px}}
 </style>
 </head>
 <body>
@@ -626,16 +667,25 @@ html[data-skin=ledger]{--wall:#d39a6a}
    <div class="daypick" id="days" role="tablist" aria-label="Days"></div>
   </div>
   <p class="hint" id="daySub"></p>
+  <div class="calls" id="callsBox" hidden><ol id="calls"></ol><p class="calls-f" id="callsF"></p></div>
   <div class="tickers" id="tickers" role="tablist" aria-label="Tickers"></div>
   <div class="desk">
    <div class="cdesk" id="cryptoDesk" hidden></div>
    <div class="panel chartp" role="tabpanel" id="stockPanel">
+    <div class="act" id="act">
+     <div class="st-top"><span class="st-ic" id="stIcon"></span><span class="st-k" id="stKind"></span><span class="st-meta" id="stMeta"></span></div>
+     <div class="aw" id="actWord"></div>
+     <p class="st-say" id="stSay"></p>
+     <p class="st-side" id="stSide" hidden></p>
+     <details class="st-more" id="stMore"><summary>Details</summary><dl class="al" id="actLines"></dl></details>
+    </div>
     <div class="stockhead">
      <span class="sym" id="sym">—</span>
      <span class="num pxbig" id="pxNow"></span>
      <span class="asofbig" id="pxAsOf"></span>
      <span class="distbig" id="pxDist"></span>
      <span class="tagwide" id="wideChip" hidden>Wide box</span>
+     <div class="seg" id="chartMode" role="group" aria-label="Chart detail"><button type="button" data-m="simple">Simple</button><button type="button" data-m="full">Full</button></div>
     </div>
     <div class="chartbox" id="chartbox">
      <div class="pins" id="hiPins"></div>
@@ -650,8 +700,7 @@ html[data-skin=ledger]{--wall:#d39a6a}
      <div class="ptinfo" id="ptInfo" hidden></div>
     </div>
     <p class="note" id="legendNote"></p>
-    <div class="act" id="act"><div class="aw" id="actWord"></div><dl class="al" id="actLines"></dl></div>
-    <p class="sub" id="sub"></p>
+    <p class="sub" id="sub" hidden></p>
     <p class="sub" id="headline" hidden></p>
    </div>
    <details class="side sidewrap" id="sideWrap" open>
@@ -1014,12 +1063,13 @@ html[data-skin=ledger]{--wall:#d39a6a}
   const levsAll=collectLevels(stock);
   // Phone: fewer lines. Keep the 2 nearest levels above and below the last price, so the chart reads at a glance.
   const lastPx=ohlc[ohlc.length-1].c;
-  const levs=phone?[...levsAll.filter(l=>l.kind!=='box'&&l.price>lastPx).sort((p,q)=>p.price-q.price).slice(0,2),...levsAll.filter(l=>l.kind!=='box'&&l.price<=lastPx).sort((p,q)=>q.price-p.price).slice(0,2),...levsAll.filter(l=>l.kind==='box')]:levsAll;
+  const simple=chartMode(phone)==='simple';
+  const levs=simple?levsAll.filter(l=>l.kind==='box'):phone?[...levsAll.filter(l=>l.kind!=='box'&&l.price>lastPx).sort((p,q)=>p.price-q.price).slice(0,2),...levsAll.filter(l=>l.kind!=='box'&&l.price<=lastPx).sort((p,q)=>q.price-p.price).slice(0,2),...levsAll.filter(l=>l.kind==='box')]:levsAll;
   // Phone, live day: the x-axis ends 30 min after the last candle instead of 4:00, so candles are wider.
   const lastT=ohlc[ohlc.length-1].t1;
   const END=(phone&&live&&lastT!=null&&lastT<CLOSE-45)?Math.min(CLOSE,Math.ceil((lastT+30)/30)*30):CLOSE;
-  const hasVol=ohlc.some(b=>b.v>0);
-  const vwap=vwapOf(c, ohlc);
+  const hasVol=!simple&&ohlc.some(b=>b.v>0);
+  const vwap=simple?null:vwapOf(c, ohlc);
   const L=8, R=phone?100:104, plotRight=W-R, plotW=plotRight-L;
   const volH=hasVol?Math.round(priceH*0.16):0;
   const plotTop=14, plotBottom=priceH-volH-(volH?8:6);
@@ -1189,7 +1239,7 @@ html[data-skin=ledger]{--wall:#d39a6a}
    mk('text',{x:m.lx,y:m.ly,fill:m.fill,'text-anchor':m.anchor,'font-weight':'600'},m.g,m.text);
   });
 
-  const extras=[].concat((c.shadows||[]),(c.skipped||[]),(stock.shadows||[])).map(it=>Object.assign({_k:'skip'}, it))
+  const extras=simple?[]:[].concat((c.shadows||[]),(c.skipped||[]),(stock.shadows||[])).map(it=>Object.assign({_k:'skip'}, it))
    .concat([].concat(c.strategy_b||[], c.b||[], stock.strategy_b||[]).map(it=>Object.assign({_k:'b'}, it)));
   extras.forEach(it=>{
    let t=null, px=it.price!=null?+it.price:null;
@@ -1281,7 +1331,8 @@ html[data-skin=ledger]{--wall:#d39a6a}
    extras.some(e=>e._k==='skip')?'<span>◯ skipped</span>':'',
    extras.some(e=>e._k==='b')?'<span>△ strategy B</span>':''
   ].filter(Boolean);
-  $('legend').innerHTML=legend.join('');
+  $('legend').innerHTML=simple?'<span class="pos">▲ Buy</span><span class="neg">▼ Sell</span><span><i class="sw box"></i>Opening range</span><span>Full shows levels, VWAP and volume</span>':legend.join('');
+  document.querySelectorAll('#chartMode button').forEach(bt=>{bt.setAttribute('aria-pressed',String(bt.dataset.m===(simple?'simple':'full')));bt.onclick=()=>{store.set('bl.chart',bt.dataset.m);render(LAST)}});
   $('legendNote').textContent=real
    ?'Session stays 9:30–16:00 ET. Marks sit on the bar close, so a 9:50 buy is on 9:50. Far levels are pinned at the edge.'
    :'Built from 5-minute closes until the publisher sends open, high, low, and volume. Marks sit on the bar close, so a 9:50 buy is on 9:50.';
@@ -1421,6 +1472,82 @@ html[data-skin=ledger]{--wall:#d39a6a}
   $('days').querySelectorAll('.day').forEach(b=>b.onclick=()=>{DAY=b.dataset.d===fileDay(D)?null:b.dataset.d;render(LAST);if(DAY)fetchDay(DAY).then(()=>render(LAST))});
  }
 
+ function chartMode(phone){const v=store.get('bl.chart');return v==='simple'||v==='full'?v:(phone?'simple':'full')}
+ const ICON=(()=>{const w=d=>'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+d+'</svg>';return{
+  clock:w('<circle cx="8" cy="8" r="6"/><path d="M8 4.8V8l2 1.4"/>'),
+  eye:w('<path d="M1.5 8S4 3.5 8 3.5 14.5 8 14.5 8 12 12.5 8 12.5 1.5 8 1.5 8z"/><circle cx="8" cy="8" r="1.8"/>'),
+  up:w('<circle cx="8" cy="8" r="6"/><path d="M8 11V5M5.5 7.5 8 5l2.5 2.5"/>'),
+  down:w('<circle cx="8" cy="8" r="6"/><path d="M8 5v6M5.5 8.5 8 11l2.5-2.5"/>'),
+  spark:w('<path d="M8 1.8v3M8 11.2v3M1.8 8h3M11.2 8h3M3.6 3.6l2 2M10.4 10.4l2 2M12.4 3.6l-2 2M5.6 10.4l-2 2"/>'),
+  done:w('<circle cx="8" cy="8" r="6"/><path d="M5.3 8.2 7.2 10l3.5-3.8"/>'),
+  pause:w('<circle cx="8" cy="8" r="6"/><path d="M6.5 5.8v4.4M9.5 5.8v4.4"/>'),
+  moon:w('<path d="M13 9.6A5.5 5.5 0 1 1 6.4 3a4.4 4.4 0 0 0 6.6 6.6z"/>')}})();
+ function h12(t){const m=parseHM(t);if(m==null)return t||'';const h=Math.floor(m/60);return ((h+11)%12+1)+':'+String(m%60).padStart(2,'0')}
+ function hmNow(){const n=etParts(new Date());return (+n.hour)*60+(+n.minute)}
+ function lineOf(b, re){const l=((b.action&&b.action.lines)||[]).find(x=>re.test(x[0]));return l?String(l[1]):''}
+ function timeIn(str){const m=String(str||'').match(/\((\d{1,2}:\d{2})\)/g);return m?m[m.length-1].slice(1,-1):''}
+ function lateSide(L){
+  if(!L)return '';
+  const word=L.side>0?'Potential BUY':'Potential SELL';
+  if(L.status==='closed'&&L.result!=null)return '<b class="'+(L.result>=0?'pos':'neg')+'">'+word+'</b> at '+esc(L.signal_time)+' · held to '+esc(h12(L.exit_time||'15:30'))+' · stock '+sgn1(L.result)+'. A heads-up, not a rule trade.';
+  const now=L.last_c&&L.entry?(L.last_c/L.entry-1)*100*(L.side>0?1:-1):null;
+  return '<b class="pos">'+word+'</b> at '+esc(L.signal_time)+(now!=null?' · stock '+sgn1(now)+' so far':'')+' · holding to '+esc(L.planned_exit||'3:30')+', safety stop '+pxFmt(L.stop)+'.';
+ }
+ // One state per ticker, in plain words. Tone drives colour; the word is never repeated in the sentence.
+ function stateOf(b, sym, view, dayIso){
+  const ohlc=barsFrom(b.chart), last=ohlc.length?ohlc[ohlc.length-1]:null, box=b.chart&&b.chart.box;
+  const L=b.late, res=b.result, st=b.status||'';
+  const why=honestExit(lineOf(b,/why/i), res);
+  const bought=lineOf(b,/^bought/i);
+  const side=L&&!(L.status==='open'&&view.live&&res!=null&&st!=='up'&&st!=='down')?lateSide(L):'';
+  if(!view.live){
+   if(res!=null)return {tone:res>=0?'pos':'neg', icon:'done', kind:'Saved day', word:'Out '+sgn(res), say:why||b.headline||'', side};
+   return {tone:'closed', icon:'moon', kind:'Saved day', word:'No trade', say:b.sub||b.headline||'No break that met the rules.', side};
+  }
+  const mins=dayIso===fileDay(LAST)?hmNow():null, open=sessionNow(dayIso)!=null;
+  const after=!open&&last&&last.t1>=CLOSE-10;
+  if(st==='up'||st==='down'){
+   const tr=tradeOf(b, ohlc);
+   const mv=tr.entry&&last?(last.c/tr.entry-1)*100*(st==='up'?1:-1):null;
+   return {tone:'in', icon:st==='up'?'up':'down', kind:'In a trade', word:'In · '+(st==='up'?'calls':'puts'), meta:mv!=null?'stock '+sgn1(mv)+' since entry':'',
+    say:(bought?'Bought '+bought.replace(/\s*at \$[\d.]+/,'')+'. ':'')+(tr.stop!=null?'Out on a 5-minute close back through '+pxFmt(tr.stop)+'.':''), side};
+  }
+  if(L&&L.status==='open'&&open)return {tone:'move', icon:'spark', kind:'Heads-up', word:L.side>0?'Potential BUY':'Potential SELL',
+   meta:L.last_c&&L.entry?'stock '+sgn1((L.last_c/L.entry-1)*100*(L.side>0?1:-1)):'',
+   say:'New '+(L.side>0?'high':'low')+' of the day at '+L.signal_time+'. Not a rule trade. Tracking it to '+(L.planned_exit||'3:30')+', safety stop '+pxFmt(L.stop)+'.', side:res!=null?'Rule trade earlier: <b class="'+(res>=0?'pos':'neg')+'">'+sgn(res)+'</b>.':''};
+  if(res!=null)return {tone:res>=0?'pos':'neg', icon:'done', kind:after?'Day closed':'Done for the day', word:'Out '+sgn(res), say:why, side};
+  if(st==='skip'||st==='sitout')return {tone:'out', icon:'pause', kind:'No trade', word:'Sitting out', say:b.sub||b.headline||'', side};
+  if(!last)return {tone:'wait', icon:'clock', kind:'Before the open', word:'Waiting for the open', say:'The box forms 9:30–9:45. The Plan tab has the levels to watch.', side};
+  if(after||(mins!=null&&mins>=11*60))return {tone:'closed', icon:'moon', kind:after?'Day closed':'No rule trade', word:'No trade today', say:'No 5-minute close outside the box before 11:00, so the rules sat this one out.', side};
+  if(last.t1<OPEN+15||!box)return {tone:'wait', icon:'clock', kind:'Opening range', word:'Box forming', say:'Top and bottom lock at 9:45. Then it waits for a 5-minute close outside.', side};
+  return {tone:'watch', icon:'eye', kind:'Watching', word:'Watching the box', meta:distText(last.c, box),
+   say:'A 5-minute close above '+pxFmt(box.hi)+' buys calls; below '+pxFmt(box.lo)+' buys puts. New entries stop at 11:00.', side};
+ }
+ // Today's calls as one list: rule trades and potential moves, by time.
+ function renderCalls(S, syms, view, dayIso){
+  const rows=[];
+  syms.forEach(sym=>{
+   const b=S[sym]||{}, L=b.late;
+   const bought=lineOf(b,/^bought/i), sold=lineOf(b,/^sold/i);
+   if(bought){
+    const t=timeIn(bought), name=(bought.match(/^(.*?)\s+at\s/)||[])[1]||sym;
+    const st=b.status, open=st==='up'||st==='down';
+    rows.push({k:parseHM(t)||0, t:h12(t), name:name.replace(/ call$/i,'C').replace(/ put$/i,'P'), sub:open?'rule trade · open':'rule trade · out '+h12(timeIn(sold)),
+     pill:open?'In':(b.result!=null?'Out '+sgn(b.result):'Out'), cls:open?'in':(b.result>=0?'pos':'neg')});
+   }
+   if(L&&L.signal_time){
+    const w=L.side>0?'Potential BUY':'Potential SELL';
+    const done=L.status==='closed'&&L.result!=null;
+    rows.push({k:parseHM(L.signal_time)||0, t:h12(L.signal_time), name:sym+' '+(L.side>0?'new high':'new low'), sub:done?'heads-up · held to '+h12(L.exit_time||'15:30'):'heads-up · watching',
+     pill:done?'Stock '+sgn1(L.result):w, cls:done?(L.result>=0?'pos':'neg'):'mv'});
+   }
+  });
+  rows.sort((a,b)=>a.k-b.k);
+  $('callsBox').hidden=!rows.length;
+  $('calls').innerHTML=rows.map(r=>'<li><span class="cd '+r.cls+'"></span><span class="ct">'+esc(r.t)+'</span><span class="cnm">'+esc(r.name)+'<small>'+esc(r.sub)+'</small></span><span class="cp '+r.cls+'">'+esc(r.pill)+'</span></li>').join('');
+  $('callsF').textContent='Paper · '+(dayIso?niceDate(dayIso):'')+' · '+rows.length+' call'+(rows.length===1?'':'s');
+ }
+
  function render(D){
   if(!D)return;
   LAST=D;
@@ -1487,16 +1614,23 @@ html[data-skin=ledger]{--wall:#d39a6a}
   const wide=boxNote(b);
   $('wideChip').hidden=!(wide&&/very wide|wider than usual/i.test(wide.note||''));
   const A=b.action||{word:'',tone:'wait',lines:[]};
-  let word=A.word||'';
-  if(b.result!=null&&/sold/i.test(word))word='SOLD '+sgn(b.result);
-  $('act').className='act '+(A.tone||'');
-  $('actWord').textContent=word;
-  $('act').hidden=!word&&!(A.lines||[]).length;
-  $('actLines').innerHTML=(A.lines||[]).map(l=>{
+  const ST=stateOf(b, SEL, view, dayIso);
+  $('act').className='act t-'+ST.tone;
+  $('act').hidden=false;
+  $('stIcon').innerHTML=ICON[ST.icon]||'';
+  $('stKind').textContent=SEL+' · '+ST.kind;
+  $('stMeta').textContent=ST.meta||'';
+  $('actWord').textContent=ST.word;
+  $('stSay').textContent=ST.say||'';
+  $('stSide').hidden=!ST.side; $('stSide').innerHTML=ST.side||'';
+  const lines=(A.lines||[]).map(l=>{
    let v=l[1]; if(/why/i.test(l[0]))v=honestExit(v, b.result); v=String(v).replace(/(^|[^\d])-(\d+(?:\.\d+)?%)/g,'$1−$2');
    return '<dt>'+esc(l[0])+'</dt><dd>'+esc(v)+'</dd>';
-  }).join('');
-  $('sub').textContent=honestExit(b.sub||'', b.result);
+  });
+  $('stMore').hidden=!lines.length;
+  $('actLines').innerHTML=lines.join('');
+  $('sub').textContent='';
+  renderCalls(S, syms, view, dayIso);
   try{drawChart(b, SEL, view.arch?asRows(view.arch):recs, dayIso, view.live)}catch(err){console.error(err);$('legendNote').textContent='Chart failed to draw. The rest of the page is still live.'}
   try{drawTape(barsFrom(b.chart))}catch(err){console.error(err);$('ptapeBox').hidden=true}
 
