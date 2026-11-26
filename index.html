@@ -554,6 +554,7 @@ html[data-skin=ledger]{--wall:#d39a6a}
 .ptape{margin-top:10px;border-top:1px solid var(--line);padding-top:8px}
 .ptinfo{margin-top:8px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;font-size:13.5px;line-height:1.5;color:var(--dim);min-height:44px}
 .ptinfo .th{color:var(--text);font-weight:600;margin-bottom:2px}.ptinfo .gx{color:var(--dim)}
+.ptnow{font:500 13px/1.3 var(--display);color:var(--dim);width:100%}
 .ptrend{font:600 13px/1.3 var(--display);color:var(--dim)}.ptrend.up{color:var(--win)}.ptrend.dn{color:var(--loss)}
 .pth{display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:4px}
 .ptscroll{overflow-x:auto;scrollbar-width:thin;-webkit-overflow-scrolling:touch}
@@ -631,7 +632,7 @@ html[data-skin=ledger]{--wall:#d39a6a}
     </div>
     <div class="legend" id="legend"></div>
     <div class="ptape" id="ptapeBox" hidden>
-     <div class="pth"><span class="kl">Pattern tape</span><span class="ptrend" id="ptTrend"></span><span class="meta">Whole session on one scale · swipe · tap a label</span></div>
+     <div class="pth"><span class="kl">Pattern tape</span><span class="ptrend" id="ptTrend"></span><span class="ptnow" id="ptNow"></span><span class="meta">Whole session on one scale · swipe · tap a label</span></div>
      <div class="ptscroll" id="ptScroll"><svg id="ptape" role="img" aria-label="Recent candles with candle patterns labeled"></svg></div>
      <div class="ptinfo" id="ptInfo">Tap any label (Hammer, HH, Double top…) and its meaning shows here.</div>
     </div>
@@ -1829,10 +1830,18 @@ html[data-skin=ledger]{--wall:#d39a6a}
    g2.addEventListener('pointerenter',ev=>{if(ev.pointerType!=='touch')moveTip(ev,html)}); g2.addEventListener('pointerdown',ev=>{ptInfo(html)}); g2.addEventListener('pointerleave',ev=>{if(ev.pointerType!=='touch')tip.hidden=true});
   });
   const tr=trendOf(zz);
-  const pt=$('ptTrend'); pt.textContent=(tr.k==='up'?'\u2197 ':tr.k==='dn'?'\u2198 ':'\u2194 ')+'Latest swings: '+tr.w; pt.className='ptrend '+tr.k;
-  { let li=0,hi2=0; o.forEach((b,i)=>{if(b.l<o[li].l)li=i;if(b.h>o[hi2].h)hi2=i});
+  const pt=$('ptTrend');
+  { // Day trend first (where the session went), then what the latest swings are doing right now.
+    let li=0,hi2=0; o.forEach((b,i)=>{if(b.l<o[li].l)li=i;if(b.h>o[hi2].h)hi2=i});
+    const last=o[o.length-1].c, rng=o[hi2].h-o[li].l||1, pos=(last-o[li].l)/rng;
+    const day=(li<hi2&&pos>=0.55)?'up':(hi2<li&&pos<=0.45)?'dn':'flat';
     const lowFirst=li<hi2, A=lowFirst?o[li].l:o[hi2].h, B=lowFirst?o[hi2].h:o[li].l, pct=(B/A-1)*100;
-    pt.textContent+=' \u2014 Day: '+(lowFirst?'low ':'high ')+pxFmt(A)+' at '+fmtHM(lowFirst?o[li].t1:o[hi2].t1)+' \u2192 '+(lowFirst?'high ':'low ')+pxFmt(B)+' at '+fmtHM(lowFirst?o[hi2].t1:o[li].t1)+' ('+(pct>0?'+':'\u2212')+Math.abs(pct).toFixed(2)+'%)'; }
+    const dayW={up:'\u2197 Day: Uptrend',dn:'\u2198 Day: Downtrend',flat:'\u2194 Day: Choppy / range'}[day];
+    const now=tr.k===day?'still '+(day==='up'?'climbing':day==='dn'?'falling':'chopping'):tr.k==='flat'?'pausing':(day==='up'&&tr.k==='dn')?'pulling back (lower high, lower low)':(day==='dn'&&tr.k==='up')?'bouncing (higher high, higher low)':tr.k==='up'?'turning up':'turning down';
+    pt.textContent=dayW+' \u00b7 '+(lowFirst?'low ':'high ')+pxFmt(A)+' at '+fmtHM(lowFirst?o[li].t1:o[hi2].t1)+' \u2192 '+(lowFirst?'high ':'low ')+pxFmt(B)+' at '+fmtHM(lowFirst?o[hi2].t1:o[li].t1)+' ('+(pct>0?'+':'\u2212')+Math.abs(pct).toFixed(2)+'%)';
+    pt.className='ptrend '+day;
+    const ptn=$('ptNow'); if(ptn){ptn.textContent='Right now: '+now+'.'}
+  }
   bigPatterns(all,zz).filter(p=>p.i1>=start).forEach((p,n)=>{
    const P=BIG[p.k], x0=cx(Math.max(0,p.i0-start)), x1=cx(Math.min(o.length-1,p.i1-start)), yy=26+(n%2)*0, col=P.dir>0?T('--win'):T('--loss');
    const g3=mk('g',{class:'tg'},svg);
