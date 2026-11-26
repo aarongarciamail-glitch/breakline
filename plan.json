@@ -1,6 +1,6 @@
 {
  "v": 1,
- "built": "2026-11-26T07:00:02-05:00",
+ "built": "2026-11-26T07:15:02-05:00",
  "for": "2026-11-27",
  "for_label": "Friday, Nov 27",
  "title": "Tomorrow's plan",
@@ -43,10 +43,10 @@
  ],
  "tape": {
   "label": "Tape split",
-  "strategy": "Calls and puts both stay open. Oil is up 4.8% and the 10-year is down 5.6 bp, so they disagree. The opening-range close picks the side.",
+  "strategy": "Calls and puts both stay open. Oil is up 4.4% and the 10-year is down 5.6 bp, so they disagree. The opening-range close picks the side.",
   "vix": {
    "name": "VIX",
-   "price": 27.08,
+   "price": 27.07,
    "prev": 28.32,
    "chg_pct": -4.4,
    "move": "Down 4.4% from yesterday's close of 28.3.",
@@ -56,12 +56,12 @@
   },
   "oil": {
    "name": "Crude",
-   "price": 84.59,
+   "price": 84.31,
    "prev": 80.73,
-   "chg_pct": 4.8,
-   "move": "Up 4.8% from yesterday's close of 80.73.",
+   "chg_pct": 4.4,
+   "move": "Up 4.4% from yesterday's close of 80.73.",
    "range": "Inside the last month, 79.07 to 104.99.",
-   "why": "Up 4.8% from yesterday's close of 80.73. MT Newswires: Commerzbank Says Treasury Futures Are Softer, US Equity Futures Higher as Oil Prices Advance",
+   "why": "Up 4.4% from yesterday's close of 80.73. MT Newswires: Commerzbank Says Treasury Futures Are Softer, US Equity Futures Higher as Oil Prices Advance",
    "headline": {
     "source": "MT Newswires",
     "title": "Commerzbank Says Treasury Futures Are Softer, US Equity Futures Higher as Oil Prices Advance"
@@ -74,7 +74,7 @@
    "chg_bps": -5.6,
    "move": "10-year is 4.85%, down 5.6 bp."
   },
-  "asof": "2026-11-26T07:00:03-05:00"
+  "asof": "2026-11-26T07:15:03-05:00"
  },
  "market_news": [
   {
@@ -96,10 +96,10 @@
    "url": "https://finance.yahoo.com/markets/currencies/articles/sterling-today-pound-steady-dollar-100410482.html"
   },
   {
-   "title": "Dow Jones Futures Rise After Nasdaq Slashes Losses In Wild Market Ride",
-   "source": "Investor's Business Daily",
-   "time": "Thu 4:55 AM",
-   "url": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-market-wild-ride-nasdaq-nvidia-slash-losses-anthropic-higher/?src=A00220&yptr=yahoo"
+   "title": "Stock market today: Dow erases losses to end positive, S&P 500 and Nasdaq recover ground amid AI sell-off",
+   "source": "Yahoo Finance",
+   "time": "Wed 4:14 AM",
+   "url": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-november-25-dow-sp-500-nasdaq-pce-inflation-data-091428237.html"
   }
  ],
  "tickers": {
