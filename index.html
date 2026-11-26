@@ -564,6 +564,15 @@ html[data-skin=ledger]{--wall:#d39a6a}
 #ptape{display:block;height:auto}
 #ptape text{font:11px var(--display)}
 #ptape .tg{cursor:pointer}
+.ptstory{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:6px}
+.ptstory li{display:grid;grid-template-columns:26px 1fr auto;gap:2px 10px;align-items:baseline;padding:10px 12px;border:1px solid var(--line);border-radius:12px;cursor:pointer}
+.ptstory li.on{border-color:var(--text);background:rgba(255,255,255,.04)}
+.ptstory .no{grid-row:1/3;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font:700 12px/1 var(--display);color:var(--ink);background:var(--dim);align-self:start}
+.ptstory .up .no,.ptstory li.up .no{background:var(--win)}.ptstory li.dn .no{background:var(--loss)}
+.ptstory .ttl{font:600 14.5px/1.3 var(--display);color:var(--text)}
+.ptstory .pc{font:600 14px/1.3 var(--mono)}.ptstory li.up .pc{color:var(--win)}.ptstory li.dn .pc{color:var(--loss)}
+.ptstory .why{grid-column:2/4;font-size:13.5px;line-height:1.45;color:var(--dim)}
+.ptstory li:not(.on) .why{display:none}
 </style>
 </head>
 <body>
@@ -635,10 +644,10 @@ html[data-skin=ledger]{--wall:#d39a6a}
     </div>
     <div class="legend" id="legend"></div>
     <div class="ptape" id="ptapeBox" hidden>
-     <div class="pth"><span class="kl">Pattern tape</span><span class="ptrend" id="ptTrend"></span><span class="ptnow" id="ptNow"></span><span class="meta">Whole session on one scale · swipe · tap a label</span></div>
-     <div class="ptlayers" id="ptLayers"><button type="button" data-l="moves">Moves</button><button type="button" data-l="patterns">Patterns</button><button type="button" data-l="swings">Swings</button><button type="button" data-l="candles">Candles</button></div>
+     <div class="pth"><span class="kl">Pattern tape</span><span class="ptrend" id="ptTrend"></span><span class="ptnow" id="ptNow"></span><span class="meta">The day as chapters · tap one to see it on the tape</span></div>
      <div class="ptscroll" id="ptScroll"><svg id="ptape" role="img" aria-label="Recent candles with candle patterns labeled"></svg></div>
-     <div class="ptinfo" id="ptInfo">Tap any label (Hammer, HH, Double top…) and its meaning shows here.</div>
+     <ol class="ptstory" id="ptStory"></ol>
+     <div class="ptinfo" id="ptInfo" hidden></div>
     </div>
     <p class="note" id="legendNote"></p>
     <div class="act" id="act"><div class="aw" id="actWord"></div><dl class="al" id="actLines"></dl></div>
@@ -1796,84 +1805,80 @@ html[data-skin=ledger]{--wall:#d39a6a}
  let TAPE_LAST=null;
  function tapeLayers(){let v=null;try{v=JSON.parse(localStorage.getItem('bl.layers')||'null')}catch(e){}return v||{moves:true,patterns:true,swings:false,candles:false}}
  document.addEventListener('click',ev=>{const bt=ev.target.closest&&ev.target.closest('#ptLayers button');if(!bt)return;const v=tapeLayers();v[bt.dataset.l]=!v[bt.dataset.l];try{localStorage.setItem('bl.layers',JSON.stringify(v))}catch(e){}if(TAPE_LAST)drawTape(TAPE_LAST)});
+ let TAPE_SEL=null;
+ function chaptersOf(o){
+  // Zoomed-out zigzag: a new chapter only when price reverses by at least ~30% of the day's range (min 0.5%).
+  const dayHi=Math.max(...o.map(b=>b.h)), dayLo=Math.min(...o.map(b=>b.l)), thr=Math.max(0.005,0.3*(dayHi/dayLo-1));
+  const piv=[{i:0,p:o[0].o}]; let dir=0, ext={i:0,p:o[0].o};
+  for(let i=0;i<o.length;i++){const b=o[i];
+   if(dir===0){if(b.h>=piv[0].p*(1+thr)){dir=1;ext={i,p:b.h}}else if(b.l<=piv[0].p*(1-thr)){dir=-1;ext={i,p:b.l}}}
+   else if(dir===1){if(b.h>ext.p)ext={i,p:b.h};else if(b.l<=ext.p*(1-thr)){piv.push(ext);dir=-1;ext={i,p:b.l}}}
+   else{if(b.l<ext.p)ext={i,p:b.l};else if(b.h>=ext.p*(1+thr)){piv.push(ext);dir=1;ext={i,p:b.h}}}
+  }
+  if(ext.i>piv[piv.length-1].i)piv.push(ext);
+  const L=o.length-1; if(L>piv[piv.length-1].i)piv.push({i:L,p:o[L].c,now:true});
+  const out=[];
+  for(let k=1;k<piv.length;k++){const A=piv[k-1],B=piv[k],pct=(B.p/A.p-1)*100;
+   out.push({i0:A.i,i1:B.i,a:A.p,b:B.p,pct,mins:o[B.i].t1-o[A.i].t0,kind:Math.abs(pct)<thr*100*0.6?'chop':pct>0?'up':'dn',hi:Math.max(A.p,B.p),lo:Math.min(A.p,B.p),last:!!B.now});
+  }
+  let big=null; out.forEach(c=>{if(c.kind!=='chop'&&(!big||Math.abs(c.pct)>Math.abs(big.pct)))big=c}); if(big)big.star=true;
+  return out;
+ }
  function drawTape(ohlc){
-  TAPE_LAST=ohlc; const LY=tapeLayers(); document.querySelectorAll('#ptLayers button').forEach(bt=>bt.classList.toggle('on',!!LY[bt.dataset.l]));
+  TAPE_LAST=ohlc;
   const box=$('ptapeBox'), svg=$('ptape'), sc0=$('ptScroll');
   const keep=sc0.dataset.sym===SEL&&sc0.scrollWidth>0&&sc0.scrollLeft<sc0.scrollWidth-sc0.clientWidth-30, oldLeft=sc0.scrollLeft;
-  const all=ohlc.filter(b=>b.real&&isFinite(b.o)&&isFinite(b.h));
-  if(all.length<3){box.hidden=true;return}
-  const start=0, o=all;   // whole session, one scale, so big moves look big
+  const o=ohlc.filter(b=>b.real&&isFinite(b.o)&&isFinite(b.h));
+  if(o.length<3){box.hidden=true;return}
   box.hidden=false; svg.textContent='';
-  const phone=innerWidth<641, cw=phone?24:18, H=phone?270:250, TP=48, PH=H-100, W=o.length*cw+12;
+  const phone=innerWidth<641, cw=phone?14:12, H=phone?230:220, TP=14, PH=H-40, W=o.length*cw+16;
   const vis=$('ptScroll').clientWidth||600;
-  svg.setAttribute('viewBox','0 0 '+W+' '+H); svg.setAttribute('width',Math.max(W,vis)); svg.setAttribute('height',H);
-  const lo=Math.min(...o.map(b=>b.l)), hi=Math.max(...o.map(b=>b.h)), y=p=>TP+(hi-p)/(hi-lo||1)*PH;
-  o.forEach((b,i)=>{
-   const x=6+i*cw+cw/2, up=b.c>=b.o, col=up?T('--win'):T('--loss');
-   mk('line',{x1:x,x2:x,y1:y(b.h),y2:y(b.l),stroke:col,'stroke-width':1.2},svg);
-   mk('rect',{x:x-cw*0.32,y:y(Math.max(b.o,b.c)),width:cw*0.64,height:Math.max(1.2,Math.abs(y(b.o)-y(b.c))),fill:col,rx:1},svg);
-   if(b.t0%30===0)mk('text',{x:x,y:H-4,fill:T('--faint'),'text-anchor':'middle','font-size':'10'},svg,fmtHM(b.t0));
+  svg.setAttribute('viewBox','0 0 '+Math.max(W,vis)+' '+H); svg.setAttribute('width',Math.max(W,vis)); svg.setAttribute('height',H);
+  const lo=Math.min(...o.map(b=>b.l)), hi=Math.max(...o.map(b=>b.h)), y=p=>TP+(hi-p)/(hi-lo||1)*PH, cx=i=>8+i*cw+cw/2;
+  const zz=swingsOf(o), ch=chaptersOf(o), tr=trendOf(zz);
+  if(TAPE_SEL!=null&&TAPE_SEL>=ch.length)TAPE_SEL=null;
+  // selected chapter: shaded band
+  if(TAPE_SEL!=null){const c=ch[TAPE_SEL];mk('rect',{x:cx(c.i0)-cw/2,y:TP-6,width:cx(c.i1)-cx(c.i0)+cw,height:PH+12,fill:c.kind==='up'?T('--win'):c.kind==='dn'?T('--loss'):T('--dim'),opacity:.12,rx:6},svg)}
+  // candles
+  o.forEach((b,i)=>{const x=cx(i), col=b.c>=b.o?T('--win'):T('--loss');
+   mk('line',{x1:x,x2:x,y1:y(b.h),y2:y(b.l),stroke:col,'stroke-width':1},svg);
+   mk('rect',{x:x-cw*0.33,y:y(Math.max(b.o,b.c)),width:cw*0.66,height:Math.max(1.2,Math.abs(y(b.o)-y(b.c))),fill:col,rx:1},svg);
+   if(b.t0%60===30||b.t0===OPEN)mk('text',{x:x,y:H-4,fill:T('--faint'),'text-anchor':'middle','font-size':'10'},svg,fmtHM(b.t0));
   });
-  const zz=swingsOf(all), zv=zz.filter(z2=>z2.i>=start).map(z2=>({...z2,i:z2.i-start}));
-  const cx=i=>6+i*cw+cw/2;
-  if(zv.length>1)mk('path',{d:zv.map((z2,k)=>(k?'L':'M')+cx(z2.i)+' '+y(z2.p)).join(' '),fill:'none',stroke:T('--dim'),'stroke-width':1,'stroke-dasharray':'3 3',opacity:.7},svg);
-  let big=null;
-  for(let k=1;k<zv.length;k++){const A=zv[k-1],B=zv[k],pct=(B.p/A.p-1)*100;if(!big||Math.abs(pct)>Math.abs(big.pct))big={A,B,pct}}
-  for(let k=1;k<zv.length;k++){
-   const A=zv[k-1],B=zv[k],pct=(B.p/A.p-1)*100,mins=(o[B.i].t1-o[A.i].t1);
-   if(!LY.moves||(Math.abs(pct)<0.5&&!(big&&A===big.A)))continue;   // Moves layer: only legs of 0.5%+ and the biggest
-   const isBig=big&&A===big.A, col=pct>0?T('--win'):T('--loss');
-   if(isBig)mk('line',{x1:cx(A.i),y1:y(A.p),x2:cx(B.i),y2:y(B.p),stroke:col,'stroke-width':3,opacity:.35},svg);
-   const mx=(cx(A.i)+cx(B.i))/2, my=(y(A.p)+y(B.p))/2;
-   const g4=mk('g',{class:'tg'},svg);
-   mk('text',{x:mx+(pct>0?-6:6),y:my,fill:col,'text-anchor':pct>0?'end':'start','font-size':isBig?'12':'10.5','font-weight':isBig?'800':'600'},g4,(pct>0?'+':'\u2212')+Math.abs(pct).toFixed(2)+'% \u00b7 '+mins+'m'+(isBig?' \u2605':''));
-   const html=tipHTML((pct>0?'Rip':'Dip')+' \u00b7 '+fmtHM(o[A.i].t1)+'\u2013'+fmtHM(o[B.i].t1),[['Move',(pct>0?'+':'\u2212')+Math.abs(pct).toFixed(2)+'%'],['Price',pxFmt(A.p)+' \u2192 '+pxFmt(B.p)],['Time',mins+' min']])+(isBig?'<div class="gx">\u2605 The biggest swing of the session so far.</div>':'');
-   g4.addEventListener('pointerenter',ev=>{if(ev.pointerType!=='touch')moveTip(ev,html)}); g4.addEventListener('pointerdown',ev=>{ptInfo(html)}); g4.addEventListener('pointerleave',ev=>{if(ev.pointerType!=='touch')tip.hidden=true});
-  }
-  if(LY.swings)zv.forEach(z2=>{const up=z2.lab==='HH'||z2.lab==='HL', dn=z2.lab==='LL'||z2.lab==='LH';
-   const g2=mk('g',{class:'tg'},svg);
-   mk('text',{x:cx(z2.i),y:z2.t==='H'?y(z2.p)-6:y(z2.p)+(phone?28:26),fill:up?T('--win'):dn?T('--loss'):T('--dim'),'text-anchor':'middle','font-size':'10','font-weight':'700'},g2,z2.lab);
-   const ex={HH:'Higher high: buyers pushed past the last peak.',HL:'Higher low: the dip stopped above the last dip. Buyers stepped in sooner.',LH:'Lower high: the bounce failed below the last peak. Sellers stepped in sooner.',LL:'Lower low: sellers pushed below the last dip.',H:'First swing high in view.',L:'First swing low in view.'}[z2.lab];
-   const html=tipHTML(z2.lab+' \u00b7 swing '+(z2.t==='H'?'high':'low')+' '+fmtHM(o[z2.i].t1),[])+'<div class="gx">'+esc(ex)+'</div>';
-   g2.addEventListener('pointerenter',ev=>{if(ev.pointerType!=='touch')moveTip(ev,html)}); g2.addEventListener('pointerdown',ev=>{ptInfo(html)}); g2.addEventListener('pointerleave',ev=>{if(ev.pointerType!=='touch')tip.hidden=true});
+  // chapter outline + numbered dots (no words on the tape)
+  ch.forEach((c,k)=>{const col=c.kind==='up'?T('--win'):c.kind==='dn'?T('--loss'):T('--dim'), on=TAPE_SEL===k;
+   mk('line',{x1:cx(c.i0),y1:y(c.a),x2:cx(c.i1),y2:y(c.b),stroke:col,'stroke-width':on||c.star?2.6:1.3,opacity:on?.95:.55,'stroke-dasharray':c.kind==='chop'?'3 3':null},svg);
+   const dx=(cx(c.i0)+cx(c.i1))/2, dy=Math.min(y(c.a),y(c.b))-12;
+   const g=mk('g',{class:'tg'},svg);
+   mk('circle',{cx:dx,cy:Math.max(10,dy),r:9,fill:col,opacity:on?1:.85},g);
+   mk('text',{x:dx,y:Math.max(10,dy)+4,fill:T('--ink'),'text-anchor':'middle','font-size':'11','font-weight':'800'},g,String(k+1));
+   g.addEventListener('pointerdown',()=>{TAPE_SEL=TAPE_SEL===k?null:k;drawTape(TAPE_LAST)});
   });
-  const tr=trendOf(zz);
+  // header: day trend + right now
   const pt=$('ptTrend');
-  { // Day trend first (where the session went), then what the latest swings are doing right now.
-    let li=0,hi2=0; o.forEach((b,i)=>{if(b.l<o[li].l)li=i;if(b.h>o[hi2].h)hi2=i});
+  { let li=0,hi2=0; o.forEach((b,i)=>{if(b.l<o[li].l)li=i;if(b.h>o[hi2].h)hi2=i});
     const last=o[o.length-1].c, rng=o[hi2].h-o[li].l||1, pos=(last-o[li].l)/rng;
     const day=(li<hi2&&pos>=0.55)?'up':(hi2<li&&pos<=0.45)?'dn':'flat';
     const lowFirst=li<hi2, A=lowFirst?o[li].l:o[hi2].h, B=lowFirst?o[hi2].h:o[li].l, pct=(B/A-1)*100;
-    const dayW={up:'\u2197 Day: Uptrend',dn:'\u2198 Day: Downtrend',flat:'\u2194 Day: Choppy / range'}[day];
-    const now=tr.k===day?'still '+(day==='up'?'climbing':day==='dn'?'falling':'chopping'):tr.k==='flat'?'pausing':(day==='up'&&tr.k==='dn')?'pulling back (lower high, lower low)':(day==='dn'&&tr.k==='up')?'bouncing (higher high, higher low)':tr.k==='up'?'turning up':'turning down';
-    pt.textContent=dayW+' \u00b7 '+(lowFirst?'low ':'high ')+pxFmt(A)+' at '+fmtHM(lowFirst?o[li].t1:o[hi2].t1)+' \u2192 '+(lowFirst?'high ':'low ')+pxFmt(B)+' at '+fmtHM(lowFirst?o[hi2].t1:o[li].t1)+' ('+(pct>0?'+':'\u2212')+Math.abs(pct).toFixed(2)+'%)';
+    pt.textContent={up:'↗ Day: Uptrend',dn:'↘ Day: Downtrend',flat:'↔ Day: Choppy'}[day]+' · '+(pct>0?'+':'−')+Math.abs(pct).toFixed(2)+'% low to high';
     pt.className='ptrend '+day;
-    const ptn=$('ptNow'); if(ptn){ptn.textContent='Right now: '+now+'.'}
+    const now=tr.k===day?'still '+(day==='up'?'climbing':day==='dn'?'falling':'chopping'):tr.k==='flat'?'pausing':(day==='up'&&tr.k==='dn')?'pulling back':(day==='dn'&&tr.k==='up')?'bouncing':tr.k==='up'?'turning up':'turning down';
+    $('ptNow').textContent='Right now: '+now+'.';
+    // story list
+    const pats=findPatterns(o), bigs=bigPatterns(o,zz);
+    $('ptStory').innerHTML=ch.map((c,k)=>{
+     const t0=fmtHM(o[c.i0].t0), t1=k===ch.length-1?'now':fmtHM(o[c.i1].t1);
+     const name=c.kind==='chop'?(c.last?'Pausing now':k===0?'Opening chop':'Chop / pause'):c.kind==='up'?(c.star?'The rip':k===0?'Opening pop':day==='dn'?'Bounce':'Climb'):(k===0?'Opening flush':day==='up'?'Pullback':'Drop');
+     const bp=bigs.filter(q=>q.i1>=c.i0&&q.i1<=c.i1).map(q=>BIG[q.k].n), cp=pats.filter(q=>q.i>=c.i0&&q.i<=c.i1&&['hammer','star','bulleng','beareng'].includes(q.k)).slice(0,2).map(q=>PAT[q.k].n+' at '+fmtHM(o[q.i].t1));
+     const why=c.kind==='chop'?'Sideways between '+pxFmt(c.lo)+' and '+pxFmt(c.hi)+' for '+c.mins+' min. Buyers and sellers traded punches; the next break out of this range tends to set the direction.'
+      :c.kind==='up'?'Buyers in control: '+pxFmt(c.a)+' → '+pxFmt(c.b)+' in '+c.mins+' min.'+(c.star?' The biggest move of the day.':'')
+      :'Sellers in control: '+pxFmt(c.a)+' → '+pxFmt(c.b)+' in '+c.mins+' min.'+(day==='up'?' A dip inside an uptrend only breaks it if it falls below the last higher low.':'');
+     const extra=(bp.length?' Shape: '+bp.join(', ')+'.':'')+(cp.length?' Candles: '+cp.join(', ')+'.':'');
+     return '<li class="'+c.kind+(TAPE_SEL===k?' on':'')+'" data-k="'+k+'"><span class="no">'+(k+1)+'</span><span class="ttl">'+name+(c.star?' ★':'')+' <span class="meta">'+t0+'–'+t1+'</span></span><span class="pc">'+(c.kind==='chop'?'':(c.pct>0?'+':'−')+Math.abs(c.pct).toFixed(2)+'%')+'</span><span class="why">'+esc(why+extra)+'</span></li>';
+    }).join('');
+    $('ptStory').querySelectorAll('li').forEach(li=>li.onclick=()=>{const k=+li.dataset.k;TAPE_SEL=TAPE_SEL===k?null:k;drawTape(TAPE_LAST);if(TAPE_SEL!=null){const c=ch[k],sc=$('ptScroll');sc.scrollLeft=Math.max(0,cx(c.i0)-40)}});
   }
-  if(LY.patterns)bigPatterns(all,zz).filter(p=>p.i1>=start).forEach((p,n)=>{
-   const P=BIG[p.k], x0=cx(Math.max(0,p.i0-start)), x1=cx(Math.min(o.length-1,p.i1-start)), yy=22+(n%2)*16, col=P.dir>0?T('--win'):T('--loss');
-   const g3=mk('g',{class:'tg'},svg);
-   mk('path',{d:`M${x0} ${yy+6} V${yy} H${x1} V${yy+6}`,fill:'none',stroke:col,'stroke-width':1.3},g3);
-   mk('text',{x:x1,y:yy-3,fill:col,'text-anchor':'end','font-size':'10.5','font-weight':'700'},g3,P.n);
-   const html=tipHTML(P.n,[])+'<div class="gx">'+esc(P.t)+'</div>';
-   g3.addEventListener('pointerenter',ev=>{if(ev.pointerType!=='touch')moveTip(ev,html)}); g3.addEventListener('pointerdown',ev=>{ptInfo(html)}); g3.addEventListener('pointerleave',ev=>{if(ev.pointerType!=='touch')tip.hidden=true});
-  });
-  const pats=findPatterns(all).filter(p=>p.i>=start).map(p=>({...p,i:p.i-start})), lanes={last:null};
-  if(LY.candles)pats.forEach(pt=>{
-   const b=o[pt.i], x=6+pt.i*cw+cw/2, P=PAT[pt.k], col=P.dir>0?T('--win'):P.dir<0?T('--loss'):T('--dim');
-   // tag sits just under its own candle; nudged down only if it would collide with the previous tag
-   let ty=y(b.l)+15; const prev=lanes.last; if(prev&&x-prev.x<74&&Math.abs(ty-prev.y)<13)ty=prev.y+13; lanes.last={x,y:ty};
-   ty=Math.min(ty,TP+PH+36);
-   const g=mk('g',{class:'tg'},svg);
-   const short={hammer:'Hammer',star:'Star',doji:'Doji',bulleng:'Engulf ↑',beareng:'Engulf ↓',inside:'Inside',strongup:'Strong ↑',strongdn:'Strong ↓'}[pt.k];
-   mk('text',{x:x,y:ty,fill:col,'text-anchor':'middle','font-weight':'600'},g,short+(pt.ok===true?' ✓':pt.ok===false?' ✗':''));
-   const res=pt.nxt==null?'Too new: the next 3 candles haven’t closed yet.':'Next 3 candles: '+(pt.nxt>=0?'+':'−')+Math.abs(pt.nxt).toFixed(2)+'%'+(pt.ok===true?' → it worked.':pt.ok===false?' → it didn’t work this time.':'.');
-   const html=tipHTML(P.n+' · '+fmtHM(b.t1),[])+'<div class="gx">'+esc(P.t)+'</div><div class="gx"><b>'+esc(res)+'</b></div>';
-   const show=ev=>moveTip(ev,html);
-   g.addEventListener('pointerenter',ev=>{if(ev.pointerType!=='touch')show(ev)}); g.addEventListener('pointerdown',ev=>{ptInfo(html)});
-   g.addEventListener('pointerleave',ev=>{if(ev.pointerType!=='touch')tip.hidden=true});
-  });
-  const sc=$('ptScroll'); sc.scrollLeft=keep?oldLeft:sc.scrollWidth; sc.dataset.sym=SEL;
+  const sc=$('ptScroll'); if(sc.dataset.sym!==SEL)TAPE_SEL=null; sc.scrollLeft=keep?oldLeft:sc.scrollWidth; sc.dataset.sym=SEL;
  }
  const CSYMS=()=>CRY&&CRY.coins?Object.keys(CRY.coins):['BTC','SOL','XRP'];
  function cryptoTile(sym){
