@@ -23,7 +23,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500;600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Literata:opsz,wght@7..72,500;7..72,600&display=swap">
-<script>try{var q=new URLSearchParams(location.search).get('theme');var k=q||localStorage.getItem('bl.skin');if(k==='ledger')document.documentElement.dataset.skin='ledger'}catch(e){}</script>
+<script>try{var q=new URLSearchParams(location.search).get('theme');var k=q||localStorage.getItem('bl.skin');if(k==='ledger'||k==='ember')document.documentElement.dataset.skin=k}catch(e){}</script>
 <!-- Page source. publish.py should commit data.json only. Chart reads closes, and OHLCV when chart_payload.py adds it. -->
 <style>
 :root{
@@ -487,7 +487,39 @@ html[data-skin=ledger] nav.links a.on{background:#f5f3ef;color:#14120b;box-shado
 html[data-skin=ledger] .tline li{background:linear-gradient(90deg,rgba(184,169,101,.08),transparent);border-left-color:rgba(184,169,101,.55)}
 html[data-skin=ledger] .kpi .kbar i,html[data-skin=ledger] .ck .bar i{background:linear-gradient(90deg,#86827a,#b8a965)}
 html[data-skin=ledger] .pill.paper{background:rgba(184,169,101,.1)}
-:root{--wall:#e59a6a}
+:root{--wall:#e59a6a;--accent:#9fdde6}
+html[data-skin=ledger]{--accent:#b8a965}
+/* Ember: flat near-black, one orange accent, white type, mono numbers */
+html[data-skin=ember]{
+ --ink:#0e0e0e; --panel:#151515; --panel-2:#1c1c1c;
+ --line:rgba(255,255,255,.07); --line-2:rgba(255,255,255,.14);
+ --text:#f5f5f5; --dim:#a3a3a3; --faint:#6e6e6e;
+ --silver-hi:#ffffff; --silver-lo:#a3a3a3;
+ --teal:#ff8a3d; --paper:#ff8a3d; --teal-soft:rgba(255,138,61,.13); --accent:#ff8a3d;
+ --win:#34d399; --loss:#f8717f; --warn:#fbbf24; --info:#93c5fd; --pm:#c4b5fd; --vwap:#fcd34d; --wall:#fdba74;
+ --display:"Inter",ui-sans-serif,system-ui,sans-serif;
+ --mono:"Geist Mono",ui-monospace,Menlo,monospace;
+}
+html[data-skin=ember] body{background:var(--ink)}
+html[data-skin=ember] .sky{display:none}
+html[data-skin=ember] .panel,html[data-skin=ember] .tk,html[data-skin=ember] .stat,html[data-skin=ember] .chip,html[data-skin=ember] .day,
+html[data-skin=ember] .kpi,html[data-skin=ember] .pflag,html[data-skin=ember] .tip,html[data-skin=ember] .sidewrap>summary{backdrop-filter:none;-webkit-backdrop-filter:none}
+html[data-skin=ember] .panel,html[data-skin=ember] .kpi,html[data-skin=ember] .tk,html[data-skin=ember] .stat,html[data-skin=ember] .calls,html[data-skin=ember] .act{border-radius:20px}
+html[data-skin=ember] header.top::before{background:var(--ink)}
+html[data-skin=ember] .tabbar{background:rgba(14,14,14,.96)}
+html[data-skin=ember] .word{background:none;-webkit-text-fill-color:#fff;color:#fff;font-weight:600}
+html[data-skin=ember] .brand svg{filter:none}
+html[data-skin=ember] .brand svg rect{stroke:#6e6e6e;fill:rgba(255,255,255,.04)}
+html[data-skin=ember] .brand svg path{stroke:#fff}
+html[data-skin=ember] .brand svg circle{fill:#ff8a3d}
+html[data-skin=ember] .brand svg circle:first-of-type{fill:rgba(255,138,61,.22)}
+html[data-skin=ember] h2,html[data-skin=ember] #dayHead,html[data-skin=ember] .aw,html[data-skin=ember] .kpi .kv,html[data-skin=ember] .stat .n{font-weight:650;letter-spacing:-.03em}
+html[data-skin=ember] nav.links{background:transparent;border-color:var(--line)}
+html[data-skin=ember] nav.links a.on{background:#fff;color:#0e0e0e;box-shadow:none}
+html[data-skin=ember] .tline li{background:linear-gradient(90deg,rgba(255,138,61,.08),transparent);border-left-color:rgba(255,138,61,.6)}
+html[data-skin=ember] .kpi .kbar i,html[data-skin=ember] .ck .bar i{background:linear-gradient(90deg,#7a4a2a,#ff8a3d)}
+html[data-skin=ember] .pill.paper{background:rgba(255,138,61,.1)}
+html[data-skin=ember] .seg button[aria-pressed=true]{background:#fff;color:#0e0e0e}
 html[data-skin=ledger]{--wall:#d39a6a}
 .sw.wall{background:var(--wall);height:2px}
 .ladder .wall dt,.ladder .wall dd{color:var(--wall)}
@@ -581,6 +613,9 @@ html[data-skin=ledger]{--wall:#d39a6a}
 .st-meta{margin-left:auto;color:var(--faint);letter-spacing:.02em;text-transform:none}
 .act .aw{font:650 34px/1.02 var(--display);letter-spacing:-.035em;color:var(--text)}
 .st-say{margin:0;font:400 15px/1.45 var(--display);color:var(--dim);max-width:60ch}
+.st-do{margin:2px 0 0;font:400 15px/1.45 var(--display);color:var(--text)}
+.st-do b{font-weight:650;letter-spacing:.01em}.st-do .tri{font-size:12px;color:var(--accent)}
+.act{border-left-width:3px}
 .st-side{margin:2px 0 0;padding-top:8px;border-top:1px solid var(--line);font:400 13px/1.4 var(--display);color:var(--dim)}
 .st-side b{font:600 12px/1 var(--mono);letter-spacing:.04em}
 .st-more summary{cursor:pointer;list-style:none;font:500 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--faint);padding:4px 0}
@@ -600,6 +635,21 @@ html[data-skin=ledger]{--wall:#d39a6a}
 .seg button{all:unset;cursor:pointer;font:500 11px/1 var(--mono);letter-spacing:.04em;color:var(--faint);padding:6px 10px;border-radius:999px}
 .seg button[aria-pressed=true]{background:var(--text);color:var(--ink)}
 .seg button:focus-visible{outline:2px solid var(--teal)}
+/* Simple chart: run header + event grid */
+.runhead{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin:4px 2px 8px}
+.rh-k{font:400 13px/1.3 var(--display);color:var(--dim)}
+.rh-v{font:600 24px/1.15 var(--display);letter-spacing:-.02em;color:var(--text);margin-top:2px}
+.rh-v .arr{color:var(--faint);font-weight:400}
+.rh-x{font:700 40px/1 var(--display);letter-spacing:-.04em;color:var(--accent)}
+.rh-x.dn{color:var(--loss)}
+.evgrid{list-style:none;margin:10px 0 4px;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:4px 10px}
+.evgrid li{display:grid;grid-template-columns:14px 1fr;grid-template-rows:auto auto;column-gap:10px;padding:8px 10px;border-radius:14px;cursor:pointer}
+.evgrid li.on,.evgrid li:hover{background:var(--panel-2)}
+.evd{grid-row:1/3;align-self:center;width:12px;height:12px;border-radius:50%;box-sizing:border-box}
+.evd.acc{background:var(--accent)}.evd.wht{background:var(--text)}.evd.ring{border:2px solid var(--faint)}
+.evt{font:400 12.5px/1.3 var(--mono);color:var(--faint)}
+.evl{font:500 14.5px/1.3 var(--display);color:var(--text)}
+@media (max-width:560px){.rh-v{font-size:20px}.rh-x{font-size:34px}.evgrid{gap:2px 6px}.evgrid li{padding:7px 8px}}
 /* Today's calls list */
 .calls{margin:0 0 12px;padding:4px 16px 10px;border:1px solid var(--line);border-radius:16px;background:var(--panel)}
 .calls ol{list-style:none;margin:0;padding:0}
@@ -632,7 +682,7 @@ html[data-skin=ledger]{--wall:#d39a6a}
   <nav class="links" aria-label="Sections">
    <a href="#today" data-go="today">Today</a><a href="#plan" data-go="plan">Plan</a><a href="#record" data-go="record">Record</a><a href="#how" data-go="how">Learn</a>
   </nav>
-  <button type="button" class="skinbtn" id="skinBtn" aria-label="Switch look" title="Switch look (Haze / Ledger)">
+  <button type="button" class="skinbtn" id="skinBtn" aria-label="Switch look" title="Switch look (Haze / Ledger / Ember)">
    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5a8.5 8.5 0 0 1 0 17z" class="half"/></svg>
    <span id="skinName">Haze</span>
   </button>
@@ -676,6 +726,7 @@ html[data-skin=ledger]{--wall:#d39a6a}
      <div class="st-top"><span class="st-ic" id="stIcon"></span><span class="st-k" id="stKind"></span><span class="st-meta" id="stMeta"></span></div>
      <div class="aw" id="actWord"></div>
      <p class="st-say" id="stSay"></p>
+     <p class="st-do" id="stDo" hidden></p>
      <p class="st-side" id="stSide" hidden></p>
      <details class="st-more" id="stMore"><summary>Details</summary><dl class="al" id="actLines"></dl></details>
     </div>
@@ -687,11 +738,13 @@ html[data-skin=ledger]{--wall:#d39a6a}
      <span class="tagwide" id="wideChip" hidden>Wide box</span>
      <div class="seg" id="chartMode" role="group" aria-label="Chart detail"><button type="button" data-m="simple">Simple</button><button type="button" data-m="full">Full</button></div>
     </div>
+    <div class="runhead" id="runHead" hidden></div>
     <div class="chartbox" id="chartbox">
      <div class="pins" id="hiPins"></div>
      <svg class="chart" id="chart" role="img" aria-label="Session chart"></svg>
      <div class="pins" id="loPins"></div>
     </div>
+    <ol class="evgrid" id="evGrid" hidden></ol>
     <div class="legend" id="legend"></div>
     <div class="ptape" id="ptapeBox" hidden>
      <div class="pth"><span class="kl">Pattern tape</span><span class="ptrend" id="ptTrend"></span><span class="ptnow" id="ptNow"></span><span class="meta">The day as chapters · tap one to see it on the tape</span></div>
@@ -1070,7 +1123,7 @@ html[data-skin=ledger]{--wall:#d39a6a}
   const END=(phone&&live&&lastT!=null&&lastT<CLOSE-45)?Math.min(CLOSE,Math.ceil((lastT+30)/30)*30):CLOSE;
   const hasVol=!simple&&ohlc.some(b=>b.v>0);
   const vwap=simple?null:vwapOf(c, ohlc);
-  const L=8, R=phone?100:104, plotRight=W-R, plotW=plotRight-L;
+  const L=8, R=simple?8:(phone?100:104), plotRight=W-R, plotW=plotRight-L;
   const volH=hasVol?Math.round(priceH*0.16):0;
   const plotTop=14, plotBottom=priceH-volH-(volH?8:6);
   const pts=[];
@@ -1123,7 +1176,20 @@ html[data-skin=ledger]{--wall:#d39a6a}
 
   const slot=Math.max(2, (xAt(OPEN+5)-xAt(OPEN))*0.62);
   const bodies=[];
+  if(simple){
+   const acc=T('--accent')||'#ff8a3d', gid='ag'+Math.random().toString(36).slice(2,7);
+   const g=mk('linearGradient',{id:gid,x1:0,y1:0,x2:0,y2:1},mk('defs',{},svg));
+   mk('stop',{offset:0,'stop-color':acc,'stop-opacity':.28},g);mk('stop',{offset:1,'stop-color':acc,'stop-opacity':0},g);
+   const P=ohlc.filter(b=>b.t0>=OPEN&&b.t0<CLOSE).map(b=>[xAt(b.t1),yP(b.c)]);
+   if(P.length){
+    const d='M'+P.map(p=>p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' L');
+    mk('path',{d:d+' L'+P[P.length-1][0].toFixed(1)+' '+plotBottom+' L'+P[0][0].toFixed(1)+' '+plotBottom+' Z',fill:'url(#'+gid+')'},svg);
+    mk('path',{d,fill:'none',stroke:acc,'stroke-width':2,'stroke-linejoin':'round','stroke-linecap':'round'},svg);
+   }
+   ohlc.forEach(b=>{hits.bars.push({x:xAt(b.t1), html:tipHTML(fmtHM(b.t1), [['Close',pxFmt(b.c)],['Vs the box', c.box?distText(b.c, c.box):'']])})});
+  }
   ohlc.forEach((b,i)=>{
+   if(simple)return;
    if(b.t0<OPEN||b.t0>=CLOSE)return;
    const x=xAt(b.t0+2.5), up=b.c>=b.o, col=up?T('--win'):T('--loss');
    mk('line',{x1:x,x2:x,y1:yP(b.h),y2:yP(b.l),stroke:col,'stroke-width':1},svg);
@@ -1160,14 +1226,14 @@ html[data-skin=ledger]{--wall:#d39a6a}
    const sameExit=trade.exitPx!=null&&Math.abs(trade.exitPx-trade.entry)<0.05;
    const name=trade.trimmed?(sameExit?'Stop · exit ':'Stop '):(sameExit?'Entry · exit ':'Entry ');
    addLab(trade.entry, name+pxFmt(trade.entry), T('--text'), 5);
-   if(trade.entryT!=null){
+   if(trade.entryT!=null&&!simple){
     const x1=xAt(trade.entryT), x2=xAt(trade.exitT!=null?trade.exitT:Math.min(CLOSE, ohlc[ohlc.length-1].t1));
     mk('line',{x1,x2,y1:yP(trade.entry),y2:yP(trade.entry),stroke:T('--text'),'stroke-width':1.2,'stroke-dasharray':trade.trimmed?'2 3':null},svg);
    }
   }
   if(trade.exitPx!=null&&(trade.entry==null||Math.abs(trade.exitPx-trade.entry)>=0.05)){
    addLab(trade.exitPx, 'Exit '+pxFmt(trade.exitPx), (stock.result>0?T('--win'):T('--loss')), 5);
-   if(trade.exitT!=null){
+   if(trade.exitT!=null&&!simple){
     const x=xAt(trade.exitT);
     mk('line',{x1:x-5,x2:x+5,y1:yP(trade.exitPx),y2:yP(trade.exitPx),stroke:stock.result>0?T('--win'):T('--loss'),'stroke-width':1.6},svg);
    }
@@ -1180,12 +1246,12 @@ html[data-skin=ledger]{--wall:#d39a6a}
   labels.sort((a,b)=>b.rank-a.rank||a.y-b.y);
   const kept=[];
   labels.forEach(lb=>{if(!kept.some(k=>Math.abs(k.trueY-lb.trueY)<8&&k.rank>=lb.rank))kept.push(lb)});
-  unpack(kept, plotTop+8, plotBottom-4).forEach(lb=>{
+  if(!simple)unpack(kept, plotTop+8, plotBottom-4).forEach(lb=>{
    if(Math.abs(lb.y-lb.trueY)>8)mk('line',{x1:plotRight,x2:plotRight+5,y1:lb.trueY,y2:lb.y,stroke:lb.color,'stroke-width':1,opacity:.55},svg);
    mk('text',{x:plotRight+8,y:lb.y+3,fill:lb.color},svg,lb.text);
   });
 
-  const markLabs=[];
+  const markLabs=[]; const EVS=[];
   (trade.marks||[]).forEach(m=>{
    const b=ohlc[m.i]; if(!b)return;
    // times[i] is the bar open. The fill is the close, five minutes later, so a 9:50 buy is not drawn on 9:45.
@@ -1195,6 +1261,14 @@ html[data-skin=ledger]{--wall:#d39a6a}
    const col=m.kind==='buy'?T('--win'):m.kind==='sell'?(partial?T('--warn'):(stock.result>0?T('--win'):T('--loss'))):m.kind==='move'?(moveDn?T('--loss'):T('--win')):m.kind==='moveexit'?T('--teal'):T('--faint');
    const text=m.kind==='buy'?'BUY':m.kind==='sell'?(partial?'1/3':('EXIT '+(stock.result==null?'':sgn(stock.result)))):m.kind==='move'?(moveDn?'Potential SELL':'Potential BUY'):(m.label||'');
    const g=mk('g',{'data-mark':m.kind,'data-t':fmtHM(b.t1)},svg);
+   if(simple){
+    const fill=m.kind==='buy'||m.kind==='move'?T('--accent'):(m.kind==='sell'&&!partial?T('--text'):T('--ink'));
+    mk('circle',{cx:x,cy:y,r:9,fill:T('--ink'),'fill-opacity':.85,stroke:col,'stroke-width':2,'data-ev':EVS.length},g);
+    mk('circle',{cx:x,cy:y,r:4.5,fill},g);
+    EVS.push({t:b.t1, px:b.c, x, y, kind:m.kind, col, label:m.kind==='buy'?(trade.dir<0?'Bought puts':'Bought calls'):m.kind==='sell'?(partial?'Sold a third':(stock.result!=null?'Out, '+sgn(stock.result):'Out')):m.kind==='move'?(moveDn?'Potential SELL':'Potential BUY'):('Held to 3:30, stock '+(m.label||''))});
+    hits.marks.push({x, y, r:16, html:tipHTML(text||m.kind, [['Clock', fmtHM(b.t1)], ['Stock', pxFmt(b.c)]])});
+    return;
+   }
    if(m.kind==='buy')mk('path',{d:`M${x} ${y+5} l6 10 h-12 z`,fill:col},g);
    else if(m.kind==='sell')mk('path',{d:`M${x} ${y-5} l6 -10 h-12 z`,fill:col},g);
    else if(m.kind==='move')mk('path',{d:moveDn?`M${x} ${y-5} l6 -10 h-12 z`:`M${x} ${y+5} l6 10 h-12 z`,fill:'none',stroke:col,'stroke-width':1.6},g);
@@ -1239,6 +1313,33 @@ html[data-skin=ledger]{--wall:#d39a6a}
    mk('text',{x:m.lx,y:m.ly,fill:m.fill,'text-anchor':m.anchor,'font-weight':'600'},m.g,m.text);
   });
 
+  if(simple){
+   const inS=ohlc.filter(b=>b.t0>=OPEN&&b.t0<CLOSE);
+   if(inS.length>3){
+    const hiB=inS.reduce((a,b)=>b.h>a.h?b:a), loB=inS.reduce((a,b)=>b.l<a.l?b:a);
+    [[hiB,'The high',hiB.h],[loB,'The low',loB.l]].forEach(([b,lab,px])=>{
+     const x=xAt(b.t1), y=yP(px);
+     mk('circle',{cx:x,cy:y,r:8,fill:'none',stroke:T('--faint'),'stroke-width':2.5,'data-ev':EVS.length},svg);
+     EVS.push({t:b.t1, px, x, y, kind:'ring', col:T('--faint'), label:lab});
+    });
+    if(trade.entry!=null&&trade.entryT!=null){
+     const x1=xAt(trade.entryT), x2=xAt(trade.exitT!=null?trade.exitT:inS[inS.length-1].t1);
+     mk('line',{x1:x1+10,x2:Math.max(x1+10,x2),y1:yP(trade.entry),y2:yP(trade.entry),stroke:T('--text'),'stroke-opacity':.55,'stroke-width':1.2,'stroke-dasharray':'5 5'},svg);
+    }
+    const first=inS[0].o, lo=loB.l, hi=hiB.h, up=hiB.t1>loB.t1;
+    const a=up?lo:hi, z=up?hi:lo, mv=(z/a-1)*100;
+    $('runHead').hidden=false;
+    $('runHead').innerHTML='<div class="rh-l"><div class="rh-k">'+esc(sym)+' · '+(up?'low to high':'high to low')+' today</div><div class="rh-v num">'+pxFmt(a)+' <span class="arr">→</span> '+pxFmt(z)+'</div></div><div class="rh-x num '+(up?'':'dn')+'">'+sgn1(mv)+'</div>';
+   }
+   EVS.sort((p,q)=>p.t-q.t);
+   $('evGrid').hidden=!EVS.length;
+   $('evGrid').innerHTML=EVS.map((e,i)=>'<li data-i="'+i+'"><span class="evd '+(e.kind==='ring'?'ring':e.kind==='buy'||e.kind==='move'?'acc':'wht')+'"></span><span class="evt num">'+h12(fmtHM(e.t))+' · '+pxFmt(e.px)+'</span><span class="evl">'+esc(e.label)+'</span></li>').join('');
+   document.querySelectorAll('#evGrid li').forEach(li=>li.onclick=()=>{
+    document.querySelectorAll('#evGrid li').forEach(x=>x.classList.toggle('on',x===li&&!li.classList.contains('on')));
+    svg.querySelectorAll('.evhl').forEach(n=>n.remove());
+    if(li.classList.contains('on')){const e=EVS[+li.dataset.i];mk('circle',{class:'evhl',cx:e.x,cy:e.y,r:14,fill:'none',stroke:T('--text'),'stroke-width':1.5},svg)}
+   });
+  }else{$('runHead').hidden=true;$('evGrid').hidden=true}
   const extras=simple?[]:[].concat((c.shadows||[]),(c.skipped||[]),(stock.shadows||[])).map(it=>Object.assign({_k:'skip'}, it))
    .concat([].concat(c.strategy_b||[], c.b||[], stock.strategy_b||[]).map(it=>Object.assign({_k:'b'}, it)));
   extras.forEach(it=>{
@@ -1493,6 +1594,17 @@ html[data-skin=ledger]{--wall:#d39a6a}
   const now=L.last_c&&L.entry?(L.last_c/L.entry-1)*100*(L.side>0?1:-1):null;
   return '<b class="pos">'+word+'</b> at '+esc(L.signal_time)+(now!=null?' · stock '+sgn1(now)+' so far':'')+' · holding to '+esc(L.planned_exit||'3:30')+', safety stop '+pxFmt(L.stop)+'.';
  }
+ function inDo(b, tr){
+  const plan=b.plan||[], stopRow=plan.find(p=>/^stop$/i.test(p[0])), nxt=plan.find(p=>/sell a third/i.test(p[1])&&!p[2]);
+  const trimmed=plan.some(p=>/sell a third/i.test(p[1])&&p[2]);
+  const tgt=nxt?String(nxt[1]).match(/at\s+(\d+\.\d+)/):null;
+  const parts=[];
+  if(tgt)parts.push('sell a third at '+tgt[1]+' ('+nxt[0]+')');
+  if(trimmed)parts.push('stop is now break-even'+(tr.entry!=null?' ('+pxFmt(tr.entry)+')':''));
+  else if(stopRow)parts.push('out on '+String(stopRow[1]).replace(/^A /,'a ').replace(/,? or -?(\d+)%/,' or −$1% on the option'));
+  parts.push('everything out by 3:30');
+  return ['HOLD', parts.join('. ')+'.'];
+ }
  // One state per ticker, in plain words. Tone drives colour; the word is never repeated in the sentence.
  function stateOf(b, sym, view, dayIso){
   const ohlc=barsFrom(b.chart), last=ohlc.length?ohlc[ohlc.length-1]:null, box=b.chart&&b.chart.box;
@@ -1510,18 +1622,20 @@ html[data-skin=ledger]{--wall:#d39a6a}
    const tr=tradeOf(b, ohlc);
    const mv=tr.entry&&last?(last.c/tr.entry-1)*100*(st==='up'?1:-1):null;
    return {tone:'in', icon:st==='up'?'up':'down', kind:'In a trade', word:'In · '+(st==='up'?'calls':'puts'), meta:mv!=null?'stock '+sgn1(mv)+' since entry':'',
+    do:inDo(b, tr),
     say:(bought?'Bought '+bought.replace(/\s*at \$[\d.]+/,'')+'. ':'')+(tr.stop!=null?'Out on a 5-minute close back through '+pxFmt(tr.stop)+'.':''), side};
   }
   if(L&&L.status==='open'&&open)return {tone:'move', icon:'spark', kind:'Heads-up', word:L.side>0?'Potential BUY':'Potential SELL',
    meta:L.last_c&&L.entry?'stock '+sgn1((L.last_c/L.entry-1)*100*(L.side>0?1:-1)):'',
+   do:['YOUR CALL','a heads-up, not a rule trade. Safety stop '+pxFmt(L.stop)+', out by 3:30.'],
    say:'New '+(L.side>0?'high':'low')+' of the day at '+L.signal_time+'. Not a rule trade. Tracking it to '+(L.planned_exit||'3:30')+', safety stop '+pxFmt(L.stop)+'.', side:res!=null?'Rule trade earlier: <b class="'+(res>=0?'pos':'neg')+'">'+sgn(res)+'</b>.':''};
-  if(res!=null)return {tone:res>=0?'pos':'neg', icon:'done', kind:after?'Day closed':'Done for the day', word:'Out '+sgn(res), say:why, side};
-  if(st==='skip'||st==='sitout')return {tone:'out', icon:'pause', kind:'No trade', word:'Sitting out', say:b.sub||b.headline||'', side};
-  if(!last)return {tone:'wait', icon:'clock', kind:'Before the open', word:'Waiting for the open', say:'The box forms 9:30–9:45. The Plan tab has the levels to watch.', side};
-  if(after||(mins!=null&&mins>=11*60))return {tone:'closed', icon:'moon', kind:after?'Day closed':'No rule trade', word:'No trade today', say:'No 5-minute close outside the box before 11:00, so the rules sat this one out.', side};
-  if(last.t1<OPEN+15||!box)return {tone:'wait', icon:'clock', kind:'Opening range', word:'Box forming', say:'Top and bottom lock at 9:45. Then it waits for a 5-minute close outside.', side};
+  if(res!=null)return {tone:res>=0?'pos':'neg', icon:'done', kind:after?'Day closed':'Done for the day', word:'Out '+sgn(res), say:why, do:['DONE','one trade a day. No re-entry today.'], side};
+  if(st==='skip'||st==='sitout')return {tone:'out', icon:'pause', kind:'No trade', word:'Sitting out', say:b.sub||b.headline||'', do:['NOTHING TO DO','the rules pass on this one today.'], side};
+  if(!last)return {tone:'wait', icon:'clock', kind:'Before the open', word:'Waiting for the open', say:'The box forms 9:30–9:45. The Plan tab has the levels to watch.', do:['WAIT','nothing happens before 9:45.'], side};
+  if(after||(mins!=null&&mins>=11*60))return {tone:'closed', icon:'moon', kind:after?'Day closed':'No rule trade', word:'No trade today', say:'No 5-minute close outside the box before 11:00, so the rules sat this one out.', do:after?null:['NOTHING TO DO','no new rule entries after 11:00.'], side};
+  if(last.t1<OPEN+15||!box)return {tone:'wait', icon:'clock', kind:'Opening range', word:'Box forming', say:'Top and bottom lock at 9:45. Then it waits for a 5-minute close outside.', do:['WAIT','no trade inside the first 15 minutes.'], side};
   return {tone:'watch', icon:'eye', kind:'Watching', word:'Watching the box', meta:distText(last.c, box),
-   say:'A 5-minute close above '+pxFmt(box.hi)+' buys calls; below '+pxFmt(box.lo)+' buys puts. New entries stop at 11:00.', side};
+   say:'A 5-minute close above '+pxFmt(box.hi)+' buys calls; below '+pxFmt(box.lo)+' buys puts. New entries stop at 11:00.', do:['WATCH','no trade until a 5-minute candle closes outside the box.'], side};
  }
  // Today's calls as one list: rule trades and potential moves, by time.
  function renderCalls(S, syms, view, dayIso){
@@ -1622,6 +1736,7 @@ html[data-skin=ledger]{--wall:#d39a6a}
   $('stMeta').textContent=ST.meta||'';
   $('actWord').textContent=ST.word;
   $('stSay').textContent=ST.say||'';
+  $('stDo').hidden=!ST.do; $('stDo').innerHTML=ST.do?'<span class="tri">▶</span> <b>'+esc(ST.do[0])+'</b>'+(ST.do[1]?' — '+esc(ST.do[1]):''):'';
   $('stSide').hidden=!ST.side; $('stSide').innerHTML=ST.side||'';
   const lines=(A.lines||[]).map(l=>{
    let v=l[1]; if(/why/i.test(l[0]))v=honestExit(v, b.result); v=String(v).replace(/(^|[^\d])-(\d+(?:\.\d+)?%)/g,'$1−$2');
@@ -2177,9 +2292,9 @@ html[data-skin=ledger]{--wall:#d39a6a}
 
  /* look switch: Haze <-> Ledger, remembered on this device */
  const skinBtn=document.getElementById('skinBtn');
- function paintSkin(){const led=document.documentElement.dataset.skin==='ledger';document.getElementById('skinName').textContent=led?'Ledger':'Haze';
-  const m=document.querySelector('meta[name=theme-color]');if(m)m.content=led?'#14120b':'#060708'}
- skinBtn.addEventListener('click',()=>{const r=document.documentElement;if(r.dataset.skin==='ledger')delete r.dataset.skin;else r.dataset.skin='ledger';
+ function paintSkin(){const k=document.documentElement.dataset.skin||'haze';document.getElementById('skinName').textContent={haze:'Haze',ledger:'Ledger',ember:'Ember'}[k]||'Haze';
+  const m=document.querySelector('meta[name=theme-color]');if(m)m.content={ledger:'#14120b',ember:'#0e0e0e'}[k]||'#060708'}
+ skinBtn.addEventListener('click',()=>{const r=document.documentElement, nx={haze:'ledger',ledger:'ember',ember:'haze'}[r.dataset.skin||'haze'];if(nx==='haze')delete r.dataset.skin;else r.dataset.skin=nx;
   try{localStorage.setItem('bl.skin',r.dataset.skin||'haze')}catch(e){}paintSkin();if(LAST)render(LAST);try{renderPlan()}catch(e){}});
  paintSkin();
 
