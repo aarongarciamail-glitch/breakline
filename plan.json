@@ -1,6 +1,6 @@
 {
  "v": 1,
- "built": "2026-11-26T08:30:02-05:00",
+ "built": "2026-11-26T08:45:02-05:00",
  "for": "2026-11-27",
  "for_label": "Friday, Nov 27",
  "title": "Tomorrow's plan",
@@ -46,17 +46,17 @@
   "strategy": "Calls and puts both stay open. Oil is up 4.8% and the 10-year is down 5.6 bp, so they disagree. The opening-range close picks the side.",
   "vix": {
    "name": "VIX",
-   "price": 26.84,
+   "price": 26.93,
    "prev": 28.32,
-   "chg_pct": -5.2,
-   "move": "Down 5.2% from yesterday's close of 28.3.",
-   "why": "Down 5.2% from yesterday's close of 28.3.",
+   "chg_pct": -4.9,
+   "move": "Down 4.9% from yesterday's close of 28.3.",
+   "why": "Down 4.9% from yesterday's close of 28.3.",
    "headline": null,
-   "means": "Fear eased. I shrink size at 35 or higher, and this print is under that, so size stays normal."
+   "means": "VIX is close to yesterday. Size stays normal until it reaches 35."
   },
   "oil": {
    "name": "Crude",
-   "price": 84.57,
+   "price": 84.6,
    "prev": 80.73,
    "chg_pct": 4.8,
    "move": "Up 4.8% from yesterday's close of 80.73.",
@@ -74,7 +74,7 @@
    "chg_bps": -5.6,
    "move": "10-year is 4.85%, down 5.6 bp."
   },
-  "asof": "2026-11-26T08:30:03-05:00"
+  "asof": "2026-11-26T08:45:03-05:00"
  },
  "market_news": [
   {
