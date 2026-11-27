@@ -304,7 +304,8 @@ footer p{margin:0;max-width:70ch}
  .tk .s{font-size:12.5px}
  .tk .dot{margin-left:0;width:7px;height:7px}
  .tk .pxline,.tk .dist,.tk .l,.tk .tagwide{display:none}
- .tk .ls{display:block;font:500 12.5px/1 var(--mono);color:var(--dim)}
+ .tk .ls{display:none} /* 2026-11-27: status lives in the card below; pills are just a switcher */
+ .tk{padding:10px 4px}
  .tk .ls.pos{color:var(--win)}.tk .ls.neg{color:var(--loss)}
  .chartp{display:flex;flex-direction:column}
  .chartp .stockhead{order:-2}
@@ -447,7 +448,6 @@ h2,.sh h2{font:500 22px/1.2 var(--display);letter-spacing:-.03em}
  .kpi .kv{font-size:21px}
  .sym{font-size:18px}
  .tk .s{font-size:12.5px}
- .tk .ls{font:500 12.5px/1 var(--display);font-variant-numeric:tabular-nums}
  .pflag{font-size:13.5px}
 }
 /* ---------- theme toggle: Haze (default) / Ledger (warm, editorial) ---------- */
