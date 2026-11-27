@@ -39,10 +39,10 @@
  },
  "tape": {
   "ok": true,
-  "asof": "2026-11-27T09:30:28-05:00",
+  "asof": "2026-11-27T09:35:28-05:00",
   "lean": "mixed",
   "label": "Tape split",
-  "strategy": "Calls and puts both stay open. Oil is up 4.6% and the 10-year is flat, so they disagree. The opening-range close picks the side.",
+  "strategy": "Calls and puts both stay open. Oil is up 4.2% and the 10-year is flat, so they disagree. The opening-range close picks the side.",
   "block_calls": false,
   "block_puts": false,
   "vix_small": false,
@@ -54,22 +54,22 @@
   "note": "Context only. Oil 1% and the 10-year 5 bp describe the lean. VIX 35 is a size note. Neither one blocks a call or a put.",
   "vix": {
    "name": "VIX",
-   "price": 25.53,
+   "price": 25.8,
    "prev": 26.8,
-   "chg_pct": -4.7,
-   "move": "Down 4.7% from yesterday's close of 26.8.",
-   "why": "Down 4.7% from yesterday's close of 26.8.",
+   "chg_pct": -3.7,
+   "move": "Down 3.7% from yesterday's close of 26.8.",
+   "why": "Down 3.7% from yesterday's close of 26.8.",
    "headline": null,
    "means": "VIX is close to yesterday. Size stays normal until it reaches 35."
   },
   "oil": {
    "name": "Crude",
-   "price": 84.42,
+   "price": 84.09,
    "prev": 80.73,
-   "chg_pct": 4.6,
-   "move": "Up 4.6% from yesterday's close of 80.73.",
+   "chg_pct": 4.2,
+   "move": "Up 4.2% from yesterday's close of 80.73.",
    "range": "Inside the last month, 79.07 to 104.99.",
-   "why": "Up 4.6% from yesterday's close of 80.73. Zacks: Venezuela's Oil Production Push: 3 Energy Stocks to Watch Now",
+   "why": "Up 4.2% from yesterday's close of 80.73. Zacks: Venezuela's Oil Production Push: 3 Energy Stocks to Watch Now",
    "headline": {
     "source": "Zacks",
     "title": "Venezuela's Oil Production Push: 3 Energy Stocks to Watch Now"
@@ -78,8 +78,8 @@
   },
   "yield": {
    "name": "10-year",
-   "price": 4.904,
-   "chg_bps": 0.0,
+   "price": 4.9,
+   "chg_bps": -0.4,
    "move": "10-year is 4.90%, flat."
   }
  },
@@ -230,9 +230,9 @@
   }
  ],
  "session": true,
- "next_check": "9:35 AM",
+ "next_check": "9:40 AM",
  "mode": "paper",
- "updated": "2026-11-27T09:30:28-05:00",
+ "updated": "2026-11-27T09:35:28-05:00",
  "date": "Fri \u00b7 Nov 27",
  "day": {
   "pills": [
