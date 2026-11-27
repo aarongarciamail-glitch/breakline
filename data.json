@@ -39,37 +39,37 @@
  },
  "tape": {
   "ok": true,
-  "asof": "2026-11-27T10:55:31-05:00",
+  "asof": "2026-11-27T11:00:30-05:00",
   "lean": "quiet",
   "label": "Oil quiet",
-  "strategy": "Calls and puts both stay open. Oil moved 0.8%, under the 1% line, so it does not pick a side.",
+  "strategy": "Calls and puts both stay open. Oil moved 0.9%, under the 1% line, so it does not pick a side.",
   "block_calls": false,
   "block_puts": false,
   "vix_small": false,
   "size_note": "",
   "skip_calls": "",
   "skip_puts": "",
-  "agree_calls": "Oil moved 0.8%, so the tape is not picking a side.",
-  "agree_puts": "Oil moved 0.8%, so the tape is not picking a side.",
+  "agree_calls": "Oil moved 0.9%, so the tape is not picking a side.",
+  "agree_puts": "Oil moved 0.9%, so the tape is not picking a side.",
   "note": "Context only. Oil 1% and the 10-year 5 bp describe the lean. VIX 35 is a size note. Neither one blocks a call or a put.",
   "vix": {
    "name": "VIX",
-   "price": 25.68,
+   "price": 25.42,
    "prev": 26.8,
-   "chg_pct": -4.2,
-   "move": "Down 4.2% from yesterday's close of 26.8.",
-   "why": "Down 4.2% from yesterday's close of 26.8.",
+   "chg_pct": -5.1,
+   "move": "Down 5.1% from yesterday's close of 26.8.",
+   "why": "Down 5.1% from yesterday's close of 26.8.",
    "headline": null,
-   "means": "VIX is close to yesterday. Size stays normal until it reaches 35."
+   "means": "Fear eased. I shrink size at 35 or higher, and this print is under that, so size stays normal."
   },
   "oil": {
    "name": "Crude",
-   "price": 83.78,
+   "price": 83.62,
    "prev": 84.42,
-   "chg_pct": -0.8,
-   "move": "Down 0.8% from yesterday's close of 84.42.",
+   "chg_pct": -0.9,
+   "move": "Down 0.9% from yesterday's close of 84.42.",
    "range": "Inside the last month, 79.07 to 104.99.",
-   "why": "Down 0.8% from yesterday's close of 84.42. Reuters: Oil on track for first weekly gain in November on supply fears",
+   "why": "Down 0.9% from yesterday's close of 84.42. Reuters: Oil on track for first weekly gain in November on supply fears",
    "headline": {
     "source": "Reuters",
     "title": "Oil on track for first weekly gain in November on supply fears"
@@ -78,9 +78,9 @@
   },
   "yield": {
    "name": "10-year",
-   "price": 4.914,
-   "chg_bps": 6.6,
-   "move": "10-year is 4.91%, up 6.6 bp."
+   "price": 4.91,
+   "chg_bps": 6.2,
+   "move": "10-year is 4.91%, up 6.2 bp."
   }
  },
  "curve": [
@@ -256,9 +256,9 @@
   }
  ],
  "session": true,
- "next_check": "11:00 AM",
+ "next_check": "11:05 AM",
  "mode": "paper",
- "updated": "2026-11-27T10:55:28-05:00",
+ "updated": "2026-11-27T11:00:29-05:00",
  "date": "Fri \u00b7 Nov 27",
  "day": {
   "pills": [
@@ -297,7 +297,8 @@
      "10:35",
      "10:40",
      "10:45",
-     "10:50"
+     "10:50",
+     "10:55"
     ],
     "closes": [
      723.11,
@@ -316,7 +317,8 @@
      725.26,
      725.59,
      725.2,
-     724.93
+     724.93,
+     725.04
     ],
     "box": {
      "hi": 726.05,
@@ -459,11 +461,11 @@
      },
      {
       "t": "10:40",
-      "o": 725.27,
+      "o": 725.26,
       "h": 725.91,
       "l": 724.71,
       "c": 725.59,
-      "v": 286498.059047
+      "v": 584482.059047
      },
      {
       "t": "10:45",
@@ -480,6 +482,14 @@
       "l": 724.48,
       "c": 724.93,
       "v": 237439.37075
+     },
+     {
+      "t": "10:55",
+      "o": 724.99,
+      "h": 725.79,
+      "l": 724.94,
+      "c": 725.04,
+      "v": 201639.321538
      }
     ],
     "opens": [
@@ -497,9 +507,10 @@
      723.61,
      723.11,
      723.33,
-     725.27,
+     725.26,
      725.6,
-     725.24
+     725.24,
+     724.99
     ],
     "highs": [
      726.09,
@@ -518,7 +529,8 @@
      725.6,
      725.91,
      726.62,
-     725.38
+     725.38,
+     725.79
     ],
     "lows": [
      722.79,
@@ -537,7 +549,8 @@
      723.24,
      724.71,
      725.19,
-     724.48
+     724.48,
+     724.94
     ],
     "volumes": [
      1119251.227693,
@@ -554,9 +567,10 @@
      388405.48921,
      326055.482925,
      558674.579947,
-     286498.059047,
+     584482.059047,
      251589.618567,
-     237439.37075
+     237439.37075,
+     201639.321538
     ],
     "option": {
      "contract": "SPY 720 put",
@@ -592,9 +606,10 @@
      722.0311,
      722.0725,
      722.2261,
-     722.3186,
-     722.4022,
-     722.4603
+     722.4093,
+     722.4883,
+     722.5428,
+     722.5933
     ]
    },
    "levels": [
@@ -785,7 +800,8 @@
      "10:35",
      "10:40",
      "10:45",
-     "10:50"
+     "10:50",
+     "10:55"
     ],
     "closes": [
      640.75,
@@ -804,7 +820,8 @@
      645.26,
      645.26,
      644.68,
-     644.5
+     644.5,
+     644.77
     ],
     "box": {
      "hi": 645.86,
@@ -951,7 +968,7 @@
       "h": 645.91,
       "l": 644.29,
       "c": 645.26,
-      "v": 347785.311185
+      "v": 616847.311185
      },
      {
       "t": "10:45",
@@ -968,6 +985,14 @@
       "l": 643.96,
       "c": 644.5,
       "v": 306582.0
+     },
+     {
+      "t": "10:55",
+      "o": 644.46,
+      "h": 645.69,
+      "l": 644.44,
+      "c": 644.77,
+      "v": 210498.0
      }
     ],
     "opens": [
@@ -987,7 +1012,8 @@
      642.29,
      645.3,
      645.3,
-     644.7
+     644.7,
+     644.46
     ],
     "highs": [
      645.89,
@@ -1006,7 +1032,8 @@
      645.74,
      645.91,
      646.61,
-     645.0
+     645.0,
+     645.69
     ],
     "lows": [
      640.08,
@@ -1025,7 +1052,8 @@
      642.18,
      644.29,
      644.68,
-     643.96
+     643.96,
+     644.44
     ],
     "volumes": [
      1420392.757685,
@@ -1042,9 +1070,10 @@
      452070.057986,
      316976.0,
      597054.824184,
-     347785.311185,
+     616847.311185,
      353501.872464,
-     306582.0
+     306582.0,
+     210498.0
     ],
     "option": {
      "contract": "QQQ 638 put",
@@ -1080,9 +1109,10 @@
      639.9117,
      639.9769,
      640.222,
-     640.3765,
-     640.5292,
-     640.6323
+     640.4895,
+     640.6353,
+     640.7334,
+     640.8062
     ]
    },
    "levels": [
