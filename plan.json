@@ -1,6 +1,6 @@
 {
  "v": 1,
- "built": "2026-11-27T08:30:02-05:00",
+ "built": "2026-11-27T08:45:02-05:00",
  "for": "2026-11-27",
  "for_label": "Friday, Nov 27",
  "title": "Today's plan",
@@ -39,25 +39,25 @@
  ],
  "tape": {
   "label": "Tape split",
-  "strategy": "Calls and puts both stay open. Oil is up 5.2% and the 10-year is down 5.6 bp, so they disagree. The opening-range close picks the side.",
+  "strategy": "Calls and puts both stay open. Oil is up 4.7% and the 10-year is flat, so they disagree. The opening-range close picks the side.",
   "vix": {
    "name": "VIX",
-   "price": 25.17,
+   "price": 25.4,
    "prev": 26.8,
-   "chg_pct": -6.1,
-   "move": "Down 6.1% from yesterday's close of 26.8.",
-   "why": "Down 6.1% from yesterday's close of 26.8.",
+   "chg_pct": -5.2,
+   "move": "Down 5.2% from yesterday's close of 26.8.",
+   "why": "Down 5.2% from yesterday's close of 26.8.",
    "headline": null,
    "means": "Fear eased. I shrink size at 35 or higher, and this print is under that, so size stays normal."
   },
   "oil": {
    "name": "Crude",
-   "price": 84.92,
+   "price": 84.52,
    "prev": 80.73,
-   "chg_pct": 5.2,
-   "move": "Up 5.2% from yesterday's close of 80.73.",
+   "chg_pct": 4.7,
+   "move": "Up 4.7% from yesterday's close of 80.73.",
    "range": "Inside the last month, 79.07 to 104.99.",
-   "why": "Up 5.2% from yesterday's close of 80.73. Reuters: Oil on track to snap three-week losing streak over supply fears",
+   "why": "Up 4.7% from yesterday's close of 80.73. Reuters: Oil on track to snap three-week losing streak over supply fears",
    "headline": {
     "source": "Reuters",
     "title": "Oil on track to snap three-week losing streak over supply fears"
@@ -66,13 +66,19 @@
   },
   "yield": {
    "name": "10-year",
-   "price": 4.848,
-   "chg_bps": -5.6,
-   "move": "10-year is 4.85%, down 5.6 bp."
+   "price": 4.904,
+   "chg_bps": 0.0,
+   "move": "10-year is 4.90%, flat."
   },
-  "asof": "2026-11-27T08:30:02-05:00"
+  "asof": "2026-11-27T08:45:02-05:00"
  },
  "market_news": [
+  {
+   "title": "US stock selloffs trigger a new kind of dollar bounce",
+   "source": "Reuters",
+   "time": "Fri 8:16 AM",
+   "url": "https://finance.yahoo.com/markets/currencies/articles/us-stock-selloffs-trigger-kind-131650853.html"
+  },
   {
    "title": "US Equity Futures Climb Pre-Bell as Traders Prepare to Wind Down Volatile Holiday Week",
    "source": "MT Newswires",
@@ -90,12 +96,6 @@
    "source": "Investor's Business Daily",
    "time": "Fri 8:07 AM",
    "url": "https://www.investors.com/market-trend/stock-market-today/dow-jones-sp500-nasdaq-nvidia-stock-anthropic-spacex-tesla/?src=A00220&yptr=yahoo"
-  },
-  {
-   "title": "Dow Jones Futures Rise; Look For This Bullish Market Signal On Black Friday",
-   "source": "Investor's Business Daily",
-   "time": "Fri 8:06 AM",
-   "url": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-market-wild-ride-nasdaq-nvidia-slash-losses-anthropic-higher/?src=A00220&yptr=yahoo"
   }
  ],
  "tickers": {
@@ -105,7 +105,7 @@
     "Put wall": 725.0,
     "Busiest strike": 728.0
    },
-   "last": 728.06,
+   "last": 728.25,
    "pc": 716.75,
    "ph": 718.43,
    "pl": 695.45,
@@ -119,7 +119,7 @@
     "R2": 733.19,
     "R3": 747.95
    },
-   "gap_pct": 1.58,
+   "gap_pct": 1.6,
    "pmh": 731.49,
    "pml": 726.77,
    "typ_box_pct": 0.281,
@@ -145,7 +145,7 @@
     "Call wall": 650.0,
     "Put wall": 640.0
    },
-   "last": 648.33,
+   "last": 648.35,
    "pc": 633.95,
    "ph": 634.89,
    "pl": 607.74,
@@ -161,7 +161,7 @@
    },
    "gap_pct": 2.27,
    "pmh": 652.66,
-   "pml": 645.88,
+   "pml": 637.67,
    "typ_box_pct": 0.565,
    "typ_box_usd": 3.58,
    "trend5": -5.5,
