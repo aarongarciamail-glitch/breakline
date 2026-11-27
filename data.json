@@ -39,7 +39,7 @@
  },
  "tape": {
   "ok": true,
-  "asof": "2026-11-27T15:05:28-05:00",
+  "asof": "2026-11-27T15:10:28-05:00",
   "lean": "mixed",
   "label": "Tape split",
   "strategy": "Calls and puts both stay open. Oil is down 1.6% and the 10-year is up 8.8 bp, so they disagree. The opening-range close picks the side.",
@@ -258,7 +258,7 @@
  "session": false,
  "next_check": null,
  "mode": "paper",
- "updated": "2026-11-27T15:05:27-05:00",
+ "updated": "2026-11-27T15:10:27-05:00",
  "date": "Fri \u00b7 Nov 27",
  "day": {
   "pills": [
