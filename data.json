@@ -39,48 +39,48 @@
  },
  "tape": {
   "ok": true,
-  "asof": "2026-11-27T09:45:33-05:00",
+  "asof": "2026-11-27T09:50:28-05:00",
   "lean": "quiet",
   "label": "Oil quiet",
-  "strategy": "Calls and puts both stay open. Oil moved 0.5%, under the 1% line, so it does not pick a side.",
+  "strategy": "Calls and puts both stay open. Oil moved 0.4%, under the 1% line, so it does not pick a side.",
   "block_calls": false,
   "block_puts": false,
   "vix_small": false,
   "size_note": "",
   "skip_calls": "",
   "skip_puts": "",
-  "agree_calls": "Oil moved 0.5%, so the tape is not picking a side.",
-  "agree_puts": "Oil moved 0.5%, so the tape is not picking a side.",
+  "agree_calls": "Oil moved 0.4%, so the tape is not picking a side.",
+  "agree_puts": "Oil moved 0.4%, so the tape is not picking a side.",
   "note": "Context only. Oil 1% and the 10-year 5 bp describe the lean. VIX 35 is a size note. Neither one blocks a call or a put.",
   "vix": {
    "name": "VIX",
-   "price": 25.99,
+   "price": 26.74,
    "prev": 26.8,
-   "chg_pct": -3.0,
-   "move": "Down 3.0% from yesterday's close of 26.8.",
-   "why": "Down 3.0% from yesterday's close of 26.8.",
+   "chg_pct": -0.2,
+   "move": "Down 0.2% from yesterday's close of 26.8.",
+   "why": "Down 0.2% from yesterday's close of 26.8.",
    "headline": null,
    "means": "VIX is close to yesterday. Size stays normal until it reaches 35."
   },
   "oil": {
    "name": "Crude",
-   "price": 84.02,
+   "price": 84.11,
    "prev": 84.42,
-   "chg_pct": -0.5,
-   "move": "Down 0.5% from yesterday's close of 84.42.",
+   "chg_pct": -0.4,
+   "move": "Down 0.4% from yesterday's close of 84.42.",
    "range": "Inside the last month, 79.07 to 104.99.",
-   "why": "Down 0.5% from yesterday's close of 84.42. Zacks: Venezuela's Oil Production Push: 3 Energy Stocks to Watch Now",
+   "why": "Down 0.4% from yesterday's close of 84.42. Zacks: Oil Prices Remain High: Boon for BP's Energy Operations?",
    "headline": {
     "source": "Zacks",
-    "title": "Venezuela's Oil Production Push: 3 Energy Stocks to Watch Now"
+    "title": "Oil Prices Remain High: Boon for BP's Energy Operations?"
    },
    "means": "A move under 1% does not pick a side. Calls and puts both stay open."
   },
   "yield": {
    "name": "10-year",
-   "price": 4.896,
-   "chg_bps": -0.8,
-   "move": "10-year is 4.90%, down 0.8 bp."
+   "price": 4.888,
+   "chg_bps": -1.6,
+   "move": "10-year is 4.89%, down 1.6 bp."
   }
  },
  "curve": [
@@ -230,9 +230,9 @@
   }
  ],
  "session": true,
- "next_check": "9:50 AM",
+ "next_check": "9:55 AM",
  "mode": "paper",
- "updated": "2026-11-27T09:45:28-05:00",
+ "updated": "2026-11-27T09:50:27-05:00",
  "date": "Fri \u00b7 Nov 27",
  "day": {
   "pills": [
@@ -257,12 +257,14 @@
     "times": [
      "9:30",
      "9:35",
-     "9:40"
+     "9:40",
+     "9:45"
     ],
     "closes": [
      723.11,
      721.66,
-     722.75
+     722.75,
+     721.08
     ],
     "box": {
      "hi": 726.05,
@@ -274,10 +276,10 @@
      {
       "t": "9:30",
       "o": 725.86,
-      "h": 726.05,
+      "h": 726.09,
       "l": 722.79,
       "c": 723.11,
-      "v": 497431.227693
+      "v": 1119251.227693
      },
      {
       "t": "9:35",
@@ -294,34 +296,47 @@
       "l": 720.92,
       "c": 722.75,
       "v": 467199.0
+     },
+     {
+      "t": "9:45",
+      "o": 722.7,
+      "h": 722.98,
+      "l": 720.5,
+      "c": 721.08,
+      "v": 461567.591614
      }
     ],
     "opens": [
      725.86,
      723.16,
-     721.72
+     721.72,
+     722.7
     ],
     "highs": [
-     726.05,
+     726.09,
      723.7,
-     722.75
+     722.75,
+     722.98
     ],
     "lows": [
      722.79,
      721.53,
-     720.92
+     720.92,
+     720.5
     ],
     "volumes": [
-     497431.227693,
+     1119251.227693,
      459374.75159,
-     467199.0
+     467199.0,
+     461567.591614
     ],
     "shadows": [],
     "strategy_b": [],
     "vwap": [
-     723.9833,
-     723.1735,
-     722.8345
+     723.9967,
+     723.502,
+     723.1909,
+     722.8834
     ]
    },
    "levels": [
@@ -463,12 +478,14 @@
     "times": [
      "9:30",
      "9:35",
-     "9:40"
+     "9:40",
+     "9:45"
     ],
     "closes": [
      640.75,
      638.76,
-     640.02
+     640.02,
+     638.04
     ],
     "box": {
      "hi": 645.86,
@@ -479,11 +496,11 @@
     "bars": [
      {
       "t": "9:30",
-      "o": 645.73,
-      "h": 645.86,
-      "l": 640.09,
+      "o": 645.72,
+      "h": 645.89,
+      "l": 640.08,
       "c": 640.75,
-      "v": 831209.757685
+      "v": 1412245.757685
      },
      {
       "t": "9:35",
@@ -500,34 +517,47 @@
       "l": 637.98,
       "c": 640.02,
       "v": 511652.37265
+     },
+     {
+      "t": "9:45",
+      "o": 640.08,
+      "h": 640.43,
+      "l": 637.17,
+      "c": 638.04,
+      "v": 474057.90724
      }
     ],
     "opens": [
-     645.73,
+     645.72,
      640.75,
-     638.75
+     638.75,
+     640.08
     ],
     "highs": [
-     645.86,
+     645.89,
      642.0,
-     640.06
+     640.06,
+     640.43
     ],
     "lows": [
-     640.09,
+     640.08,
      638.5,
-     637.98
+     637.98,
+     637.17
     ],
     "volumes": [
-     831209.757685,
+     1412245.757685,
      638194.348688,
-     511652.37265
+     511652.37265,
+     474057.90724
     ],
     "shadows": [],
     "strategy_b": [],
     "vwap": [
-     642.2333,
-     641.1562,
-     640.6906
+     642.24,
+     641.466,
+     641.0441,
+     640.6542
     ]
    },
    "levels": [
