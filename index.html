@@ -1594,6 +1594,7 @@ html[data-skin=ledger]{--wall:#d39a6a}
   const now=L.last_c&&L.entry?(L.last_c/L.entry-1)*100*(L.side>0?1:-1):null;
   return '<b class="pos">'+word+'</b> at '+esc(L.signal_time)+(now!=null?' · stock '+sgn1(now)+' so far':'')+' · holding to '+esc(L.planned_exit||'3:30')+', safety stop '+pxFmt(L.stop)+'.';
  }
+ function exitBy(dayIso){try{const k=dayIso?niceDate(dayIso):'';if(PLAN&&k&&(PLAN.flags||[]).some(f=>f.text.indexOf(k+': early close')===0))return '12:30'}catch(e){}return '3:30'}
  function inDo(b, tr){
   const plan=b.plan||[], stopRow=plan.find(p=>/^stop$/i.test(p[0])), nxt=plan.find(p=>/sell a third/i.test(p[1])&&!p[2]);
   const trimmed=plan.some(p=>/sell a third/i.test(p[1])&&p[2]);
@@ -1602,7 +1603,7 @@ html[data-skin=ledger]{--wall:#d39a6a}
   if(tgt)parts.push('sell a third at '+tgt[1]+' ('+nxt[0]+')');
   if(trimmed)parts.push('stop is now break-even'+(tr.entry!=null?' ('+pxFmt(tr.entry)+')':''));
   else if(stopRow)parts.push('out on '+String(stopRow[1]).replace(/^A /,'a ').replace(/,? or -?(\d+)%/,' or −$1% on the option'));
-  parts.push('everything out by 3:30');
+  parts.push('everything out by '+exitBy(fileDay(LAST)));
   return ['HOLD', parts.join('. ')+'.'];
  }
  // One state per ticker, in plain words. Tone drives colour; the word is never repeated in the sentence.
@@ -1627,7 +1628,7 @@ html[data-skin=ledger]{--wall:#d39a6a}
   }
   if(L&&L.status==='open'&&open)return {tone:'move', icon:'spark', kind:'Heads-up', word:L.side>0?'Potential BUY':'Potential SELL',
    meta:L.last_c&&L.entry?'stock '+sgn1((L.last_c/L.entry-1)*100*(L.side>0?1:-1)):'',
-   do:['YOUR CALL','a heads-up, not a rule trade. Safety stop '+pxFmt(L.stop)+', out by 3:30.'],
+   do:['YOUR CALL','a heads-up, not a rule trade. Safety stop '+pxFmt(L.stop)+', out by '+h12(L.planned_exit||exitBy(dayIso))+'.'],
    say:'New '+(L.side>0?'high':'low')+' of the day at '+L.signal_time+'. Not a rule trade. Tracking it to '+(L.planned_exit||'3:30')+', safety stop '+pxFmt(L.stop)+'.', side:res!=null?'Rule trade earlier: <b class="'+(res>=0?'pos':'neg')+'">'+sgn(res)+'</b>.':''};
   if(res!=null)return {tone:res>=0?'pos':'neg', icon:'done', kind:after?'Day closed':'Done for the day', word:'Out '+sgn(res), say:why, do:['DONE','one trade a day. No re-entry today.'], side};
   if(st==='skip'||st==='sitout')return {tone:'out', icon:'pause', kind:'No trade', word:'Sitting out', say:b.sub||b.headline||'', do:['NOTHING TO DO','the rules pass on this one today.'], side};
@@ -1854,7 +1855,7 @@ html[data-skin=ledger]{--wall:#d39a6a}
   $('pNewsBox').hidden=!mn.length;
   $('pNews').innerHTML=mn.map(x=>'<li><a href="'+esc(x.url)+'" target="_blank" rel="noopener">'+esc(x.title)+'</a><span class="src">'+esc(x.source)+' \u00b7 '+esc(x.time)+'</span></li>').join('');
  }
- const loadPlan=()=>fetch('plan.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(p=>{PLAN=p;renderPlan()}).catch(()=>{});
+ const loadPlan=()=>fetch('plan.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(p=>{PLAN=p;renderPlan();if(LAST)try{render(LAST)}catch(e){}}).catch(()=>{});
  const load=()=>fetch('data.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.json()).then(d=>{LAST=d;render(d)}).catch(()=>{if(!LAST){$('dayHead').textContent='Couldn’t load today’s data.';$('daySub').textContent='Refresh in a minute.'}});
  load();
  setInterval(()=>{if(!document.hidden){load();loadPlan()}},60000);
