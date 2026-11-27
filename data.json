@@ -39,10 +39,10 @@
  },
  "tape": {
   "ok": true,
-  "asof": "2026-11-27T13:20:28-05:00",
+  "asof": "2026-11-27T13:25:28-05:00",
   "lean": "mixed",
   "label": "Tape split",
-  "strategy": "Calls and puts both stay open. Oil is down 1.6% and the 10-year is up 8.4 bp, so they disagree. The opening-range close picks the side.",
+  "strategy": "Calls and puts both stay open. Oil is down 1.7% and the 10-year is up 9.0 bp, so they disagree. The opening-range close picks the side.",
   "block_calls": false,
   "block_puts": false,
   "vix_small": false,
@@ -54,22 +54,22 @@
   "note": "Context only. Oil 1% and the 10-year 5 bp describe the lean. VIX 35 is a size note. Neither one blocks a call or a put.",
   "vix": {
    "name": "VIX",
-   "price": 24.06,
+   "price": 24.01,
    "prev": 26.8,
-   "chg_pct": -10.2,
-   "move": "Down 10.2% from yesterday's close of 26.8.",
-   "why": "Down 10.2% from yesterday's close of 26.8.",
+   "chg_pct": -10.4,
+   "move": "Down 10.4% from yesterday's close of 26.8.",
+   "why": "Down 10.4% from yesterday's close of 26.8.",
    "headline": null,
    "means": "Fear eased. I shrink size at 35 or higher, and this print is under that, so size stays normal."
   },
   "oil": {
    "name": "Crude",
-   "price": 83.03,
+   "price": 82.99,
    "prev": 84.42,
-   "chg_pct": -1.6,
-   "move": "Down 1.6% from yesterday's close of 84.42.",
+   "chg_pct": -1.7,
+   "move": "Down 1.7% from yesterday's close of 84.42.",
    "range": "Inside the last month, 79.07 to 104.99.",
-   "why": "Down 1.6% from yesterday's close of 84.42. Oilprice.com: The Oil Glut Everyone Expected Is Looking Increasingly Elusive",
+   "why": "Down 1.7% from yesterday's close of 84.42. Oilprice.com: The Oil Glut Everyone Expected Is Looking Increasingly Elusive",
    "headline": {
     "source": "Oilprice.com",
     "title": "The Oil Glut Everyone Expected Is Looking Increasingly Elusive"
@@ -78,9 +78,9 @@
   },
   "yield": {
    "name": "10-year",
-   "price": 4.932,
-   "chg_bps": 8.4,
-   "move": "10-year is 4.93%, up 8.4 bp."
+   "price": 4.938,
+   "chg_bps": 9.0,
+   "move": "10-year is 4.94%, up 9.0 bp."
   }
  },
  "curve": [
@@ -258,7 +258,7 @@
  "session": false,
  "next_check": null,
  "mode": "paper",
- "updated": "2026-11-27T13:20:27-05:00",
+ "updated": "2026-11-27T13:25:27-05:00",
  "date": "Fri \u00b7 Nov 27",
  "day": {
   "pills": [
@@ -368,7 +368,7 @@
      725.65,
      726.52,
      728.72,
-     728.68
+     728.32
     ],
     "box": {
      "hi": 726.05,
@@ -735,10 +735,10 @@
      },
      {
       "t": "13:00",
-      "o": 728.68,
+      "o": 728.32,
       "h": 729.2,
       "l": 726.09,
-      "c": 728.68,
+      "c": 728.32,
       "v": 2276823.0
      }
     ],
@@ -785,7 +785,7 @@
      726.27,
      725.64,
      726.52,
-     728.68
+     728.32
     ],
     "highs": [
      726.09,
@@ -984,7 +984,7 @@
      724.1581,
      724.2501,
      724.8107,
-     725.0797
+     725.0696
     ]
    },
    "levels": [
