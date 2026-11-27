@@ -1760,7 +1760,7 @@ html[data-skin=ledger]{--wall:#d39a6a}
   $('plan').innerHTML=plan.map(p=>'<li class="'+(p[2]?'done':'')+'"><b>'+esc(p[0])+'</b><span>'+esc(honestPlan(p[1]))+'</span></li>').join('');
   const isCrypto=CS.includes(SEL);
   $('cryptoDesk').hidden=!isCrypto; $('stockPanel').hidden=isCrypto; $('sideWrap').hidden=isCrypto;
-  if(isCrypto){$('cryptoDesk').innerHTML=coinView(SEL);wireSpark()}
+  if(isCrypto){$('cryptoDesk').innerHTML=coinView(SEL);wireSpark();wireCoinEvents()}
 
   const size=(D.size_pct||4)/100;
   const mine=recs.filter(r=>r.symbol===SEL&&r.result!=null).slice().reverse();
@@ -1915,6 +1915,19 @@ html[data-skin=ledger]{--wall:#d39a6a}
    +'<path d="'+path(cl)+'" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round"/>'+ent+mk2+rings
    +'<line class="spx" x1="0" x2="0" y1="'+T+'" y2="'+(T+ph)+'" stroke="var(--dim)" stroke-dasharray="2 3" opacity="0"/>'
    +'<circle class="spd" r="3.2" fill="var(--text)" opacity="0"/></svg>';
+ }
+ function wireCoinEvents(){
+  const svg=document.querySelector('#cryptoDesk svg.spk'); if(!svg)return; const D=SPK[svg.id]; if(!D)return;
+  document.querySelectorAll('#cryptoDesk .cev li').forEach(li=>li.onclick=()=>{
+   const was=li.classList.contains('on');
+   document.querySelectorAll('#cryptoDesk .cev li').forEach(x=>x.classList.remove('on'));
+   svg.querySelectorAll('.evhl').forEach(n=>n.remove());
+   if(was)return;
+   li.classList.add('on');
+   const i=+li.dataset.i, c=document.createElementNS('http://www.w3.org/2000/svg','circle');
+   c.setAttribute('class','evhl');c.setAttribute('cx',D.x(i));c.setAttribute('cy',D.y(D.cl[i]));c.setAttribute('r',14);
+   c.setAttribute('fill','none');c.setAttribute('stroke','var(--text)');c.setAttribute('stroke-width',1.6);svg.appendChild(c);
+  });
  }
  function wireSpark(){
   document.querySelectorAll('svg.spk').forEach(svg=>{
@@ -2181,7 +2194,7 @@ html[data-skin=ledger]{--wall:#d39a6a}
    +'<details class="st-more"><summary>Details</summary><dl class="al">'+detail.map(r=>'<dt>'+esc(r[0])+'</dt><dd>'+esc(r[1])+'</dd>').join('')+'</dl></details></div>'
    +(mv!=null?'<div class="runhead"><div class="rh-l"><div class="rh-k">'+sym+' · last '+cl.length+' days'+(d0?' (since '+shortDate(d0[0])+')':'')+'</div><div class="rh-v num">'+f(a)+' <span class="arr">→</span> '+f(z)+'</div></div><div class="rh-x num '+(mv<0?'dn':'')+'">'+sgn1(mv)+'</div></div>':'')
    +chart
-   +(ev.length?'<ol class="evgrid">'+ev.map(e=>'<li><span class="evd '+(e.k==='ring'?'ring':e.k==='sell'?'wht':'acc')+'"></span><span class="evt num">'+shortDate(e.date)+' · '+f(e.px)+'</span><span class="evl">'+esc(e.label)+'</span></li>').join('')+'</ol>':'')
+   +(ev.length?'<ol class="evgrid cev">'+ev.map(e=>'<li data-i="'+e.i+'"><span class="evd '+(e.k==='ring'?'ring':e.k==='sell'?'wht':'acc')+'"></span><span class="evt num">'+shortDate(e.date)+' · '+f(e.px)+'</span><span class="evl">'+esc(e.label)+'</span></li>').join('')+'</ol>':'')
    +'<div class="legend"><span><i class="sw" style="background:var(--accent);height:2px"></i>Daily close</span><span><i class="sw" style="background:var(--win);height:2px"></i><span data-g="20-day high">Buy line</span></span><span><i class="sw" style="background:var(--loss);height:2px"></i><span data-g="10-day low">Sell line</span></span></div>'
    +(T.length?'<div class="tablewrap bytick"><table><thead><tr><th>In</th><th>Out</th><th class="r">Days</th><th class="r">Result</th></tr></thead><tbody>'+T.map(t=>'<tr><td class="d">'+esc(t.entry_date)+' @ $'+fmtC(t.entry)+'</td><td class="d">'+esc(t.exit_date)+' @ $'+fmtC(t.exit)+'</td><td class="r">'+esc(t.days)+'</td><td class="r '+(t.result_pct>0?'pos':'neg')+'">'+pc(t.result_pct)+'</td></tr>').join('')+'</tbody></table></div>':'')
    +'</div>'+valueView(sym)+RULE;
