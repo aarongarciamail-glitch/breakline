@@ -4417,5 +4417,12 @@
    "n": 42,
    "hold_total_pct": -40
   }
+ },
+ "btc_gate": {
+  "on": false,
+  "days": 200,
+  "close": 60378.2,
+  "sma": 72028.46,
+  "added": "2026-11-27"
  }
 }

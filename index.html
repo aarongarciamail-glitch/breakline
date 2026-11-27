@@ -2162,6 +2162,11 @@ html[data-skin=ledger]{--wall:#d39a6a}
   const side=v?'Value track: <b class="'+(/cheap/i.test(v.zone)?'pos':/pricey|expensive/i.test(v.zone)?'neg':'')+'">'+esc(v.zone)+'</b> · this week’s smart buy '+v.mult+'× ('+esc(v.gauge)+' '+Number(v.reading).toFixed(2)+'). Buys every Sunday.':'';
   if(inn)return {tone:'in',icon:'up',kind:'Swing · holding',word:'Holding '+pc(c.open_pct),meta:c.entry_date?'since '+shortDate(c.entry_date):'',
    say:'Bought at '+f(c.entry)+' after a daily close above the 20-day high.',do:['HOLD','sell only on a daily close below '+f(c.sell_line)+' ('+pc(c.to_sell_pct)+' away).'],side};
+  const G=CRY&&CRY.btc_gate, off=G&&G.on===false;
+  const gateTxt=G&&G.sma?'Bitcoin '+f(G.close)+' vs its 200-day average '+f(G.sma)+' ('+pc((G.close/G.sma-1)*100)+').':'';
+  if(off)return {tone:'out',icon:'pause',kind:'Swing · buys paused',word:'Buys paused',meta:'Bitcoin filter',
+   say:'New buys only happen while Bitcoin closes above its 200-day average. '+gateTxt,
+   do:['WAIT','no new swing buys until Bitcoin closes back above '+(G.sma?f(G.sma):'its 200-day average')+'. The Value track still buys every Sunday.'],side};
   if(c.to_buy_pct!=null&&c.to_buy_pct<=3)return {tone:'watch',icon:'eye',kind:'Swing · close to a buy',word:'Near the buy line',
    say:'Price is '+pc(c.to_buy_pct)+' under the 20-day high ('+f(c.buy_line)+'). A daily close above it is a BUY.',do:['WATCH','the 8:10 pm check decides. Nothing to do before then.'],side};
   return {tone:'wait',icon:'clock',kind:'Swing · no position',word:'Waiting',
@@ -2199,7 +2204,7 @@ html[data-skin=ledger]{--wall:#d39a6a}
    +(T.length?'<div class="tablewrap bytick"><table><thead><tr><th>In</th><th>Out</th><th class="r">Days</th><th class="r">Result</th></tr></thead><tbody>'+T.map(t=>'<tr><td class="d">'+esc(t.entry_date)+' @ $'+fmtC(t.entry)+'</td><td class="d">'+esc(t.exit_date)+' @ $'+fmtC(t.exit)+'</td><td class="r">'+esc(t.days)+'</td><td class="r '+(t.result_pct>0?'pos':'neg')+'">'+pc(t.result_pct)+'</td></tr>').join('')+'</tbody></table></div>':'')
    +'</div>'+valueView(sym)+RULE;
  }
- const RULE='<div class="panel box crule"><h3>The crypto rule</h3><p><b>Buy</b> when a coin closes a day above its <span data-g="20-day high">20-day high</span>. <b>Sell</b> when it closes below its <span data-g="10-day low">10-day low</span>. Long only, held days to weeks, checked each evening at 8:10 pm ET, after the daily candle closes (midnight UTC). Alerts go to Telegram.</p><p class="meta">Backtest 2018–2025 (SOL from 2020), 1% cost per trade: beat holding on all three with smaller drops, but drops were still large. About 40% wins.</p></div>';
+ const RULE='<div class="panel box crule"><h3>The crypto rule</h3><p><b>Buy</b> when a coin closes a day above its <span data-g="20-day high">20-day high</span>. <b>Sell</b> when it closes below its <span data-g="10-day low">10-day low</span>. <b>Bitcoin filter:</b> new buys only while Bitcoin closes above its 200-day average (sells are never blocked). Rule added Nov 27, 2026. Long only, held days to weeks, checked each evening at 8:10 pm ET, after the daily candle closes (midnight UTC). Alerts go to Telegram.</p><p class="meta">Backtest 2018–2025 (SOL from 2020), 1% cost per trade: beat holding on all three with smaller drops, but drops were still large. About 40% wins. With the Bitcoin filter (2026 re-test): smaller worst drops on all three (BTC −52%→−45%, SOL −79%→−59%, XRP −79%→−71%).</p></div>';
  const loadCrypto=()=>fetch('crypto.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(d=>{CRY=d;if(LAST)render(LAST);liveCrypto()}).catch(()=>{});
  loadCrypto(); setInterval(()=>{if(!document.hidden)loadCrypto()},300000);
  /* live crypto prices in the browser (Coinbase public feed, no key, no server, no tokens).
