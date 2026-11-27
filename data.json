@@ -39,37 +39,37 @@
  },
  "tape": {
   "ok": true,
-  "asof": "2026-11-27T10:10:30-05:00",
+  "asof": "2026-11-27T10:15:28-05:00",
   "lean": "quiet",
   "label": "Oil quiet",
-  "strategy": "Calls and puts both stay open. Oil moved 0.5%, under the 1% line, so it does not pick a side.",
+  "strategy": "Calls and puts both stay open. Oil moved 0.9%, under the 1% line, so it does not pick a side.",
   "block_calls": false,
   "block_puts": false,
   "vix_small": false,
   "size_note": "",
   "skip_calls": "",
   "skip_puts": "",
-  "agree_calls": "Oil moved 0.5%, so the tape is not picking a side.",
-  "agree_puts": "Oil moved 0.5%, so the tape is not picking a side.",
+  "agree_calls": "Oil moved 0.9%, so the tape is not picking a side.",
+  "agree_puts": "Oil moved 0.9%, so the tape is not picking a side.",
   "note": "Context only. Oil 1% and the 10-year 5 bp describe the lean. VIX 35 is a size note. Neither one blocks a call or a put.",
   "vix": {
    "name": "VIX",
-   "price": 26.85,
+   "price": 27.36,
    "prev": 26.8,
-   "chg_pct": 0.2,
-   "move": "Up 0.2% from yesterday's close of 26.8.",
-   "why": "Up 0.2% from yesterday's close of 26.8.",
+   "chg_pct": 2.1,
+   "move": "Up 2.1% from yesterday's close of 26.8.",
+   "why": "Up 2.1% from yesterday's close of 26.8.",
    "headline": null,
    "means": "VIX is close to yesterday. Size stays normal until it reaches 35."
   },
   "oil": {
    "name": "Crude",
-   "price": 84.01,
+   "price": 83.65,
    "prev": 84.42,
-   "chg_pct": -0.5,
-   "move": "Down 0.5% from yesterday's close of 84.42.",
+   "chg_pct": -0.9,
+   "move": "Down 0.9% from yesterday's close of 84.42.",
    "range": "Inside the last month, 79.07 to 104.99.",
-   "why": "Down 0.5% from yesterday's close of 84.42. Associated Press: BC-Crude Oil Futures",
+   "why": "Down 0.9% from yesterday's close of 84.42. Associated Press: BC-Crude Oil Futures",
    "headline": {
     "source": "Associated Press",
     "title": "BC-Crude Oil Futures"
@@ -78,9 +78,9 @@
   },
   "yield": {
    "name": "10-year",
-   "price": 4.896,
-   "chg_bps": -0.8,
-   "move": "10-year is 4.90%, down 0.8 bp."
+   "price": 4.894,
+   "chg_bps": -1.0,
+   "move": "10-year is 4.89%, down 1.0 bp."
   }
  },
  "curve": [
@@ -256,9 +256,9 @@
   }
  ],
  "session": true,
- "next_check": "10:15 AM",
+ "next_check": "10:20 AM",
  "mode": "paper",
- "updated": "2026-11-27T10:10:29-05:00",
+ "updated": "2026-11-27T10:15:27-05:00",
  "date": "Fri \u00b7 Nov 27",
  "day": {
   "pills": [
@@ -288,7 +288,8 @@
      "9:50",
      "9:55",
      "10:00",
-     "10:05"
+     "10:05",
+     "10:10"
     ],
     "closes": [
      723.11,
@@ -296,9 +297,10 @@
      722.68,
      721.12,
      721.42,
-     720.09,
+     720.08,
      720.5,
-     721.06
+     721.06,
+     722.21
     ],
     "box": {
      "hi": 726.05,
@@ -369,11 +371,11 @@
      },
      {
       "t": "9:55",
-      "o": 721.51,
-      "h": 722.2,
+      "o": 721.45,
+      "h": 722.21,
       "l": 720.0,
-      "c": 720.09,
-      "v": 465057.78461
+      "c": 720.08,
+      "v": 874765.78461
      },
      {
       "t": "10:00",
@@ -390,6 +392,14 @@
       "l": 719.62,
       "c": 721.06,
       "v": 454448.217877
+     },
+     {
+      "t": "10:10",
+      "o": 720.99,
+      "h": 722.63,
+      "l": 720.84,
+      "c": 722.21,
+      "v": 258185.463675
      }
     ],
     "opens": [
@@ -398,9 +408,10 @@
      721.78,
      722.73,
      721.06,
-     721.51,
+     721.45,
      720.09,
-     720.48
+     720.48,
+     720.99
     ],
     "highs": [
      726.09,
@@ -408,9 +419,10 @@
      722.75,
      722.98,
      722.37,
-     722.2,
+     722.21,
      720.87,
-     721.97
+     721.97,
+     722.63
     ],
     "lows": [
      722.79,
@@ -420,7 +432,8 @@
      721.04,
      720.0,
      719.87,
-     719.62
+     719.62,
+     720.84
     ],
     "volumes": [
      1119251.227693,
@@ -428,9 +441,10 @@
      902686.0,
      829453.591614,
      674283.0,
-     465057.78461,
+     874765.78461,
      314100.967573,
-     454448.217877
+     454448.217877,
+     258185.463675
     ],
     "option": {
      "contract": "SPY 720 put",
@@ -457,9 +471,10 @@
      722.8514,
      722.5758,
      722.4354,
-     722.2832,
-     722.1748,
-     722.0749
+     722.1703,
+     722.0756,
+     721.9894,
+     721.9856
     ]
    },
    "levels": [
@@ -641,7 +656,8 @@
      "9:50",
      "9:55",
      "10:00",
-     "10:05"
+     "10:05",
+     "10:10"
     ],
     "closes": [
      640.75,
@@ -649,9 +665,10 @@
      640.02,
      638.04,
      639.12,
-     637.82,
+     637.72,
      638.0,
-     638.56
+     638.56,
+     640.84
     ],
     "box": {
      "hi": 645.86,
@@ -725,8 +742,8 @@
       "o": 639.19,
       "h": 640.17,
       "l": 637.67,
-      "c": 637.82,
-      "v": 353483.0
+      "c": 637.72,
+      "v": 713169.0
      },
      {
       "t": "10:00",
@@ -743,6 +760,14 @@
       "l": 636.72,
       "c": 638.56,
       "v": 445658.233309
+     },
+     {
+      "t": "10:10",
+      "o": 638.56,
+      "h": 641.24,
+      "l": 638.4,
+      "c": 640.84,
+      "v": 296729.708616
      }
     ],
     "opens": [
@@ -753,7 +778,8 @@
      638.04,
      639.19,
      637.76,
-     637.81
+     637.81,
+     638.56
     ],
     "highs": [
      645.89,
@@ -763,7 +789,8 @@
      640.26,
      640.17,
      638.5,
-     640.0
+     640.0,
+     641.24
     ],
     "lows": [
      640.08,
@@ -773,7 +800,8 @@
      637.92,
      637.67,
      637.12,
-     636.72
+     636.72,
+     638.4
     ],
     "volumes": [
      1420392.757685,
@@ -781,9 +809,10 @@
      990766.37265,
      886400.90724,
      825427.0,
-     353483.0,
+     713169.0,
      264323.037,
-     445658.233309
+     445658.233309,
+     296729.708616
     ],
     "option": {
      "contract": "QQQ 638 put",
@@ -810,9 +839,10 @@
      640.5925,
      640.2002,
      640.033,
-     639.9427,
-     639.8523,
-     639.7545
+     639.8575,
+     639.7757,
+     639.688,
+     639.7076
     ]
    },
    "levels": [
