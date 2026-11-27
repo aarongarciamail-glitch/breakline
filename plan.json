@@ -1,6 +1,6 @@
 {
  "v": 1,
- "built": "2026-11-27T07:00:02-05:00",
+ "built": "2026-11-27T07:15:02-05:00",
  "for": "2026-11-27",
  "for_label": "Friday, Nov 27",
  "title": "Today's plan",
@@ -39,25 +39,25 @@
  ],
  "tape": {
   "label": "Tape split",
-  "strategy": "Calls and puts both stay open. Oil is up 5.7% and the 10-year is down 5.6 bp, so they disagree. The opening-range close picks the side.",
+  "strategy": "Calls and puts both stay open. Oil is up 5.6% and the 10-year is down 5.6 bp, so they disagree. The opening-range close picks the side.",
   "vix": {
    "name": "VIX",
-   "price": 25.35,
+   "price": 25.37,
    "prev": 26.8,
-   "chg_pct": -5.4,
-   "move": "Down 5.4% from yesterday's close of 26.8.",
-   "why": "Down 5.4% from yesterday's close of 26.8.",
+   "chg_pct": -5.3,
+   "move": "Down 5.3% from yesterday's close of 26.8.",
+   "why": "Down 5.3% from yesterday's close of 26.8.",
    "headline": null,
    "means": "Fear eased. I shrink size at 35 or higher, and this print is under that, so size stays normal."
   },
   "oil": {
    "name": "Crude",
-   "price": 85.37,
+   "price": 85.28,
    "prev": 80.73,
-   "chg_pct": 5.7,
-   "move": "Up 5.7% from yesterday's close of 80.73.",
+   "chg_pct": 5.6,
+   "move": "Up 5.6% from yesterday's close of 80.73.",
    "range": "Inside the last month, 79.07 to 104.99.",
-   "why": "Up 5.7% from yesterday's close of 80.73. MT Newswires: Treasuries Fall as US Equity Futures Recover, Oil Prices Edge Higher, Commerzbank Says",
+   "why": "Up 5.6% from yesterday's close of 80.73. MT Newswires: Treasuries Fall as US Equity Futures Recover, Oil Prices Edge Higher, Commerzbank Says",
    "headline": {
     "source": "MT Newswires",
     "title": "Treasuries Fall as US Equity Futures Recover, Oil Prices Edge Higher, Commerzbank Says"
@@ -70,13 +70,19 @@
    "chg_bps": -5.6,
    "move": "10-year is 4.85%, down 5.6 bp."
   },
-  "asof": "2026-11-27T07:00:02-05:00"
+  "asof": "2026-11-27T07:15:02-05:00"
  },
  "market_news": [
   {
+   "title": "Nasdaq futures surge as investors pile back into battered AI stocks",
+   "source": "Reuters",
+   "time": "Fri 7:07 AM",
+   "url": "https://finance.yahoo.com/markets/stocks/articles/wall-st-futures-surge-investors-073405748.html"
+  },
+  {
    "title": "Dow Jones Futures Rise; Look For This Bullish Market Signal On Black Friday",
    "source": "Investor's Business Daily",
-   "time": "Fri 6:56 AM",
+   "time": "Fri 7:01 AM",
    "url": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-market-wild-ride-nasdaq-nvidia-slash-losses-anthropic-higher/?src=A00220&yptr=yahoo"
   },
   {
@@ -86,16 +92,10 @@
    "url": "https://finance.yahoo.com/markets/live/stock-market-today-firday-november-27-dow-sp-500-nasdaq-black-friday-holiday-091152065.html"
   },
   {
-   "title": "Renewed Tech Optimism Lifts Wall Street Pre-Bell; Asia, Europe Up",
-   "source": "MT Newswires",
-   "time": "Fri 6:12 AM",
-   "url": "https://finance.yahoo.com/markets/stocks/articles/renewed-tech-optimism-lifts-wall-111258453.html"
-  },
-  {
-   "title": "Sterling today: Pound edges higher as risk rebound offsets Fed repricing",
-   "source": "Investing.com",
-   "time": "Fri 6:04 AM",
-   "url": "https://finance.yahoo.com/markets/currencies/articles/sterling-today-pound-edges-higher-110410757.html"
+   "title": "Why Is Salesforce Stock Rising Today?",
+   "source": "InvestorsHub",
+   "time": "Fri 6:42 AM",
+   "url": "https://investorshub.advfn.com/market-news/article/40777/why-is-salesforce-stock-rising-today"
   }
  ],
  "tickers": {
@@ -121,7 +121,7 @@
    },
    "gap_pct": 1.56,
    "pmh": 731.49,
-   "pml": 726.83,
+   "pml": 726.77,
    "typ_box_pct": 0.281,
    "typ_box_usd": 2.01,
    "trend5": -4.4,
@@ -145,7 +145,7 @@
     "Call wall": 650.0,
     "Put wall": 640.0
    },
-   "last": 647.18,
+   "last": 647.04,
    "pc": 633.95,
    "ph": 634.89,
    "pl": 607.74,
@@ -159,7 +159,7 @@
     "R2": 652.68,
     "R3": 670.46
    },
-   "gap_pct": 2.09,
+   "gap_pct": 2.06,
    "pmh": 652.66,
    "pml": 645.88,
    "typ_box_pct": 0.565,
