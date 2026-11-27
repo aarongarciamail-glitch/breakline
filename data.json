@@ -39,10 +39,10 @@
  },
  "tape": {
   "ok": true,
-  "asof": "2026-11-27T14:35:28-05:00",
+  "asof": "2026-11-27T14:40:28-05:00",
   "lean": "mixed",
   "label": "Tape split",
-  "strategy": "Calls and puts both stay open. Oil is down 1.7% and the 10-year is up 8.6 bp, so they disagree. The opening-range close picks the side.",
+  "strategy": "Calls and puts both stay open. Oil is down 1.6% and the 10-year is up 8.6 bp, so they disagree. The opening-range close picks the side.",
   "block_calls": false,
   "block_puts": false,
   "vix_small": false,
@@ -64,12 +64,12 @@
   },
   "oil": {
    "name": "Crude",
-   "price": 82.96,
+   "price": 83.11,
    "prev": 84.42,
-   "chg_pct": -1.7,
-   "move": "Down 1.7% from yesterday's close of 84.42.",
+   "chg_pct": -1.6,
+   "move": "Down 1.6% from yesterday's close of 84.42.",
    "range": "Inside the last month, 79.07 to 104.99.",
-   "why": "Down 1.7% from yesterday's close of 84.42. Oilprice.com: The Oil Glut Everyone Expected Is Looking Increasingly Elusive",
+   "why": "Down 1.6% from yesterday's close of 84.42. Oilprice.com: The Oil Glut Everyone Expected Is Looking Increasingly Elusive",
    "headline": {
     "source": "Oilprice.com",
     "title": "The Oil Glut Everyone Expected Is Looking Increasingly Elusive"
@@ -258,7 +258,7 @@
  "session": false,
  "next_check": null,
  "mode": "paper",
- "updated": "2026-11-27T14:35:27-05:00",
+ "updated": "2026-11-27T14:40:27-05:00",
  "date": "Fri \u00b7 Nov 27",
  "day": {
   "pills": [
