@@ -39,10 +39,10 @@
  },
  "tape": {
   "ok": true,
-  "asof": "2026-11-27T07:00:16-05:00",
+  "asof": "2026-11-27T09:20:29-05:00",
   "lean": "mixed",
   "label": "Tape split",
-  "strategy": "Calls and puts both stay open. Oil is up 5.8% and the 10-year is down 5.6 bp, so they disagree. The opening-range close picks the side.",
+  "strategy": "Calls and puts both stay open. Oil is up 4.6% and the 10-year is flat, so they disagree. The opening-range close picks the side.",
   "block_calls": false,
   "block_puts": false,
   "vix_small": false,
@@ -54,33 +54,33 @@
   "note": "Context only. Oil 1% and the 10-year 5 bp describe the lean. VIX 35 is a size note. Neither one blocks a call or a put.",
   "vix": {
    "name": "VIX",
-   "price": 25.35,
+   "price": 25.59,
    "prev": 26.8,
-   "chg_pct": -5.4,
-   "move": "Down 5.4% from yesterday's close of 26.8.",
-   "why": "Down 5.4% from yesterday's close of 26.8.",
+   "chg_pct": -4.5,
+   "move": "Down 4.5% from yesterday's close of 26.8.",
+   "why": "Down 4.5% from yesterday's close of 26.8.",
    "headline": null,
-   "means": "Fear eased. I shrink size at 35 or higher, and this print is under that, so size stays normal."
+   "means": "VIX is close to yesterday. Size stays normal until it reaches 35."
   },
   "oil": {
    "name": "Crude",
-   "price": 85.38,
+   "price": 84.42,
    "prev": 80.73,
-   "chg_pct": 5.8,
-   "move": "Up 5.8% from yesterday's close of 80.73.",
+   "chg_pct": 4.6,
+   "move": "Up 4.6% from yesterday's close of 80.73.",
    "range": "Inside the last month, 79.07 to 104.99.",
-   "why": "Up 5.8% from yesterday's close of 80.73. MT Newswires: Treasuries Fall as US Equity Futures Recover, Oil Prices Edge Higher, Commerzbank Says",
+   "why": "Up 4.6% from yesterday's close of 80.73. Reuters: Oil on track to snap three-week losing streak over supply fears",
    "headline": {
-    "source": "MT Newswires",
-    "title": "Treasuries Fall as US Equity Futures Recover, Oil Prices Edge Higher, Commerzbank Says"
+    "source": "Reuters",
+    "title": "Oil on track to snap three-week losing streak over supply fears"
    },
    "means": "Oil and yields point different ways. Calls and puts both stay open. The box picks the side."
   },
   "yield": {
    "name": "10-year",
-   "price": 4.848,
-   "chg_bps": -5.6,
-   "move": "10-year is 4.85%, down 5.6 bp."
+   "price": 4.904,
+   "chg_bps": 0.0,
+   "move": "10-year is 4.90%, flat."
   }
  },
  "curve": [
@@ -229,18 +229,17 @@
    ]
   }
  ],
- "session": false,
- "next_check": null,
+ "session": true,
+ "next_check": "9:25 AM",
  "mode": "paper",
- "updated": "2026-11-27T07:00:16-05:00",
+ "updated": "2026-11-27T09:20:28-05:00",
  "date": "Fri \u00b7 Nov 27",
  "day": {
   "pills": [
-   "Paper",
-   "New day"
+   "Paper"
   ],
   "headline": "No trades yet. The box forms 9:30\u20139:45.",
-  "sub": "Levels and targets are on the Plan tab. Buy alerts can start at 9:45."
+  "sub": "Tap a ticker to see its box, levels and numbers."
  },
  "symbols": [
   "SPY",
@@ -251,12 +250,68 @@
    "status": "pending",
    "label": "Wait",
    "result": null,
-   "headline": "Morning brief posts at 9:20.",
-   "sub": "Levels first, then the box from 9:30 to 9:45.",
+   "headline": "The box forms 9:30 to 9:45.",
+   "sub": "A trade needs a 5-minute close outside it.",
    "chart": null,
-   "levels": [],
+   "levels": [
+    [
+     "Pre-market high",
+     731.49,
+     false
+    ],
+    [
+     "Call wall",
+     730.0,
+     false
+    ],
+    [
+     "Busiest strike",
+     728.0,
+     false
+    ],
+    [
+     "Pre-market low",
+     726.61,
+     false
+    ],
+    [
+     "Put wall",
+     725.0,
+     false
+    ],
+    [
+     "R1 pivot",
+     724.97,
+     true
+    ],
+    [
+     "Prior-day high",
+     718.43,
+     false
+    ],
+    [
+     "S1 pivot",
+     701.9900000000001,
+     true
+    ],
+    [
+     "Prior-day low",
+     695.45,
+     false
+    ]
+   ],
    "plan": [],
    "measures": [
+    [
+     "Normal box",
+     "0.28%",
+     "median of the last 40 sessions"
+    ],
+    [
+     "20-day volatility",
+     "32%",
+     "annualized, from daily closes"
+    ],
     [
      "Paper record",
      "3 trades",
@@ -276,21 +331,94 @@
     "lines": [
      [
       "When",
-      "Buy levels post at 9:45, after the opening range forms."
+      "The opening range forms 9:30 to 9:45. Buy levels post at 9:45."
      ]
     ]
+   },
+   "walls": {
+    "expiration": "2026-11-27",
+    "price": 727.41,
+    "at": "2026-11-27T09:15:09-05:00",
+    "call_wall": {
+     "strike": 730.0,
+     "oi": 29816
+    },
+    "put_wall": {
+     "strike": 725.0,
+     "oi": 12407
+    },
+    "magnet": {
+     "strike": 730.0,
+     "oi": 48789,
+     "share": 14
+    },
+    "busiest": {
+     "strike": 728.0,
+     "vol": 5836
+    }
    }
   },
   "QQQ": {
    "status": "pending",
    "label": "Wait",
    "result": null,
-   "headline": "Morning brief posts at 9:20.",
-   "sub": "Levels first, then the box from 9:30 to 9:45.",
+   "headline": "The box forms 9:30 to 9:45.",
+   "sub": "A trade needs a 5-minute close outside it.",
    "chart": null,
-   "levels": [],
+   "levels": [
+    [
+     "Pre-market high",
+     652.66,
+     false
+    ],
+    [
+     "Call wall",
+     650.0,
+     false
+    ],
+    [
+     "R1 pivot",
+     643.3133333333335,
+     true
+    ],
+    [
+     "Put wall",
+     640.0,
+     false
+    ],
+    [
+     "Pre-market low",
+     637.67,
+     false
+    ],
+    [
+     "Prior-day high",
+     634.89,
+     false
+    ],
+    [
+     "S1 pivot",
+     616.1633333333335,
+     true
+    ],
+    [
+     "Prior-day low",
+     607.74,
+     false
+    ]
+   ],
    "plan": [],
    "measures": [
+    [
+     "Normal box",
+     "0.56%",
+     "median of the last 40 sessions"
+    ],
+    [
+     "20-day volatility",
+     "48%",
+     "annualized, from daily closes"
+    ],
     [
      "Paper record",
      "3 trades",
@@ -310,9 +438,31 @@
     "lines": [
      [
       "When",
-      "Buy levels post at 9:45, after the opening range forms."
+      "The opening range forms 9:30 to 9:45. Buy levels post at 9:45."
      ]
     ]
+   },
+   "walls": {
+    "expiration": "2026-11-27",
+    "price": 647.68,
+    "at": "2026-11-27T09:15:13-05:00",
+    "call_wall": {
+     "strike": 650.0,
+     "oi": 14851
+    },
+    "put_wall": {
+     "strike": 640.0,
+     "oi": 12523
+    },
+    "magnet": {
+     "strike": 640.0,
+     "oi": 21257,
+     "share": 13
+    },
+    "busiest": {
+     "strike": 650.0,
+     "vol": 2414
+    }
    }
   }
  },
