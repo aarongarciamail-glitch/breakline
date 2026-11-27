@@ -39,10 +39,10 @@
  },
  "tape": {
   "ok": true,
-  "asof": "2026-11-27T13:10:28-05:00",
+  "asof": "2026-11-27T13:15:31-05:00",
   "lean": "mixed",
   "label": "Tape split",
-  "strategy": "Calls and puts both stay open. Oil is down 1.9% and the 10-year is up 8.0 bp, so they disagree. The opening-range close picks the side.",
+  "strategy": "Calls and puts both stay open. Oil is down 1.8% and the 10-year is up 8.4 bp, so they disagree. The opening-range close picks the side.",
   "block_calls": false,
   "block_puts": false,
   "vix_small": false,
@@ -54,22 +54,22 @@
   "note": "Context only. Oil 1% and the 10-year 5 bp describe the lean. VIX 35 is a size note. Neither one blocks a call or a put.",
   "vix": {
    "name": "VIX",
-   "price": 24.52,
+   "price": 24.37,
    "prev": 26.8,
-   "chg_pct": -8.5,
-   "move": "Down 8.5% from yesterday's close of 26.8.",
-   "why": "Down 8.5% from yesterday's close of 26.8.",
+   "chg_pct": -9.1,
+   "move": "Down 9.1% from yesterday's close of 26.8.",
+   "why": "Down 9.1% from yesterday's close of 26.8.",
    "headline": null,
    "means": "Fear eased. I shrink size at 35 or higher, and this print is under that, so size stays normal."
   },
   "oil": {
    "name": "Crude",
-   "price": 82.84,
+   "price": 82.9,
    "prev": 84.42,
-   "chg_pct": -1.9,
-   "move": "Down 1.9% from yesterday's close of 84.42.",
+   "chg_pct": -1.8,
+   "move": "Down 1.8% from yesterday's close of 84.42.",
    "range": "Inside the last month, 79.07 to 104.99.",
-   "why": "Down 1.9% from yesterday's close of 84.42. Oilprice.com: The Oil Glut Everyone Expected Is Looking Increasingly Elusive",
+   "why": "Down 1.8% from yesterday's close of 84.42. Oilprice.com: The Oil Glut Everyone Expected Is Looking Increasingly Elusive",
    "headline": {
     "source": "Oilprice.com",
     "title": "The Oil Glut Everyone Expected Is Looking Increasingly Elusive"
@@ -78,9 +78,9 @@
   },
   "yield": {
    "name": "10-year",
-   "price": 4.928,
-   "chg_bps": 8.0,
-   "move": "10-year is 4.93%, up 8.0 bp."
+   "price": 4.932,
+   "chg_bps": 8.4,
+   "move": "10-year is 4.93%, up 8.4 bp."
   }
  },
  "curve": [
@@ -258,7 +258,7 @@
  "session": false,
  "next_check": null,
  "mode": "paper",
- "updated": "2026-11-27T13:10:27-05:00",
+ "updated": "2026-11-27T13:15:27-05:00",
  "date": "Fri \u00b7 Nov 27",
  "day": {
   "pills": [
@@ -367,7 +367,7 @@
      726.29,
      725.65,
      726.52,
-     728.73,
+     728.72,
      728.68
     ],
     "box": {
@@ -727,11 +727,11 @@
      },
      {
       "t": "12:55",
-      "o": 726.53,
+      "o": 726.52,
       "h": 729.15,
       "l": 726.21,
-      "c": 728.73,
-      "v": 1264762.0
+      "c": 728.72,
+      "v": 3655637.0
      },
      {
       "t": "13:00",
@@ -784,7 +784,7 @@
      726.19,
      726.27,
      725.64,
-     726.53,
+     726.52,
      728.68
     ],
     "highs": [
@@ -919,7 +919,7 @@
      469443.0,
      689264.0,
      904260.663682,
-     1264762.0,
+     3655637.0,
      313325.0
     ],
     "option": {
@@ -983,8 +983,8 @@
      724.1022,
      724.1581,
      724.2501,
-     724.4651,
-     724.5139
+     724.8107,
+     724.8504
     ]
    },
    "levels": [
@@ -1002,6 +1002,11 @@
      "Range high",
      726.05,
      true
+    ],
+    [
+     "Busiest strike",
+     726.0,
+     false
     ],
     [
      "Pre-market low",
@@ -1124,8 +1129,8 @@
    },
    "walls": {
     "expiration": "2026-11-27",
-    "price": 726.2,
-    "at": "2026-11-27T12:40:29-05:00",
+    "price": 728.68,
+    "at": "2026-11-27T13:15:29-05:00",
     "call_wall": {
      "strike": 730.0,
      "oi": 29816
@@ -1140,8 +1145,8 @@
      "share": 14
     },
     "busiest": {
-     "strike": 725.0,
-     "vol": 612830
+     "strike": 726.0,
+     "vol": 684073
     }
    }
   },
@@ -1240,7 +1245,7 @@
      646.47,
      646.08,
      647.13,
-     650.76,
+     650.75,
      650.99
     ],
     "box": {
@@ -1603,8 +1608,8 @@
       "o": 647.1,
       "h": 651.34,
       "l": 647.1,
-      "c": 650.76,
-      "v": 934905.0
+      "c": 650.75,
+      "v": 1663473.0
      },
      {
       "t": "13:00",
@@ -1792,7 +1797,7 @@
      245960.0,
      320487.0,
      492820.978392,
-     934905.0,
+     1663473.0,
      2400151.0
     ],
     "option": {
@@ -1856,19 +1861,19 @@
      642.6616,
      642.7191,
      642.8209,
-     643.133,
-     643.8955
+     643.3571,
+     644.0738
     ]
    },
    "levels": [
     [
-     "Pre-market high",
-     652.66,
+     "Call wall",
+     665.0,
      false
     ],
     [
-     "Call wall",
-     650.0,
+     "Pre-market high",
+     652.66,
      false
     ],
     [
@@ -2002,11 +2007,11 @@
    },
    "walls": {
     "expiration": "2026-11-27",
-    "price": 646.03,
-    "at": "2026-11-27T12:40:31-05:00",
+    "price": 650.99,
+    "at": "2026-11-27T13:15:31-05:00",
     "call_wall": {
-     "strike": 650.0,
-     "oi": 14851
+     "strike": 665.0,
+     "oi": 11825
     },
     "put_wall": {
      "strike": 640.0,
@@ -2015,11 +2020,11 @@
     "magnet": {
      "strike": 640.0,
      "oi": 21257,
-     "share": 12
+     "share": 13
     },
     "busiest": {
      "strike": 645.0,
-     "vol": 374204
+     "vol": 402978
     }
    }
   }
