@@ -39,10 +39,10 @@
  },
  "tape": {
   "ok": true,
-  "asof": "2026-11-27T12:15:28-05:00",
+  "asof": "2026-11-27T12:20:28-05:00",
   "lean": "mixed",
   "label": "Tape split",
-  "strategy": "Calls and puts both stay open. Oil is down 1.8% and the 10-year is up 8.0 bp, so they disagree. The opening-range close picks the side.",
+  "strategy": "Calls and puts both stay open. Oil is down 1.7% and the 10-year is up 8.0 bp, so they disagree. The opening-range close picks the side.",
   "block_calls": false,
   "block_puts": false,
   "vix_small": false,
@@ -54,22 +54,22 @@
   "note": "Context only. Oil 1% and the 10-year 5 bp describe the lean. VIX 35 is a size note. Neither one blocks a call or a put.",
   "vix": {
    "name": "VIX",
-   "price": 24.66,
+   "price": 24.85,
    "prev": 26.8,
-   "chg_pct": -8.0,
-   "move": "Down 8.0% from yesterday's close of 26.8.",
-   "why": "Down 8.0% from yesterday's close of 26.8.",
+   "chg_pct": -7.3,
+   "move": "Down 7.3% from yesterday's close of 26.8.",
+   "why": "Down 7.3% from yesterday's close of 26.8.",
    "headline": null,
    "means": "Fear eased. I shrink size at 35 or higher, and this print is under that, so size stays normal."
   },
   "oil": {
    "name": "Crude",
-   "price": 82.89,
+   "price": 83.02,
    "prev": 84.42,
-   "chg_pct": -1.8,
-   "move": "Down 1.8% from yesterday's close of 84.42.",
+   "chg_pct": -1.7,
+   "move": "Down 1.7% from yesterday's close of 84.42.",
    "range": "Inside the last month, 79.07 to 104.99.",
-   "why": "Down 1.8% from yesterday's close of 84.42. Reuters: Iraq in talks with OPEC for higher oil quota, minister says before OPEC+ meeting",
+   "why": "Down 1.7% from yesterday's close of 84.42. Reuters: Iraq in talks with OPEC for higher oil quota, minister says before OPEC+ meeting",
    "headline": {
     "source": "Reuters",
     "title": "Iraq in talks with OPEC for higher oil quota, minister says before OPEC+ meeting"
@@ -256,9 +256,9 @@
   }
  ],
  "session": true,
- "next_check": "12:20 PM",
+ "next_check": "12:25 PM",
  "mode": "paper",
- "updated": "2026-11-27T12:15:28-05:00",
+ "updated": "2026-11-27T12:20:27-05:00",
  "date": "Fri \u00b7 Nov 27",
  "day": {
   "pills": [
@@ -313,7 +313,8 @@
      "11:55",
      "12:00",
      "12:05",
-     "12:10"
+     "12:10",
+     "12:15"
     ],
     "closes": [
      723.11,
@@ -346,9 +347,10 @@
      727.0,
      727.74,
      726.42,
-     726.07,
+     726.03,
      726.32,
-     725.97
+     725.97,
+     726.52
     ],
     "box": {
      "hi": 726.05,
@@ -622,8 +624,8 @@
       "o": 726.44,
       "h": 727.07,
       "l": 725.87,
-      "c": 726.07,
-      "v": 212506.385569
+      "c": 726.03,
+      "v": 393919.385569
      },
      {
       "t": "12:05",
@@ -640,6 +642,14 @@
       "l": 725.82,
       "c": 725.97,
       "v": 152789.038
+     },
+     {
+      "t": "12:15",
+      "o": 726.03,
+      "h": 726.64,
+      "l": 725.9,
+      "c": 726.52,
+      "v": 203167.0
      }
     ],
     "opens": [
@@ -675,7 +685,8 @@
      727.77,
      726.44,
      726.03,
-     726.28
+     726.28,
+     726.03
     ],
     "highs": [
      726.09,
@@ -710,7 +721,8 @@
      727.8,
      727.07,
      726.57,
-     726.44
+     726.44,
+     726.64
     ],
     "lows": [
      722.79,
@@ -745,7 +757,8 @@
      726.42,
      725.87,
      725.75,
-     725.82
+     725.82,
+     725.9
     ],
     "volumes": [
      1119251.227693,
@@ -778,9 +791,10 @@
      312408.50802,
      514237.0,
      386538.0,
-     212506.385569,
+     393919.385569,
      176930.422194,
-     152789.038
+     152789.038,
+     203167.0
     ],
     "option": {
      "contract": "SPY 720 put",
@@ -832,9 +846,10 @@
      723.4046,
      723.5411,
      723.6212,
-     723.6566,
-     723.684,
-     723.7059
+     723.6857,
+     723.7125,
+     723.734,
+     723.7652
     ]
    },
    "levels": [
@@ -1036,7 +1051,8 @@
      "11:55",
      "12:00",
      "12:05",
-     "12:10"
+     "12:10",
+     "12:15"
     ],
     "closes": [
      640.75,
@@ -1071,7 +1087,8 @@
      646.31,
      645.73,
      646.31,
-     646.37
+     646.37,
+     646.89
     ],
     "box": {
      "hi": 645.86,
@@ -1344,9 +1361,9 @@
       "t": "12:00",
       "o": 646.31,
       "h": 647.11,
-      "l": 645.44,
+      "l": 645.43,
       "c": 645.73,
-      "v": 210984.0
+      "v": 333411.0
      },
      {
       "t": "12:05",
@@ -1363,6 +1380,14 @@
       "l": 645.92,
       "c": 646.37,
       "v": 134541.40811
+     },
+     {
+      "t": "12:15",
+      "o": 646.37,
+      "h": 646.94,
+      "l": 646.1,
+      "c": 646.89,
+      "v": 131481.0
      }
     ],
     "opens": [
@@ -1398,7 +1423,8 @@
      648.12,
      646.31,
      645.68,
-     646.27
+     646.27,
+     646.37
     ],
     "highs": [
      645.89,
@@ -1433,7 +1459,8 @@
      648.13,
      647.11,
      646.45,
-     646.69
+     646.69,
+     646.94
     ],
     "lows": [
      640.08,
@@ -1466,9 +1493,10 @@
      646.41,
      647.15,
      646.31,
-     645.44,
+     645.43,
      645.47,
-     645.92
+     645.92,
+     646.1
     ],
     "volumes": [
      1420392.757685,
@@ -1501,9 +1529,10 @@
      287280.0,
      349190.196912,
      474316.380038,
-     210984.0,
+     333411.0,
      129521.598052,
-     134541.40811
+     134541.40811,
+     131481.0
     ],
     "option": {
      "contract": "QQQ 638 put",
@@ -1555,9 +1584,10 @@
      641.8036,
      641.9365,
      642.0799,
-     642.1306,
-     642.161,
-     642.1941
+     642.1594,
+     642.1894,
+     642.222,
+     642.2558
     ]
    },
    "levels": [
