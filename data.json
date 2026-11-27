@@ -7,25 +7,25 @@
   "checks": [
    {
     "name": "Paper trades",
-    "value": "14 of 20",
+    "value": "15 of 20",
     "ok": false,
-    "progress": 0.7
+    "progress": 0.75
    },
    {
     "name": "Profit factor",
-    "value": "0.43",
+    "value": "0.38",
     "need": "\u2265 1.2",
     "ok": false
    },
    {
     "name": "Average trade",
-    "value": "-11%",
+    "value": "-13%",
     "need": "> 0%",
     "ok": false
    },
    {
     "name": "Worst drawdown",
-    "value": "6.4%",
+    "value": "7.4%",
     "need": "\u2264 12%",
     "ok": true
    },
@@ -39,7 +39,7 @@
  },
  "tape": {
   "ok": true,
-  "asof": "2026-11-27T10:05:29-05:00",
+  "asof": "2026-11-27T10:10:30-05:00",
   "lean": "quiet",
   "label": "Oil quiet",
   "strategy": "Calls and puts both stay open. Oil moved 0.5%, under the 1% line, so it does not pick a side.",
@@ -54,33 +54,33 @@
   "note": "Context only. Oil 1% and the 10-year 5 bp describe the lean. VIX 35 is a size note. Neither one blocks a call or a put.",
   "vix": {
    "name": "VIX",
-   "price": 27.11,
+   "price": 26.85,
    "prev": 26.8,
-   "chg_pct": 1.2,
-   "move": "Up 1.2% from yesterday's close of 26.8.",
-   "why": "Up 1.2% from yesterday's close of 26.8.",
+   "chg_pct": 0.2,
+   "move": "Up 0.2% from yesterday's close of 26.8.",
+   "why": "Up 0.2% from yesterday's close of 26.8.",
    "headline": null,
    "means": "VIX is close to yesterday. Size stays normal until it reaches 35."
   },
   "oil": {
    "name": "Crude",
-   "price": 83.98,
+   "price": 84.01,
    "prev": 84.42,
    "chg_pct": -0.5,
    "move": "Down 0.5% from yesterday's close of 84.42.",
    "range": "Inside the last month, 79.07 to 104.99.",
-   "why": "Down 0.5% from yesterday's close of 84.42. Yahoo Finance Video: Oil prices are back on the rise. Could things get out of hand again?",
+   "why": "Down 0.5% from yesterday's close of 84.42. Associated Press: BC-Crude Oil Futures",
    "headline": {
-    "source": "Yahoo Finance Video",
-    "title": "Oil prices are back on the rise. Could things get out of hand again?"
+    "source": "Associated Press",
+    "title": "BC-Crude Oil Futures"
    },
    "means": "A move under 1% does not pick a side. Calls and puts both stay open."
   },
   "yield": {
    "name": "10-year",
-   "price": 4.89,
-   "chg_bps": -1.4,
-   "move": "10-year is 4.89%, down 1.4 bp."
+   "price": 4.896,
+   "chg_bps": -0.8,
+   "move": "10-year is 4.90%, down 0.8 bp."
   }
  },
  "curve": [
@@ -139,20 +139,29 @@
   {
    "date": "2026-11-27",
    "acct": -6.1
+  },
+  {
+   "date": "2026-11-27",
+   "acct": -7.44
   }
  ],
- "max_dd": 6.44,
+ "max_dd": 7.44,
  "days": [
   {
    "date": "2026-11-27",
-   "n": 1,
+   "n": 2,
    "wins": 1,
-   "acct": 0.36,
+   "acct": -1.07,
    "items": [
     {
      "symbol": "QQQ",
      "dir": "puts",
      "result": 9
+    },
+    {
+     "symbol": "SPY",
+     "dir": "puts",
+     "result": -36
     }
    ]
   },
@@ -247,15 +256,15 @@
   }
  ],
  "session": true,
- "next_check": "10:10 AM",
+ "next_check": "10:15 AM",
  "mode": "paper",
- "updated": "2026-11-27T10:05:28-05:00",
+ "updated": "2026-11-27T10:10:29-05:00",
  "date": "Fri \u00b7 Nov 27",
  "day": {
   "pills": [
    "Paper"
   ],
-  "headline": "2 trades: 1 open, 1 won.",
+  "headline": "2 trades: 1 won, 1 lost.",
   "sub": "Tap a ticker to see its box, levels and numbers."
  },
  "symbols": [
@@ -264,11 +273,11 @@
  ],
  "stocks": {
   "SPY": {
-   "status": "down",
-   "label": "Holding puts",
-   "result": null,
-   "headline": "SPY broke down at 10:00. Puts.",
-   "sub": "5-minute close 720.09 below the box (720.92). Paper trade is open.",
+   "status": "loss",
+   "label": "Sold -36%",
+   "result": -36,
+   "headline": "SPY broke down at 10:00. Closed -36%.",
+   "sub": "Puts from the 10:00 close at 720.09. Paper result on the option, whole trade.",
    "chart": {
     "symbol": "SPY",
     "times": [
@@ -278,7 +287,8 @@
      "9:45",
      "9:50",
      "9:55",
-     "10:00"
+     "10:00",
+     "10:05"
     ],
     "closes": [
      723.11,
@@ -287,7 +297,8 @@
      721.12,
      721.42,
      720.09,
-     720.5
+     720.5,
+     721.06
     ],
     "box": {
      "hi": 726.05,
@@ -308,6 +319,11 @@
       "i": 5,
       "kind": "buy",
       "label": "BUY"
+     },
+     {
+      "i": 7,
+      "kind": "sell",
+      "label": "SELL"
      }
     ],
     "bars": [
@@ -347,9 +363,9 @@
       "t": "9:50",
       "o": 721.06,
       "h": 722.37,
-      "l": 721.05,
+      "l": 721.04,
       "c": 721.42,
-      "v": 348025.0
+      "v": 674283.0
      },
      {
       "t": "9:55",
@@ -366,6 +382,14 @@
       "l": 719.87,
       "c": 720.5,
       "v": 314100.967573
+     },
+     {
+      "t": "10:05",
+      "o": 720.48,
+      "h": 721.97,
+      "l": 719.62,
+      "c": 721.06,
+      "v": 454448.217877
      }
     ],
     "opens": [
@@ -375,7 +399,8 @@
      722.73,
      721.06,
      721.51,
-     720.09
+     720.09,
+     720.48
     ],
     "highs": [
      726.09,
@@ -384,25 +409,28 @@
      722.98,
      722.37,
      722.2,
-     720.87
+     720.87,
+     721.97
     ],
     "lows": [
      722.79,
      721.53,
      720.92,
      720.5,
-     721.05,
+     721.04,
      720.0,
-     719.87
+     719.87,
+     719.62
     ],
     "volumes": [
      1119251.227693,
      1115425.75159,
      902686.0,
      829453.591614,
-     348025.0,
+     674283.0,
      465057.78461,
-     314100.967573
+     314100.967573,
+     454448.217877
     ],
     "option": {
      "contract": "SPY 720 put",
@@ -411,9 +439,15 @@
        "t": "10:00",
        "px": 2.34,
        "label": "Buy"
+      },
+      {
+       "t": "10:10",
+       "px": 1.51,
+       "label": "Exit"
       }
      ],
-     "best_pct": 3.0
+     "best_pct": 3.0,
+     "trade_pct": -35.5
     },
     "shadows": [],
     "strategy_b": [],
@@ -422,9 +456,10 @@
      723.1481,
      722.8514,
      722.5758,
-     722.4981,
-     722.3293,
-     722.2112
+     722.4354,
+     722.2832,
+     722.1748,
+     722.0749
     ]
    },
    "levels": [
@@ -493,7 +528,7 @@
     [
      "Stop",
      "A 5-min close back over 720.92, or -50%",
-     false
+     true
     ],
     [
      "P",
@@ -534,8 +569,8 @@
     ],
     [
      "Paper record",
-     "3 trades",
-     "0% win \u00b7 avg -30% \u00b7 best -24%"
+     "4 trades",
+     "0% win \u00b7 avg -32% \u00b7 best -24%"
     ],
     [
      "Backtest, 59 days",
@@ -545,21 +580,25 @@
    ],
    "late": null,
    "action": {
-    "word": "HOLD PUTS",
-    "tone": "hold",
-    "tile": "Holding puts",
+    "word": "SOLD -36%",
+    "tone": "loss",
+    "tile": "Sold -36%",
     "lines": [
      [
       "Bought",
       "SPY 720 put at $2.34 (10:00)"
      ],
      [
-      "Take profit",
-      "1/3 at 710.21, 1/3 at 701.99"
+      "Sold",
+      "the rest at $1.51 (10:10)"
      ],
      [
-      "Sell all if",
-      "a 5-minute candle closes back over 720.92, or the option drops to $1.17"
+      "Why it ended",
+      "SPY fell back inside its opening range (721.06)"
+     ],
+     [
+      "Result",
+      "-36% on the whole trade (paper)"
      ]
     ]
    },
@@ -601,7 +640,8 @@
      "9:45",
      "9:50",
      "9:55",
-     "10:00"
+     "10:00",
+     "10:05"
     ],
     "closes": [
      640.75,
@@ -610,7 +650,8 @@
      638.04,
      639.12,
      637.82,
-     638.0
+     638.0,
+     638.56
     ],
     "box": {
      "hi": 645.86,
@@ -675,9 +716,9 @@
       "t": "9:50",
       "o": 638.04,
       "h": 640.26,
-      "l": 637.97,
+      "l": 637.92,
       "c": 639.12,
-      "v": 418448.0
+      "v": 825427.0
      },
      {
       "t": "9:55",
@@ -694,6 +735,14 @@
       "l": 637.12,
       "c": 638.0,
       "v": 264323.037
+     },
+     {
+      "t": "10:05",
+      "o": 637.81,
+      "h": 640.0,
+      "l": 636.72,
+      "c": 638.56,
+      "v": 445658.233309
      }
     ],
     "opens": [
@@ -703,7 +752,8 @@
      640.08,
      638.04,
      639.19,
-     637.76
+     637.76,
+     637.81
     ],
     "highs": [
      645.89,
@@ -712,25 +762,28 @@
      640.47,
      640.26,
      640.17,
-     638.5
+     638.5,
+     640.0
     ],
     "lows": [
      640.08,
      638.47,
      637.98,
      637.15,
-     637.97,
+     637.92,
      637.67,
-     637.12
+     637.12,
+     636.72
     ],
     "volumes": [
      1420392.757685,
      1310065.348688,
      990766.37265,
      886400.90724,
-     418448.0,
+     825427.0,
      353483.0,
-     264323.037
+     264323.037,
+     445658.233309
     ],
     "option": {
      "contract": "QQQ 638 put",
@@ -756,9 +809,10 @@
      641.0421,
      640.5925,
      640.2002,
-     640.11,
-     640.0077,
-     639.9077
+     640.033,
+     639.9427,
+     639.8523,
+     639.7545
     ]
    },
    "levels": [
@@ -927,6 +981,14 @@
    "call": "QQQ puts",
    "result": 9,
    "note": "5-min close 638.00 back inside the box.",
+   "tag": "Lotto"
+  },
+  {
+   "date": "2026-11-27",
+   "symbol": "SPY",
+   "call": "SPY puts",
+   "result": -36,
+   "note": "5-min close 721.06 back inside the box.",
    "tag": "Lotto"
   },
   {
