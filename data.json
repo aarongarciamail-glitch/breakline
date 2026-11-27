@@ -39,7 +39,7 @@
  },
  "tape": {
   "ok": true,
-  "asof": "2026-11-27T14:20:28-05:00",
+  "asof": "2026-11-27T14:25:30-05:00",
   "lean": "mixed",
   "label": "Tape split",
   "strategy": "Calls and puts both stay open. Oil is down 1.6% and the 10-year is up 8.6 bp, so they disagree. The opening-range close picks the side.",
@@ -64,7 +64,7 @@
   },
   "oil": {
    "name": "Crude",
-   "price": 83.06,
+   "price": 83.11,
    "prev": 84.42,
    "chg_pct": -1.6,
    "move": "Down 1.6% from yesterday's close of 84.42.",
@@ -258,7 +258,7 @@
  "session": false,
  "next_check": null,
  "mode": "paper",
- "updated": "2026-11-27T14:20:27-05:00",
+ "updated": "2026-11-27T14:25:27-05:00",
  "date": "Fri \u00b7 Nov 27",
  "day": {
   "pills": [
@@ -994,11 +994,6 @@
      false
     ],
     [
-     "Call wall",
-     730.0,
-     false
-    ],
-    [
      "Range high",
      726.05,
      true
@@ -1011,11 +1006,6 @@
     [
      "Pre-market low",
      725.84,
-     false
-    ],
-    [
-     "Put wall",
-     725.0,
      false
     ],
     [
@@ -1130,20 +1120,7 @@
    "walls": {
     "expiration": "2026-11-27",
     "price": 728.32,
-    "at": "2026-11-27T13:50:30-05:00",
-    "call_wall": {
-     "strike": 730.0,
-     "oi": 29816
-    },
-    "put_wall": {
-     "strike": 725.0,
-     "oi": 12407
-    },
-    "magnet": {
-     "strike": 730.0,
-     "oi": 48789,
-     "share": 14
-    },
+    "at": "2026-11-27T14:25:29-05:00",
     "busiest": {
      "strike": 726.0,
      "vol": 684073
@@ -1867,11 +1844,6 @@
    },
    "levels": [
     [
-     "Call wall",
-     665.0,
-     false
-    ],
-    [
      "Pre-market high",
      652.66,
      false
@@ -1890,11 +1862,6 @@
      "R1 pivot",
      643.3133333333335,
      true
-    ],
-    [
-     "Put wall",
-     640.0,
-     false
     ],
     [
      "Range low",
@@ -2008,20 +1975,7 @@
    "walls": {
     "expiration": "2026-11-27",
     "price": 650.99,
-    "at": "2026-11-27T13:50:32-05:00",
-    "call_wall": {
-     "strike": 665.0,
-     "oi": 11825
-    },
-    "put_wall": {
-     "strike": 640.0,
-     "oi": 12523
-    },
-    "magnet": {
-     "strike": 640.0,
-     "oi": 21257,
-     "share": 13
-    },
+    "at": "2026-11-27T14:25:30-05:00",
     "busiest": {
      "strike": 645.0,
      "vol": 402978
