@@ -551,6 +551,8 @@ html[data-skin=ledger]{--wall:#d39a6a}
 .ccard svg{width:100%;height:auto;display:block}
 .ccard svg text{font:10.5px var(--mono)}
 .spk{touch-action:pan-y;cursor:crosshair}
+.cview{display:grid;gap:8px}.cview .spk{width:100%;height:auto;display:block}.cview .spk text{font:10.5px var(--mono)}
+.cview .stockhead .cn{display:inline-flex;align-items:center;gap:6px}.cview .stockhead .ci{width:22px;height:22px}
 .cline{display:grid;grid-template-columns:auto 1fr auto;gap:4px 10px;font-size:13.5px;align-items:baseline}
 .cline dt{color:var(--dim)}.cline dd{margin:0;font:500 13.5px var(--mono);text-align:right}
 .cline .bar{height:1px;background:var(--line);align-self:center}
@@ -1865,13 +1867,13 @@ html[data-skin=ledger]{--wall:#d39a6a}
  let CRY=null;
  const fmtC=v=>v==null?'—':(Math.abs(v)>=1000?Number(v).toLocaleString('en-US',{maximumFractionDigits:0}):Math.abs(v)>=10?Number(v).toFixed(2):Number(v).toFixed(4));
  const pc=v=>v==null?'—':(v>0?'+':v<0?'−':'')+Math.abs(v).toFixed(1)+'%';
- const SPK={}, SPKSIG={};
+ const SPK={}, SPKSIG={}, SPKEV={};
  function niceTicks(mn,mx,n){const span=mx-mn||1, raw=span/n, mag=Math.pow(10,Math.floor(Math.log10(raw))), st=[1,2,2.5,5,10].map(k=>k*mag).find(k=>k>=raw)||raw;const out=[];for(let v=Math.ceil(mn/st)*st;v<=mx+1e-9;v+=st)out.push(v);return out}
  function spark(c,big,sym){
   const dates=(c.closes||[]).map(x=>x[0]), cl=(c.closes||[]).map(x=>x[1]), hi=(c.hi20||[]).map(x=>x[1]??x), lo=(c.lo10||[]).map(x=>x[1]??x);
   if(cl.length<2)return '';
-  const wide=big&&innerWidth>640;
-  const W=wide?760:340, H=wide?250:170, L=6, R=wide?118:92, T=10, B=22, pw=W-L-R, ph=H-T-B;
+  const wide=big&&innerWidth>640, id='spk'+Math.random().toString(36).slice(2,8);
+  const W=wide?1100:340, H=wide?300:(big?210:170), L=6, R=wide?118:92, T=10, B=22, pw=W-L-R, ph=H-T-B;
   const all=cl.concat(hi.filter(isFinite),lo.filter(isFinite)); let mn=Math.min(...all), mx=Math.max(...all); const pad=(mx-mn)*.06; mn-=pad; mx+=pad;
   const x=i=>L+i*pw/(cl.length-1), y=v=>T+(mx-v)/(mx-mn||1)*ph;
   const path=a=>a.map((v,i)=>isFinite(v)?(i&&isFinite(a[i-1])?'L':'M')+x(i).toFixed(1)+' '+y(v).toFixed(1):'').join(' ');
@@ -1893,20 +1895,24 @@ html[data-skin=ledger]{--wall:#d39a6a}
   }
   const vh=(VAL&&VAL.coins&&VAL.coins[sym]&&VAL.coins[sym].mayer_hist)||[], vm=new Map(vh);
   let armed=false; dates.forEach((d,i)=>{const m=vm.get(d); if(m==null)return; if(m>=0.9)armed=true; else if(armed&&m<0.8){armed=false;sig.push({i,k:'pbuy',t:'Potential BUY'})}});   // once per dip; re-arms after Mayer recovers to 0.9
-  let mk2='';
-  sig.forEach(s2=>{const X=x(s2.i), Y=y(cl[s2.i]), up=s2.k!=='sell', col=s2.k==='sell'?'var(--loss)':'var(--win)';
-   const tri=up?`M${X} ${Y+5} l5 9 h-10 z`:`M${X} ${Y-5} l5 -9 h-10 z`;
-   mk2+='<path d="'+tri+'" '+(s2.k==='pbuy'?'fill="none" stroke="'+col+'" stroke-width="1.5"':'fill="'+col+'"')+'/>'
-    +(X>L+pw*0.72?'<text x="'+(X-7)+'" text-anchor="end" y="'+(up?Y+16:Y-8)+'" fill="'+col+'" font-size="10">'+s2.t+'</text>':'<text x="'+(X+7)+'" y="'+(up?Y+16:Y-8)+'" fill="'+col+'" font-size="10">'+s2.t+'</text>')});
+  let mk2='', rings='';
+  sig.forEach(s2=>{const X=x(s2.i), Y=y(cl[s2.i]), col=s2.k==='sell'?'var(--loss)':s2.k==='pbuy'?'var(--warn)':'var(--win)';
+   const fill=s2.k==='buy'?'var(--accent)':s2.k==='sell'?'var(--text)':'var(--ink)';
+   mk2+='<circle cx="'+X.toFixed(1)+'" cy="'+Y.toFixed(1)+'" r="'+(big?8:6)+'" fill="var(--ink)" fill-opacity=".85" stroke="'+col+'" stroke-width="2"/><circle cx="'+X.toFixed(1)+'" cy="'+Y.toFixed(1)+'" r="'+(big?4:3)+'" fill="'+fill+'"/>'});
+  const iHi=cl.indexOf(Math.max(...cl)), iLo=cl.indexOf(Math.min(...cl));
+  [iHi,iLo].forEach(i=>{rings+='<circle cx="'+x(i).toFixed(1)+'" cy="'+y(cl[i]).toFixed(1)+'" r="7" fill="none" stroke="var(--faint)" stroke-width="2.2"/>'});
   SPKSIG[sym||'']=sig;
+  SPKEV[sym||'']=sig.map(z=>({i:z.i,k:z.k,label:z.k==='buy'?'Buy signal':z.k==='sell'?'Sell signal':'Potential BUY'}))
+   .concat([{i:iHi,k:'ring',label:'The high'},{i:iLo,k:'ring',label:'The low'}]).sort((a,b)=>a.i-b.i).map(e=>Object.assign(e,{date:dates[e.i],px:cl[e.i]}));
   let ent='';
-  if(c.status==='in'&&c.entry_date){const i=dates.findIndex(d=>d>=c.entry_date);if(i>=0)ent='<circle cx="'+x(i)+'" cy="'+y(c.entry)+'" r="3.4" fill="var(--win)"/><text x="'+(x(i)+6)+'" y="'+(y(c.entry)+12)+'" fill="var(--win)">bought</text>'}
-  const id='spk'+Math.random().toString(36).slice(2,8);
+  if(c.status==='in'&&c.entry_date){const i=dates.findIndex(d=>d>=c.entry_date);if(i>=0)ent='<line x1="'+x(i)+'" x2="'+x(end)+'" y1="'+y(c.entry)+'" y2="'+y(c.entry)+'" stroke="var(--text)" stroke-opacity=".55" stroke-dasharray="5 5"/><circle cx="'+x(i)+'" cy="'+y(c.entry)+'" r="8" fill="var(--ink)" stroke="var(--win)" stroke-width="2"/><circle cx="'+x(i)+'" cy="'+y(c.entry)+'" r="4" fill="var(--accent)"/>'}
   SPK[id]={dates,cl,hi,lo,L,pw,W,n:cl.length,x,y,T,ph,sym};
   return '<svg class="spk" id="'+id+'" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Last '+cl.length+' days: daily close with the buy line and sell line">'+g
    +'<path d="'+path(hi)+'" fill="none" stroke="var(--win)" stroke-width="1.1" stroke-dasharray="4 3" opacity=".85"/>'
    +'<path d="'+path(lo)+'" fill="none" stroke="var(--loss)" stroke-width="1.1" stroke-dasharray="4 3" opacity=".85"/>'
-   +'<path d="'+path(cl)+'" fill="none" stroke="var(--text)" stroke-width="1.6"/>'+ent+mk2
+   +'<defs><linearGradient id="'+id+'g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--accent)" stop-opacity=".26"/><stop offset="1" stop-color="var(--accent)" stop-opacity="0"/></linearGradient></defs>'
+   +'<path d="'+path(cl)+' L'+x(end).toFixed(1)+' '+(T+ph)+' L'+x(0).toFixed(1)+' '+(T+ph)+' Z" fill="url(#'+id+'g)"/>'
+   +'<path d="'+path(cl)+'" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round"/>'+ent+mk2+rings
    +'<line class="spx" x1="0" x2="0" y1="'+T+'" y2="'+(T+ph)+'" stroke="var(--dim)" stroke-dasharray="2 3" opacity="0"/>'
    +'<circle class="spd" r="3.2" fill="var(--text)" opacity="0"/></svg>';
  }
@@ -2137,25 +2143,48 @@ html[data-skin=ledger]{--wall:#d39a6a}
   const inn=c.status==='in', st=inn?'Holding '+pc(c.open_pct):'Waiting · buy '+pc(c.to_buy_pct);
   return '<button type="button" class="tk" role="tab" data-s="'+sym+'" aria-selected="'+(sym===SEL?'true':'false')+'"><span class="t1"><span class="s">'+coinName(sym)+'</span><span class="tagwide" style="color:var(--dim);border-color:var(--line-2)">Swing</span><span class="dot '+(inn?'up':'pending')+'"></span></span><span class="pxline"><span class="num px">$'+fmtC(c.price)+'</span><span class="asof '+((c.chg24h_pct||0)>0?'pos':(c.chg24h_pct||0)<0?'neg':'')+'">'+pc(c.chg24h_pct)+'</span></span><span class="dist">'+(VAL&&VAL.coins&&VAL.coins[sym]?'<span class="zt '+zoneCls(VAL.coins[sym].zone)+'">'+VAL.coins[sym].zone+' \u00b7 buy '+VAL.coins[sym].mult+'\u00d7</span>':(inn?'Sell line $'+fmtC(c.sell_line):'Buy line $'+fmtC(c.buy_line)))+'</span><span class="l '+(inn&&c.open_pct>0?'pos':inn&&c.open_pct<0?'neg':'')+'">'+st+'</span><span class="ls '+(inn&&c.open_pct>0?'pos':inn&&c.open_pct<0?'neg':'')+'">'+(VAL&&VAL.coins&&VAL.coins[sym]?VAL.coins[sym].zone.replace('Very cheap','V. cheap'):(inn?pc(c.open_pct):'Wait'))+'</span></button>';
  }
+ function coinState(sym,c){
+  const inn=c.status==='in', v=VAL&&VAL.coins&&VAL.coins[sym];
+  const f=n=>'$'+(n>=1000?Math.round(n).toLocaleString('en-US'):fmtC(n));
+  const side=v?'Value track: <b class="'+(/cheap/i.test(v.zone)?'pos':/pricey|expensive/i.test(v.zone)?'neg':'')+'">'+esc(v.zone)+'</b> · this week’s smart buy '+v.mult+'× ('+esc(v.gauge)+' '+Number(v.reading).toFixed(2)+'). Buys every Sunday.':'';
+  if(inn)return {tone:'in',icon:'up',kind:'Swing · holding',word:'Holding '+pc(c.open_pct),meta:c.entry_date?'since '+shortDate(c.entry_date):'',
+   say:'Bought at '+f(c.entry)+' after a daily close above the 20-day high.',do:['HOLD','sell only on a daily close below '+f(c.sell_line)+' ('+pc(c.to_sell_pct)+' away).'],side};
+  if(c.to_buy_pct!=null&&c.to_buy_pct<=3)return {tone:'watch',icon:'eye',kind:'Swing · close to a buy',word:'Near the buy line',
+   say:'Price is '+pc(c.to_buy_pct)+' under the 20-day high ('+f(c.buy_line)+'). A daily close above it is a BUY.',do:['WATCH','the 8:10 pm check decides. Nothing to do before then.'],side};
+  return {tone:'wait',icon:'clock',kind:'Swing · no position',word:'Waiting',
+   say:'No position. The rule buys on a daily close above the 20-day high, '+f(c.buy_line)+' ('+pc(c.to_buy_pct)+' away).',
+   do:['WAIT',v&&/cheap/i.test(v.zone)?'nothing on the breakout rule. The Value track is the buy-low side.':'nothing to do until a daily close above '+f(c.buy_line)+'.'],side};
+ }
  function coinView(sym){
   const D=CRY, c=D&&D.coins&&D.coins[sym];
   if(!c)return '<div class="panel ccard big"><div class="top"><span class="cn">'+coinName(sym)+'</span><span class="st pill out">Swing</span></div><p class="cnote">Crypto is a swing trade, not same-day: it’s checked once each evening after the daily close. Tracking starts tonight at 8:10 pm ET.</p></div>'+RULE;
-  const S=D.summary||{}, bt=(D.backtest||{})[sym]||{}, inn=c.status==='in';
-  const rows=inn
-   ?[['Bought','$'+fmtC(c.entry)+(c.entry_date?' on '+c.entry_date.slice(5).replace('-','/'):'')],['Now',pc(c.open_pct)],['Sell line (10-day low)','$'+fmtC(c.sell_line)+' · '+pc(c.to_sell_pct)+' away']]
-   :[['Buy line (20-day high)','$'+fmtC(c.buy_line)+' · '+pc(c.to_buy_pct)+' away'],['Sell line (10-day low)','$'+fmtC(c.sell_line)]];
-  const word=inn?'HOLD':'WAIT', line=inn?'Holding a swing position. Sell only on a daily close below the sell line.':'No position. Buy only on a daily close above the buy line.';
-  const T=(D.trades||[]).filter(t=>t.coin===sym).slice().reverse();
+  const S=D.summary||{}, bt=(D.backtest||{})[sym]||{};
+  const f=n=>'$'+(n>=1000?Math.round(n).toLocaleString('en-US'):fmtC(n));
+  const ST=coinState(sym,c);
   const u=D.updated?new Date(D.updated):null;
-  return valueView(sym)+'<div class="panel ccard big"><div class="top"><span class="cn">'+coinName(sym)+'</span><span class="cp">$'+fmtC(c.price)+'</span><span class="cc '+((c.chg24h_pct||0)>0?'pos':(c.chg24h_pct||0)<0?'neg':'')+'">'+pc(c.chg24h_pct)+' 24h</span><span class="st pill '+(inn?'in':'out')+'">Swing · '+(inn?'Holding':'Waiting')+'</span></div>'
-   +'<div class="act '+(inn?'hold':'wait')+'"><div class="aw">'+word+'</div><dl class="al"><dt>Rule</dt><dd>'+line+'</dd>'+(c.system_in&&!inn?'<dt>Trend</dt><dd>The rule’s trend has been on since '+esc(c.system_since||'?')+', before paper tracking began.</dd>':'')+'</dl></div>'
-   +spark(c,true,sym)
-   +'<div class="legend"><span><i class="sw" style="background:var(--text);height:2px"></i>Daily close</span><span><i class="sw" style="background:var(--win);height:2px"></i><span data-g="20-day high">Buy line</span></span><span><i class="sw" style="background:var(--loss);height:2px"></i><span data-g="10-day low">Sell line</span></span><span>\u25b2 BUY / \u25bc SELL = breakout rule</span><span>\u25b3 Potential BUY = entered very cheap</span></div>'
-   +'<dl class="cline">'+rows.map(r=>'<dt>'+esc(r[0])+'</dt><span class="bar"></span><dd>'+esc(r[1])+'</dd>').join('')+'</dl>'
-   +'<div class="chead">'+(bt.total_pct!=null?'<span>Backtest '+pc(bt.total_pct)+' vs holding '+pc(bt.hold_total_pct)+', worst drop '+pc(bt.max_dd_pct)+'</span>':'')
-   +'<span>Crypto paper account '+pc(S.account_pct||0)+' · '+(S.n||0)+' trade'+(S.n===1?'':'s')+'</span>'+(CLIVE_AT?'<span>Live price '+CLIVE_AT.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',second:'2-digit'})+' (Coinbase)</span>':'')+(u?'<span>Rule checked '+u.toLocaleString('en-US',{timeZone:'America/New_York',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'})+'</span>':'')+'</div>'
+  const T=(D.trades||[]).filter(t=>t.coin===sym).slice().reverse();
+  const chart=spark(c,true,sym);
+  const cl=(c.closes||[]).map(x=>x[1]), d0=(c.closes||[])[0];
+  const a=cl[0], z=c.price??cl[cl.length-1], mv=a?(z/a-1)*100:null;
+  const ev=(SPKEV[sym]||[]).slice(-8);
+  const detail=[['Buy line (20-day high)',f(c.buy_line)+' · '+pc(c.to_buy_pct)+' away'],['Sell line (10-day low)',f(c.sell_line)+(c.to_sell_pct!=null?' · '+pc(c.to_sell_pct)+' away':'')]]
+   .concat(bt.total_pct!=null?[['Backtest',pc(bt.total_pct)+' vs holding '+pc(bt.hold_total_pct)+', worst drop '+pc(bt.max_dd_pct)]]:[])
+   .concat([['Crypto paper account',pc(S.account_pct||0)+' · '+(S.n||0)+' trade'+(S.n===1?'':'s')]])
+   .concat(u?[['Rule checked',u.toLocaleString('en-US',{timeZone:'America/New_York',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'})]]:[])
+   .concat(CLIVE_AT?[['Live price',CLIVE_AT.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'})+' (Coinbase)']]:[]);
+  return '<div class="panel chartp cview">'
+   +'<div class="stockhead"><span class="sym cn">'+coinName(sym)+'</span><span class="num pxbig">'+f(c.price)+'</span><span class="asofbig '+((c.chg24h_pct||0)>0?'pos':(c.chg24h_pct||0)<0?'neg':'')+'">'+pc(c.chg24h_pct)+' today</span><span class="tagwide" style="color:var(--dim);border-color:var(--line-2)">Swing</span></div>'
+   +'<div class="act t-'+ST.tone+'"><div class="st-top"><span class="st-ic">'+(ICON[ST.icon]||'')+'</span><span class="st-k">'+sym+' · '+esc(ST.kind)+'</span><span class="st-meta">'+esc(ST.meta||'')+'</span></div>'
+   +'<div class="aw">'+esc(ST.word)+'</div><p class="st-say">'+esc(ST.say)+'</p>'
+   +'<p class="st-do"><span class="tri">▶</span> <b>'+esc(ST.do[0])+'</b> — '+esc(ST.do[1])+'</p>'
+   +(ST.side?'<p class="st-side">'+ST.side+'</p>':'')
+   +'<details class="st-more"><summary>Details</summary><dl class="al">'+detail.map(r=>'<dt>'+esc(r[0])+'</dt><dd>'+esc(r[1])+'</dd>').join('')+'</dl></details></div>'
+   +(mv!=null?'<div class="runhead"><div class="rh-l"><div class="rh-k">'+sym+' · last '+cl.length+' days'+(d0?' (since '+shortDate(d0[0])+')':'')+'</div><div class="rh-v num">'+f(a)+' <span class="arr">→</span> '+f(z)+'</div></div><div class="rh-x num '+(mv<0?'dn':'')+'">'+sgn1(mv)+'</div></div>':'')
+   +chart
+   +(ev.length?'<ol class="evgrid">'+ev.map(e=>'<li><span class="evd '+(e.k==='ring'?'ring':e.k==='sell'?'wht':'acc')+'"></span><span class="evt num">'+shortDate(e.date)+' · '+f(e.px)+'</span><span class="evl">'+esc(e.label)+'</span></li>').join('')+'</ol>':'')
+   +'<div class="legend"><span><i class="sw" style="background:var(--accent);height:2px"></i>Daily close</span><span><i class="sw" style="background:var(--win);height:2px"></i><span data-g="20-day high">Buy line</span></span><span><i class="sw" style="background:var(--loss);height:2px"></i><span data-g="10-day low">Sell line</span></span></div>'
    +(T.length?'<div class="tablewrap bytick"><table><thead><tr><th>In</th><th>Out</th><th class="r">Days</th><th class="r">Result</th></tr></thead><tbody>'+T.map(t=>'<tr><td class="d">'+esc(t.entry_date)+' @ $'+fmtC(t.entry)+'</td><td class="d">'+esc(t.exit_date)+' @ $'+fmtC(t.exit)+'</td><td class="r">'+esc(t.days)+'</td><td class="r '+(t.result_pct>0?'pos':'neg')+'">'+pc(t.result_pct)+'</td></tr>').join('')+'</tbody></table></div>':'')
-   +'</div>'+RULE;
+   +'</div>'+valueView(sym)+RULE;
  }
  const RULE='<div class="panel box crule"><h3>The crypto rule</h3><p><b>Buy</b> when a coin closes a day above its <span data-g="20-day high">20-day high</span>. <b>Sell</b> when it closes below its <span data-g="10-day low">10-day low</span>. Long only, held days to weeks, checked each evening at 8:10 pm ET, after the daily candle closes (midnight UTC). Alerts go to Telegram.</p><p class="meta">Backtest 2018–2025 (SOL from 2020), 1% cost per trade: beat holding on all three with smaller drops, but drops were still large. About 40% wins.</p></div>';
  const loadCrypto=()=>fetch('crypto.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():null).then(d=>{CRY=d;if(LAST)render(LAST);liveCrypto()}).catch(()=>{});
