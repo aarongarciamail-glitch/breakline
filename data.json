@@ -39,7 +39,7 @@
  },
  "tape": {
   "ok": true,
-  "asof": "2026-11-27T09:50:28-05:00",
+  "asof": "2026-11-27T09:55:28-05:00",
   "lean": "quiet",
   "label": "Oil quiet",
   "strategy": "Calls and puts both stay open. Oil moved 0.4%, under the 1% line, so it does not pick a side.",
@@ -54,33 +54,30 @@
   "note": "Context only. Oil 1% and the 10-year 5 bp describe the lean. VIX 35 is a size note. Neither one blocks a call or a put.",
   "vix": {
    "name": "VIX",
-   "price": 26.74,
+   "price": 27.14,
    "prev": 26.8,
-   "chg_pct": -0.2,
-   "move": "Down 0.2% from yesterday's close of 26.8.",
-   "why": "Down 0.2% from yesterday's close of 26.8.",
+   "chg_pct": 1.3,
+   "move": "Up 1.3% from yesterday's close of 26.8.",
+   "why": "Up 1.3% from yesterday's close of 26.8.",
    "headline": null,
    "means": "VIX is close to yesterday. Size stays normal until it reaches 35."
   },
   "oil": {
    "name": "Crude",
-   "price": 84.11,
+   "price": 84.07,
    "prev": 84.42,
    "chg_pct": -0.4,
    "move": "Down 0.4% from yesterday's close of 84.42.",
    "range": "Inside the last month, 79.07 to 104.99.",
-   "why": "Down 0.4% from yesterday's close of 84.42. Zacks: Oil Prices Remain High: Boon for BP's Energy Operations?",
-   "headline": {
-    "source": "Zacks",
-    "title": "Oil Prices Remain High: Boon for BP's Energy Operations?"
-   },
+   "why": "Down 0.4% from yesterday's close of 84.42.",
+   "headline": null,
    "means": "A move under 1% does not pick a side. Calls and puts both stay open."
   },
   "yield": {
    "name": "10-year",
-   "price": 4.888,
-   "chg_bps": -1.6,
-   "move": "10-year is 4.89%, down 1.6 bp."
+   "price": 4.884,
+   "chg_bps": -2.0,
+   "move": "10-year is 4.88%, down 2.0 bp."
   }
  },
  "curve": [
@@ -230,9 +227,9 @@
   }
  ],
  "session": true,
- "next_check": "9:55 AM",
+ "next_check": "10:00 AM",
  "mode": "paper",
- "updated": "2026-11-27T09:50:27-05:00",
+ "updated": "2026-11-27T09:55:27-05:00",
  "date": "Fri \u00b7 Nov 27",
  "day": {
   "pills": [
@@ -258,13 +255,15 @@
      "9:30",
      "9:35",
      "9:40",
-     "9:45"
+     "9:45",
+     "9:50"
     ],
     "closes": [
      723.11,
      721.66,
      722.75,
-     721.08
+     721.08,
+     721.42
     ],
     "box": {
      "hi": 726.05,
@@ -283,11 +282,11 @@
      },
      {
       "t": "9:35",
-      "o": 723.16,
+      "o": 723.08,
       "h": 723.7,
       "l": 721.53,
       "c": 721.66,
-      "v": 459374.75159
+      "v": 1115425.75159
      },
      {
       "t": "9:40",
@@ -304,39 +303,52 @@
       "l": 720.5,
       "c": 721.08,
       "v": 461567.591614
+     },
+     {
+      "t": "9:50",
+      "o": 721.06,
+      "h": 722.37,
+      "l": 721.05,
+      "c": 721.42,
+      "v": 348025.0
      }
     ],
     "opens": [
      725.86,
-     723.16,
+     723.08,
      721.72,
-     722.7
+     722.7,
+     721.06
     ],
     "highs": [
      726.09,
      723.7,
      722.75,
-     722.98
+     722.98,
+     722.37
     ],
     "lows": [
      722.79,
      721.53,
      720.92,
-     720.5
+     720.5,
+     721.05
     ],
     "volumes": [
      1119251.227693,
-     459374.75159,
+     1115425.75159,
      467199.0,
-     461567.591614
+     461567.591614,
+     348025.0
     ],
     "shadows": [],
     "strategy_b": [],
     "vwap": [
      723.9967,
-     723.502,
-     723.1909,
-     722.8834
+     723.1481,
+     722.9738,
+     722.7617,
+     722.6479
     ]
    },
    "levels": [
@@ -479,13 +491,15 @@
      "9:30",
      "9:35",
      "9:40",
-     "9:45"
+     "9:45",
+     "9:50"
     ],
     "closes": [
      640.75,
      638.76,
      640.02,
-     638.04
+     638.04,
+     639.12
     ],
     "box": {
      "hi": 645.86,
@@ -496,19 +510,19 @@
     "bars": [
      {
       "t": "9:30",
-      "o": 645.72,
+      "o": 645.73,
       "h": 645.89,
       "l": 640.08,
       "c": 640.75,
-      "v": 1412245.757685
+      "v": 1420392.757685
      },
      {
       "t": "9:35",
       "o": 640.75,
       "h": 642.0,
-      "l": 638.5,
+      "l": 638.47,
       "c": 638.76,
-      "v": 638194.348688
+      "v": 1310065.348688
      },
      {
       "t": "9:40",
@@ -525,39 +539,52 @@
       "l": 637.17,
       "c": 638.04,
       "v": 474057.90724
+     },
+     {
+      "t": "9:50",
+      "o": 638.04,
+      "h": 640.26,
+      "l": 637.97,
+      "c": 639.12,
+      "v": 418448.0
      }
     ],
     "opens": [
-     645.72,
+     645.73,
      640.75,
      638.75,
-     640.08
+     640.08,
+     638.04
     ],
     "highs": [
      645.89,
      642.0,
      640.06,
-     640.43
+     640.43,
+     640.26
     ],
     "lows": [
      640.08,
-     638.5,
+     638.47,
      637.98,
-     637.17
+     637.17,
+     637.97
     ],
     "volumes": [
-     1412245.757685,
-     638194.348688,
+     1420392.757685,
+     1310065.348688,
      511652.37265,
-     474057.90724
+     474057.90724,
+     418448.0
     ],
     "shadows": [],
     "strategy_b": [],
     "vwap": [
      642.24,
-     641.466,
-     641.0441,
-     640.6542
+     641.0421,
+     640.7756,
+     640.4913,
+     640.3521
     ]
    },
    "levels": [
