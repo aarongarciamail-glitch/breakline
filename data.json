@@ -39,7 +39,7 @@
  },
  "tape": {
   "ok": true,
-  "asof": "2026-11-27T13:05:28-05:00",
+  "asof": "2026-11-27T13:10:28-05:00",
   "lean": "mixed",
   "label": "Tape split",
   "strategy": "Calls and puts both stay open. Oil is down 1.9% and the 10-year is up 8.0 bp, so they disagree. The opening-range close picks the side.",
@@ -54,17 +54,17 @@
   "note": "Context only. Oil 1% and the 10-year 5 bp describe the lean. VIX 35 is a size note. Neither one blocks a call or a put.",
   "vix": {
    "name": "VIX",
-   "price": 24.77,
+   "price": 24.52,
    "prev": 26.8,
-   "chg_pct": -7.6,
-   "move": "Down 7.6% from yesterday's close of 26.8.",
-   "why": "Down 7.6% from yesterday's close of 26.8.",
+   "chg_pct": -8.5,
+   "move": "Down 8.5% from yesterday's close of 26.8.",
+   "why": "Down 8.5% from yesterday's close of 26.8.",
    "headline": null,
    "means": "Fear eased. I shrink size at 35 or higher, and this print is under that, so size stays normal."
   },
   "oil": {
    "name": "Crude",
-   "price": 82.81,
+   "price": 82.84,
    "prev": 84.42,
    "chg_pct": -1.9,
    "move": "Down 1.9% from yesterday's close of 84.42.",
@@ -258,7 +258,7 @@
  "session": false,
  "next_check": null,
  "mode": "paper",
- "updated": "2026-11-27T13:05:28-05:00",
+ "updated": "2026-11-27T13:10:27-05:00",
  "date": "Fri \u00b7 Nov 27",
  "day": {
   "pills": [
@@ -721,9 +721,9 @@
       "t": "12:50",
       "o": 725.64,
       "h": 726.97,
-      "l": 725.4,
+      "l": 725.39,
       "c": 726.52,
-      "v": 429826.663682
+      "v": 904260.663682
      },
      {
       "t": "12:55",
@@ -873,7 +873,7 @@
      726.19,
      725.76,
      725.26,
-     725.4,
+     725.39,
      726.21,
      726.09
     ],
@@ -918,7 +918,7 @@
      339893.910612,
      469443.0,
      689264.0,
-     429826.663682,
+     904260.663682,
      1264762.0,
      313325.0
     ],
@@ -982,9 +982,9 @@
      724.0507,
      724.1022,
      724.1581,
-     724.2029,
-     724.4253,
-     724.4757
+     724.2501,
+     724.4651,
+     724.5139
     ]
    },
    "levels": [
@@ -1239,7 +1239,7 @@
      646.03,
      646.47,
      646.08,
-     647.18,
+     647.13,
      650.76,
      650.99
     ],
@@ -1592,11 +1592,11 @@
      },
      {
       "t": "12:50",
-      "o": 646.0,
+      "o": 646.06,
       "h": 647.71,
       "l": 645.57,
-      "c": 647.18,
-      "v": 268653.978392
+      "c": 647.13,
+      "v": 492820.978392
      },
      {
       "t": "12:55",
@@ -1656,7 +1656,7 @@
      646.92,
      646.01,
      646.48,
-     646.0,
+     646.06,
      647.1,
      650.99
     ],
@@ -1791,7 +1791,7 @@
      317778.91806,
      245960.0,
      320487.0,
-     268653.978392,
+     492820.978392,
      934905.0,
      2400151.0
     ],
@@ -1855,9 +1855,9 @@
      642.6154,
      642.6616,
      642.7191,
-     642.7755,
-     643.0931,
-     643.8673
+     642.8209,
+     643.133,
+     643.8955
     ]
    },
    "levels": [
