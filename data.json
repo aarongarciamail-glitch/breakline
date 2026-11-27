@@ -39,7 +39,7 @@
  },
  "tape": {
   "ok": true,
-  "asof": "2026-11-27T15:55:28-05:00",
+  "asof": "2026-11-27T18:57:24-05:00",
   "lean": "mixed",
   "label": "Tape split",
   "strategy": "Calls and puts both stay open. Oil is down 1.6% and the 10-year is up 8.8 bp, so they disagree. The opening-range close picks the side.",
@@ -69,10 +69,10 @@
    "chg_pct": -1.6,
    "move": "Down 1.6% from yesterday's close of 84.42.",
    "range": "Inside the last month, 79.07 to 104.99.",
-   "why": "Down 1.6% from yesterday's close of 84.42. Reuters: Oil notches first weekly gain in November on supply fears",
+   "why": "Down 1.6% from yesterday's close of 84.42. The Wall Street Journal: Oil Futures Settle Lower Ahead of OPEC+ Policy Meeting",
    "headline": {
-    "source": "Reuters",
-    "title": "Oil notches first weekly gain in November on supply fears"
+    "source": "The Wall Street Journal",
+    "title": "Oil Futures Settle Lower Ahead of OPEC+ Policy Meeting"
    },
    "means": "Oil and yields point different ways. Calls and puts both stay open. The box picks the side."
   },
@@ -258,7 +258,7 @@
  "session": false,
  "next_check": null,
  "mode": "paper",
- "updated": "2026-11-27T15:55:27-05:00",
+ "updated": "2026-11-27T18:57:19-05:00",
  "date": "Fri \u00b7 Nov 27",
  "day": {
   "pills": [
@@ -1120,7 +1120,7 @@
    "walls": {
     "expiration": "2026-11-27",
     "price": 728.32,
-    "at": "2026-11-27T15:35:29-05:00",
+    "at": "2026-11-27T18:57:21-05:00",
     "busiest": {
      "strike": 726.0,
      "vol": 684073
@@ -1975,7 +1975,7 @@
    "walls": {
     "expiration": "2026-11-27",
     "price": 650.99,
-    "at": "2026-11-27T15:35:31-05:00",
+    "at": "2026-11-27T18:57:24-05:00",
     "busiest": {
      "strike": 645.0,
      "vol": 402978
@@ -1990,6 +1990,8 @@
    "call": "QQQ puts",
    "result": 9,
    "note": "5-min close 638.00 back inside the box.",
+   "best": 9,
+   "worst": null,
    "tag": "Lotto"
   },
   {
@@ -1998,6 +2000,8 @@
    "call": "SPY puts",
    "result": -36,
    "note": "5-min close 721.06 back inside the box.",
+   "best": 3,
+   "worst": null,
    "tag": "Lotto"
   },
   {
@@ -2006,6 +2010,8 @@
    "call": "SPY calls",
    "result": -24,
    "note": "5-min close 702.70 back inside the box.",
+   "best": 0,
+   "worst": null,
    "tag": ""
   },
   {
@@ -2014,6 +2020,8 @@
    "call": "QQQ calls",
    "result": -30,
    "note": "5-min close 615.46 back inside the box.",
+   "best": 1,
+   "worst": null,
    "tag": ""
   },
   {
@@ -2022,6 +2030,8 @@
    "call": "NVDA calls",
    "result": -35,
    "note": "Stock back at 145.62. The stop is the stock entry, not break-even on the option. Option \u221234.6%.",
+   "best": 0,
+   "worst": null,
    "tag": ""
   },
   {
@@ -2030,6 +2040,8 @@
    "call": "QQQ calls",
    "result": -36,
    "note": "Stock back at 641.98. The stop is the stock entry, not break-even on the option. Option \u221235.6%.",
+   "best": 0,
+   "worst": null,
    "tag": ""
   },
   {
@@ -2038,6 +2050,8 @@
    "call": "SPY calls",
    "result": -34,
    "note": "5-min close 716.79 back inside the box.",
+   "best": 2,
+   "worst": null,
    "tag": ""
   },
   {
@@ -2046,6 +2060,8 @@
    "call": "TSLA puts",
    "result": 6,
    "note": "Profit lock: best was +42%, now +6% (floor +28%).",
+   "best": 42,
+   "worst": null,
    "tag": ""
   },
   {
@@ -2054,6 +2070,8 @@
    "call": "NVDA puts",
    "result": 16,
    "note": "Profit lock: best was +38%, now +16% (floor +25%).",
+   "best": 38,
+   "worst": null,
    "tag": ""
   },
   {
@@ -2062,6 +2080,8 @@
    "call": "SPCX puts",
    "result": 54,
    "note": "Profit lock: best was +103%, now +66% (floor +72%).",
+   "best": 103,
+   "worst": null,
    "tag": ""
   },
   {
@@ -2070,6 +2090,8 @@
    "call": "NVDA calls",
    "result": -25,
    "note": "5-min close 166.48 back inside the box.",
+   "best": 0,
+   "worst": null,
    "tag": ""
   },
   {
@@ -2078,6 +2100,8 @@
    "call": "QQQ calls",
    "result": -1,
    "note": "5-min close 655.62 back inside the box.",
+   "best": 0,
+   "worst": null,
    "tag": ""
   },
   {
@@ -2086,6 +2110,8 @@
    "call": "SPY calls",
    "result": -33,
    "note": "5-min close 723.78 back inside the box.",
+   "best": 12,
+   "worst": null,
    "tag": ""
   },
   {
@@ -2094,6 +2120,8 @@
    "call": "SPCX puts",
    "result": 30,
    "note": "Profit lock: best was +69%, now +26% (floor +45%).",
+   "best": 69,
+   "worst": null,
    "tag": ""
   },
   {
@@ -2102,6 +2130,8 @@
    "call": "TSLA calls",
    "result": -51,
    "note": "5-min close 388.48 back inside the box.",
+   "best": 29,
+   "worst": null,
    "tag": ""
   }
  ]
