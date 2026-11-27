@@ -39,10 +39,10 @@
  },
  "tape": {
   "ok": true,
-  "asof": "2026-11-27T14:40:28-05:00",
+  "asof": "2026-11-27T14:45:28-05:00",
   "lean": "mixed",
   "label": "Tape split",
-  "strategy": "Calls and puts both stay open. Oil is down 1.6% and the 10-year is up 8.6 bp, so they disagree. The opening-range close picks the side.",
+  "strategy": "Calls and puts both stay open. Oil is down 1.6% and the 10-year is up 8.8 bp, so they disagree. The opening-range close picks the side.",
   "block_calls": false,
   "block_puts": false,
   "vix_small": false,
@@ -64,7 +64,7 @@
   },
   "oil": {
    "name": "Crude",
-   "price": 83.11,
+   "price": 83.08,
    "prev": 84.42,
    "chg_pct": -1.6,
    "move": "Down 1.6% from yesterday's close of 84.42.",
@@ -78,9 +78,9 @@
   },
   "yield": {
    "name": "10-year",
-   "price": 4.934,
-   "chg_bps": 8.6,
-   "move": "10-year is 4.93%, up 8.6 bp."
+   "price": 4.936,
+   "chg_bps": 8.8,
+   "move": "10-year is 4.94%, up 8.8 bp."
   }
  },
  "curve": [
@@ -258,7 +258,7 @@
  "session": false,
  "next_check": null,
  "mode": "paper",
- "updated": "2026-11-27T14:40:27-05:00",
+ "updated": "2026-11-27T14:45:27-05:00",
  "date": "Fri \u00b7 Nov 27",
  "day": {
   "pills": [
