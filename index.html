@@ -876,6 +876,22 @@ html[data-skin=ledger]{--wall:#d39a6a}
  function tipHTML(title, rows){return '<div class="th">'+esc(title)+'</div>'+rows.filter(r=>r&&r[1]!=null&&r[1]!=='').map(r=>'<div class="tr"><span>'+esc(r[0])+'</span><span>'+esc(r[1])+'</span></div>').join('')}
  function moveTip(ev, html){tip.hidden=false;tip.innerHTML=html;let x=ev.clientX+14,y=ev.clientY+16;tip.style.left=x+'px';tip.style.top=y+'px';const r=tip.getBoundingClientRect();if(r.right>innerWidth-8)x=ev.clientX-r.width-14;if(r.bottom>innerHeight-8)y=ev.clientY-r.height-12;tip.style.left=Math.max(8,x)+'px';tip.style.top=Math.max(8,y)+'px'}
  function svgPoint(svg, ev){const p=svg.createSVGPoint();p.x=ev.clientX;p.y=ev.clientY;const ctm=svg.getScreenCTM();if(!ctm)return null;return p.matrixTransform(ctm.inverse())}
+ /* Tap-to-zoom (2026-11-28): animate the chart's viewBox toward one point, and back. Tapping the chart
+    while zoomed, or the same list item again, zooms out. Respects reduced motion. */
+ function zoomSvg(svg, cx, cy, f){
+  if(!svg.dataset.zoomed)svg.dataset.vb0=svg.getAttribute('viewBox');
+  const [,,W,H]=svg.dataset.vb0.split(/[\s,]+/).map(Number);
+  const cur=svg.getAttribute('viewBox').split(/[\s,]+/).map(Number);
+  let to=[0,0,W,H];
+  if(f>1){const w=W/f,h=H/f;to=[Math.min(Math.max(cx-w/2,0),W-w),Math.min(Math.max(cy-h/2,0),H-h),w,h]}
+  svg.dataset.zoomed=f>1?'1':'';
+  cancelAnimationFrame(svg.__za);
+  const dur=matchMedia('(prefers-reduced-motion: reduce)').matches?0:480, t0=performance.now();
+  const ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+  const step=now=>{const t=dur?Math.min(1,(now-t0)/dur):1,e=ease(t);svg.setAttribute('viewBox',cur.map((v,i)=>(v+(to[i]-v)*e).toFixed(2)).join(' '));if(t<1)svg.__za=requestAnimationFrame(step)};
+  svg.__za=requestAnimationFrame(step);
+  if(!svg.dataset.zoombound){svg.dataset.zoombound='1';svg.addEventListener('click',()=>{if(svg.dataset.zoomed&&svg.__unzoom)svg.__unzoom()})}
+ }
  const tipPick=new WeakMap();
  function bindTip(svg, pick){
   tipPick.set(svg, pick);
@@ -1112,7 +1128,7 @@ html[data-skin=ledger]{--wall:#d39a6a}
   const showOpt=false;   // option-price strip removed (Aaron, 11/25): the action card already shows the option and result
   const priceH=phone?300:290, optH=showOpt?(phone?124:142):0, axisH=22;
   const H=priceH+optH+axisH+(showOpt?6:0);
-  svg.setAttribute('viewBox','0 0 '+W+' '+H);
+  svg.setAttribute('viewBox','0 0 '+W+' '+H); svg.dataset.zoomed=''; cancelAnimationFrame(svg.__za);
   svg.dataset.mode=ohlc.some(b=>b.real)?'ohlc':'closes';
   if(!ohlc.length){
    const msg=live?'Chart starts at 9:30.':'No intraday bars saved for this day.';
@@ -1370,8 +1386,10 @@ html[data-skin=ledger]{--wall:#d39a6a}
    document.querySelectorAll('#evGrid li').forEach(li=>li.onclick=()=>{
     document.querySelectorAll('#evGrid li').forEach(x=>x.classList.toggle('on',x===li&&!li.classList.contains('on')));
     svg.querySelectorAll('.evhl').forEach(n=>n.remove());
-    if(li.classList.contains('on')){const e=EVS[+li.dataset.i];mk('circle',{class:'evhl',cx:e.x,cy:e.y,r:14,fill:'none',stroke:T('--text'),'stroke-width':1.5},svg)}
+    if(li.classList.contains('on')){const e=EVS[+li.dataset.i];const Z=phone?2.2:2.6;mk('circle',{class:'evhl',cx:e.x,cy:e.y,r:14/Z,fill:'none',stroke:T('--text'),'stroke-width':1.5/Z},svg);zoomSvg(svg,e.x,e.y,Z)}
+    else zoomSvg(svg,0,0,1);
    });
+   svg.__unzoom=()=>{document.querySelectorAll('#evGrid li').forEach(x=>x.classList.remove('on'));svg.querySelectorAll('.evhl').forEach(n=>n.remove());zoomSvg(svg,0,0,1)};
   }
   const extras=simple?[]:[].concat((c.shadows||[]),(c.skipped||[]),(stock.shadows||[])).map(it=>Object.assign({_k:'skip'}, it))
    .concat([].concat(c.strategy_b||[], c.b||[], stock.strategy_b||[]).map(it=>Object.assign({_k:'b'}, it)));
@@ -1970,12 +1988,14 @@ html[data-skin=ledger]{--wall:#d39a6a}
    const was=li.classList.contains('on');
    document.querySelectorAll('#cryptoDesk .cev li').forEach(x=>x.classList.remove('on'));
    svg.querySelectorAll('.evhl').forEach(n=>n.remove());
-   if(was)return;
+   if(was){zoomSvg(svg,0,0,1);return}
    li.classList.add('on');
-   const i=+li.dataset.i, c=document.createElementNS('http://www.w3.org/2000/svg','circle');
-   c.setAttribute('class','evhl');c.setAttribute('cx',D.x(i));c.setAttribute('cy',D.y(D.cl[i]));c.setAttribute('r',14);
-   c.setAttribute('fill','none');c.setAttribute('stroke','var(--text)');c.setAttribute('stroke-width',1.6);svg.appendChild(c);
+   const Z=2.4, i=+li.dataset.i, c=document.createElementNS('http://www.w3.org/2000/svg','circle');
+   c.setAttribute('class','evhl');c.setAttribute('cx',D.x(i));c.setAttribute('cy',D.y(D.cl[i]));c.setAttribute('r',14/Z);
+   c.setAttribute('fill','none');c.setAttribute('stroke','var(--text)');c.setAttribute('stroke-width',1.6/Z);svg.appendChild(c);
+   zoomSvg(svg,D.x(i),D.y(D.cl[i]),Z);
   });
+  svg.__unzoom=()=>{document.querySelectorAll('#cryptoDesk .cev li').forEach(x=>x.classList.remove('on'));svg.querySelectorAll('.evhl').forEach(n=>n.remove());zoomSvg(svg,0,0,1)};
  }
  function wireSpark(){
   document.querySelectorAll('svg.spk').forEach(svg=>{
