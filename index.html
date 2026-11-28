@@ -430,6 +430,7 @@ h2,.sh h2{font:500 22px/1.2 var(--display);letter-spacing:-.03em}
 .tk .px,.pxbig{font-weight:500;letter-spacing:-.02em}
 /* day chips: date in sans, % in mono */
 .day{font:500 12.5px/1 var(--display);padding:7px 11px}
+.daynav{color:var(--dim);border-style:dashed}
 .day .pos,.day .neg{font-family:var(--mono);font-size:12px}
 /* summary numbers */
 .kpi .kv{font:400 28px/1.05 var(--display);letter-spacing:-.035em}
@@ -1602,12 +1603,18 @@ html[data-skin=ledger]{--wall:#d39a6a}
   return [...map.values()].sort((a,b)=>a.date<b.date?-1:1);
  }
  function renderDays(D){
-  const choices=dayChoices(D), live=fileDay(D), active=DAY||live;
-  $('days').innerHTML=choices.map(d=>{
+  const all=dayChoices(D), live=fileDay(D), active=DAY||live;
+  /* One week at a time (2026-11-27): the chips show the Mon–Fri week of the day being viewed, so a new
+     week starts fresh. "‹ Earlier" jumps to the last saved day of the week before; "This week ›" comes back. */
+  const monOf=iso=>{const t=new Date(iso+'T12:00:00Z'), w=(t.getUTCDay()+6)%7; t.setUTCDate(t.getUTCDate()-w); return t.toISOString().slice(0,10)};
+  const wk=monOf(active), choices=all.filter(d=>monOf(d.date)===wk);
+  const prev=all.filter(d=>d.date<wk).pop(), liveWk=live&&monOf(live)!==wk;
+  const nav=(lbl,d)=>'<button type="button" class="day daynav" data-d="'+esc(d)+'">'+lbl+'</button>';
+  $('days').innerHTML=(prev?nav('‹ Earlier',prev.date):'')+choices.map(d=>{
    const on=d.date===active;
    const acct=d.acct==null?'':'<span class="'+(d.acct>0?'pos':d.acct<0?'neg':'')+'">'+sgn1(d.acct)+'</span>';
    return '<button type="button" class="day'+(on?' on':'')+'" role="tab" data-d="'+esc(d.date)+'" aria-selected="'+(on?'true':'false')+'"><span>'+esc(shortDate(d.date))+'</span>'+(d.date===live&&!mktClosed(D)?'<span class="live">Live</span>':'')+acct+'</button>';
-  }).join('');
+  }).join('')+(liveWk?nav('This week ›',live):'');
   $('days').querySelectorAll('.day').forEach(b=>b.onclick=()=>{DAY=b.dataset.d===fileDay(D)?null:b.dataset.d;render(LAST);if(DAY)fetchDay(DAY).then(()=>render(LAST))});
  }
 
