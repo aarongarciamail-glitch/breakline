@@ -1550,6 +1550,16 @@ html[data-skin=ledger]{--wall:#d39a6a}
    +cell('Account','<span class="'+cls(acct)+'">'+sgn1(acct)+'</span>',(D.max_dd!=null?'worst dip '+Number(D.max_dd).toFixed(1)+'%':'since start'),'','#record')
    +cell('Real money',esc((n.value||'').replace(' of ','/'))||'—',ok+' of '+all+' checks pass','<span class="kbar"><i style="width:'+Math.round((n.progress||0)*100)+'%"></i></span>','#road');
  }
+ /* Is the market closed right now? The file keeps session=true after the last publish, so judge from
+    the clock too. Early-close days (PLAN flag) close at 1:00 pm. 2026-11-27: also drives the day chip's Live tag. */
+ function mktClosed(D){
+  if(!D||!D.updated)return true;
+  const et=o=>Object.fromEntries(new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',hour:'2-digit',minute:'2-digit',hourCycle:'h23',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(o).map(p=>[p.type,p.value]));
+  const u=new Date(D.updated), mins=Math.round((Date.now()-u)/60000), n=et(new Date()), w=et(u), hm=x=>Number(x.hour)*60+Number(x.minute);
+  const sameDay=n.year+n.month+n.day===w.year+w.month+w.day;
+  const early=exitBy(n.year+'-'+n.month+'-'+n.day)==='12:30', close=early?13*60:16*60;
+  return !D.session||!sameDay||hm(n)>=close||hm(n)<9*60+30||(hm(w)>=close-30&&mins>20);
+ }
  function renderFresh(D){
   const f=$('fresh'); if(!D.updated){f.textContent='';return}
   const u=new Date(D.updated), mins=Math.round((Date.now()-u)/60000);
@@ -1558,7 +1568,7 @@ html[data-skin=ledger]{--wall:#d39a6a}
   const n=et(new Date()), w=et(u), hm=x=>Number(x.hour)*60+Number(x.minute);
   const sameDay=n.year+n.month+n.day===w.year+w.month+w.day;
   // the file keeps session=true after the last 3:45 publish, so judge "closed" from the clock too
-  const closed=!D.session||!sameDay||hm(n)>=16*60||hm(n)<9*60+30||(hm(w)>=15*60+30&&mins>20);
+  const closed=mktClosed(D);
   const stale=!closed&&mins>25;
   const pre=sameDay&&hm(n)<9*60+30&&!/Sat|Sun/.test(new Date().toLocaleDateString('en-US',{timeZone:'America/New_York',weekday:'short'}));
   f.className='fresh'+(stale?' stale':closed?' closed':'');
@@ -1578,7 +1588,7 @@ html[data-skin=ledger]{--wall:#d39a6a}
   $('days').innerHTML=choices.map(d=>{
    const on=d.date===active;
    const acct=d.acct==null?'':'<span class="'+(d.acct>0?'pos':d.acct<0?'neg':'')+'">'+sgn1(d.acct)+'</span>';
-   return '<button type="button" class="day'+(on?' on':'')+'" role="tab" data-d="'+esc(d.date)+'" aria-selected="'+(on?'true':'false')+'"><span>'+esc(shortDate(d.date))+'</span>'+(d.date===live?'<span class="live">Live</span>':'')+acct+'</button>';
+   return '<button type="button" class="day'+(on?' on':'')+'" role="tab" data-d="'+esc(d.date)+'" aria-selected="'+(on?'true':'false')+'"><span>'+esc(shortDate(d.date))+'</span>'+(d.date===live&&!mktClosed(D)?'<span class="live">Live</span>':'')+acct+'</button>';
   }).join('');
   $('days').querySelectorAll('.day').forEach(b=>b.onclick=()=>{DAY=b.dataset.d===fileDay(D)?null:b.dataset.d;render(LAST);if(DAY)fetchDay(DAY).then(()=>render(LAST))});
  }
