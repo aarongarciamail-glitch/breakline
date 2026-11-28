@@ -1198,6 +1198,23 @@ html[data-skin=ledger]{--wall:#d39a6a}
    }
    ohlc.forEach(b=>{hits.bars.push({x:xAt(b.t1), html:tipHTML(fmtHM(b.t1), [['Close',pxFmt(b.c)],['Vs the box', c.box?distText(b.c, c.box):'']])})});
   }
+  /* Fair value gaps (2026-11-27): bar k-2's high below bar k's low (up gap), or above it (down gap).
+     Shaded from the middle bar until price trades back through the gap, or to the last bar if it's still open. */
+  let fvgN=0;
+  if(!simple){
+   const R5=ohlc.filter(b=>b.t0>=OPEN&&b.t0<CLOSE), minGap=(lastPx||1)*0.0003;
+   for(let k=2;k<R5.length;k++){
+    const a=R5[k-2], z=R5[k];
+    [[1,a.h,z.l],[-1,z.h,a.l]].forEach(([dir,lo_,hi_])=>{
+     if(!(hi_-lo_>minGap)||!inScale(lo_)||!inScale(hi_))return;
+     let end=R5.length-1, filled=false;
+     for(let j=k+1;j<R5.length;j++){if(dir>0?R5[j].l<=lo_:R5[j].h>=hi_){end=j;filled=true;break}}
+     const x0=xAt(R5[k-1].t0), x1=xAt(R5[end].t0+5), col=dir>0?T('--win'):T('--loss');
+     mk('rect',{x:x0,y:yP(hi_),width:Math.max(x1-x0,2),height:Math.max(yP(lo_)-yP(hi_),1),fill:col,'fill-opacity':filled?.07:.16,stroke:col,'stroke-opacity':filled?.15:.4,'stroke-width':.8,'stroke-dasharray':filled?'2 3':null},svg);
+     fvgN++;
+    });
+   }
+  }
   ohlc.forEach((b,i)=>{
    if(simple)return;
    if(b.t0<OPEN||b.t0>=CLOSE)return;
@@ -1442,6 +1459,7 @@ html[data-skin=ledger]{--wall:#d39a6a}
    extras.some(e=>e._k==='skip')?'<span>◯ skipped</span>':'',
    extras.some(e=>e._k==='b')?'<span>△ strategy B</span>':''
   ].filter(Boolean);
+  if(fvgN)legend.push('<span><i class="sw" style="background:var(--win);opacity:.35"></i><i class="sw" style="background:var(--loss);opacity:.35;margin-left:-2px"></i><span data-g="FVG">Gap (FVG), faded once filled</span></span>');
   $('legend').innerHTML=simple?'<span class="pos">▲ Buy</span><span class="neg">▼ Sell</span><span><i class="sw box"></i>Opening range</span><span>Full shows levels, VWAP and volume</span>':legend.join('');
   document.querySelectorAll('#chartMode button').forEach(bt=>{bt.setAttribute('aria-pressed',String(bt.dataset.m===(simple?'simple':'full')));bt.onclick=()=>{store.set('bl.chart',bt.dataset.m);render(LAST)}});
   $('legendNote').textContent=real
@@ -2261,6 +2279,7 @@ html[data-skin=ledger]{--wall:#d39a6a}
    ['Break-even stop','After the first trim, the stop moves to the entry price, so the rest of the trade should not turn into a loss on the stock move.',['break-even','breakeven','be']],
    ['Potential BUY / SELL','An outlined arrow: price made a new high (potential buy) or low (potential sell) of the day after 11:00. The rules still apply, so it is a heads-up about an opportunity, not a rule trade. Tracked on paper to learn if late moves are worth trading.',['potential buy','potential sell','buy signal','sell signal','move','after-11']],
    ['Paper','Pretend trades with no real money, used to prove the rules work before risking anything.',['paper']],
+   ['FVG','Fair value gap: three 5-minute candles where the first and third don\u2019t overlap, so the middle candle moved so fast it left a gap. Shaded green (up) or red (down) on the Full chart, faded once price trades back through it. In testing, breakouts that left a gap in their own direction did much better than ones that didn\u2019t.',['fvg','fair value gap','gap']],
    ['Wide box','The box is more than 2x its normal size. Historically these days were not worse, but moves are bigger.',['wide','wide box']]]],
   ['Candle patterns',[
    ['Wick','The thin line above or below a candle body: a price that was reached and then rejected. A long wick is a failed push.',['wick']],
