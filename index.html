@@ -1202,16 +1202,18 @@ html[data-skin=ledger]{--wall:#d39a6a}
   /* Fair value gaps (2026-11-27): bar k-2's high below bar k's low (up gap), or above it (down gap).
      Shaded from the middle bar until price trades back through the gap, or to the last bar if it's still open. */
   let fvgN=0;
-  if(!simple){
-   const R5=ohlc.filter(b=>b.t0>=OPEN&&b.t0<CLOSE), minGap=(lastPx||1)*0.0003;
+  {
+   // Every gap counts, same as the entry rule (no size floor). Simple shows only the ones still open.
+   const R5=ohlc.filter(b=>b.t0>=OPEN&&b.t0<CLOSE);
    for(let k=2;k<R5.length;k++){
     const a=R5[k-2], z=R5[k];
     [[1,a.h,z.l],[-1,z.h,a.l]].forEach(([dir,lo_,hi_])=>{
-     if(!(hi_-lo_>minGap)||!inScale(lo_)||!inScale(hi_))return;
+     if(!(hi_-lo_>0)||!inScale(lo_)||!inScale(hi_))return;
      let end=R5.length-1, filled=false;
      for(let j=k+1;j<R5.length;j++){if(dir>0?R5[j].l<=lo_:R5[j].h>=hi_){end=j;filled=true;break}}
+     if(simple&&filled)return;
      const x0=xAt(R5[k-1].t0), x1=xAt(R5[end].t0+5), col=dir>0?T('--win'):T('--loss');
-     mk('rect',{x:x0,y:yP(hi_),width:Math.max(x1-x0,2),height:Math.max(yP(lo_)-yP(hi_),1),fill:col,'fill-opacity':filled?.07:.16,stroke:col,'stroke-opacity':filled?.15:.4,'stroke-width':.8,'stroke-dasharray':filled?'2 3':null},svg);
+     mk('rect',{x:x0,y:yP(hi_),width:Math.max(x1-x0,2),height:Math.max(yP(lo_)-yP(hi_),1),fill:col,'fill-opacity':filled?.10:.16,stroke:col,'stroke-opacity':filled?.3:.4,'stroke-width':.8,'stroke-dasharray':filled?'2 3':null},svg);
      fvgN++;
     });
    }
@@ -1460,8 +1462,8 @@ html[data-skin=ledger]{--wall:#d39a6a}
    extras.some(e=>e._k==='skip')?'<span>◯ skipped</span>':'',
    extras.some(e=>e._k==='b')?'<span>△ strategy B</span>':''
   ].filter(Boolean);
-  if(fvgN)legend.push('<span><i class="sw" style="background:var(--win);opacity:.35"></i><i class="sw" style="background:var(--loss);opacity:.35;margin-left:-2px"></i><span data-g="FVG">Gap (FVG), faded once filled</span></span>');
-  $('legend').innerHTML=simple?'<span class="pos">▲ Buy</span><span class="neg">▼ Sell</span><span><i class="sw box"></i>Opening range</span><span>Full shows levels, VWAP and volume</span>':legend.join('');
+  if(fvgN&&!simple)legend.push('<span><i class="sw" style="background:var(--win);opacity:.35"></i><i class="sw" style="background:var(--loss);opacity:.35;margin-left:-2px"></i><span data-g="FVG">Gap (FVG), faded once filled</span></span>');
+  $('legend').innerHTML=simple?'<span class="pos">▲ Buy</span><span class="neg">▼ Sell</span><span><i class="sw box"></i>Opening range</span>'+(fvgN?'<span><i class="sw" style="background:var(--win);opacity:.35"></i><span data-g="FVG">Open gap (FVG)</span></span>':'')+'<span>Full shows levels, VWAP and volume</span>':legend.join('');
   document.querySelectorAll('#chartMode button').forEach(bt=>{bt.setAttribute('aria-pressed',String(bt.dataset.m===(simple?'simple':'full')));bt.onclick=()=>{store.set('bl.chart',bt.dataset.m);render(LAST)}});
   $('legendNote').textContent=real
    ?'Session stays 9:30–16:00 ET. Marks sit on the bar close, so a 9:50 buy is on 9:50. Far levels are pinned at the edge.'
